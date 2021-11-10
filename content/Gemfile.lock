@@ -40,8 +40,8 @@ GEM
     sass-listen (4.0.0)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
-    therubyracer (0.12.2)
-      libv8 (~> 3.16.14.0)
+    therubyracer (0.12.3)
+      libv8 (~> 3.16.14.15)
       ref
     yajl-ruby (1.2.2)
 
@@ -54,7 +54,7 @@ DEPENDENCIES
   jekyll-paginate (= 1.1.0)
   kramdown (= 1.10.0)
   pygments.rb (= 0.6.3)
-  therubyracer (= 0.12.2)
+  therubyracer (= 0.12.3)
   yajl-ruby (= 1.2.2)
 
 RUBY VERSION
