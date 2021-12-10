@@ -48,7 +48,7 @@ services:
       SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8091
 
   rest-proxy:
-    image: confluentinc/cp-kafka-rest:7.0.0
+    image: confluentinc/cp-kafka-rest:7.0.1
     depends_on:
       - broker
       - schema-registry
