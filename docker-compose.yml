@@ -90,7 +90,7 @@ services:
     container_name: web
 
   sql-client:
-    image: ftisiot/flink_sql_cli:1.13.2
+    image: ftisiot/flink_sql_cli:1.15.0
     depends_on:
       - jobmanager
     environment:
