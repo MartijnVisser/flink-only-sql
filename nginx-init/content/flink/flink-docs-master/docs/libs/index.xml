@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Libraries on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/docs/libs/</link>
+    <description>Recent content in Libraries on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/docs/libs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Event Processing (CEP)</title>
+      <link>//localhost/flink/flink-docs-master/docs/libs/cep/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/libs/cep/</guid>
+      <description>FlinkCEP - Complex event processing for Flink # FlinkCEP is the Complex Event Processing (CEP) library implemented on top of Flink. It allows you to detect event patterns in an endless stream of events, giving you the opportunity to get hold of what&amp;rsquo;s important in your data.
+This page describes the API calls available in Flink CEP. We start by presenting the Pattern API, which allows you to specify the patterns that you want to detect in your stream, before presenting how you can detect and act upon matching event sequences.</description>
+    </item>
+    
+    <item>
+      <title>State Processor API</title>
+      <link>//localhost/flink/flink-docs-master/docs/libs/state_processor_api/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/libs/state_processor_api/</guid>
+      <description>State Processor API # Apache Flink&amp;rsquo;s State Processor API provides powerful functionality to reading, writing, and modifying savepoints and checkpoints using Flink’s DataStream API under BATCH execution. Due to the interoperability of DataStream and Table API, you can even use relational Table API or SQL queries to analyze and process state data.
+For example, you can take a savepoint of a running stream processing application and analyze it with a DataStream batch program to verify that the application behaves correctly.</description>
+    </item>
+    
+  </channel>
+</rss>

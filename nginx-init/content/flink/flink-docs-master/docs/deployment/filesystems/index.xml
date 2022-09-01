@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>File Systems on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/docs/deployment/filesystems/</link>
+    <description>Recent content in File Systems on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/docs/deployment/filesystems/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Overview</title>
+      <link>//localhost/flink/flink-docs-master/docs/deployment/filesystems/overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/deployment/filesystems/overview/</guid>
+      <description>File Systems # Apache Flink uses file systems to consume and persistently store data, both for the results of applications and for fault tolerance and recovery. These are some of most of the popular file systems, including local, hadoop-compatible, Amazon S3, Aliyun OSS and Azure Blob Storage.
+The file system used for a particular file is determined by its URI scheme. For example, file:///home/user/text.txt refers to a file in the local file system, while hdfs://namenode:50010/data/user/text.</description>
+    </item>
+    
+    <item>
+      <title>Common Configurations</title>
+      <link>//localhost/flink/flink-docs-master/docs/deployment/filesystems/common/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/deployment/filesystems/common/</guid>
+      <description>Common Configurations # Apache Flink provides several standard configuration settings that work across all file system implementations.
+Default File System # A default scheme (and authority) is used if paths to files do not explicitly specify a file system scheme (and authority).
+fs.default-scheme: &amp;lt;default-fs&amp;gt; For example, if the default file system configured as fs.default-scheme: hdfs://localhost:9000/, then a file path of /user/hugo/in.txt is interpreted as hdfs://localhost:9000/user/hugo/in.txt.
+Connection limiting # You can limit the total number of connections that a file system can concurrently open which is useful when the file system cannot handle a large number of concurrent reads/writes or open connections at the same time.</description>
+    </item>
+    
+    <item>
+      <title>Amazon S3</title>
+      <link>//localhost/flink/flink-docs-master/docs/deployment/filesystems/s3/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/deployment/filesystems/s3/</guid>
+      <description>Amazon S3 # Amazon Simple Storage Service (Amazon S3) provides cloud object storage for a variety of use cases. You can use S3 with Flink for reading and writing data as well in conjunction with the streaming state backends.
+You can use S3 objects like regular files by specifying paths in the following format:
+s3://&amp;lt;your-bucket&amp;gt;/&amp;lt;endpoint&amp;gt; The endpoint can either be a single file or a directory, for example:
+// Read from S3 bucket env.</description>
+    </item>
+    
+    <item>
+      <title>Google Cloud Storage</title>
+      <link>//localhost/flink/flink-docs-master/docs/deployment/filesystems/gcs/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/deployment/filesystems/gcs/</guid>
+      <description>Google Cloud Storage # Google Cloud Storage (GCS) provides cloud storage for a variety of use cases. You can use it for reading and writing data, and for checkpoint storage when using FileSystemCheckpointStorage) with the streaming state backends.
+You can use GCS objects like regular files by specifying paths in the following format:
+gs://&amp;lt;your-bucket&amp;gt;/&amp;lt;endpoint&amp;gt; The endpoint can either be a single file or a directory, for example:
+// Read from GCS bucket env.</description>
+    </item>
+    
+    <item>
+      <title>Aliyun OSS</title>
+      <link>//localhost/flink/flink-docs-master/docs/deployment/filesystems/oss/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/deployment/filesystems/oss/</guid>
+      <description>Aliyun Object Storage Service (OSS) # OSS: Object Storage Service # Aliyun Object Storage Service (Aliyun OSS) is widely used, particularly popular among China’s cloud users, and it provides cloud object storage for a variety of use cases. You can use OSS with Flink for reading and writing data as well in conjunction with the streaming state backends
+You can use OSS objects like regular files by specifying paths in the following format:</description>
+    </item>
+    
+    <item>
+      <title>Azure Blob Storage</title>
+      <link>//localhost/flink/flink-docs-master/docs/deployment/filesystems/azure/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/deployment/filesystems/azure/</guid>
+      <description>Azure Blob Storage # Azure Blob Storage is a Microsoft-managed service providing cloud storage for a variety of use cases. You can use Azure Blob Storage with Flink for reading and writing data as well in conjunction with the streaming state backends
+Flink supports accessing Azure Blob Storage using both wasb:// or abfs://.
+Azure recommends using abfs:// for accessing ADLS Gen2 storage accounts even though wasb:// works through backward compatibility.</description>
+    </item>
+    
+    <item>
+      <title>Plugins</title>
+      <link>//localhost/flink/flink-docs-master/docs/deployment/filesystems/plugins/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/deployment/filesystems/plugins/</guid>
+      <description>Plugins # Plugins facilitate a strict separation of code through restricted classloaders. Plugins cannot access classes from other plugins or from Flink that have not been specifically whitelisted. This strict isolation allows plugins to contain conflicting versions of the same library without the need to relocate classes or to converge to common versions. Currently, file systems and metric reporters are pluggable but in the future, connectors, formats, and even user code should also be pluggable.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Debugging on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/docs/ops/debugging/</link>
+    <description>Recent content in Debugging on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/docs/ops/debugging/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Debugging Windows &amp; Event Time</title>
+      <link>//localhost/flink/flink-docs-master/docs/ops/debugging/debugging_event_time/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/ops/debugging/debugging_event_time/</guid>
+      <description>Debugging Windows &amp;amp; Event Time # Monitoring Current Event Time # Flink&amp;rsquo;s event time and watermark support are powerful features for handling out-of-order events. However, it&amp;rsquo;s harder to understand what exactly is going on because the progress of time is tracked within the system.
+Low watermarks of each task can be accessed through Flink web interface or metrics system.
+Each Task in Flink exposes a metric called currentInputWatermark that represents the lowest watermark received by this task.</description>
+    </item>
+    
+    <item>
+      <title>Debugging Classloading</title>
+      <link>//localhost/flink/flink-docs-master/docs/ops/debugging/debugging_classloading/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/ops/debugging/debugging_classloading/</guid>
+      <description>Debugging Classloading # Overview of Classloading in Flink # When running Flink applications, the JVM will load various classes over time. These classes can be divided into three groups based on their origin:
+The Java Classpath: This is Java&amp;rsquo;s common classpath, and it includes the JDK libraries, and all code in Flink&amp;rsquo;s /lib folder (the classes of Apache Flink and some dependencies). They are loaded by AppClassLoader.
+The Flink Plugin Components: The plugins code in folders under Flink&amp;rsquo;s /plugins folder.</description>
+    </item>
+    
+    <item>
+      <title>Flame Graphs</title>
+      <link>//localhost/flink/flink-docs-master/docs/ops/debugging/flame_graphs/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/ops/debugging/flame_graphs/</guid>
+      <description>Flame Graphs # Flame Graphs are a visualization that effectively surfaces answers to questions like:
+Which methods are currently consuming CPU resources? How does consumption by one method compare to the others? Which series of calls on the stack led to executing a particular method? Flame Graph Flame Graphs are constructed by sampling stack traces a number of times. Each method call is presented by a bar, where the length of the bar is proportional to the number of times it is present in the samples.</description>
+    </item>
+    
+    <item>
+      <title>Application Profiling &amp; Debugging</title>
+      <link>//localhost/flink/flink-docs-master/docs/ops/debugging/application_profiling/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/ops/debugging/application_profiling/</guid>
+      <description>Application Profiling &amp;amp; Debugging # Overview of Custom Logging with Apache Flink # Each standalone JobManager, TaskManager, HistoryServer, and ZooKeeper daemon redirects stdout and stderr to a file with a .out filename suffix and writes internal logging to a file with a .log suffix. Java options configured by the user in env.java.opts, env.java.opts.jobmanager, env.java.opts.taskmanager, env.java.opts.historyserver and env.java.opts.client can likewise define log files with use of the script variable FLINK_LOG_PREFIX and by enclosing the options in double quotes for late evaluation.</description>
+    </item>
+    
+  </channel>
+</rss>

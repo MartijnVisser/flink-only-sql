@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>DataStream API on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/docs/dev/python/datastream/</link>
+    <description>Recent content in DataStream API on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/docs/dev/python/datastream/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Intro to the Python DataStream API</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/python/datastream/intro_to_datastream_api/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/python/datastream/intro_to_datastream_api/</guid>
+      <description>Intro to the Python DataStream API # DataStream programs in Flink are regular programs that implement transformations on data streams (e.g., filtering, updating state, defining windows, aggregating). The data streams are initially created from various sources (e.g., message queues, socket streams, files). Results are returned via sinks, which may for example write the data to files, or to standard output (for example the command line terminal).
+Python DataStream API is a Python version of DataStream API which allows Python users could write Python DatStream API jobs.</description>
+    </item>
+    
+    <item>
+      <title>Data Types</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/python/datastream/data_types/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/python/datastream/data_types/</guid>
+      <description>Data Types # In Apache Flink&amp;rsquo;s Python DataStream API, a data type describes the type of a value in the DataStream ecosystem. It can be used to declare input and output types of operations and informs the system how to serailize elements.
+Pickle Serialization # If the type has not been declared, data would be serialized or deserialized using Pickle. For example, the program below specifies no data types.</description>
+    </item>
+    
+    <item>
+      <title>State</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/python/datastream/state/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/python/datastream/state/</guid>
+      <description> </description>
+    </item>
+    
+  </channel>
+</rss>

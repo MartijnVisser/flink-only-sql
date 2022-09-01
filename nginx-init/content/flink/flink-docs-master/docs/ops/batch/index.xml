@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Batch on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/docs/ops/batch/</link>
+    <description>Recent content in Batch on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/docs/ops/batch/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Batch Shuffle</title>
+      <link>//localhost/flink/flink-docs-master/docs/ops/batch/batch_shuffle/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/ops/batch/batch_shuffle/</guid>
+      <description>Batch Shuffle # Overview # Flink supports a batch execution mode in both DataStream API and Table / SQL for jobs executing across bounded input. In batch execution mode, Flink offers two modes for network exchanges: Blocking Shuffle and Hybrid Shuffle.
+Blocking Shuffle is the default data exchange mode for batch executions. It persists all intermediate data, and can be consumed only after fully produced. Hybrid Shuffle is the next generation data exchange mode for batch executions.</description>
+    </item>
+    
+  </channel>
+</rss>

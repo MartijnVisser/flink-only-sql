@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Functions on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/docs/dev/table/functions/</link>
+    <description>Recent content in Functions on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/docs/dev/table/functions/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Overview</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/table/functions/overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/table/functions/overview/</guid>
+      <description>Functions # Flink Table API &amp;amp; SQL empowers users to do data transformations with functions.
+Types of Functions # There are two dimensions to classify functions in Flink.
+One dimension is system (or built-in) functions v.s. catalog functions. System functions have no namespace and can be referenced with just their names. Catalog functions belong to a catalog and database therefore they have catalog and database namespaces, they can be referenced by either fully/partially qualified name (catalog.</description>
+    </item>
+    
+    <item>
+      <title>System (Built-in) Functions</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/table/functions/systemfunctions/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/table/functions/systemfunctions/</guid>
+      <description>System (Built-in) Functions # Flink Table API &amp;amp; SQL provides users with a set of built-in functions for data transformations. This page gives a brief overview of them. If a function that you need is not supported yet, you can implement a user-defined function. If you think that the function is general enough, please open a Jira issue for it with a detailed description.
+Scalar Functions # The scalar functions take zero, one or more values as the input and return a single value as the result.</description>
+    </item>
+    
+    <item>
+      <title>User-defined Functions</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/table/functions/udfs/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/table/functions/udfs/</guid>
+      <description>User-defined Functions # User-defined functions (UDFs) are extension points to call frequently used logic or custom logic that cannot be expressed otherwise in queries.
+User-defined functions can be implemented in a JVM language (such as Java or Scala) or Python. An implementer can use arbitrary third party libraries within a UDF. This page will focus on JVM-based languages, please refer to the PyFlink documentation for details on writing general and vectorized UDFs in Python.</description>
+    </item>
+    
+  </channel>
+</rss>

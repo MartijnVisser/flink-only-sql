@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>DataSet API (Legacy) on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/zh/docs/dev/dataset/</link>
+    <description>Recent content in DataSet API (Legacy) on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/zh/docs/dev/dataset/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>概览</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/dataset/overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/dataset/overview/</guid>
+      <description>DataSet API 编程指南 # DataSet programs in Flink are regular programs that implement transformations on data sets (e.g., filtering, mapping, joining, grouping). The data sets are initially created from certain sources (e.g., by reading files, or from local collections). Results are returned via sinks, which may for example write the data to (distributed) files, or to standard output (for example the command line terminal). Flink programs run in a variety of contexts, standalone, or embedded in other programs.</description>
+    </item>
+    
+    <item>
+      <title>Transformations</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/dataset/transformations/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/dataset/transformations/</guid>
+      <description>DataSet Transformations # This document gives a deep-dive into the available transformations on DataSets. For a general introduction to the Flink Java API, please refer to the Programming Guide.
+For zipping elements in a data set with a dense index, please refer to the Zip Elements Guide.
+Map # The Map transformation applies a user-defined map function on each element of a DataSet. It implements a one-to-one mapping, that is, exactly one element must be returned by the function.</description>
+    </item>
+    
+    <item>
+      <title>Zipping Elements</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/dataset/zip_elements_guide/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/dataset/zip_elements_guide/</guid>
+      <description>给 DataSet 中的元素编号 # 在一些算法中，可能需要为数据集元素分配唯一标识符。 本文档阐述了如何将 DataSetUtils 用于此目的。
+以密集索引编号 # zipWithIndex 为元素分配连续的标签，接收数据集作为输入并返回一个新的 (unique id, initial value) 二元组的数据集。 这个过程需要分为两个（子）过程，首先是计数，然后是标记元素，由于计数操作的同步性，这个过程不能被 pipelined（流水线化）。
+可供备选的 zipWithUniqueId 是以 pipelined 的方式进行工作的。当唯一标签足够时，首选 zipWithUniqueId 。 例如，下面的代码：
+Java ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment(); env.setParallelism(2); DataSet&amp;lt;String&amp;gt; in = env.fromElements(&amp;#34;A&amp;#34;, &amp;#34;B&amp;#34;, &amp;#34;C&amp;#34;, &amp;#34;D&amp;#34;, &amp;#34;E&amp;#34;, &amp;#34;F&amp;#34;, &amp;#34;G&amp;#34;, &amp;#34;H&amp;#34;); DataSet&amp;lt;Tuple2&amp;lt;Long, String&amp;gt;&amp;gt; result = DataSetUtils.zipWithIndex(in); result.writeAsCsv(resultPath, &amp;#34;\n&amp;#34;, &amp;#34;,&amp;#34;); env.execute(); Scala import org.apache.flink.api.scala._ val env: ExecutionEnvironment = ExecutionEnvironment.getExecutionEnvironment env.setParallelism(2) val input: DataSet[String] = env.fromElements(&amp;#34;A&amp;#34;, &amp;#34;B&amp;#34;, &amp;#34;C&amp;#34;, &amp;#34;D&amp;#34;, &amp;#34;E&amp;#34;, &amp;#34;F&amp;#34;, &amp;#34;G&amp;#34;, &amp;#34;H&amp;#34;) val result: DataSet[(Long, String)] = input.</description>
+    </item>
+    
+    <item>
+      <title>迭代</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/dataset/iterations/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/dataset/iterations/</guid>
+      <description>迭代 # Iterative algorithms occur in many domains of data analysis, such as machine learning or graph analysis. Such algorithms are crucial in order to realize the promise of Big Data to extract meaningful information out of your data. With increasing interest to run these kinds of algorithms on very large data sets, there is a need to execute iterations in a massively parallel fashion.
+Flink programs implement iterative algorithms by defining a step function and embedding it into a special iteration operator.</description>
+    </item>
+    
+    <item>
+      <title>Hadoop 兼容</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/dataset/hadoop_compatibility/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/dataset/hadoop_compatibility/</guid>
+      <description>Hadoop 兼容 # Flink is compatible with Apache Hadoop MapReduce interfaces and therefore allows reusing code that was implemented for Hadoop MapReduce.
+You can:
+use Hadoop&amp;rsquo;s Writable data types in Flink programs. use any Hadoop InputFormat as a DataSource. use any Hadoop OutputFormat as a DataSink. use a Hadoop Mapper as FlatMapFunction. use a Hadoop Reducer as GroupReduceFunction. This document shows how to use existing Hadoop MapReduce code with Flink.</description>
+    </item>
+    
+    <item>
+      <title>本地执行</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/dataset/local_execution/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/dataset/local_execution/</guid>
+      <description>本地执行 # Flink can run on a single machine, even in a single Java Virtual Machine. This allows users to test and debug Flink programs locally. This section gives an overview of the local execution mechanisms.
+The local environments and executors allow you to run Flink programs in a local Java Virtual Machine, or with within any JVM as part of existing programs. Most examples can be launched locally by simply hitting the &amp;ldquo;Run&amp;rdquo; button of your IDE.</description>
+    </item>
+    
+    <item>
+      <title>集群执行</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/dataset/cluster_execution/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/dataset/cluster_execution/</guid>
+      <description>集群执行 # Flink 程序可以分布式运行在多机器集群上。有两种方式可以将程序提交到集群上执行：
+命令行界面（Interface） # 命令行界面使你可以将打包的程序（JARs）提交到集群（或单机设置）。
+有关详细信息，请参阅命令行界面文档。
+远程环境（Remote Environment） # 远程环境使你可以直接在集群上执行 Flink Java 程序。远程环境指向你要执行程序的集群。
+Maven Dependency # 如果将程序作为 Maven 项目开发，则必须添加 flink-clients 模块的依赖：
+&amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.apache.flink&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;flink-clients&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.16-SNAPSHOT&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; 示例 # 下面演示了 RemoteEnvironment 的用法：
+public static void main(String[] args) throws Exception { ExecutionEnvironment env = ExecutionEnvironment .createRemoteEnvironment(&amp;#34;flink-jobmanager&amp;#34;, 8081, &amp;#34;/home/user/udfs.jar&amp;#34;); DataSet&amp;lt;String&amp;gt; data = env.readTextFile(&amp;#34;hdfs://path/to/file&amp;#34;); data .filter(new FilterFunction&amp;lt;String&amp;gt;() { public boolean filter(String value) { return value.startsWith(&amp;#34;http://&amp;#34;); } }) .writeAsText(&amp;#34;hdfs://path/to/result&amp;#34;); env.execute(); } 请注意，该程序包含用户自定义代码，因此需要一个带有附加代码类的 JAR 文件。远程环境的构造函数使用 JAR 文件的路径进行构造。</description>
+    </item>
+    
+    <item>
+      <title>Batch 示例</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/dataset/examples/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/dataset/examples/</guid>
+      <description>Batch 示例 # 以下示例展示了 Flink 从简单的WordCount到图算法的应用。示例代码展示了 Flink&amp;rsquo;s DataSet API 的使用。
+完整的源代码可以在 Flink 源代码库的 flink-examples-batch 模块找到。
+运行一个示例 # 在开始运行一个示例前，我们假设你已经有了 Flink 的运行示例。导航栏中的“快速开始（Quickstart）”和“安装（Setup）” 标签页提供了启动 Flink 的不同方法。
+最简单的方法就是执行 ./bin/start-cluster.sh，从而启动一个只有一个 JobManager 和 TaskManager 的本地 Flink 集群。
+每个 Flink 的 binary release 都会包含一个examples（示例）目录，其中可以找到这个页面上每个示例的 jar 包文件。
+可以通过执行以下命令来运行WordCount 示例:
+./bin/flink run ./examples/batch/WordCount.jar 其他的示例也可以通过类似的方式执行。
+注意很多示例在不传递执行参数的情况下都会使用内置数据。如果需要利用 WordCount 程序计算真实数据，你需要传递存储数据的文件路径。
+./bin/flink run ./examples/batch/WordCount.jar --input /path/to/some/text/data --output /path/to/result 注意非本地文件系统需要一个对应前缀，例如 hdfs://。
+Word Count # WordCount 是大数据系统中的 “Hello World”。他可以计算一个文本集合中不同单词的出现频次。这个算法分两步进行： 第一步，把所有文本切割成单独的单词。第二步，把单词分组并分别统计。
+Java ExecutionEnvironment env = ExecutionEnvironment.</description>
+    </item>
+    
+  </channel>
+</rss>

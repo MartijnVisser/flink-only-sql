@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>State &amp; Fault Tolerance on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/docs/ops/state/</link>
+    <description>Recent content in State &amp; Fault Tolerance on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/docs/ops/state/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Checkpoints</title>
+      <link>//localhost/flink/flink-docs-master/docs/ops/state/checkpoints/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/ops/state/checkpoints/</guid>
+      <description>Checkpoints # Overview # Checkpoints make state in Flink fault tolerant by allowing state and the corresponding stream positions to be recovered, thereby giving the application the same semantics as a failure-free execution.
+See Checkpointing for how to enable and configure checkpoints for your program.
+To understand the differences between checkpoints and savepoints see checkpoints vs. savepoints.
+Checkpoint Storage # When checkpointing is enabled, managed state is persisted to ensure consistent recovery in case of failures.</description>
+    </item>
+    
+    <item>
+      <title>Checkpointing under backpressure</title>
+      <link>//localhost/flink/flink-docs-master/docs/ops/state/checkpointing_under_backpressure/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/ops/state/checkpointing_under_backpressure/</guid>
+      <description>Checkpointing under backpressure # Normally aligned checkpointing time is dominated by the synchronous and asynchronous parts of the checkpointing process. However, when a Flink job is running under heavy backpressure, the dominant factor in the end-to-end time of a checkpoint can be the time to propagate checkpoint barriers to all operators/subtasks. This is explained in the overview of the checkpointing process). and can be observed by high alignment time and start delay metrics.</description>
+    </item>
+    
+    <item>
+      <title>Savepoints</title>
+      <link>//localhost/flink/flink-docs-master/docs/ops/state/savepoints/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/ops/state/savepoints/</guid>
+      <description>Savepoints # What is a Savepoint? # A Savepoint is a consistent image of the execution state of a streaming job, created via Flink&amp;rsquo;s checkpointing mechanism. You can use Savepoints to stop-and-resume, fork, or update your Flink jobs. Savepoints consist of two parts: a directory with (typically large) binary files on stable storage (e.g. HDFS, S3, &amp;hellip;) and a (relatively small) meta data file. The files on stable storage represent the net data of the job&amp;rsquo;s execution state image.</description>
+    </item>
+    
+    <item>
+      <title>Checkpoints vs. Savepoints</title>
+      <link>//localhost/flink/flink-docs-master/docs/ops/state/checkpoints_vs_savepoints/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/ops/state/checkpoints_vs_savepoints/</guid>
+      <description>Checkpoints vs. Savepoints # Overview # Conceptually, Flink&amp;rsquo;s savepoints are different from checkpoints in a way that&amp;rsquo;s analogous to how backups are different from recovery logs in traditional database systems.
+The primary purpose of checkpoints is to provide a recovery mechanism in case of unexpected job failures. A checkpoint&amp;rsquo;s lifecycle is managed by Flink, i.e. a checkpoint is created, owned, and released by Flink - without user interaction. Because checkpoints are being triggered often, and are relied upon for failure recovery, the two main design goals for the checkpoint implementation are i) being as lightweight to create and ii) being as fast to restore from as possible.</description>
+    </item>
+    
+    <item>
+      <title>State Backends</title>
+      <link>//localhost/flink/flink-docs-master/docs/ops/state/state_backends/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/ops/state/state_backends/</guid>
+      <description>State Backends # Programs written in the Data Stream API often hold state in various forms:
+Windows gather elements or aggregates until they are triggered Transformation functions may use the key/value state interface to store values Transformation functions may implement the CheckpointedFunction interface to make their local variables fault tolerant See also state section in the streaming API guide.
+When checkpointing is activated, such state is persisted upon checkpoints to guard against data loss and recover consistently.</description>
+    </item>
+    
+    <item>
+      <title>Tuning Checkpoints and Large State</title>
+      <link>//localhost/flink/flink-docs-master/docs/ops/state/large_state_tuning/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/ops/state/large_state_tuning/</guid>
+      <description>Tuning Checkpoints and Large State # This page gives a guide how to configure and tune applications that use large state.
+Overview # For Flink applications to run reliably at large scale, two conditions must be fulfilled:
+The application needs to be able to take checkpoints reliably
+The resources need to be sufficient catch up with the input data streams after a failure
+The first sections discuss how to get well performing checkpoints at scale.</description>
+    </item>
+    
+    <item>
+      <title>Task Failure Recovery</title>
+      <link>//localhost/flink/flink-docs-master/docs/ops/state/task_failure_recovery/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/ops/state/task_failure_recovery/</guid>
+      <description>Task Failure Recovery # When a task failure happens, Flink needs to restart the failed task and other affected tasks to recover the job to a normal state.
+Restart strategies and failover strategies are used to control the task restarting. Restart strategies decide whether and when the failed/affected tasks can be restarted. Failover strategies decide which tasks should be restarted to recover the job.
+Restart Strategies # The cluster can be started with a default restart strategy which is always used when no job specific restart strategy has been defined.</description>
+    </item>
+    
+  </channel>
+</rss>

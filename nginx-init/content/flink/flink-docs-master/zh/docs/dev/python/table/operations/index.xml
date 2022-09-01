@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Operations on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/zh/docs/dev/python/table/operations/</link>
+    <description>Recent content in Operations on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/zh/docs/dev/python/table/operations/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Overview</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/python/table/operations/operations/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/python/table/operations/operations/</guid>
+      <description> </description>
+    </item>
+    
+    <item>
+      <title>Row-based Operations</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/python/table/operations/row_based_operations/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/python/table/operations/row_based_operations/</guid>
+      <description>Row-based Operations # This page describes how to use row-based operations in PyFlink Table API.
+Map # Performs a map operation with a python general scalar function or vectorized scalar function. The output will be flattened if the output type is a composite type.
+from pyflink.common import Row from pyflink.table import EnvironmentSettings, TableEnvironment from pyflink.table.expressions import col from pyflink.table.types import DataTypes from pyflink.table.udf import udf env_settings = EnvironmentSettings.in_batch_mode() table_env = TableEnvironment.</description>
+    </item>
+    
+  </channel>
+</rss>

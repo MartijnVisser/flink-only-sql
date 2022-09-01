@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Concepts on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/docs/concepts/</link>
+    <description>Recent content in Concepts on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/docs/concepts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Overview</title>
+      <link>//localhost/flink/flink-docs-master/docs/concepts/overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/concepts/overview/</guid>
+      <description>Concepts # The Hands-on Training explains the basic concepts of stateful and timely stream processing that underlie Flink&amp;rsquo;s APIs, and provides examples of how these mechanisms are used in applications. Stateful stream processing is introduced in the context of Data Pipelines &amp;amp; ETL and is further developed in the section on Fault Tolerance. Timely stream processing is introduced in the section on Streaming Analytics.
+This Concepts in Depth section provides a deeper understanding of how Flink&amp;rsquo;s architecture and runtime implement these concepts.</description>
+    </item>
+    
+    <item>
+      <title>Stateful Stream Processing</title>
+      <link>//localhost/flink/flink-docs-master/docs/concepts/stateful-stream-processing/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/concepts/stateful-stream-processing/</guid>
+      <description>Stateful Stream Processing # What is State? # While many operations in a dataflow simply look at one individual event at a time (for example an event parser), some operations remember information across multiple events (for example window operators). These operations are called stateful.
+Some examples of stateful operations:
+When an application searches for certain event patterns, the state will store the sequence of events encountered so far. When aggregating events per minute/hour/day, the state holds the pending aggregates.</description>
+    </item>
+    
+    <item>
+      <title>Timely Stream Processing</title>
+      <link>//localhost/flink/flink-docs-master/docs/concepts/time/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/concepts/time/</guid>
+      <description>Timely Stream Processing # Introduction # Timely stream processing is an extension of stateful stream processing in which time plays some role in the computation. Among other things, this is the case when you do time series analysis, when doing aggregations based on certain time periods (typically called windows), or when you do event processing where the time when an event occurred is important.
+In the following sections we will highlight some of the topics that you should consider when working with timely Flink Applications.</description>
+    </item>
+    
+    <item>
+      <title>Flink Architecture</title>
+      <link>//localhost/flink/flink-docs-master/docs/concepts/flink-architecture/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/concepts/flink-architecture/</guid>
+      <description>Flink Architecture # Flink is a distributed system and requires effective allocation and management of compute resources in order to execute streaming applications. It integrates with all common cluster resource managers such as Hadoop YARN and Kubernetes, but can also be set up to run as a standalone cluster or even as a library.
+This section contains an overview of Flink’s architecture and describes how its main components interact to execute applications and recover from failures.</description>
+    </item>
+    
+    <item>
+      <title>Glossary</title>
+      <link>//localhost/flink/flink-docs-master/docs/concepts/glossary/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/concepts/glossary/</guid>
+      <description>Glossary # Checkpoint Storage # The location where the State Backend will store its snapshot during a checkpoint (Java Heap of JobManager or Filesystem).
+Flink Application Cluster # A Flink Application Cluster is a dedicated Flink Cluster that only executes Flink Jobs from one Flink Application. The lifetime of the Flink Cluster is bound to the lifetime of the Flink Application.
+Flink Job Cluster # A Flink Job Cluster is a dedicated Flink Cluster that only executes a single Flink Job.</description>
+    </item>
+    
+  </channel>
+</rss>

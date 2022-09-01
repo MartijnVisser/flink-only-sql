@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>SQL on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/docs/dev/table/sql/</link>
+    <description>Recent content in SQL on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/docs/dev/table/sql/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SQL</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/table/sql/overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/table/sql/overview/</guid>
+      <description>SQL # This page describes the SQL language supported in Flink, including Data Definition Language (DDL), Data Manipulation Language (DML) and Query Language. Flink’s SQL support is based on Apache Calcite which implements the SQL standard.
+This page lists all the supported statements supported in Flink SQL for now:
+SELECT (Queries) CREATE TABLE, CATALOG, DATABASE, VIEW, FUNCTION DROP TABLE, DATABASE, VIEW, FUNCTION ALTER TABLE, DATABASE, FUNCTION ANALYZE TABLE INSERT DESCRIBE EXPLAIN USE SHOW LOAD UNLOAD Data Types # Please see the dedicated page about data types.</description>
+    </item>
+    
+    <item>
+      <title>Getting Started</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/table/sql/gettingstarted/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/table/sql/gettingstarted/</guid>
+      <description>Getting Started # Flink SQL makes it simple to develop streaming applications using standard SQL. It is easy to learn Flink if you have ever worked with a database or SQL like system by remaining ANSI-SQL 2011 compliant. This tutorial will help you get started quickly with a Flink SQL development environment.
+Prerequisites # You only need to have basic knowledge of SQL to follow along. No other programming experience is assumed.</description>
+    </item>
+    
+    <item>
+      <title>CREATE Statements</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/table/sql/create/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/table/sql/create/</guid>
+      <description>CREATE Statements # CREATE statements are used to register a table/view/function into current or specified Catalog. A registered table/view/function can be used in SQL queries.
+Flink SQL supports the following CREATE statements for now:
+CREATE TABLE CREATE CATALOG CREATE DATABASE CREATE VIEW CREATE FUNCTION Run a CREATE statement # Java CREATE statements can be executed with the executeSql() method of the TableEnvironment. The executeSql() method returns &amp;lsquo;OK&amp;rsquo; for a successful CREATE operation, otherwise will throw an exception.</description>
+    </item>
+    
+    <item>
+      <title>DROP Statements</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/table/sql/drop/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/table/sql/drop/</guid>
+      <description>DROP Statements # DROP statements are used to remove a catalog with the given catalog name or to remove a registered table/view/function from the current or specified Catalog.
+Flink SQL supports the following DROP statements for now:
+DROP CATALOG DROP TABLE DROP DATABASE DROP VIEW DROP FUNCTION Run a DROP statement # Java DROP statements can be executed with the executeSql() method of the TableEnvironment. The executeSql() method returns &amp;lsquo;OK&amp;rsquo; for a successful DROP operation, otherwise will throw an exception.</description>
+    </item>
+    
+    <item>
+      <title>ALTER Statements</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/table/sql/alter/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/table/sql/alter/</guid>
+      <description>ALTER Statements # ALTER statements are used to modified a registered table/view/function definition in the Catalog.
+Flink SQL supports the following ALTER statements for now:
+ALTER TABLE ALTER VIEW ALTER DATABASE ALTER FUNCTION Run an ALTER statement # Java ALTER statements can be executed with the executeSql() method of the TableEnvironment. The executeSql() method returns &amp;lsquo;OK&amp;rsquo; for a successful ALTER operation, otherwise will throw an exception.
+The following examples show how to run an ALTER statement in TableEnvironment.</description>
+    </item>
+    
+    <item>
+      <title>INSERT Statement</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/table/sql/insert/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/table/sql/insert/</guid>
+      <description>INSERT Statement # INSERT statements are used to add rows to a table.
+Run an INSERT statement # Java Single INSERT statement can be executed through the executeSql() method of the TableEnvironment. The executeSql() method for INSERT statement will submit a Flink job immediately, and return a TableResult instance which associates the submitted job. Multiple INSERT statements can be executed through the addInsertSql() method of the StatementSet which can be created by the TableEnvironment.</description>
+    </item>
+    
+    <item>
+      <title>ANALYZE Statements</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/table/sql/analyze/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/table/sql/analyze/</guid>
+      <description>ANALYZE Statements # ANALYZE statements are used to collect statistics for existing tables and store the result to catalog. Only ANALYZE TABLE statements are supported now, and need to be triggered manually instead of automatically.
+Attention Currently, ANALYZE TABLE only supports in batch mode. Only existing table is supported, and an exception will be thrown if the table is a view or table not exists.
+Run an ANALYZE TABLE statement # Java ANALYZE TABLE statements can be executed with the executeSql() method of the TableEnvironment.</description>
+    </item>
+    
+    <item>
+      <title>DESCRIBE Statements</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/table/sql/describe/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/table/sql/describe/</guid>
+      <description>DESCRIBE Statements # DESCRIBE statements are used to describe the schema of a table or a view.
+Run a DESCRIBE statement # Java DESCRIBE statements can be executed with the executeSql() method of the TableEnvironment. The executeSql() method returns the schema of given table for a successful DESCRIBE operation, otherwise will throw an exception.
+The following examples show how to run a DESCRIBE statement in TableEnvironment.
+Scala DESCRIBE statements can be executed with the executeSql() method of the TableEnvironment.</description>
+    </item>
+    
+    <item>
+      <title>EXPLAIN Statements</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/table/sql/explain/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/table/sql/explain/</guid>
+      <description>EXPLAIN Statements # EXPLAIN statements are used to explain the logical and optimized query plans of a query or an INSERT statement.
+Run an EXPLAIN statement # Java EXPLAIN statements can be executed with the executeSql() method of the TableEnvironment. The executeSql() method returns explain result for a successful EXPLAIN operation, otherwise will throw an exception.
+The following examples show how to run an EXPLAIN statement in TableEnvironment.
+Scala EXPLAIN statements can be executed with the executeSql() method of the TableEnvironment.</description>
+    </item>
+    
+    <item>
+      <title>USE Statements</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/table/sql/use/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/table/sql/use/</guid>
+      <description>USE Statements # USE statements are used to set the current database or catalog, or change the resolution order and enabled status of module.
+Run a USE statement # Java USE statements can be executed with the executeSql() method of the TableEnvironment. The executeSql() method returns &amp;lsquo;OK&amp;rsquo; for a successful USE operation, otherwise will throw an exception.
+The following examples show how to run a USE statement in TableEnvironment.</description>
+    </item>
+    
+    <item>
+      <title>SHOW Statements</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/table/sql/show/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/table/sql/show/</guid>
+      <description>SHOW Statements # SHOW statements are used to list objects within their corresponding parent, such as catalogs, databases, tables and views, columns, functions, and modules. See the individual commands for more details and additional options.
+SHOW CREATE statements are used to print a DDL statement with which a given object can be created. The currently &amp;lsquo;SHOW CREATE&amp;rsquo; statement is only available in printing DDL statement of the given table and view.</description>
+    </item>
+    
+    <item>
+      <title>LOAD Statements</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/table/sql/load/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/table/sql/load/</guid>
+      <description>LOAD Statements # LOAD statements are used to load a built-in or user-defined module.
+Run a LOAD statement # Java LOAD statements can be executed with the executeSql() method of the TableEnvironment. The executeSql() method returns &amp;lsquo;OK&amp;rsquo; for a successful LOAD operation; otherwise, it will throw an exception.
+The following examples show how to run a LOAD statement in TableEnvironment.
+Scala LOAD statements can be executed with the executeSql() method of the TableEnvironment.</description>
+    </item>
+    
+    <item>
+      <title>UNLOAD Statements</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/table/sql/unload/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/table/sql/unload/</guid>
+      <description>UNLOAD Statements # UNLOAD statements are used to unload a built-in or user-defined module.
+Run a UNLOAD statement # Java UNLOAD statements can be executed with the executeSql() method of the TableEnvironment. The executeSql() method returns &amp;lsquo;OK&amp;rsquo; for a successful LOAD operation; otherwise it will throw an exception.
+The following examples show how to run a UNLOAD statement in TableEnvironment.
+Scala UNLOAD statements can be executed with the executeSql() method of the TableEnvironment.</description>
+    </item>
+    
+    <item>
+      <title>SET Statements</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/table/sql/set/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/table/sql/set/</guid>
+      <description>SET Statements # SET statements are used to modify the configuration or list the configuration.
+Run a SET statement # SQL CLI SET statements can be executed in SQL CLI.
+The following examples show how to run a SET statement in SQL CLI.
+SQL CLI Flink SQL&amp;gt; SET &amp;#39;table.local-time-zone&amp;#39; = &amp;#39;Europe/Berlin&amp;#39;; [INFO] Session property has been set. Flink SQL&amp;gt; SET; &amp;#39;table.local-time-zone&amp;#39; = &amp;#39;Europe/Berlin&amp;#39; Syntax # SET (&amp;#39;key&amp;#39; = &amp;#39;value&amp;#39;)? If no key and value are specified, it just prints all the properties.</description>
+    </item>
+    
+    <item>
+      <title>RESET Statements</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/table/sql/reset/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/table/sql/reset/</guid>
+      <description>RESET Statements # RESET statements are used to reset the configuration to the default.
+Run a RESET statement # SQL CLI RESET statements can be executed in SQL CLI.
+The following examples show how to run a RESET statement in SQL CLI.
+SQL CLI Flink SQL&amp;gt; RESET &amp;#39;table.planner&amp;#39;; [INFO] Session property has been reset. Flink SQL&amp;gt; RESET; [INFO] All session properties have been set to their default values. Syntax # RESET (&amp;#39;key&amp;#39;)?</description>
+    </item>
+    
+    <item>
+      <title>JAR Statements</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/table/sql/jar/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/table/sql/jar/</guid>
+      <description>JAR Statements # JAR statements are used to add user jars into the classpath or remove user jars from the classpath or show added jars in the classpath in the runtime.
+Flink SQL supports the following JAR statements for now:
+ADD JAR REMOVE JAR SHOW JARS Attention JAR statements only work in the SQL CLI.
+Run a JAR statement # SQL CLI The following examples show how to run JAR statements in SQL CLI.</description>
+    </item>
+    
+  </channel>
+</rss>

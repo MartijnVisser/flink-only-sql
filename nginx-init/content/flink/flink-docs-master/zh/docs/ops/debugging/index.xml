@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Debugging on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/zh/docs/ops/debugging/</link>
+    <description>Recent content in Debugging on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/zh/docs/ops/debugging/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>调试窗口与事件时间</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/ops/debugging/debugging_event_time/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/ops/debugging/debugging_event_time/</guid>
+      <description>调试窗口与事件时间 # 监控当前事件时间（Event Time） # Flink 的事件时间和 watermark 支持对于处理乱序事件是十分强大的特性。然而，由于是系统内部跟踪时间进度，所以很难了解究竟正在发生什么。
+可以通过 Flink web 界面或指标系统访问 task 的 low watermarks。
+Flink 中的 task 通过调用 currentInputWatermark 方法暴露一个指标，该指标表示当前 task 所接收到的 the lowest watermark。这个 long 类型值表示“当前事件时间”。该值通过获取上游算子收到的所有 watermarks 的最小值来计算。这意味着用 watermarks 跟踪的事件时间总是由最落后的 source 控制。
+使用 web 界面可以访问 low watermark 指标，在指标选项卡中选择一个 task，然后选择 &amp;lt;taskNr&amp;gt;.currentInputWatermark 指标。在新的显示框中，你可以看到此 task 的当前 low watermark。
+获取指标的另一种方式是使用指标报告器之一，如指标系统文档所述。对于本地集群设置，我们推荐使用 JMX 指标报告器和类似于 VisualVM 的工具。
+处理散乱的事件时间 # 方式 1：延迟的 Watermark（表明完整性），窗口提前触发 方式 2：具有最大延迟启发式的 Watermark，窗口接受迟到的数据 Back to top</description>
+    </item>
+    
+    <item>
+      <title>调试类加载</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/ops/debugging/debugging_classloading/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/ops/debugging/debugging_classloading/</guid>
+      <description>调试类加载 # Flink中的类加载概述 # Flink应用程序运行时，JVM会随着时间不断加载各种不同的类。 根据起源不同这些类可以分为三组类型：
+Java Classpath: Java共有的classpath类加载路径，包括JDK库和Flink的/lib目录（Apache Flink及相关依赖的类）中的代码。它们通过AppClassLoader进行加载。
+Flink插件类组件：存放于Flink的 /plugins 目录中的插件代码。Flink的插件机制确保在启动时对它们进行动态加载。
+动态用户代码：动态提交job（通过REST、命令行或者web UI方式）时存在JAR文件中的类。job运行时它们通过FlinkUserCodeClassLoader进行动态加载或卸载。
+作为通用规则，每当Flink进程先启动，之后job提交时，job相关的类都是动态加载的。 如果Flink进程与job或应用程序一起启动，或者应用代码启动Flink组件（JobManager, TaskManager等），这时所有job的类存在于Java的classpath下。
+每个插件中的组件代码会由一个专用的类加载器进行动态加载。
+下面是不同部署模式的一些细节信息：
+Session模式(Standalone/Yarn/Kubernetes)
+当Flink Session集群启动时，JobManager和TaskManager由Java classpath中的Flink框架类（Flink framework classes）进行启动加载。而通过session提交（REST或命令行方式）的job或应用程序由FlinkUserCodeClassLoader进行加载。
+Per-Job模式（已弃用）（Yarn）
+当前只有Yarn支持Per-Job模式。默认情况下，Flink集群运行在Per-Job模式下时会将用户的jar文件包含在系统的classpath中。 这种模式可以由yarn.classpath.include-user-jar 参数控制。 当该参数设定为DISABLED时，Flink会将用户jar文件含在用户的classpath中，并由FlinkUserCodeClassLoader进行动态加载。
+详细信息参见Flink on Yarn。
+Application模式（Standalone/Yarn/Kubernetes）
+当Application模式的Flink集群基于Standalone或Kubernetes方式运行时，用户jar文件（启动命令指定的jar文件和Flink的usrlib目录中的jar包）会由FlinkUserCodeClassLoader进行动态加载。
+当Flink集群以Application模式运行时，用户jar文件（启动命令指定的jar文件和Flink的usrlib目录中的jar包）默认情况下会包含在系统classpath（AppClassLoader）。与Per-Job模式相同，当yarn.classpath.include-user-jar设置为DISABLED时，Flink会将用户jar文件含在用户的classpath中，并由FlinkUserCodeClassLoader进行动态加载。
+倒置类加载（Inverted Class Loading）和ClassLoader解析顺序 # 涉及到动态类加载的层次结构涉及两种ClassLoader： （1）Java的application classloader，包含classpath中的所有类； （2）动态的plugin/user code classloader，用来加载插件代码或用户代码的jar文件。动态的ClassLoader将应用程序classloader作为parent。
+默认情况下Flink会倒置类加载顺序，首先Flink会查找动态类加载器，如果该类不属于动态加载的代码时才会去查找其parent（application classloader）。
+倒置类加载的好处在于插件和job可以使用与Flink核心不同的库版本，尤其在使用不同版本的库从而出现不兼容的情况下。这种机制可以帮助避免常见的类似 IllegalAccessError 或NoSuchMethodError的依赖冲突错误。代码的不同部分会有独立的拷贝（Flink内核及它的不同依赖包可使用与用户代码或插件代码不同的拷贝），多数情况下这种方式可以正常运行，并且不需要用户进行额外配置。
+然而有些情况下，倒置类加载可能会引起一些问题，参见下面的&amp;ldquo;X cannot be cast to X&amp;rdquo;。
+对于用户代码的类加载，您可以通过调整Flink的classloader.resolve-order配置将ClassLoader解析顺序还原至Java的默认模式（从Flink默认的child-first调整为parent-first）。
+请注意由于有些类在Flink内核与插件或用户代码间共享，它们总是以parent-first方式进行解析的。这些类相关的包通过classloader.parent-first-patterns-default和classloader.parent-first-patterns-additional进行配置。如果需要新添加parent-first 方式的包，请调整classloader.parent-first-patterns-additional 配置选项。
+避免用户代码的动态类加载 # Flink的组件（JobManager, TaskManager, Client, ApplicationMaster等）在启动时会在日志开头的环境信息部分记录classpath的设定。
+当JobManager和TaskManager的运行模式为指定一个job时，可以通过将用户代码的JAR文件放置在/lib目录下，从而包含在classpath路径中，以保证它们不会被动态加载。</description>
+    </item>
+    
+    <item>
+      <title>火焰图</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/ops/debugging/flame_graphs/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/ops/debugging/flame_graphs/</guid>
+      <description>Flame Graphs # Flame Graphs are a visualization that effectively surfaces answers to questions like:
+Which methods are currently consuming CPU resources? How does consumption by one method compare to the others? Which series of calls on the stack led to executing a particular method? Flame Graph Flame Graphs are constructed by sampling stack traces a number of times. Each method call is presented by a bar, where the length of the bar is proportional to the number of times it is present in the samples.</description>
+    </item>
+    
+    <item>
+      <title>应用程序分析与调试</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/ops/debugging/application_profiling/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/ops/debugging/application_profiling/</guid>
+      <description>应用程序分析与调试 # Apache Flink 自定义日志概述 # 每个独立的 JobManager，TaskManager，HistoryServer，ZooKeeper 守护进程都将 stdout 和 stderr 重定向到名称后缀为 .out 的文件，并将其内部的日志记录写入到 .log 后缀的文件。用户可以在 env.java.opts，env.java.opts.jobmanager，env.java.opts.taskmanager，env.java.opts.historyserver 和 env.java.opts.client 配置项中配置 Java 选项（包括 log 相关的选项），同样也可以使用脚本变量 FLINK_LOG_PREFIX 定义日志文件，并将选项括在双引号中以供后期使用。日志文件将使用 FLINK_LOG_PREFIX 与默认的 .out 和 .log 后缀一起滚动。
+使用 Java Flight Recorder 分析 # Java Flight Recorder 是 Oracle JDK 内置的分析和事件收集框架。Java Mission Control 是一套先进的工具，可以对 Java Flight Recorder 收集的大量数据进行高效和详细的分析。配置示例：
+env.java.opts: &amp;#34;-XX:+UnlockCommercialFeatures -XX:+UnlockDiagnosticVMOptions -XX:+FlightRecorder -XX:+DebugNonSafepoints -XX:FlightRecorderOptions=defaultrecording=true,dumponexit=true,dumponexitpath=${FLINK_LOG_PREFIX}.jfr&amp;#34; 使用 JITWatch 分析 # JITWatch Java HotSpot JIT 编译器的日志分析器和可视化工具，用于检查内联决策、热点方法、字节码和汇编。配置示例：
+env.java.opts: &amp;#34;-XX:+UnlockDiagnosticVMOptions -XX:+TraceClassLoading -XX:+LogCompilation -XX:LogFile=${FLINK_LOG_PREFIX}.</description>
+    </item>
+    
+  </channel>
+</rss>

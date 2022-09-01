@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>SQL on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/zh/docs/dev/table/sql/</link>
+    <description>Recent content in SQL on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/zh/docs/dev/table/sql/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>概览</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/table/sql/overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/table/sql/overview/</guid>
+      <description>SQL # 本页面描述了 Flink 所支持的 SQL 语言，包括数据定义语言（Data Definition Language，DDL）、数据操纵语言（Data Manipulation Language，DML）以及查询语言。Flink 对 SQL 的支持基于实现了 SQL 标准的 Apache Calcite。
+本页面列出了目前 Flink SQL 所支持的所有语句：
+SELECT (Queries) CREATE TABLE, CATALOG, DATABASE, VIEW, FUNCTION DROP TABLE, DATABASE, VIEW, FUNCTION ALTER TABLE, DATABASE, FUNCTION ANALYZE TABLE INSERT SQL HINTS DESCRIBE EXPLAIN USE SHOW LOAD UNLOAD 数据类型 # 请参考专门描述该主题的页面 数据类型。
+通用类型与（嵌套的）复合类型 （如：POJO、tuples、rows、Scala case 类) 都可以作为行的字段。
+复合类型的字段任意的嵌套可被 值访问函数 访问。
+通用类型将会被视为一个黑箱，且可以被 用户自定义函数 传递或引用。
+对于 DDL 语句而言，我们支持所有在 数据类型 页面中定义的数据类型。</description>
+    </item>
+    
+    <item>
+      <title>入门</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/table/sql/gettingstarted/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/table/sql/gettingstarted/</guid>
+      <description>入门 # Flink SQL 使得使用标准 SQL 开发流应用程序变的简单。如果你曾经在工作中使用过兼容 ANSI-SQL 2011 的数据库或类似的 SQL 系统，那么就很容易学习 Flink。本教程将帮助你在 Flink SQL 开发环境下快速入门。
+先决条件 # 你只需要具备 SQL 的基础知识即可，不需要其他编程经验。
+安装 # 安装 Flink 有多种方式。对于实验而言，最常见的选择是下载二进制包并在本地运行。你可以按照本地模式安装中的步骤为本教程的剩余部分设置环境。
+完成所有设置后，在安装文件夹中使用以下命令启动本地集群：
+./bin/start-cluster.sh 启动完成后，就可以在本地访问 Flink WebUI localhost:8081，通过它，你可以监控不同的作业。
+SQL 客户端 # SQL 客户端是一个交互式的客户端，用于向 Flink 提交 SQL 查询并将结果可视化。 在安装文件夹中运行 sql-client 脚本来启动 SQL 客户端。
+./bin/sql-client.sh Hello World # SQL 客户端（我们的查询编辑器）启动并运行后，就可以开始编写查询了。 让我们使用以下简单查询打印出 &amp;lsquo;Hello World&amp;rsquo;：
+SELECT &amp;#39;Hello World&amp;#39;; 运行 HELP 命令会列出所有支持的 SQL 语句。让我们运行一个 SHOW 命令，来查看 Flink 内置函数的完整列表。
+SHOW FUNCTIONS; 这些函数为用户在开发 SQL 查询时提供了一个功能强大的工具箱。 例如，CURRENT_TIMESTAMP 将在执行时打印出机器的当前系统时间。</description>
+    </item>
+    
+    <item>
+      <title>CREATE 语句</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/table/sql/create/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/table/sql/create/</guid>
+      <description>CREATE 语句 # CREATE 语句用于向当前或指定的 Catalog 中注册表、视图或函数。注册后的表、视图和函数可以在 SQL 查询中使用。
+目前 Flink SQL 支持下列 CREATE 语句：
+CREATE TABLE CREATE CATALOG CREATE DATABASE CREATE VIEW CREATE FUNCTION 执行 CREATE 语句 # Java 可以使用 TableEnvironment 中的 executeSql() 方法执行 CREATE 语句。 若 CREATE 操作执行成功，executeSql() 方法返回 &amp;lsquo;OK&amp;rsquo;，否则会抛出异常。
+以下的例子展示了如何在 TableEnvironment 中执行一个 CREATE 语句。
+Scala 可以使用 TableEnvironment 中的 executeSql() 方法执行 CREATE 语句。 若 CREATE 操作执行成功，executeSql() 方法返回 &amp;lsquo;OK&amp;rsquo;，否则会抛出异常。
+以下的例子展示了如何在 TableEnvironment 中执行一个 CREATE 语句。
+Python 可以使用 TableEnvironment 中的 execute_sql() 方法执行 CREATE 语句。 若 CREATE 操作执行成功，execute_sql() 方法返回 &amp;lsquo;OK&amp;rsquo;，否则会抛出异常。</description>
+    </item>
+    
+    <item>
+      <title>DROP 语句</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/table/sql/drop/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/table/sql/drop/</guid>
+      <description>DROP 语句 # DROP 语句可用于删除指定的 catalog，也可用于从当前或指定的 Catalog 中删除一个已经注册的表、视图或函数。
+Flink SQL 目前支持以下 DROP 语句：
+DROP CATALOG DROP TABLE DROP DATABASE DROP VIEW DROP FUNCTION 执行 DROP 语句 # Java 可以使用 TableEnvironment 中的 executeSql() 方法执行 DROP 语句。 若 DROP 操作执行成功，executeSql() 方法返回 &amp;lsquo;OK&amp;rsquo;，否则会抛出异常。
+以下的例子展示了如何在 TableEnvironment 中执行一个 DROP 语句。
+Scala 可以使用 TableEnvironment 中的 executeSql() 方法执行 DROP 语句。 若 DROP 操作执行成功，executeSql() 方法返回 &amp;lsquo;OK&amp;rsquo;，否则会抛出异常。
+以下的例子展示了如何在 TableEnvironment 中执行一个 DROP 语句。
+Java 可以使用 TableEnvironment 中的 executeSql() 方法执行 DROP 语句。 若 DROP 操作执行成功，executeSql() 方法返回 &amp;lsquo;OK&amp;rsquo;，否则会抛出异常。</description>
+    </item>
+    
+    <item>
+      <title>ALTER 语句</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/table/sql/alter/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/table/sql/alter/</guid>
+      <description>ALTER 语句 # ALTER 语句用于修改一个已经在 Catalog 中注册的表、视图或函数定义。
+Flink SQL 目前支持以下 ALTER 语句：
+ALTER TABLE ALTER VIEW ALTER DATABASE ALTER FUNCTION 执行 ALTER 语句 # Java 可以使用 TableEnvironment 中的 executeSql() 方法执行 ALTER 语句。 若 ALTER 操作执行成功，executeSql() 方法返回 &amp;lsquo;OK&amp;rsquo;，否则会抛出异常。
+以下的例子展示了如何在 TableEnvironment 中执行一个 ALTER 语句。
+Scala 可以使用 TableEnvironment 中的 executeSql() 方法执行 ALTER 语句。 若 ALTER 操作执行成功，executeSql() 方法返回 &amp;lsquo;OK&amp;rsquo;，否则会抛出异常。
+以下的例子展示了如何在 TableEnvironment 中执行一个 ALTER 语句。
+Python 可以使用 TableEnvironment 中的 execute_sql() 方法执行 ALTER 语句。 若 ALTER 操作执行成功，execute_sql() 方法返回 &amp;lsquo;OK&amp;rsquo;，否则会抛出异常。</description>
+    </item>
+    
+    <item>
+      <title>INSERT 语句</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/table/sql/insert/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/table/sql/insert/</guid>
+      <description>INSERT 语句 # INSERT 语句用来向表中添加行。
+执行 INSERT 语句 # Java 单条 INSERT 语句，可以使用 TableEnvironment 中的 executeSql() 方法执行。executeSql() 方法执行 INSERT 语句时会立即提交一个 Flink 作业，并且返回一个 TableResult 对象，通过该对象可以获取 JobClient 方便的操作提交的作业。 多条 INSERT 语句，使用 TableEnvironment 中的 createStatementSet 创建一个 StatementSet 对象，然后使用 StatementSet 中的 addInsertSql() 方法添加多条 INSERT 语句，最后通过 StatementSet 中的 execute() 方法来执行。
+以下的例子展示了如何在 TableEnvironment 中执行一条 INSERT 语句，或者通过 StatementSet 执行多条 INSERT 语句。
+Scala 单条 INSERT 语句，可以使用 TableEnvironment 中的 executeSql() 方法执行。executeSql() 方法执行 INSERT 语句时会立即提交一个 Flink 作业，并且返回一个 TableResult 对象，通过该对象可以获取 JobClient 方便的操作提交的作业。 多条 INSERT 语句，使用 TableEnvironment 中的 createStatementSet 创建一个 StatementSet 对象，然后使用 StatementSet 中的 addInsertSql() 方法添加多条 INSERT 语句，最后通过 StatementSet 中的 execute() 方法来执行。</description>
+    </item>
+    
+    <item>
+      <title>ANALYZE 语句</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/table/sql/analyze/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/table/sql/analyze/</guid>
+      <description>ANALYZE 语句 # ANALYZE 语句被用于为存在的表收集统计信息，并将统计信息写入该表的 catalog 中。当前版本中，ANALYZE 语句只支持 ANALYZE TABLE， 且只能由用户手动触发。
+注意 现在, ANALYZE TABLE 只支持批模式（Batch Mode），且只能用于已存在的表， 如果表不存在或者是视图（View）则会报错。
+执行 ANALYZE TABLE 语句 # Java 可以使用 TableEnvironment 的 executeSql() 方法执行 ANALYZE TABLE 语句。
+以下示例展示了如何在 TableEnvironment 中执行一条 ANALYZE TABLE 语句。
+Scala 可以使用 TableEnvironment 的 executeSql() 方法执行 ANALYZE TABLE 语句。
+以下示例展示了如何在 TableEnvironment 中执行一条 ANALYZE TABLE 语句。
+Python 可以使用 TableEnvironment 的 execute_sql() 方法执行 ANALYZE TABLE 语句。
+以下示例展示了如何在 TableEnvironment 中执行一条 ANALYZE TABLE 语句。
+SQL CLI ANALYZE TABLE 语句可以在 SQL CLI 中执行。</description>
+    </item>
+    
+    <item>
+      <title>DESCRIBE 语句</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/table/sql/describe/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/table/sql/describe/</guid>
+      <description>DESCRIBE 语句 # DESCRIBE 语句用于描述表或视图的 schema。
+执行 DESCRIBE 语句 # Java 可以使用 TableEnvironment 的 executeSql() 方法执行 DESCRIBE 语句。如果 DESCRIBE 操作执行成功，executeSql() 方法会返回给定表的 schema，否则会抛出异常。
+以下示例展示了如何在 TableEnvironment 中执行一条 DESCRIBE 语句。
+Scala 可以使用 TableEnvironment 的 executeSql() 方法执行 DESCRIBE 语句。如果 DESCRIBE 操作执行成功，executeSql() 方法会返回给定表的 schema，否则会抛出异常。
+以下示例展示了如何在 TableEnvironment 中执行一条 DESCRIBE 语句。
+Python 可以使用 TableEnvironment 的 execute_sql() 方法执行 DESCRIBE 语句。如果 DESCRIBE 操作执行成功，execute_sql() 方法会返回给定表的 schema，否则会抛出异常。
+以下示例展示了如何在 TableEnvironment 中执行一条 DESCRIBE 语句。
+SQL CLI DESCRIBE 语句可以在 SQL CLI 中执行。
+以下示例展示了如何在 SQL CLI 中执行一条 DESCRIBE 语句。</description>
+    </item>
+    
+    <item>
+      <title>EXPLAIN 语句</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/table/sql/explain/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/table/sql/explain/</guid>
+      <description>EXPLAIN 语句 # EXPLAIN 语句用于解释 query 或 INSERT 语句的执行逻辑，也用于优化 query 语句的查询计划。
+执行 EXPLAIN 语句 # Java 可以使用 TableEnvironment 的 executeSql() 方法执行 EXPLAIN 语句。如果 EXPLAIN 操作执行成功，executeSql() 方法会返回解释结果，否则会抛出异常。
+以下示例展示了如何在 TableEnvironment 中执行一条 EXPLAIN 语句。
+Scala 可以使用 TableEnvironment 的 executeSql() 方法执行 EXPLAIN 语句。如果 EXPLAIN 操作执行成功，executeSql() 方法会返回解释结果，否则会抛出异常。
+以下示例展示了如何在 TableEnvironment 中执行一条 EXPLAIN 语句。
+Python 可以使用 TableEnvironment 的 execute_sql() 方法执行 EXPLAIN 语句。如果 EXPLAIN 操作执行成功，execute_sql() 方法会返回解释结果，否则会抛出异常。
+以下示例展示了如何在 TableEnvironment 中执行一条 EXPLAIN 语句。
+SQL CLI EXPLAIN 语句可以在 SQL CLI 中执行。</description>
+    </item>
+    
+    <item>
+      <title>USE 语句</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/table/sql/use/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/table/sql/use/</guid>
+      <description>USE 语句 # USE 语句用来设置当前的 catalog 或者 database。
+运行一个 USE 语句 # Java 可以使用 TableEnvironment 中的 executeSql() 方法执行 USE 语句。 若 USE 操作执行成功，executeSql() 方法返回 &amp;lsquo;OK&amp;rsquo;，否则会抛出异常。
+以下的例子展示了如何在 TableEnvironment 中执行一个 USE 语句。
+Scala 可以使用 TableEnvironment 中的 executeSql() 方法执行 USE 语句。 若 USE 操作执行成功，executeSql() 方法返回 &amp;lsquo;OK&amp;rsquo;，否则会抛出异常。
+以下的例子展示了如何在 TableEnvironment 中执行一个 USE 语句。
+Python 可以使用 TableEnvironment 中的 execute_sql() 方法执行 USE 语句。 若 USE 操作执行成功，execute_sql() 方法返回 &amp;lsquo;OK&amp;rsquo;，否则会抛出异常。
+以下的例子展示了如何在 TableEnvironment 中执行一个 USE 语句。
+SQL CLI 可以在 SQL CLI 中执行 USE 语句。</description>
+    </item>
+    
+    <item>
+      <title>SHOW 语句</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/table/sql/show/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/table/sql/show/</guid>
+      <description>SHOW 语句 # SHOW 语句用于列出其相应父对象中的对象，例如 catalog、database、table 和 view、column、function 和 module。有关详细信息和其他选项，请参见各个命令。
+SHOW CREATE 语句用于打印给定对象的创建 DDL 语句。当前的 SHOW CREATE 语句仅在打印给定表和视图的 DDL 语句时可用。
+目前 Flink SQL 支持下列 SHOW 语句：
+SHOW CATALOGS SHOW CURRENT CATALOG SHOW DATABASES SHOW CURRENT DATABASE SHOW TABLES SHOW CREATE TABLE SHOW COLUMNS SHOW VIEWS SHOW CREATE VIEW SHOW FUNCTIONS SHOW MODULES SHOW FULL MODULES SHOW JARS 执行 SHOW 语句 # Java 可以使用 TableEnvironment 中的 executeSql() 方法执行 SHOW 语句。 若 SHOW 操作执行成功，executeSql() 方法返回所有对象，否则会抛出异常。</description>
+    </item>
+    
+    <item>
+      <title>LOAD 语句</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/table/sql/load/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/table/sql/load/</guid>
+      <description>LOAD 语句 # LOAD 语句用于加载内置的或用户自定义的模块。
+执行 LOAD 语句 # Java 可以使用 TableEnvironment 的 executeSql() 方法执行 LOAD 语句。如果 LOAD 操作执行成功，executeSql() 方法会返回 &amp;lsquo;OK&amp;rsquo;，否则会抛出异常。
+以下示例展示了如何在 TableEnvironment 中执行一条 LOAD 语句。
+Scala 可以使用 TableEnvironment 的 executeSql() 方法执行 LOAD 语句。如果 LOAD 操作执行成功，executeSql() 方法会返回 &amp;lsquo;OK&amp;rsquo;，否则会抛出异常。
+以下示例展示了如何在 TableEnvironment 中执行一条 LOAD 语句。
+Python 可以使用 TableEnvironment 的 execute_sql() 方法执行 LOAD 语句。如果 LOAD 操作执行成功，execute_sql() 方法会返回 &amp;lsquo;OK&amp;rsquo;，否则会抛出异常。
+以下示例展示了如何在 TableEnvironment 中执行一条 LOAD 语句。
+SQL CLI LOAD 语句可以在 SQL CLI 中执行。
+以下示例展示了如何在 SQL CLI 中执行一条 LOAD 语句。</description>
+    </item>
+    
+    <item>
+      <title>UNLOAD 语句</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/table/sql/unload/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/table/sql/unload/</guid>
+      <description>UNLOAD 语句 # UNLOAD 语句用于卸载内置的或用户自定义的模块。
+执行 UNLOAD 语句 # Java 可以使用 TableEnvironment 的 executeSql() 方法执行 UNLOAD 语句。如果 UNLOAD 操作执行成功，executeSql() 方法会返回 &amp;lsquo;OK&amp;rsquo;，否则会抛出异常。
+以下示例展示了如何在 TableEnvironment 中执行一条 UNLOAD 语句。
+Scala 可以使用 TableEnvironment 的 executeSql() 方法执行 UNLOAD 语句。如果 UNLOAD 操作执行成功，executeSql() 方法会返回 &amp;lsquo;OK&amp;rsquo;，否则会抛出异常。
+以下示例展示了如何在 TableEnvironment 中执行一条 UNLOAD 语句。
+Python 可以使用 TableEnvironment 的 execute_sql() 方法执行 UNLOAD 语句。如果 UNLOAD 操作执行成功，execute_sql() 方法会返回 &amp;lsquo;OK&amp;rsquo;，否则会抛出异常。
+以下示例展示了如何在 TableEnvironment 中执行一条 UNLOAD 语句。
+SQL CLI UNLOAD 语句可以在 SQL CLI 中执行。
+以下示例展示了如何在 SQL CLI 中执行一条 UNLOAD 语句。</description>
+    </item>
+    
+    <item>
+      <title>SET 语句</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/table/sql/set/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/table/sql/set/</guid>
+      <description>SET 语句 # SET 语句用于修改配置或展示配置。
+执行 SET 语句 # SQL CLI SET 语句可以在 SQL CLI 中执行。
+以下示例展示了如何在 SQL CLI 中执行一条 SET 语句。
+SQL CLI Flink SQL&amp;gt; SET &amp;#39;table.local-time-zone&amp;#39; = &amp;#39;Europe/Berlin&amp;#39;; [INFO] Session property has been set. Flink SQL&amp;gt; SET; &amp;#39;table.local-time-zone&amp;#39; = &amp;#39;Europe/Berlin&amp;#39; Syntax # SET (&amp;#39;key&amp;#39; = &amp;#39;value&amp;#39;)? 如果没有指定 key 和 value，它仅仅打印所有属性。否则，它会为 key 设置指定的 value 值。
+Back to top</description>
+    </item>
+    
+    <item>
+      <title>RESET 语句</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/table/sql/reset/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/table/sql/reset/</guid>
+      <description>RESET 语句 # RESET 语句用于将配置重置为默认值。
+执行 RESET 语句 # SQL CLI RESET 语句可以在 SQL CLI 中执行。
+以下示例展示了如何在 SQL CLI 中执行一条 RESET 语句。
+SQL CLI Flink SQL&amp;gt; RESET &amp;#39;table.planner&amp;#39;; [INFO] Session property has been reset. Flink SQL&amp;gt; RESET; [INFO] All session properties have been set to their default values. Syntax # RESET (&amp;#39;key&amp;#39;)? 如果未指定 key，则将所有属性重置为默认值。否则，将指定的 key 重置为默认值。
+Back to top</description>
+    </item>
+    
+    <item>
+      <title>JAR Statements</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/table/sql/jar/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/table/sql/jar/</guid>
+      <description>JAR 语句 # JAR 语句用于将用户 jar 添加到 classpath、或将用户 jar 从 classpath 中删除或展示运行时 classpath 中添加的 jar。
+目前 Flink SQL 支持以下 JAR 语句：
+ADD JAR REMOVE JAR SHOW JARS 注意 JAR 语句仅适用于 SQL CLI。
+执行 JAR 语句 # SQL CLI 以下示例展示了如何在 SQL CLI 中运行 JAR 语句。 SQL CLI Flink SQL&amp;gt; ADD JAR &amp;#39;/path/hello.jar&amp;#39;; [INFO] The specified jar is added into session classloader. Flink SQL&amp;gt; SHOW JARS; /path/hello.jar Flink SQL&amp;gt; REMOVE JAR &amp;#39;/path/hello.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>State &amp; Fault Tolerance on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/docs/dev/datastream/fault-tolerance/</link>
+    <description>Recent content in State &amp; Fault Tolerance on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/docs/dev/datastream/fault-tolerance/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Working with State</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/datastream/fault-tolerance/state/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/datastream/fault-tolerance/state/</guid>
+      <description>Working with State # In this section you will learn about the APIs that Flink provides for writing stateful programs. Please take a look at Stateful Stream Processing to learn about the concepts behind stateful stream processing.
+Keyed DataStream # If you want to use keyed state, you first need to specify a key on a DataStream that should be used to partition the state (and also the records in the stream themselves).</description>
+    </item>
+    
+    <item>
+      <title>The Broadcast State Pattern</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/datastream/fault-tolerance/broadcast_state/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/datastream/fault-tolerance/broadcast_state/</guid>
+      <description>The Broadcast State Pattern # In this section you will learn about how to use broadcast state in practise. Please refer to Stateful Stream Processing to learn about the concepts behind stateful stream processing.
+Provided APIs # To show the provided APIs, we will start with an example before presenting their full functionality. As our running example, we will use the case where we have a stream of objects of different colors and shapes and we want to find pairs of objects of the same color that follow a certain pattern, e.</description>
+    </item>
+    
+    <item>
+      <title>Checkpointing</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/datastream/fault-tolerance/checkpointing/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/datastream/fault-tolerance/checkpointing/</guid>
+      <description>Checkpointing # Every function and operator in Flink can be stateful (see working with state for details). Stateful functions store data across the processing of individual elements/events, making state a critical building block for any type of more elaborate operation.
+In order to make state fault tolerant, Flink needs to checkpoint the state. Checkpoints allow Flink to recover state and positions in the streams to give the application the same semantics as a failure-free execution.</description>
+    </item>
+    
+    <item>
+      <title>Queryable State</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/datastream/fault-tolerance/queryable_state/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/datastream/fault-tolerance/queryable_state/</guid>
+      <description>Queryable State # The client APIs for queryable state are currently in an evolving state and there are no guarantees made about stability of the provided interfaces. It is likely that there will be breaking API changes on the client side in the upcoming Flink versions. In a nutshell, this feature exposes Flink&amp;rsquo;s managed keyed (partitioned) state (see Working with State) to the outside world and allows the user to query a job&amp;rsquo;s state from outside Flink.</description>
+    </item>
+    
+    <item>
+      <title>State Backends</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/datastream/fault-tolerance/state_backends/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/datastream/fault-tolerance/state_backends/</guid>
+      <description>State Backends # Flink provides different state backends that specify how and where state is stored.
+State can be located on Java’s heap or off-heap. Depending on your state backend, Flink can also manage the state for the application, meaning Flink deals with the memory management (possibly spilling to disk if necessary) to allow applications to hold very large state. By default, the configuration file flink-conf.yaml determines the state backend for all Flink jobs.</description>
+    </item>
+    
+  </channel>
+</rss>

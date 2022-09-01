@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Formats on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/zh/docs/connectors/datastream/formats/</link>
+    <description>Recent content in Formats on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/zh/docs/connectors/datastream/formats/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Overview</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/connectors/datastream/formats/overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/connectors/datastream/formats/overview/</guid>
+      <description>DataStream Formats # Available Formats # Formats define how information is encoded for storage. Currently these formats are supported:
+Avro Azure Table Hadoop Parquet Text files Back to top</description>
+    </item>
+    
+    <item>
+      <title>Avro</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/connectors/datastream/formats/avro/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/connectors/datastream/formats/avro/</guid>
+      <description>Avro format # Flink 内置支持 Apache Avro 格式。在 Flink 中将更容易地读写基于 Avro schema 的 Avro 数据。 Flink 的序列化框架可以处理基于 Avro schemas 生成的类。为了能够使用 Avro format，需要在自动构建工具（例如 Maven 或 SBT）中添加如下依赖到项目中。
+&amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.apache.flink&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;flink-avro&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.16-SNAPSHOT&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; 为了在 PyFlink 作业中使用 Avro format ，需要添加下列依赖： PyFlink JAR Only available for stable releases. 在 PyFlink 中如何添加 JAR 包依赖参见 Python 依赖管理。 如果读取 Avro 文件数据，你必须指定 AvroInputFormat。
+示例：
+AvroInputFormat&amp;lt;User&amp;gt; users = new AvroInputFormat&amp;lt;User&amp;gt;(in, User.class); DataStream&amp;lt;User&amp;gt; usersDS = env.createInput(users); 注意，User 是一个通过 Avro schema生成的 POJO 类。Flink 还允许选择 POJO 中字符串类型的键。例如：</description>
+    </item>
+    
+    <item>
+      <title>Azure Table storage</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/connectors/datastream/formats/azure_table_storage/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/connectors/datastream/formats/azure_table_storage/</guid>
+      <description>Azure Table Storage # 本例使用 HadoopInputFormat 包装器来使用现有的 Hadoop input format 实现访问 Azure&amp;rsquo;s Table Storage.
+下载并编译 azure-tables-hadoop 项目。该项目开发的 input format 在 Maven 中心尚不存在，因此，我们必须自己构建该项目。 执行如下命令： git clone https://github.com/mooso/azure-tables-hadoop.git cd azure-tables-hadoop mvn clean install 使用 quickstarts 创建一个新的 Flink 项目： curl https://flink.apache.org/q/quickstart.sh | bash 在你的 pom.xml 文件 &amp;lt;dependencies&amp;gt; 部分添加如下依赖： &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.apache.flink&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;flink-hadoop-compatibility_2.12&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.16-SNAPSHOT&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;com.microsoft.hadoop&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;microsoft-hadoop-azure&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;0.0.5&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; flink-hadoop-compatibility 是一个提供 Hadoop input format 包装器的 Flink 包。 microsoft-hadoop-azure 可以将之前构建的部分添加到项目中。
+现在可以开始进行项目的编码。我们建议将项目导入 IDE，例如 IntelliJ。你应该将其作为 Maven 项目导入。 跳转到文件 Job.</description>
+    </item>
+    
+    <item>
+      <title>CSV</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/connectors/datastream/formats/csv/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/connectors/datastream/formats/csv/</guid>
+      <description>CSV format # To use the CSV format you need to add the Flink CSV dependency to your project:
+&amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.apache.flink&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;flink-csv&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.16-SNAPSHOT&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; For PyFlink users, you could use it directly in your jobs.
+Flink supports reading CSV files using CsvReaderFormat. The reader utilizes Jackson library and allows passing the corresponding configuration for the CSV schema and parsing options.
+CsvReaderFormat can be initialized and used like this:
+CsvReaderFormat&amp;lt;SomePojo&amp;gt; csvFormat = CsvReaderFormat.</description>
+    </item>
+    
+    <item>
+      <title>Hadoop</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/connectors/datastream/formats/hadoop/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/connectors/datastream/formats/hadoop/</guid>
+      <description>Hadoop formats # Project Configuration # 对 Hadoop 的支持位于 flink-hadoop-compatibility Maven 模块中。
+将以下依赖添加到 pom.xml 中使用 hadoop
+&amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.apache.flink&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;flink-hadoop-compatibility_2.12&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.16-SNAPSHOT&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; 如果你想在本地运行你的 Flink 应用（例如在 IDE 中），你需要按照如下所示将 hadoop-client 依赖也添加到 pom.xml：
+&amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.apache.hadoop&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;hadoop-client&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;2.8.5&amp;lt;/version&amp;gt; &amp;lt;scope&amp;gt;provided&amp;lt;/scope&amp;gt; &amp;lt;/dependency&amp;gt; Using Hadoop InputFormats # 在 Flink 中使用 Hadoop InputFormats，必须首先使用 HadoopInputs 工具类的 readHadoopFile 或 createHadoopInput 包装 Input Format。 前者用于从 FileInputFormat 派生的 Input Format，而后者必须用于通用的 Input Format。 生成的 InputFormat 可通过使用 ExecutionEnvironment#createInput 创建数据源。
+生成的 DataStream 包含 2 元组，其中第一个字段是键，第二个字段是从 Hadoop InputFormat 接收的值。</description>
+    </item>
+    
+    <item>
+      <title>JSON</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/connectors/datastream/formats/json/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/connectors/datastream/formats/json/</guid>
+      <description>Json format # To use the JSON format you need to add the Flink JSON dependency to your project:
+&amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.apache.flink&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;flink-json&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.16-SNAPSHOT&amp;lt;/version&amp;gt; &amp;lt;scope&amp;gt;provided&amp;lt;/scope&amp;gt; &amp;lt;/dependency&amp;gt; For PyFlink users, you could use it directly in your jobs.
+Flink supports reading/writing JSON records via the JsonSerializationSchema/JsonDeserializationSchema. These utilize the Jackson library, and support any type that is supported by Jackson, including, but not limited to, POJOs and ObjectNode.
+The JsonDeserializationSchema can be used with any connector that supports the DeserializationSchema.</description>
+    </item>
+    
+    <item>
+      <title>Parquet</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/connectors/datastream/formats/parquet/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/connectors/datastream/formats/parquet/</guid>
+      <description>Parquet format # Flink 支持读取 Parquet 文件并生成 Flink RowData 和 Avro 记录。 要使用 Parquet format，你需要将 flink-parquet 依赖添加到项目中：
+&amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.apache.flink&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;flink-parquet&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.16-SNAPSHOT&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; 要使用 Avro 格式，你需要将 parquet-avro 依赖添加到项目中：
+&amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.apache.parquet&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;parquet-avro&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.12.2&amp;lt;/version&amp;gt; &amp;lt;optional&amp;gt;true&amp;lt;/optional&amp;gt; &amp;lt;exclusions&amp;gt; &amp;lt;exclusion&amp;gt; &amp;lt;groupId&amp;gt;org.apache.hadoop&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;hadoop-client&amp;lt;/artifactId&amp;gt; &amp;lt;/exclusion&amp;gt; &amp;lt;exclusion&amp;gt; &amp;lt;groupId&amp;gt;it.unimi.dsi&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;fastutil&amp;lt;/artifactId&amp;gt; &amp;lt;/exclusion&amp;gt; &amp;lt;/exclusions&amp;gt; &amp;lt;/dependency&amp;gt; 为了在 PyFlink 作业中使用 Parquet format ，需要添加下列依赖： PyFlink JAR Only available for stable releases. 在 PyFlink 中如何添加 JAR 包依赖参见 Python 依赖管理。 此格式与新的 Source 兼容，可以同时在批和流模式下使用。 因此，你可使用此格式处理以下两类数据：
+有界数据: 列出所有文件并全部读取。 无界数据：监控目录中出现的新文件 当你开启一个 File Source，会被默认为有界读取。 如果你想在连续读取模式下使用 File Source，你必须额外调用 AbstractFileSource.</description>
+    </item>
+    
+    <item>
+      <title>Text files</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/connectors/datastream/formats/text_files/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/connectors/datastream/formats/text_files/</guid>
+      <description>Text files format # Flink 支持使用 TextLineInputFormat 从文件中读取文本行。此 format 使用 Java 的内置 InputStreamReader 以支持的字符集编码来解码字节流。 要使用该 format，你需要将 Flink Connector Files 依赖项添加到项目中：
+&amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.apache.flink&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;flink-connector-files&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.16-SNAPSHOT&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; PyFlink 用户可直接使用相关接口，无需添加依赖。
+此 format 与新 Source 兼容，可以在批处理和流模式下使用。 因此，你可以通过两种方式使用此 format：
+批处理模式的有界读取 流模式的连续读取：监视目录中出现的新文件 有界读取示例:
+在此示例中，我们创建了一个 DataStream，其中包含作为字符串的文本文件的行。 此处不需要水印策略，因为记录不包含事件时间戳。
+Java final FileSource&amp;lt;String&amp;gt; source = FileSource.forRecordStreamFormat(new TextLineInputFormat(), /* Flink Path */) .build(); final DataStream&amp;lt;String&amp;gt; stream = env.fromSource(source, WatermarkStrategy.noWatermarks(), &amp;#34;file-source&amp;#34;); Python source = FileSource.for_record_stream_format(StreamFormat.text_line_format(), *path).build() stream = env.from_source(source, WatermarkStrategy.no_watermarks(), &amp;#34;file-source&amp;#34;) 连续读取示例: 在此示例中，我们创建了一个 DataStream，随着新文件被添加到目录中，其中包含的文本文件行的字符串流将无限增长。我们每秒会进行新文件监控。 此处不需要水印策略，因为记录不包含事件时间戳。</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>概念透析 on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/zh/docs/concepts/</link>
+    <description>Recent content in 概念透析 on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/zh/docs/concepts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>概览</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/concepts/overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/concepts/overview/</guid>
+      <description>概念透析 # 实践练习章节介绍了作为 Flink API 根基的有状态实时流处理的基本概念，并且举例说明了如何在 Flink 应用中使用这些机制。其中 Data Pipelines &amp;amp; ETL 小节介绍了有状态流处理的概念，并且在 Fault Tolerance 小节中进行了深入介绍。Streaming Analytics 小节介绍了实时流处理的概念。
+本章将深入分析 Flink 分布式运行时架构如何实现这些概念。
+Flink 中的 API # Flink 为流式/批式处理应用程序的开发提供了不同级别的抽象。
+Flink API 最底层的抽象为有状态实时流处理。其抽象实现是 Process Function，并且 Process Function 被 Flink 框架集成到了 DataStream API 中来为我们使用。它允许用户在应用程序中自由地处理来自单流或多流的事件（数据），并提供具有全局一致性和容错保障的状态。此外，用户可以在此层抽象中注册事件时间（event time）和处理时间（processing time）回调方法，从而允许程序可以实现复杂计算。
+Flink API 第二层抽象是 Core APIs。实际上，许多应用程序不需要使用到上述最底层抽象的 API，而是可以使用 Core APIs 进行编程：其中包含 DataStream API（应用于有界/无界数据流场景）和 DataSet API（应用于有界数据集场景）两部分。Core APIs 提供的流式 API（Fluent API）为数据处理提供了通用的模块组件，例如各种形式的用户自定义转换（transformations）、联接（joins）、聚合（aggregations）、窗口（windows）和状态（state）操作等。此层 API 中处理的数据类型在每种编程语言中都有其对应的类。
+Process Function 这类底层抽象和 DataStream API 的相互集成使得用户可以选择使用更底层的抽象 API 来实现自己的需求。DataSet API 还额外提供了一些原语，比如循环/迭代（loop/iteration）操作。</description>
+    </item>
+    
+    <item>
+      <title>有状态流处理</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/concepts/stateful-stream-processing/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/concepts/stateful-stream-processing/</guid>
+      <description>有状态流处理 # What is State? # While many operations in a dataflow simply look at one individual event at a time (for example an event parser), some operations remember information across multiple events (for example window operators). These operations are called stateful.
+Some examples of stateful operations:
+When an application searches for certain event patterns, the state will store the sequence of events encountered so far. When aggregating events per minute/hour/day, the state holds the pending aggregates.</description>
+    </item>
+    
+    <item>
+      <title>及时流处理</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/concepts/time/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/concepts/time/</guid>
+      <description>及时流处理 # Introduction # Timely stream processing is an extension of stateful stream processing in which time plays some role in the computation. Among other things, this is the case when you do time series analysis, when doing aggregations based on certain time periods (typically called windows), or when you do event processing where the time when an event occurred is important.
+In the following sections we will highlight some of the topics that you should consider when working with timely Flink Applications.</description>
+    </item>
+    
+    <item>
+      <title>Flink 架构</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/concepts/flink-architecture/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/concepts/flink-architecture/</guid>
+      <description>Flink 架构 # Flink 是一个分布式系统，需要有效分配和管理计算资源才能执行流应用程序。它集成了所有常见的集群资源管理器，例如Hadoop YARN，但也可以设置作为独立集群甚至库运行。
+本节概述了 Flink 架构，并且描述了其主要组件如何交互以执行应用程序和从故障中恢复。
+Flink 集群剖析 # Flink 运行时由两种类型的进程组成：一个 JobManager 和一个或者多个 TaskManager。
+Client 不是运行时和程序执行的一部分，而是用于准备数据流并将其发送给 JobManager。之后，客户端可以断开连接（分离模式），或保持连接来接收进程报告（附加模式）。客户端可以作为触发执行 Java/Scala 程序的一部分运行，也可以在命令行进程./bin/flink run ...中运行。
+可以通过多种方式启动 JobManager 和 TaskManager：直接在机器上作为standalone 集群启动、在容器中启动、或者通过YARN等资源框架管理并启动。TaskManager 连接到 JobManagers，宣布自己可用，并被分配工作。
+JobManager # JobManager 具有许多与协调 Flink 应用程序的分布式执行有关的职责：它决定何时调度下一个 task（或一组 task）、对完成的 task 或执行失败做出反应、协调 checkpoint、并且协调从失败中恢复等等。这个进程由三个不同的组件组成：
+ResourceManager
+ResourceManager 负责 Flink 集群中的资源提供、回收、分配 - 它管理 task slots，这是 Flink 集群中资源调度的单位（请参考TaskManagers）。Flink 为不同的环境和资源提供者（例如 YARN、Kubernetes 和 standalone 部署）实现了对应的 ResourceManager。在 standalone 设置中，ResourceManager 只能分配可用 TaskManager 的 slots，而不能自行启动新的 TaskManager。
+Dispatcher
+Dispatcher 提供了一个 REST 接口，用来提交 Flink 应用程序执行，并为每个提交的作业启动一个新的 JobMaster。它还运行 Flink WebUI 用来提供作业执行信息。</description>
+    </item>
+    
+    <item>
+      <title>词汇表</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/concepts/glossary/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/concepts/glossary/</guid>
+      <description>词汇表 # Flink Application Cluster # Flink Application 集群是专用的 Flink Cluster，仅从 Flink Application 执行 Flink Jobs。 Flink Cluster 的寿命与 Flink Application 的寿命有关。
+Flink Job Cluster # Flink Job 集群是专用的 Flink Cluster，仅执行一个 Flink Job。 Flink Cluster 的寿命与 Flink Job 的寿命有关。
+Flink Cluster # 一般情况下，Flink 集群是由一个 Flink JobManager 和一个或多个 Flink TaskManager 进程组成的分布式系统。
+Event # Event 是对应用程序建模的域的状态更改的声明。它可以同时为流或批处理应用程序的 input 和 output，也可以单独是 input 或者 output 中的一种。Event 是特殊类型的 Record。
+ExecutionGraph # 见 Physical Graph。
+Function # Function 是由用户实现的，并封装了 Flink 程序的应用程序逻辑。大多数 Function 都由相应的 Operator 封装。</description>
+    </item>
+    
+  </channel>
+</rss>

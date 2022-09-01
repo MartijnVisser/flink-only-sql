@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hive on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/zh/docs/connectors/table/hive/</link>
+    <description>Recent content in Hive on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/zh/docs/connectors/table/hive/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Overview</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/connectors/table/hive/overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/connectors/table/hive/overview/</guid>
+      <description>Hive # Apache Hive 已经成为了数据仓库生态系统中的核心。 它不仅仅是一个用于大数据分析和ETL场景的SQL引擎，同样它也是一个数据管理平台，可用于发现，定义，和演化数据。
+Flink 与 Hive 的集成包含两个层面。
+一是利用了 Hive 的 MetaStore 作为持久化的 Catalog，用户可通过HiveCatalog将不同会话中的 Flink 元数据存储到 Hive Metastore 中。 例如，用户可以使用HiveCatalog将其 Kafka 表或 Elasticsearch 表存储在 Hive Metastore 中，并后续在 SQL 查询中重新使用它们。
+二是利用 Flink 来读写 Hive 的表。
+HiveCatalog的设计提供了与 Hive 良好的兼容性，用户可以&amp;quot;开箱即用&amp;quot;的访问其已有的 Hive 数仓。 您不需要修改现有的 Hive Metastore，也不需要更改表的数据位置或分区。
+支持的Hive版本 # Flink 支持一下的 Hive 版本。
+1.0 1.0.0 1.0.1 1.1 1.1.0 1.1.1 1.2 1.2.0 1.2.1 1.2.2 2.0 2.0.0 2.0.1 2.1 2.1.0 2.1.1 2.2 2.2.0 2.3 2.</description>
+    </item>
+    
+    <item>
+      <title>Hive Catalog</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/connectors/table/hive/hive_catalog/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/connectors/table/hive/hive_catalog/</guid>
+      <description>Hive Catalog # Hive Metastore has evolved into the de facto metadata hub over the years in Hadoop ecosystem. Many companies have a single Hive Metastore service instance in their production to manage all of their metadata, either Hive metadata or non-Hive metadata, as the source of truth.
+For users who have both Hive and Flink deployments, HiveCatalog enables them to use Hive Metastore to manage Flink&amp;rsquo;s metadata.
+For users who have just Flink deployment, HiveCatalog is the only persistent catalog provided out-of-box by Flink.</description>
+    </item>
+    
+    <item>
+      <title>Hive 方言</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/connectors/table/hive/hive_dialect/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/connectors/table/hive/hive_dialect/</guid>
+      <description>Hive 方言 # 从 1.11.0 开始，在使用 Hive 方言时，Flink 允许用户用 Hive 语法来编写 SQL 语句。通过提供与 Hive 语法的兼容性，我们旨在改善与 Hive 的互操作性，并减少用户需要在 Flink 和 Hive 之间切换来执行不同语句的情况。
+使用 Hive 方言 # Flink 目前支持两种 SQL 方言: default 和 hive。你需要先切换到 Hive 方言，然后才能使用 Hive 语法编写。下面介绍如何使用 SQL 客户端和 Table API 设置方言。 还要注意，你可以为执行的每个语句动态切换方言。无需重新启动会话即可使用其他方言。
+SQL 客户端 # SQL 方言可以通过 table.sql-dialect 属性指定。因此你可以通过 SQL 客户端 yaml 文件中的 configuration 部分来设置初始方言。
+execution: type: batch result-mode: table configuration: table.sql-dialect: hive 你同样可以在 SQL 客户端启动后设置方言。
+Flink SQL&amp;gt; set table.</description>
+    </item>
+    
+    <item>
+      <title>Hive Read &amp; Write</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/connectors/table/hive/hive_read_write/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/connectors/table/hive/hive_read_write/</guid>
+      <description>Hive 读 &amp;amp; 写 # 通过使用 HiveCatalog，Apache Flink 可以对 Apache Hive 表做统一的批和流处理。这意味着 Flink 可以成为 Hive 批处理引擎的一个性能更好的选择，或者连续读写 Hive 表中的数据以支持实时数据仓库应用。
+读 # Flink 支持以批和流两种模式从 Hive 表中读取数据。批读的时候，Flink 会基于执行查询时表的状态进行查询。流读时将持续监控表，并在表中新数据可用时进行增量获取，默认情况下，Flink 将以批模式读取数据。
+流读支持消费分区表和非分区表。对于分区表，Flink 会监控新分区的生成，并且在数据可用的情况下增量获取数据。对于非分区表，Flink 将监控文件夹中新文件的生成，并增量地读取新文件。
+键 默认值 类型 描述 streaming-source.enable false Boolean 是否启动流读。注意：请确保每个分区/文件都应该原子地写入，否则读取不到完整的数据。 streaming-source.partition.include all String 选择读取的分区，可选项为 `all` 和 `latest`，`all` 读取所有分区；`latest` 读取按照 &#39;streaming-source.partition.order&#39; 排序后的最新分区，`latest` 仅在流模式的 Hive 源表作为时态表时有效。默认的选项是 `all`。在开启 &#39;streaming-source.enable&#39; 并设置 &#39;streaming-source.partition.include&#39; 为 &#39;latest&#39; 时，Flink 支持 temporal join 最新的 Hive 分区，同时，用户可以通过配置分区相关的选项来配置分区比较顺序和数据更新时间间隔。 streaming-source.monitor-interval None Duration 连续监控分区/文件的时间间隔。 注意: 默认情况下，流式读 Hive 的间隔为 &#39;1 min&#39;，但流读 Hive 的 temporal join 的默认时间间隔是 &#39;60 min&#39;，这是因为当前流读 Hive 的 temporal join 实现上有一个框架限制，即每个 TM 都要访问 Hive metastore，这可能会对 metastore 产生压力，这个问题将在未来得到改善。 streaming-source.</description>
+    </item>
+    
+    <item>
+      <title>Hive Functions</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/connectors/table/hive/hive_functions/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/connectors/table/hive/hive_functions/</guid>
+      <description>Hive Functions # Use Hive Built-in Functions via HiveModule # The HiveModule provides Hive built-in functions as Flink system (built-in) functions to Flink SQL and Table API users.
+For detailed information, please refer to HiveModule.
+Java String name = &amp;#34;myhive&amp;#34;; String version = &amp;#34;2.3.4&amp;#34;; tableEnv.loadModue(name, new HiveModule(version)); Scala val name = &amp;#34;myhive&amp;#34; val version = &amp;#34;2.3.4&amp;#34; tableEnv.loadModue(name, new HiveModule(version)); Python from pyflink.table.module import HiveModule name = &amp;#34;myhive&amp;#34; version = &amp;#34;2.</description>
+    </item>
+    
+  </channel>
+</rss>

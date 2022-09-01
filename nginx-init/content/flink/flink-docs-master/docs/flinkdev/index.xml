@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Flink Development on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/docs/flinkdev/</link>
+    <description>Recent content in Flink Development on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/docs/flinkdev/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Importing Flink into an IDE</title>
+      <link>//localhost/flink/flink-docs-master/docs/flinkdev/ide_setup/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/flinkdev/ide_setup/</guid>
+      <description>Importing Flink into an IDE # The sections below describe how to import the Flink project into an IDE for the development of Flink itself. For writing Flink programs, please refer to the Java API and the Scala API quickstart guides.
+Whenever something is not working in your IDE, try with the Maven command line first (mvn clean package -DskipTests) as it might be your IDE that has a bug or is not properly set up.</description>
+    </item>
+    
+    <item>
+      <title>Building Flink from Source</title>
+      <link>//localhost/flink/flink-docs-master/docs/flinkdev/building/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/flinkdev/building/</guid>
+      <description>Building Flink from Source # This page covers how to build Flink 1.16-SNAPSHOT from sources.
+Build Flink # In order to build Flink you need the source code. Either download the source of a release or clone the git repository.
+In addition you need Maven 3 and a JDK (Java Development Kit). Flink requires at least Java 11 to build.
+NOTE: Maven 3.3.x can build Flink, but will not properly shade away certain dependencies.</description>
+    </item>
+    
+  </channel>
+</rss>

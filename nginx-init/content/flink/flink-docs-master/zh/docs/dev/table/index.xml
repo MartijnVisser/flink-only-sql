@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Table API &amp; SQL on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/zh/docs/dev/table/</link>
+    <description>Recent content in Table API &amp; SQL on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/zh/docs/dev/table/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>概览</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/table/overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/table/overview/</guid>
+      <description>Table API &amp;amp; SQL # Apache Flink 有两种关系型 API 来做流批统一处理：Table API 和 SQL。Table API 是用于 Scala 和 Java 语言的查询API，它可以用一种非常直观的方式来组合使用选取、过滤、join 等关系型算子。Flink SQL 是基于 Apache Calcite 来实现的标准 SQL。无论输入是连续的（流式）还是有界的（批处理），在两个接口中指定的查询都具有相同的语义，并指定相同的结果。
+Table API 和 SQL 两种 API 是紧密集成的，以及 DataStream API。你可以在这些 API 之间，以及一些基于这些 API 的库之间轻松的切换。比如，你可以先用 CEP 从 DataStream 中做模式匹配，然后用 Table API 来分析匹配的结果；或者你可以用 SQL 来扫描、过滤、聚合一个批式的表，然后再跑一个 Gelly 图算法 来处理已经预处理好的数据。
+Table 程序依赖 # 您需要将 Table API 作为依赖项添加到项目中，以便用 Table API 和 SQL 定义数据管道。
+有关如何为 Java 和 Scala 配置这些依赖项的更多细节，请查阅项目配置小节。
+如果您使用 Python，请查阅 Python API 文档。</description>
+    </item>
+    
+    <item>
+      <title>概念与通用 API</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/table/common/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/table/common/</guid>
+      <description>概念与通用 API # Table API 和 SQL 集成在同一套 API 中。 这套 API 的核心概念是Table，用作查询的输入和输出。 本文介绍 Table API 和 SQL 查询程序的通用结构、如何注册 Table 、如何查询 Table 以及如何输出 Table 。
+Table API 和 SQL 程序的结构 # 所有用于批处理和流处理的 Table API 和 SQL 程序都遵循相同的模式。下面的代码示例展示了 Table API 和 SQL 程序的通用结构。
+Java import org.apache.flink.table.api.*; import org.apache.flink.connector.datagen.table.DataGenConnectorOptions; // Create a TableEnvironment for batch or streaming execution. // See the &amp;#34;Create a TableEnvironment&amp;#34; section for details. TableEnvironment tableEnv = TableEnvironment.create(/*…*/); // Create a source table tableEnv.</description>
+    </item>
+    
+    <item>
+      <title>DataStream API Integration</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/table/data_stream_api/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/table/data_stream_api/</guid>
+      <description>DataStream API Integration # Both Table API and DataStream API are equally important when it comes to defining a data processing pipeline.
+The DataStream API offers the primitives of stream processing (namely time, state, and dataflow management) in a relatively low-level imperative programming API. The Table API abstracts away many internals and provides a structured and declarative API.
+Both APIs can work with bounded and unbounded streams.
+Bounded streams need to be managed when processing historical data.</description>
+    </item>
+    
+    <item>
+      <title>流式聚合</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/table/tuning/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/table/tuning/</guid>
+      <description>Performance Tuning # SQL 是数据分析中使用最广泛的语言。Flink Table API 和 SQL 使用户能够以更少的时间和精力定义高效的流分析应用程序。此外，Flink Table API 和 SQL 是高效优化过的，它集成了许多查询优化和算子优化。但并不是所有的优化都是默认开启的，因此对于某些工作负载，可以通过打开某些选项来提高性能。
+在这一页，我们将介绍一些实用的优化选项以及流式聚合的内部原理，它们在某些情况下能带来很大的提升。
+The streaming aggregation optimizations mentioned in this page are all supported for Group Aggregations and Window TVF Aggregations now. MiniBatch 聚合 # 默认情况下，无界聚合算子是逐条处理输入的记录，即：（1）从状态中读取累加器，（2）累加/撤回记录至累加器，（3）将累加器写回状态，（4）下一条记录将再次从（1）开始处理。这种处理模式可能会增加 StateBackend 开销（尤其是对于 RocksDB StateBackend ）。此外，生产中非常常见的数据倾斜会使这个问题恶化，并且容易导致 job 发生反压。
+MiniBatch 聚合的核心思想是将一组输入的数据缓存在聚合算子内部的缓冲区中。当输入的数据被触发处理时，每个 key 只需一个操作即可访问状态。这样可以大大减少状态开销并获得更好的吞吐量。但是，这可能会增加一些延迟，因为它会缓冲一些记录而不是立即处理它们。这是吞吐量和延迟之间的权衡。
+下图说明了 mini-batch 聚合如何减少状态操作。
+默认情况下，对于无界聚合算子来说，mini-batch 优化是被禁用的。开启这项优化，需要设置选项 table.exec.mini-batch.enabled、table.exec.mini-batch.allow-latency 和 table.exec.mini-batch.size。更多详细信息请参见配置页面。
+MiniBatch optimization is always enabled for Window TVF Aggregation, regardless of the above configuration.</description>
+    </item>
+    
+    <item>
+      <title>数据类型</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/table/types/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/table/types/</guid>
+      <description>数据类型 # Flink SQL 为用户提供了一系列丰富的原始数据类型。
+数据类型 # 在 Flink 的 Table 生态系统中，数据类型 描述了数据的逻辑类型，可以用来表示转换过程中输入、输出的类型。
+Flink 的数据类型类似于 SQL 标准中的术语数据类型，但包含了值的可空性，以便于更好地处理标量表达式。
+以下是一些数据类型的例子：
+INT INT NOT NULL INTERVAL DAY TO SECOND(3) ROW&amp;lt;myField ARRAY&amp;lt;BOOLEAN&amp;gt;, myOtherField TIMESTAMP(3)&amp;gt; 可在下文中找到所有预先定义好的数据类型。
+Table API 中的数据类型 # Java/Scala 在定义 connector、catalog、用户自定义函数时，使用 JVM 相关 API 的用户可能会使用到 Table API 中基于 org.apache.flink.table.types.DataType 的一些实例。
+数据类型 实例有两个职责：
+作为逻辑类型的表现形式，定义 JVM 类语言或 Python 语言与 Table 生态系统的边界，而不是以具体的物理表现形式存在于数据的传输过程或存储中。 可选的: 在与其他 API 进行数据交换时，为 Planner 提供这些数据物理层面的相关提示。 对于基于 JVM 的语言，所有预定义的数据类型都可以在 org.apache.flink.table.api.DataTypes 下找到。
+Python 在 Python 语言定义用户自定义函数时，使用 Python API 的用户 可能会使用到 Python API 中基于 pyflink.</description>
+    </item>
+    
+    <item>
+      <title>时区</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/table/timezone/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/table/timezone/</guid>
+      <description>时区 # Flink 为日期和时间提供了丰富的数据类型， 包括 DATE， TIME， TIMESTAMP， TIMESTAMP_LTZ， INTERVAL YEAR TO MONTH， INTERVAL DAY TO SECOND (更多详情请参考 Date and Time)。 Flink 支持在 session （会话）级别设置时区（更多详情请参考 table.local-time-zone）。 Flink 对多种时间类型和时区的支持使得跨时区的数据处理变得非常容易。
+TIMESTAMP vs TIMESTAMP_LTZ # TIMESTAMP 类型 # TIMESTAMP(p) 是 TIMESTAMP(p) WITHOUT TIME ZONE 的简写， 精度 p 支持的范围是0-9， 默认是6。 TIMESTAMP 用于描述年， 月， 日， 小时， 分钟， 秒 和 小数秒对应的时间戳。 TIMESTAMP 可以通过一个字符串来指定，例如： Flink SQL&amp;gt; SELECT TIMESTAMP &amp;#39;1970-01-01 00:00:04.001&amp;#39;; +-------------------------+ | 1970-01-01 00:00:04.001 | +-------------------------+ TIMESTAMP_LTZ 类型 # TIMESTAMP_LTZ(p) 是 TIMESTAMP(p) WITH LOCAL TIME ZONE 的简写， 精度 p 支持的范围是0-9， 默认是6。 TIMESTAMP_LTZ 用于描述时间线上的绝对时间点， 使用 long 保存从 epoch 至今的毫秒数， 使用int保存毫秒中的纳秒数。 epoch 时间是从 java 的标准 epoch 时间 1970-01-01T00:00:00Z 开始计算。 在计算和可视化时， 每个 TIMESTAMP_LTZ 类型的数据都是使用的 session （会话）中配置的时区。 TIMESTAMP_LTZ 没有字符串表达形式因此无法通过字符串来指定， 可以通过一个 long 类型的 epoch 时间来转化(例如: 通过 Java 来产生一个 long 类型的 epoch 时间 System.</description>
+    </item>
+    
+    <item>
+      <title>Table API</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/table/tableapi/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/table/tableapi/</guid>
+      <description>Table API # Table API 是批处理和流处理的统一的关系型 API。Table API 的查询不需要修改代码就可以采用批输入或流输入来运行。Table API 是 SQL 语言的超集，并且是针对 Apache Flink 专门设计的。Table API 集成了 Scala，Java 和 Python 语言的 API。Table API 的查询是使用 Java，Scala 或 Python 语言嵌入的风格定义的，有诸如自动补全和语法校验的 IDE 支持，而不是像普通 SQL 一样使用字符串类型的值来指定查询。
+Table API 和 Flink SQL 共享许多概念以及部分集成的 API。通过查看公共概念 &amp;amp; API来学习如何注册表或如何创建一个表对象。流概念页面讨论了诸如动态表和时间属性等流特有的概念。
+下面的例子中假定有一张叫 Orders 的表，表中有属性 (a, b, c, rowtime) 。rowtime 字段是流任务中的逻辑时间属性或是批任务中的普通时间戳字段。
+概述 &amp;amp; 示例 # Table API 支持 Scala, Java 和 Python 语言。Scala 语言的 Table API 利用了 Scala 表达式，Java 语言的 Table API 支持 DSL 表达式和解析并转换为等价表达式的字符串，Python 语言的 Table API 仅支持解析并转换为等价表达式的字符串。</description>
+    </item>
+    
+    <item>
+      <title>模块</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/table/modules/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/table/modules/</guid>
+      <description>Modules # Modules allow users to extend Flink&amp;rsquo;s built-in objects, such as defining functions that behave like Flink built-in functions. They are pluggable, and while Flink provides a few pre-built modules, users can write their own.
+For example, users can define their own geo functions and plug them into Flink as built-in functions to be used in Flink SQL and Table APIs. Another example is users can load an out-of-shelf Hive module to use Hive built-in functions as Flink built-in functions.</description>
+    </item>
+    
+    <item>
+      <title>Catalogs</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/table/catalogs/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/table/catalogs/</guid>
+      <description>Catalogs # Catalog 提供了元数据信息，例如数据库、表、分区、视图以及数据库或其他外部系统中存储的函数和信息。
+数据处理最关键的方面之一是管理元数据。 元数据可以是临时的，例如临时表、或者通过 TableEnvironment 注册的 UDF。 元数据也可以是持久化的，例如 Hive Metastore 中的元数据。Catalog 提供了一个统一的API，用于管理元数据，并使其可以从 Table API 和 SQL 查询语句中来访问。
+Catalog 类型 # GenericInMemoryCatalog # GenericInMemoryCatalog 是基于内存实现的 Catalog，所有元数据只在 session 的生命周期内可用。
+JdbcCatalog # JdbcCatalog 使得用户可以将 Flink 通过 JDBC 协议连接到关系数据库。Postgres Catalog 和 MySQL Catalog 是目前 JDBC Catalog 仅有的两种实现。 参考 JdbcCatalog 文档 获取关于配置 JDBC catalog 的详细信息。
+HiveCatalog # HiveCatalog 有两个用途：作为原生 Flink 元数据的持久化存储，以及作为读写现有 Hive 元数据的接口。 Flink 的 Hive 文档 提供了有关设置 HiveCatalog 以及访问现有 Hive 元数据的详细信息。</description>
+    </item>
+    
+    <item>
+      <title>SQL 客户端</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/table/sqlclient/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/table/sqlclient/</guid>
+      <description>SQL 客户端 # Flink 的 Table &amp;amp; SQL API 可以处理 SQL 语言编写的查询语句，但是这些查询需要嵌入用 Java 或 Scala 编写的表程序中。此外，这些程序在提交到集群前需要用构建工具打包。这或多或少限制了 Java/Scala 程序员对 Flink 的使用。
+SQL 客户端 的目的是提供一种简单的方式来编写、调试和提交表程序到 Flink 集群上，而无需写一行 Java 或 Scala 代码。SQL 客户端命令行界面（CLI） 能够在命令行中检索和可视化分布式应用中实时产生的结果。
+入门 # 本节介绍如何在命令行里启动（setup）和运行你的第一个 Flink SQL 程序。
+SQL 客户端捆绑在常规 Flink 发行版中，因此可以直接运行。它仅需要一个正在运行的 Flink 集群就可以在其中执行表程序。有关设置 Flink 群集的更多信息，请参见集群和部署部分。如果仅想试用 SQL 客户端，也可以使用以下命令启动本地集群：
+./bin/start-cluster.sh 启动 SQL 客户端命令行界面 # SQL Client 脚本也位于 Flink 的 bin 目录中。将来，用户可以通过启动嵌入式 standalone 进程或通过连接到远程 SQL 客户端网关来启动 SQL 客户端命令行界面。目前仅支持 embedded，模式默认值embedded。可以通过以下方式启动 CLI：
+./bin/sql-client.sh 或者显式使用 embedded 模式:</description>
+    </item>
+    
+    <item>
+      <title>配置</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/table/config/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/table/config/</guid>
+      <description>配置 # Table 和 SQL API 的默认配置能够确保结果准确，同时也提供可接受的性能。
+根据 Table 程序的需求，可能需要调整特定的参数用于优化。例如，无界流程序可能需要保证所需的状态是有限的(请参阅 流式概念).
+概览 # 当实例化一个 TableEnvironment 时，可以使用 EnvironmentSettings 来传递用于当前会话的所期望的配置项 —— 传递一个 Configuration 对象到 EnvironmentSettings。
+此外，在每个 TableEnvironment 中，TableConfig 提供用于当前会话的配置项。
+对于常见或者重要的配置项，TableConfig 提供带有详细注释的 getters 和 setters 方法。
+对于更加高级的配置，用户可以直接访问底层的 key-value 配置项。以下章节列举了所有可用于调整 Flink Table 和 SQL API 程序的配置项。
+注意 因为配置项会在执行操作的不同时间点被读取，所以推荐在实例化 TableEnvironment 后尽早地设置配置项。
+Java // instantiate table environment Configuration configuration = new Configuration(); // set low-level key-value options configuration.setString(&amp;#34;table.exec.mini-batch.enabled&amp;#34;, &amp;#34;true&amp;#34;); configuration.setString(&amp;#34;table.exec.mini-batch.allow-latency&amp;#34;, &amp;#34;5 s&amp;#34;); configuration.setString(&amp;#34;table.exec.mini-batch.size&amp;#34;, &amp;#34;5000&amp;#34;); EnvironmentSettings settings = EnvironmentSettings.</description>
+    </item>
+    
+    <item>
+      <title>User-defined Sources &amp; Sinks</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/table/sourcessinks/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/table/sourcessinks/</guid>
+      <description>User-defined Sources &amp;amp; Sinks # Dynamic tables are the core concept of Flink&amp;rsquo;s Table &amp;amp; SQL API for processing both bounded and unbounded data in a unified fashion.
+Because dynamic tables are only a logical concept, Flink does not own the data itself. Instead, the content of a dynamic table is stored in external systems (such as databases, key-value stores, message queues) or files.
+Dynamic sources and dynamic sinks can be used to read and write data from and to an external system.</description>
+    </item>
+    
+  </channel>
+</rss>

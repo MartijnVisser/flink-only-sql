@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Python API on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/docs/dev/python/</link>
+    <description>Recent content in Python API on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/docs/dev/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Overview</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/python/overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/python/overview/</guid>
+      <description>Python API # PyFlink is a Python API for Apache Flink that allows you to build scalable batch and streaming workloads, such as real-time data processing pipelines, large-scale exploratory data analysis, Machine Learning (ML) pipelines and ETL processes. If you&amp;rsquo;re already familiar with Python and libraries such as Pandas, then PyFlink makes it simpler to leverage the full capabilities of the Flink ecosystem. Depending on the level of abstraction you need, there are two different APIs that can be used in PyFlink:</description>
+    </item>
+    
+    <item>
+      <title>Installation</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/python/installation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/python/installation/</guid>
+      <description>Installation # Environment Requirements # Python version (3.6, 3.7, 3.8 or 3.9) is required for PyFlink. Please run the following command to make sure that it meets the requirements: $ python --version # the version printed here must be 3.6, 3.7, 3.8 or 3.9 Environment Setup # Your system may include multiple Python versions, and thus also include multiple Python binary executables. You can run the following ls command to find out what Python binary executables are available in your system:</description>
+    </item>
+    
+    <item>
+      <title>Table API Tutorial</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/python/table_api_tutorial/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/python/table_api_tutorial/</guid>
+      <description>Table API Tutorial # Apache Flink offers a Table API as a unified, relational API for batch and stream processing, i.e., queries are executed with the same semantics on unbounded, real-time streams or bounded, batch data sets and produce the same results. The Table API in Flink is commonly used to ease the definition of data analytics, data pipelining, and ETL applications.
+What Will You Be Building? # In this tutorial, you will learn how to build a pure Python Flink Table API pipeline.</description>
+    </item>
+    
+    <item>
+      <title>DataStream API Tutorial</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/python/datastream_tutorial/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/python/datastream_tutorial/</guid>
+      <description>DataStream API Tutorial # Apache Flink offers a DataStream API for building robust, stateful streaming applications. It provides fine-grained control over state and time, which allows for the implementation of advanced event-driven systems. In this step-by-step guide, you’ll learn how to build a simple streaming application with PyFlink and the DataStream API.
+What Will You Be Building? # In this tutorial, you will learn how to write a simple Python DataStream pipeline.</description>
+    </item>
+    
+    <item>
+      <title>Dependency Management</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/python/dependency_management/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/python/dependency_management/</guid>
+      <description>Dependency Management # There are requirements to use dependencies inside the Python API programs. For example, users may need to use third-party Python libraries in Python user-defined functions. In addition, in scenarios such as machine learning prediction, users may want to load a machine learning model inside the Python user-defined functions.
+When the PyFlink job is executed locally, users could install the third-party Python libraries into the local Python environment, download the machine learning model to local, etc.</description>
+    </item>
+    
+    <item>
+      <title>Execution Mode</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/python/python_execution_mode/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/python/python_execution_mode/</guid>
+      <description>Execution Mode # The Python API supports different runtime execution modes from which you can choose depending on the requirements of your use case and the characteristics of your job. The Python runtime execution mode defines how the Python user-defined functions will be executed.
+Prior to release-1.15, there is the only execution mode called PROCESS execution mode. The PROCESS mode means that the Python user-defined functions will be executed in separate Python processes.</description>
+    </item>
+    
+    <item>
+      <title>Configuration</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/python/python_config/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/python/python_config/</guid>
+      <description>Configuration # Depending on the requirements of a Python API program, it might be necessary to adjust certain parameters for optimization.
+For Python DataStream API program, the config options could be set as following:
+from pyflink.common import Configuration from pyflink.datastream import StreamExecutionEnvironment config = Configuration() config.set_integer(&amp;#34;python.fn-execution.bundle.size&amp;#34;, 1000) env = StreamExecutionEnvironment.get_execution_environment(config) For Python Table API program, all the config options available for Java/Scala Table API program could also be used in the Python Table API program.</description>
+    </item>
+    
+    <item>
+      <title>Debugging</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/python/debugging/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/python/debugging/</guid>
+      <description>Debugging # This page describes how to debug in PyFlink.
+Logging Infos # Client Side Logging # You can log contextual and debug information via print or standard Python logging modules in PyFlink jobs in places outside Python UDFs. The logging messages will be printed in the log files of the client during job submission.
+from pyflink.table import EnvironmentSettings, TableEnvironment # create a TableEnvironment env_settings = EnvironmentSettings.in_streaming_mode() table_env = TableEnvironment.</description>
+    </item>
+    
+    <item>
+      <title>Environment Variables</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/python/environment_variables/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/python/environment_variables/</guid>
+      <description>Environment Variables # These environment variables will affect the behavior of PyFlink:
+Environment Variable Description FLINK_HOME PyFlink job will be compiled before submitting and it requires Flink&#39;s distribution to compile the job. PyFlink&#39;s installation package already contains Flink&#39;s distribution and it&#39;s used by default. This environment allows you to specify a custom Flink&#39;s distribution. PYFLINK_CLIENT_EXECUTABLE The path of the Python interpreter used to launch the Python process when submitting the Python jobs via &#34;</description>
+    </item>
+    
+    <item>
+      <title>FAQ</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/python/faq/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/python/faq/</guid>
+      <description>FAQ # This page describes the solutions to some common questions for PyFlink users.
+Preparing Python Virtual Environment # You can download a [convenience script]({% link downloads/setup-pyflink-virtual-env.sh %}) to prepare a Python virtual env zip which can be used on Mac OS and most Linux distributions. You can specify the PyFlink version to generate a Python virtual environment required for the corresponding PyFlink version, otherwise the most recent version will be installed.</description>
+    </item>
+    
+  </channel>
+</rss>

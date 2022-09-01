@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>DataStream API on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/zh/docs/dev/datastream/</link>
+    <description>Recent content in DataStream API on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/zh/docs/dev/datastream/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>概览</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/datastream/overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/datastream/overview/</guid>
+      <description>Flink DataStream API 编程指南 # Flink 中的 DataStream 程序是对数据流（例如过滤、更新状态、定义窗口、聚合）进行转换的常规程序。数据流的起始是从各种源（例如消息队列、套接字流、文件）创建的。结果通过 sink 返回，例如可以将数据写入文件或标准输出（例如命令行终端）。Flink 程序可以在各种上下文中运行，可以独立运行，也可以嵌入到其它程序中。任务执行可以运行在本地 JVM 中，也可以运行在多台机器的集群上。
+为了创建你自己的 Flink DataStream 程序，我们建议你从 Flink 程序剖析开始，然后逐渐添加自己的 stream transformation。其余部分作为附加的算子和高级特性的参考。
+DataStream 是什么? # DataStream API 得名于特殊的 DataStream 类，该类用于表示 Flink 程序中的数据集合。你可以认为 它们是可以包含重复项的不可变数据集合。这些数据可以是有界（有限）的，也可以是无界（无限）的，但用于处理它们的API是相同的。
+DataStream 在用法上类似于常规的 Java 集合，但在某些关键方面却大不相同。它们是不可变的，这意味着一旦它们被创建，你就不能添加或删除元素。你也不能简单地察看内部元素，而只能使用 DataStream API 操作来处理它们，DataStream API 操作也叫作转换（transformation）。
+你可以通过在 Flink 程序中添加 source 创建一个初始的 DataStream。然后，你可以基于 DataStream 派生新的流，并使用 map、filter 等 API 方法把 DataStream 和派生的流连接在一起。
+Flink 程序剖析 # Flink 程序看起来像一个转换 DataStream 的常规程序。每个程序由相同的基本部分组成：
+获取一个执行环境（execution environment）； 加载/创建初始数据； 指定数据相关的转换； 指定计算结果的存储位置； 触发程序执行。 Java 现在我们将对这些步骤逐一进行概述，更多细节请参考相关章节。请注意，Java DataStream API 的所有核心类都可以在 org.</description>
+    </item>
+    
+    <item>
+      <title>执行模式（流/批）</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/datastream/execution_mode/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/datastream/execution_mode/</guid>
+      <description>执行模式（流/批） # DataStream API 支持不同的运行时执行模式，你可以根据你的用例需要和作业特点进行选择。
+DataStream API 有一种”经典“的执行行为，我们称之为流（STREAMING）执行模式。这种模式适用于需要连续增量处理，而且预计无限期保持在线的无边界作业。
+此外，还有一种批式执行模式，我们称之为批（BATCH）执行模式。这种执行作业的方式更容易让人联想到批处理框架，比如 MapReduce。这种执行模式适用于有一个已知的固定输入，而且不会连续运行的有边界作业。
+Apache Flink 对流处理和批处理统一方法，意味着无论配置何种执行模式，在有界输入上执行的 DataStream 应用都会产生相同的最终 结果。重要的是要注意最终 在这里是什么意思：一个在流模式执行的作业可能会产生增量更新（想想数据库中的插入（upsert）操作），而批作业只在最后产生一个最终结果。尽管计算方法不同，只要呈现方式得当，最终结果会是相同的。
+通过启用批执行，我们允许 Flink 应用只有在我们知道输入是有边界的时侯才会使用到的额外的优化。例如，可以使用不同的关联（join）/ 聚合（aggregation）策略，允许实现更高效的任务调度和故障恢复行为的不同 shuffle。下面我们将介绍一些执行行为的细节。
+什么时候可以/应该使用批执行模式？ # 批执行模式只能用于 有边界 的作业/Flink 程序。边界是数据源的一个属性，告诉我们在执行前，来自该数据源的所有输入是否都是已知的，或者是否会有新的数据出现，可能是无限的。而对一个作业来说，如果它的所有源都是有边界的，则它就是有边界的，否则就是无边界的。
+而流执行模式，既可用于有边界任务，也可用于无边界任务。
+一般来说，在你的程序是有边界的时候，你应该使用批执行模式，因为这样做会更高效。当你的程序是无边界的时候，你必须使用流执行模式，因为只有这种模式足够通用，能够处理连续的数据流。
+一个明显的例外是当你想使用一个有边界作业去自展一些作业状态，并将状态使用在之后的无边界作业的时候。例如，通过流模式运行一个有边界作业，取一个 savepoint，然后在一个无边界作业上恢复这个 savepoint。这是一个非常特殊的用例，当我们允许将 savepoint 作为批执行作业的附加输出时，这个用例可能很快就会过时。
+另一个你可能会使用流模式运行有边界作业的情况是当你为最终会在无边界数据源写测试代码的时候。对于测试来说，在这些情况下使用有边界数据源可能更自然。
+配置批执行模式 # 执行模式可以通过 execute.runtime-mode 设置来配置。有三种可选的值：
+STREAMING: 经典 DataStream 执行模式（默认) BATCH: 在 DataStream API 上进行批量式执行 AUTOMATIC: 让系统根据数据源的边界性来决定 这可以通过 bin/flink run ... 的命令行参数进行配置，或者在创建/配置 StreamExecutionEnvironment 时写进程序。
+下面是如何通过命令行配置执行模式：
+$ bin/flink run -Dexecution.runtime-mode=BATCH examples/streaming/WordCount.jar 这个例子展示了如何在代码中配置执行模式：
+StreamExecutionEnvironment env = StreamExecutionEnvironment.</description>
+    </item>
+    
+    <item>
+      <title>用户自定义 Functions</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/datastream/user_defined_functions/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/datastream/user_defined_functions/</guid>
+      <description>&amp;lsquo;用户自定义 Functions&amp;rsquo; # 大多数操作都需要用户自定义 function。本节列出了实现用户自定义 function 的不同方式。还会介绍 Accumulators（累加器），可用于深入了解你的 Flink 应用程序。
+Java 实现接口 # 最基本的方法是实现提供的接口：
+class MyMapFunction implements MapFunction&amp;lt;String, Integer&amp;gt; { public Integer map(String value) { return Integer.parseInt(value); } } data.map(new MyMapFunction()); 匿名类 # 你可以将 function 当做匿名类传递：
+data.map(new MapFunction&amp;lt;String, Integer&amp;gt; () { public Integer map(String value) { return Integer.parseInt(value); } }); Java 8 Lambdas # Flink 在 Java API 中还支持 Java 8 Lambdas 表达式。
+data.filter(s -&amp;gt; s.startsWith(&amp;#34;http://&amp;#34;)); data.reduce((i1,i2) -&amp;gt; i1 + i2); Rich functions # 所有需要用户自定义 function 的转化操作都可以将 rich function 作为参数。例如，你可以将下面代码</description>
+    </item>
+    
+    <item>
+      <title>数据源</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/datastream/sources/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/datastream/sources/</guid>
+      <description>数据源 # 当前页面所描述的是 Flink 的 Data Source API 及其背后的概念和架构。 如果您对 Flink 中的 Data Source 如何工作感兴趣，或者您想实现一个新的数据 source，请阅读本文。
+如果您正在寻找预定义的 source 连接器，请查看连接器文档.
+Data Source 原理 # 核心组件
+一个数据 source 包括三个核心组件：分片（Splits）、分片枚举器（SplitEnumerator） 以及 源阅读器（SourceReader）。
+分片（Split） 是对一部分 source 数据的包装，如一个文件或者日志分区。分片是 source 进行任务分配和数据并行读取的基本粒度。
+源阅读器（SourceReader） 会请求分片并进行处理，例如读取分片所表示的文件或日志分区。SourceReader 在 TaskManagers 上的 SourceOperators 并行运行，并产生并行的事件流/记录流。
+分片枚举器（SplitEnumerator） 会生成分片并将它们分配给 SourceReader。该组件在 JobManager 上以单并行度运行，负责对未分配的分片进行维护，并以均衡的方式将其分配给 reader。
+Source 类作为API入口，将上述三个组件结合在了一起。
+流处理和批处理的统一
+Data Source API 以统一的方式对无界流数据和有界批数据进行处理。
+事实上，这两种情况之间的区别是非常小的：在有界/批处理情况中，枚举器生成固定数量的分片，而且每个分片都必须是有限的。但在无界流的情况下，则无需遵从限制，也就是分片大小可以不是有限的，或者枚举器将不断生成新的分片。
+示例 # 以下是一些简化的概念示例，以说明在流和批处理情况下 data source 组件如何交互。
+请注意，以下内容并没有准确地描述出 Kafka 和 File source 的工作方式，因为出于说明的目的，部分内容被简化处理。
+有界 File Source</description>
+    </item>
+    
+    <item>
+      <title>旁路输出</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/datastream/side_output/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/datastream/side_output/</guid>
+      <description>旁路输出 # 除了由 DataStream 操作产生的主要流之外，你还可以产生任意数量的旁路输出结果流。结果流中的数据类型不必与主要流中的数据类型相匹配，并且不同旁路输出的类型也可以不同。当你需要拆分数据流时，通常必须复制该数据流，然后从每个流中过滤掉不需要的数据，这个操作十分有用。
+使用旁路输出时，首先需要定义用于标识旁路输出流的 OutputTag：
+Java // 这需要是一个匿名的内部类，以便我们分析类型 OutputTag&amp;lt;String&amp;gt; outputTag = new OutputTag&amp;lt;String&amp;gt;(&amp;#34;side-output&amp;#34;) {}; Scala val outputTag = OutputTag[String](&amp;#34;side-output&amp;#34;) Python output_tag = OutputTag(&amp;#34;side-output&amp;#34;, Types.STRING()) 注意 OutputTag 是如何根据旁路输出流所包含的元素类型进行类型化的。
+可以通过以下方法将数据发送到旁路输出：
+ProcessFunction KeyedProcessFunction CoProcessFunction KeyedCoProcessFunction ProcessWindowFunction ProcessAllWindowFunction 你可以使用在上述方法中向用户暴露的 Context 参数，将数据发送到由 OutputTag 标识的旁路输出。这是从 ProcessFunction 发送数据到旁路输出的示例：
+Java DataStream&amp;lt;Integer&amp;gt; input = ...; final OutputTag&amp;lt;String&amp;gt; outputTag = new OutputTag&amp;lt;String&amp;gt;(&amp;#34;side-output&amp;#34;){}; SingleOutputStreamOperator&amp;lt;Integer&amp;gt; mainDataStream = input .process(new ProcessFunction&amp;lt;Integer, Integer&amp;gt;() { @Override public void processElement( Integer value, Context ctx, Collector&amp;lt;Integer&amp;gt; out) throws Exception { // 发送数据到主要的输出 out.</description>
+    </item>
+    
+    <item>
+      <title>Handling Application Parameters</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/datastream/application_parameters/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/datastream/application_parameters/</guid>
+      <description>应用程序参数处理 # 应用程序参数处理 # 几乎所有的批和流的 Flink 应用程序，都依赖于外部配置参数。这些配置参数可以用于指定输入和输出源（如路径或地址）、系统参数（并行度，运行时配置）和特定的应用程序参数（通常使用在用户自定义函数）。
+为解决以上问题，Flink 提供一个名为 Parametertool 的简单公共类，其中包含了一些基本的工具。请注意，这里说的 Parametertool 并不是必须使用的。Commons CLI 和 argparse4j 等其他框架也可以非常好地兼容 Flink。
+用 ParameterTool 读取配置值 # ParameterTool 定义了一组静态方法，用于读取配置信息。该工具类内部使用了 Map&amp;lt;string，string&amp;gt; 类型，这样使得它可以很容易地与你的配置集成在一起。
+配置值来自 .properties 文件 # 以下方法可以读取 Properties 文件并解析出键/值对：
+String propertiesFilePath = &amp;#34;/home/sam/flink/myjob.properties&amp;#34;; ParameterTool parameter = ParameterTool.fromPropertiesFile(propertiesFilePath); File propertiesFile = new File(propertiesFilePath); ParameterTool parameter = ParameterTool.fromPropertiesFile(propertiesFile); InputStream propertiesFileInputStream = new FileInputStream(file); ParameterTool parameter = ParameterTool.fromPropertiesFile(propertiesFileInputStream); 配置值来自命令行 # 以下方法可以从命令行中获取参数，如 --input hdfs:///mydata --elements 42。
+public static void main(String[] args) { ParameterTool parameter = ParameterTool.</description>
+    </item>
+    
+    <item>
+      <title>测试</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/datastream/testing/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/datastream/testing/</guid>
+      <description>测试 # 测试是每个软件开发过程中不可或缺的一部分， Apache Flink 同样提供了在测试金字塔的多个级别上测试应用程序代码的工具。
+测试用户自定义函数 # 通常，我们可以假设 Flink 在用户自定义函数之外产生了正确的结果。因此，建议尽可能多的用单元测试来测试那些包含主要业务逻辑的类。
+单元测试无状态、无时间限制的 UDF # 例如，让我们以以下无状态的 MapFunction 为例。
+Java public class IncrementMapFunction implements MapFunction&amp;lt;Long, Long&amp;gt; { @Override public Long map(Long record) throws Exception { return record + 1; } } Scala class IncrementMapFunction extends MapFunction[Long, Long] { override def map(record: Long): Long = { record + 1 } } 通过传递合适地参数并验证输出，你可以很容易的使用你喜欢的测试框架对这样的函数进行单元测试。
+Java public class IncrementMapFunctionTest { @Test public void testIncrement() throws Exception { // instantiate your function IncrementMapFunction incrementer = new IncrementMapFunction(); // call the methods that you have implemented assertEquals(3L, incrementer.</description>
+    </item>
+    
+    <item>
+      <title>实验功能</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/datastream/experimental/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/datastream/experimental/</guid>
+      <description>实验功能 # This section describes experimental features in the DataStream API. Experimental features are still evolving and can be either unstable, incomplete, or subject to heavy change in future versions.
+Reinterpreting a pre-partitioned data stream as keyed stream # We can re-interpret a pre-partitioned data stream as a keyed stream to avoid shuffling.
+WARNING: The re-interpreted data stream MUST already be pre-partitioned in EXACTLY the same way Flink&amp;rsquo;s keyBy would partition the data in a shuffle w.</description>
+    </item>
+    
+    <item>
+      <title>Scala API 扩展</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/datastream/scala_api_extensions/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/datastream/scala_api_extensions/</guid>
+      <description>Scala API 扩展 # 为了在 Scala 和 Java API 之间保持大致相同的使用体验，在批处理和流处理的标准 API 中省略了一些允许 Scala 高级表达的特性。
+如果你想拥有完整的 Scala 体验，可以选择通过隐式转换增强 Scala API 的扩展。
+要使用所有可用的扩展，你只需为 DataStream API 添加一个简单的引入
+import org.apache.flink.streaming.api.scala.extensions._ 或者，您可以引入单个扩展 a-là-carte 来使用您喜欢的扩展。
+Accept partial functions # 通常，DataStream API 不接受匿名模式匹配函数来解构元组、case 类或集合，如下所示：
+val data: DataStream[(Int, String, Double)] = // [...] data.map { case (id, name, temperature) =&amp;gt; // [...] // The previous line causes the following compilation error: // &amp;#34;The argument types of an anonymous function must be fully known.</description>
+    </item>
+    
+    <item>
+      <title>Java Lambda Expressions</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/datastream/java_lambdas/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/datastream/java_lambdas/</guid>
+      <description>Java Lambda 表达式 # Java 8 引入了几种新的语言特性，旨在实现更快、更清晰的编码。作为最重要的特性，即所谓的“Lambda 表达式”，它开启了函数式编程的大门。Lambda 表达式允许以简捷的方式实现和传递函数，而无需声明额外的（匿名）类。
+Flink 支持对 Java API 的所有算子使用 Lambda 表达式，但是，当 Lambda 表达式使用 Java 泛型时，你需要 显式 地声明类型信息。 本文档介绍如何使用 Lambda 表达式并描述了其（Lambda 表达式）当前的限制。有关 Flink API 的通用介绍，请参阅 DataStream API 编程指南。
+示例和限制 # 下面的这个示例演示了如何实现一个简单的内联 map() 函数，它使用 Lambda 表达式计算输入值的平方。
+不需要声明 map() 函数的输入 i 和输出参数的数据类型，因为 Java 编译器会对它们做出推断。
+env.fromElements(1, 2, 3) // 返回 i 的平方 .map(i -&amp;gt; i*i) .print(); 由于 OUT 是 Integer 而不是泛型，所以 Flink 可以从方法签名 OUT map(IN value) 的实现中自动提取出结果的类型信息。
+不幸的是，像 flatMap() 这样的函数，它的签名 void flatMap(IN value, Collector&amp;lt;OUT&amp;gt; out) 被 Java 编译器编译为 void flatMap(IN value, Collector out)。这样 Flink 就无法自动推断输出的类型信息了。</description>
+    </item>
+    
+  </channel>
+</rss>

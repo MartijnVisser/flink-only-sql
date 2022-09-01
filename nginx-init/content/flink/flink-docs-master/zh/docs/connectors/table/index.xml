@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Table API Connectors on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/zh/docs/connectors/table/</link>
+    <description>Recent content in Table API Connectors on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/zh/docs/connectors/table/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>概览</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/connectors/table/overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/connectors/table/overview/</guid>
+      <description>Table &amp;amp; SQL Connectors # Flink&amp;rsquo;s Table API &amp;amp; SQL programs can be connected to other external systems for reading and writing both batch and streaming tables. A table source provides access to data which is stored in external systems (such as a database, key-value store, message queue, or file system). A table sink emits a table to an external storage system. Depending on the type of source and sink, they support different formats such as CSV, Avro, Parquet, or ORC.</description>
+    </item>
+    
+    <item>
+      <title>Kafka</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/connectors/table/kafka/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/connectors/table/kafka/</guid>
+      <description>Apache Kafka SQL 连接器 # Scan Source: Unbounded Sink: Streaming Append Mode
+Kafka 连接器提供从 Kafka topic 中消费和写入数据的能力。
+依赖 # In order to use the Kafka connector the following dependencies are required for both projects using a build automation tool (such as Maven or SBT) and SQL Client with SQL JAR bundles.
+Kafka version Maven dependency SQL Client JAR universal &amp;ltdependency&amp;gt &amp;ltgroupId&amp;gtorg.apache.flink&amp;lt/groupId&amp;gt &amp;ltartifactId&amp;gtflink-connector-kafka&amp;lt/artifactId&amp;gt &amp;ltversion&amp;gt1.16-SNAPSHOT&amp;lt/version&amp;gt &amp;lt/dependency&amp;gt Copied to clipboard! Only available for stable releases.</description>
+    </item>
+    
+    <item>
+      <title>Upsert Kafka</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/connectors/table/upsert-kafka/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/connectors/table/upsert-kafka/</guid>
+      <description>Upsert Kafka SQL 连接器 # Scan Source: Unbounded Sink: Streaming Upsert Mode
+Upsert Kafka 连接器支持以 upsert 方式从 Kafka topic 中读取数据并将数据写入 Kafka topic。
+作为 source，upsert-kafka 连接器生产 changelog 流，其中每条数据记录代表一个更新或删除事件。更准确地说，数据记录中的 value 被解释为同一 key 的最后一个 value 的 UPDATE，如果有这个 key（如果不存在相应的 key，则该更新被视为 INSERT）。用表来类比，changelog 流中的数据记录被解释为 UPSERT，也称为 INSERT/UPDATE，因为任何具有相同 key 的现有行都被覆盖。另外，value 为空的消息将会被视作为 DELETE 消息。
+作为 sink，upsert-kafka 连接器可以消费 changelog 流。它会将 INSERT/UPDATE_AFTER 数据作为正常的 Kafka 消息写入，并将 DELETE 数据以 value 为空的 Kafka 消息写入（表示对应 key 的消息被删除）。Flink 将根据主键列的值对数据进行分区，从而保证主键上的消息有序，因此同一主键上的更新/删除消息将落在同一分区中。
+依赖 # In order to use the Upsert Kafka connector the following dependencies are required for both projects using a build automation tool (such as Maven or SBT) and SQL Client with SQL JAR bundles.</description>
+    </item>
+    
+    <item>
+      <title>Firehose</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/connectors/table/firehose/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/connectors/table/firehose/</guid>
+      <description>Amazon Kinesis Data Firehose SQL Connector # Sink: Streaming Append Mode The Kinesis Data Firehose connector allows for writing data into Amazon Kinesis Data Firehose (KDF).
+Dependencies # In order to use the AWS Kinesis Firehose connector the following dependencies are required for both projects using a build automation tool (such as Maven or SBT) and SQL Client with SQL JAR bundles.
+Maven dependency SQL Client &amp;ltdependency&amp;gt &amp;ltgroupId&amp;gtorg.apache.flink&amp;lt/groupId&amp;gt &amp;ltartifactId&amp;gtflink-connector-kinesis-firehose&amp;lt/artifactId&amp;gt &amp;ltversion&amp;gt1.</description>
+    </item>
+    
+    <item>
+      <title>Kinesis</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/connectors/table/kinesis/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/connectors/table/kinesis/</guid>
+      <description>Amazon Kinesis Data Streams SQL Connector # Scan Source: Unbounded Sink: Streaming Append Mode
+The Kinesis connector allows for reading data from and writing data into Amazon Kinesis Data Streams (KDS).
+Dependencies # In order to use the Kinesis connector the following dependencies are required for both projects using a build automation tool (such as Maven or SBT) and SQL Client with SQL JAR bundles.
+Maven dependency SQL Client &amp;ltdependency&amp;gt &amp;ltgroupId&amp;gtorg.</description>
+    </item>
+    
+    <item>
+      <title>JDBC</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/connectors/table/jdbc/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/connectors/table/jdbc/</guid>
+      <description>JDBC SQL 连接器 # Scan Source: Bounded Lookup Source: Sync Mode Sink: Batch Sink: Streaming Append &amp;amp; Upsert Mode
+JDBC 连接器允许使用 JDBC 驱动向任意类型的关系型数据库读取或者写入数据。本文档描述了针对关系型数据库如何通过建立 JDBC 连接器来执行 SQL 查询。
+如果在 DDL 中定义了主键，JDBC sink 将以 upsert 模式与外部系统交换 UPDATE/DELETE 消息；否则，它将以 append 模式与外部系统交换消息且不支持消费 UPDATE/DELETE 消息。
+依赖 # In order to use the JDBC connector the following dependencies are required for both projects using a build automation tool (such as Maven or SBT) and SQL Client with SQL JAR bundles.</description>
+    </item>
+    
+    <item>
+      <title>Elasticsearch</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/connectors/table/elasticsearch/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/connectors/table/elasticsearch/</guid>
+      <description>Elasticsearch SQL 连接器 # Sink: Batch Sink: Streaming Append &amp;amp; Upsert Mode
+Elasticsearch 连接器允许将数据写入到 Elasticsearch 引擎的索引中。本文档描述运行 SQL 查询时如何设置 Elasticsearch 连接器。
+连接器可以工作在 upsert 模式，使用 DDL 中定义的主键与外部系统交换 UPDATE/DELETE 消息。
+如果 DDL 中没有定义主键，那么连接器只能工作在 append 模式，只能与外部系统交换 INSERT 消息。
+依赖 # In order to use the Elasticsearch connector the following dependencies are required for both projects using a build automation tool (such as Maven or SBT) and SQL Client with SQL JAR bundles.
+Elasticsearch version Maven dependency SQL Client JAR 6.</description>
+    </item>
+    
+    <item>
+      <title>文件系统</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/connectors/table/filesystem/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/connectors/table/filesystem/</guid>
+      <description>文件系统 SQL 连接器 # 此连接器提供了对 Flink FileSystem abstraction 支持的文件系统中分区文件的访问。
+在 Flink 中包含了该文件系统连接器，不需要添加额外的依赖。相应的 jar 包可以在 Flink 工程项目的 /lib 目录下找到。从文件系统中读取或者向文件系统中写入行时，需要指定相应的 format。
+文件系统连接器允许从本地或分布式文件系统进行读写。文件系统表可以定义为：
+CREATE TABLE MyUserTable ( column_name1 INT, column_name2 STRING, ... part_name1 INT, part_name2 STRING ) PARTITIONED BY (part_name1, part_name2) WITH ( &amp;#39;connector&amp;#39; = &amp;#39;filesystem&amp;#39;, -- 必选：指定连接器类型 &amp;#39;path&amp;#39; = &amp;#39;file:///path/to/whatever&amp;#39;, -- 必选：指定路径 &amp;#39;format&amp;#39; = &amp;#39;...&amp;#39;, -- 必选：文件系统连接器指定 format -- 有关更多详情，请参考 Table Formats &amp;#39;partition.default-name&amp;#39; = &amp;#39;...&amp;#39;, -- 可选：默认的分区名，动态分区模式下分区字段值是 null 或空字符串 -- 可选：该属性开启了在 sink 阶段通过动态分区字段来 shuffle 数据，该功能可以大大减少文件系统 sink 的文件数，但是可能会导致数据倾斜，默认值是 false &amp;#39;sink.</description>
+    </item>
+    
+    <item>
+      <title>HBase</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/connectors/table/hbase/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/connectors/table/hbase/</guid>
+      <description>HBase SQL 连接器 # Scan Source: Bounded Lookup Source: Sync Mode Sink: Batch Sink: Streaming Upsert Mode
+HBase 连接器支持读取和写入 HBase 集群。本文档介绍如何使用 HBase 连接器基于 HBase 进行 SQL 查询。
+HBase 连接器在 upsert 模式下运行，可以使用 DDL 中定义的主键与外部系统交换更新操作消息。但是主键只能基于 HBase 的 rowkey 字段定义。如果没有声明主键，HBase 连接器默认取 rowkey 作为主键。
+依赖 # In order to use the HBase connector the following dependencies are required for both projects using a build automation tool (such as Maven or SBT) and SQL Client with SQL JAR bundles.</description>
+    </item>
+    
+    <item>
+      <title>DataGen</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/connectors/table/datagen/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/connectors/table/datagen/</guid>
+      <description>DataGen SQL 连接器 # Scan Source: 有界 Scan Source: 无界
+DataGen 连接器允许按数据生成规则进行读取。
+DataGen 连接器可以使用计算列语法。 这使您可以灵活地生成记录。
+DataGen 连接器是内置的。
+注意 不支持复杂类型: Array，Map，Row。 请用计算列构造这些类型。
+怎么创建一个 DataGen 的表 # 表的有界性：当表中字段的数据全部生成完成后，source 就结束了。 因此，表的有界性取决于字段的有界性。
+每个列，都有两种生成数据的方法：
+随机生成器是默认的生成器，您可以指定随机生成的最大和最小值。char、varchar、binary、varbinary, string （类型）可以指定长度。它是无界的生成器。
+序列生成器，您可以指定序列的起始和结束值。它是有界的生成器，当序列数字达到结束值，读取结束。
+CREATE TABLE datagen ( f_sequence INT, f_random INT, f_random_str STRING, ts AS localtimestamp, WATERMARK FOR ts AS ts ) WITH ( &amp;#39;connector&amp;#39; = &amp;#39;datagen&amp;#39;, -- optional options -- &amp;#39;rows-per-second&amp;#39;=&amp;#39;5&amp;#39;, &amp;#39;fields.f_sequence.kind&amp;#39;=&amp;#39;sequence&amp;#39;, &amp;#39;fields.f_sequence.start&amp;#39;=&amp;#39;1&amp;#39;, &amp;#39;fields.f_sequence.end&amp;#39;=&amp;#39;1000&amp;#39;, &amp;#39;fields.f_random.min&amp;#39;=&amp;#39;1&amp;#39;, &amp;#39;fields.f_random.max&amp;#39;=&amp;#39;1000&amp;#39;, &amp;#39;fields.f_random_str.length&amp;#39;=&amp;#39;10&amp;#39; ) 连接器参数 # 参数 是否必选 默认值 数据类型 描述 connector 必须 (none) String 指定要使用的连接器，这里是 &#39;datagen&#39;。 rows-per-second 可选 10000 Long 每秒生成的行数，用以控制数据发出速率。 fields.</description>
+    </item>
+    
+    <item>
+      <title>Print</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/connectors/table/print/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/connectors/table/print/</guid>
+      <description>Print SQL 连接器 # Sink Print 连接器允许将每一行写入标准输出流或者标准错误流。
+设计目的：
+简单的流作业测试。 对生产调试带来极大便利。 四种 format 选项：
+打印内容 条件 1 条件 2 标识符:任务 ID&gt; 输出数据 需要提供前缀打印标识符 parallelism &gt; 1 标识符&gt; 输出数据 需要提供前缀打印标识符 parallelism == 1 任务 ID&gt; 输出数据 不需要提供前缀打印标识符 parallelism &gt; 1 输出数据 不需要提供前缀打印标识符 parallelism == 1 输出字符串格式为 &amp;ldquo;$row_kind(f0,f1,f2&amp;hellip;)&amp;quot;，row_kind是一个 RowKind 类型的短字符串，例如：&amp;quot;+I(1,1)&amp;quot;。
+Print 连接器是内置的。
+注意 在任务运行时使用 Print Sinks 打印记录，你需要注意观察任务日志。
+如何创建一张基于 Print 的表 # CREATE TABLE print_table ( f0 INT, f1 INT, f2 STRING, f3 DOUBLE ) WITH ( &amp;#39;connector&amp;#39; = &amp;#39;print&amp;#39; ) 或者，也可以通过 LIKE子句 基于已有表的结构去创建新表。</description>
+    </item>
+    
+    <item>
+      <title>BlackHole</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/connectors/table/blackhole/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/connectors/table/blackhole/</guid>
+      <description> BlackHole SQL 连接器 # Sink: Bounded Sink: UnBounded
+BlackHole 连接器允许接收所有输入记录。它被设计用于：
+高性能测试。 UDF 输出，而不是实质性 sink。 就像类 Unix 操作系统上的 /dev/null。
+BlackHole 连接器是内置的。
+如何创建 BlackHole 表 # CREATE TABLE blackhole_table ( f0 INT, f1 INT, f2 STRING, f3 DOUBLE ) WITH ( &amp;#39;connector&amp;#39; = &amp;#39;blackhole&amp;#39; ); 或者，可以基于现有模式使用 LIKE 子句 创建。
+CREATE TABLE blackhole_table WITH (&amp;#39;connector&amp;#39; = &amp;#39;blackhole&amp;#39;) LIKE source_table (EXCLUDING ALL) 连接器选项 # 选项 是否必要 默认值 类型 描述 connector 必要 (none) String 指定需要使用的连接器，此处应为‘blackhole’。 </description>
+    </item>
+    
+    <item>
+      <title>下载页面</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/connectors/table/downloads/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/connectors/table/downloads/</guid>
+      <description>SQL Connectors 下载页面 # Download links are available only for stable releases. The page contains links to optional sql-client connectors and formats that are not part of the binary distribution.
+可选的 SQL formats # Name Download link Avro Only available for stable versions. Avro Schema Registry Only available for stable versions. Debezium Only available for stable versions. ORC Only available for stable versions. Parquet Only available for stable versions. Protobuf Only available for stable versions.</description>
+    </item>
+    
+  </channel>
+</rss>

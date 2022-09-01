@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Advanced on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/zh/docs/deployment/advanced/</link>
+    <description>Recent content in Advanced on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/zh/docs/deployment/advanced/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>扩展资源</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/deployment/advanced/external_resources/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/deployment/advanced/external_resources/</guid>
+      <description>扩展资源框架 # 许多计算任务需要使用除了 CPU 与内存外的资源，如用深度学习场景需要使用 GPU 来进行加速。为了支持这种扩展资源，Flink 提供了一个扩展资源框架。 该框架支持从底层资源管理系统（如 Kubernetes）请求各种类型的资源，并向算子提供使用这些资源所需的信息。该框架以插件形式支持不同的资源类型。 目前 Flink 仅内置了支持 GPU 资源的插件，你可以为你想使用的资源类型实现第三方插件。
+扩展资源框架做了什么 # 扩展资源（External Resource）框架主要做了以下两件事：
+根据你的配置，在 Flink 从底层资源管理系统中申请资源时，设置与扩展资源相关的请求字段
+为算子提供使用这些资源所需要的信息
+当 Flink 部署在资源管理系统（Kubernetes、Yarn）上时，扩展资源框架将确保分配的 Pod、Container 包含所需的扩展资源。目前，许多资源管理系统都支持扩展资源。 例如，Kubernetes 从 v1.10 开始通过 Device Plugin 机制支持 GPU、FPGA 等资源调度，Yarn 从 2.10 和 3.1 开始支持 GPU 和 FPGA 的调度。 在 Standalone 模式下，由用户负责确保扩展资源的可用性。
+扩展资源框架向算子提供扩展资源相关信息，这些信息由你配置的扩展资源 Driver 生成，包含了使用扩展资源所需要的基本属性。
+启用扩展资源框架 # 为了启用扩展资源框架来使用扩展资源，你需要：
+为该扩展资源准备扩展资源框架的插件
+为该扩展资源设置相关的配置
+在你的算子中，从 RuntimeContext 来获取扩展资源的信息并使用这些资源
+准备插件 # 你需要为使用的扩展资源准备插件，并将其放入 Flink 发行版的 plugins/ 文件夹中, 参看 Flink Plugins。 Flink 提供了第一方的 GPU 资源插件。你同样可以为你所使用的扩展资源实现自定义插件实现自定义插件。</description>
+    </item>
+    
+    <item>
+      <title>History Server</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/deployment/advanced/historyserver/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/deployment/advanced/historyserver/</guid>
+      <description>History Server # Flink 提供了 history server，可以在相应的 Flink 集群关闭之后查询已完成作业的统计信息。
+此外，它暴露了一套 REST API，该 API 接受 HTTP 请求并返回 JSON 格式的数据。
+概览 # HistoryServer 允许查询 JobManager 存档的已完成作业的状态和统计信息。
+在配置 HistoryServer 和 JobManager 之后，你可以使用相应的脚本来启动和停止 HistoryServer：
+# 启动或者停止 HistoryServer bin/historyserver.sh (start|start-foreground|stop) 默认情况下，此服务器绑定到 localhost 的 8082 端口。
+目前，只能将 HistoryServer 作为独立的进程运行。
+配置参数 # 配置项 jobmanager.archive.fs.dir 和 historyserver.archive.fs.refresh-interval 需要根据 作业存档目录 和 刷新作业存档目录的时间间隔 进行调整。
+JobManager
+已完成作业的存档在 JobManager 上进行，将已存档的作业信息上传到文件系统目录中。你可以在 flink-conf.yaml 文件中通过 jobmanager.archive.fs.dir 设置一个目录存档已完成的作业。
+# 上传已完成作业信息的目录 jobmanager.archive.fs.dir: hdfs:///completed-jobs HistoryServer
+可以通过 historyserver.archive.fs.dir 设置 HistoryServer 监视以逗号分隔的目录列表。定期轮询已配置的目录以查找新的存档；轮询间隔可以通过 historyserver.</description>
+    </item>
+    
+    <item>
+      <title>日志</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/deployment/advanced/logging/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/deployment/advanced/logging/</guid>
+      <description>如何使用日志记录 # 所有 Flink 进程都会创建一个文本格式的日志文件，其中包含该进程中发生的各种事件的信息。 这些日志提供了深入了解 Flink 内部工作的途径，同时可以用来输出检测出的问题（以 WARN/ERROR 消息的形式），还可以辅助调试问题。
+日志文件可以通过 Job-/TaskManager 对应的 WebUI 页面访问。所使用的 Resource Provider（如 YARN）可能会提供额外的访问方式来访问日志。
+Flink 中的日志记录是使用 SLF4J 日志接口实现的。这允许你不需要修改 Flink 的源代码就可以使用任何支持 SLF4J 的日志框架。
+默认情况下，使用 Log4j 2 作为底层日志框架。
+配置 Log4j 2 # Log4j 2 是通过 property 配置文件进行配置的。
+Flink 发行版在 conf 目录中附带了以下 log4j 配置文件，如果启用了 Log4j 2，则会自动使用如下文件：
+log4j-cli.properties：Flink 命令行使用（例如 flink run）； log4j-session.properties：Flink 命令行在启动基于 Kubernetes/Yarn 的 Session 集群时使用（例如 kubernetes-session.sh/yarn-session.sh）； log4j-console.properties：Job-/TaskManagers 在前台模式运行时使用（例如 Kubernetes）； log4j.properties： Job-/TaskManagers 默认使用的日志配置。 Log4j 会定期扫描这些文件的变更，并在必要时调整日志记录行为。默认情况下30秒检查一次，监测间隔可以通过 Log4j 配置文件的 monitorInterval 配置项进行设置。</description>
+    </item>
+    
+  </channel>
+</rss>

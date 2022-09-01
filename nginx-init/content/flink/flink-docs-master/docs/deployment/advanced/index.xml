@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Advanced on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/docs/deployment/advanced/</link>
+    <description>Recent content in Advanced on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/docs/deployment/advanced/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>External Resources</title>
+      <link>//localhost/flink/flink-docs-master/docs/deployment/advanced/external_resources/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/deployment/advanced/external_resources/</guid>
+      <description>External Resource Framework # In addition to CPU and memory, many workloads also need some other resources, e.g. GPUs for deep learning. To support external resources, Flink provides an external resource framework. The framework supports requesting various types of resources from the underlying resource management systems (e.g., Kubernetes), and supplies information needed for using these resources to the operators. Different resource types can be supported. You can either leverage built-in plugins provided by Flink (currently only for GPU support), or implement your own plugins for custom resource types.</description>
+    </item>
+    
+    <item>
+      <title>History Server</title>
+      <link>//localhost/flink/flink-docs-master/docs/deployment/advanced/historyserver/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/deployment/advanced/historyserver/</guid>
+      <description>History Server # Flink has a history server that can be used to query the statistics of completed jobs after the corresponding Flink cluster has been shut down.
+Furthermore, it exposes a REST API that accepts HTTP requests and responds with JSON data.
+Overview # The HistoryServer allows you to query the status and statistics of completed jobs that have been archived by a JobManager.
+After you have configured the HistoryServer and JobManager, you start and stop the HistoryServer via its corresponding startup script:</description>
+    </item>
+    
+    <item>
+      <title>Logging</title>
+      <link>//localhost/flink/flink-docs-master/docs/deployment/advanced/logging/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/deployment/advanced/logging/</guid>
+      <description>How to use logging # All Flink processes create a log text file that contains messages for various events happening in that process. These logs provide deep insights into the inner workings of Flink, and can be used to detect problems (in the form of WARN/ERROR messages) and can help in debugging them.
+The log files can be accessed via the Job-/TaskManager pages of the WebUI. The used Resource Provider (e.</description>
+    </item>
+    
+  </channel>
+</rss>

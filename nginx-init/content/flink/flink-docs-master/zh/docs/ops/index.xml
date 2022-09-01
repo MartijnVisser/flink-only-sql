@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Operations on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/zh/docs/ops/</link>
+    <description>Recent content in Operations on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/zh/docs/ops/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>指标</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/ops/metrics/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/ops/metrics/</guid>
+      <description>指标 # Flink exposes a metric system that allows gathering and exposing metrics to external systems.
+Registering metrics # You can access the metric system from any user function that extends RichFunction by calling getRuntimeContext().getMetricGroup(). This method returns a MetricGroup object on which you can create and register new metrics.
+Metric types # Flink supports Counters, Gauges, Histograms and Meters.
+Counter # A Counter is used to count something. The current value can be in- or decremented using inc()/inc(long n) or dec()/dec(long n).</description>
+    </item>
+    
+    <item>
+      <title>REST API</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/ops/rest_api/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/ops/rest_api/</guid>
+      <description>REST API # Flink 具有监控 API ，可用于查询正在运行的作业以及最近完成的作业的状态和统计信息。该监控 API 被用于 Flink 自己的仪表盘，同时也可用于自定义监控工具。
+该监控 API 是 REST-ful 风格的，可以接受 HTTP 请求并返回 JSON 格式的数据。
+概览 # 该监控 API 由作为 JobManager 一部分运行的 web 服务器提供支持。默认情况下，该服务器监听 8081 端口，端口号可以通过修改 flink-conf.yaml 文件的 rest.port 进行配置。请注意，该监控 API 的 web 服务器和仪表盘的 web 服务器目前是相同的，因此在同一端口一起运行。不过，它们响应不同的 HTTP URL 。
+在多个 JobManager 的情况下（为了高可用），每个 JobManager 将运行自己的监控 API 实例，当 JobManager 被选举成为集群 leader 时，该实例将提供已完成和正在运行作业的相关信息。
+拓展 # 该 REST API 后端位于 flink-runtime 项目中。核心类是 org.apache.flink.runtime.webmonitor.WebMonitorEndpoint ，用来配置服务器和请求路由。
+我们使用 Netty 和 Netty Router 库来处理 REST 请求和转换 URL 。选择该选项是因为这种组合具有轻量级依赖关系，并且 Netty HTTP 的性能非常好。</description>
+    </item>
+    
+    <item>
+      <title>升级应用程序和 Flink 版本</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/ops/upgrading/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/ops/upgrading/</guid>
+      <description>升级应用程序和 Flink 版本 # Flink DataStream 程序通常设计为长时间运行，例如数周、数月甚至数年。与所有长时间运行的服务一样，Flink 流式应用程序需要维护，包括修复错误、实施改进或将应用程序迁移到更高版本的 Flink 集群。
+本文档介绍了如何更新 Flink 流式应用程序以及如何将正在运行的流式应用程序迁移到不同的 Flink 集群。
+重启流式应用程序 # 升级流式应用程序或将应用程序迁移到不同集群的操作线基于 Flink 的 Savepoint 功能。Savepoint 是应用程序在特定时间点的状态的一致快照。 有两种方法可以从正在运行的流应用程序中获取 savepoint。
+获取 Savepoint 并继续处理。 &amp;gt; ./bin/flink savepoint &amp;lt;jobID&amp;gt; [ Savepoint 的路径] 建议定期获取 Savepoint ，以便能够从之前的时间点重新启动应用程序。
+作获取 Savepoint 并停止应用程序。 &amp;gt; ./bin/flink cancel -s [ Savepoint 的路径] &amp;lt;jobID&amp;gt; 这意味着应用程序在 Savepoint 完成后立即取消，即在 Savepoint 之后不进行其他 checkpoint。
+给定从应用程序获取的 Savepoint ，可以从该 Savepoint 启动相同或兼容的应用程序（请参阅下面的 应用程序状态兼容性 部分）。从 Savepoint 启动应用程序意味着其算子的状态被初始化为 Savepoint 中保存的算子状态。这是通过使用 Savepoint 启动应用程序来完成的。
+&amp;gt; .</description>
+    </item>
+    
+    <item>
+      <title>生产就绪情况核对清单</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/ops/production_ready/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/ops/production_ready/</guid>
+      <description>生产就绪情况核对清单 # The production readiness checklist provides an overview of configuration options that should be carefully considered before bringing an Apache Flink job into production. While the Flink community has attempted to provide sensible defaults for each configuration, it is important to review this list and ensure the options chosen are sufficient for your needs.
+Set An Explicit Max Parallelism # The max parallelism, set on a per-job and per-operator granularity, determines the maximum parallelism to which a stateful operator can scale.</description>
+    </item>
+    
+  </channel>
+</rss>

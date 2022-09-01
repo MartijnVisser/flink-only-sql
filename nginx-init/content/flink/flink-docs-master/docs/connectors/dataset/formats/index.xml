@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Formats on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/docs/connectors/dataset/formats/</link>
+    <description>Recent content in Formats on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/docs/connectors/dataset/formats/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Avro</title>
+      <link>//localhost/flink/flink-docs-master/docs/connectors/dataset/formats/avro/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/connectors/dataset/formats/avro/</guid>
+      <description>Avro format # Flink has built-in support for Apache Avro. This allows to easily read and write Avro data based on an Avro schema with Flink. The serialization framework of Flink is able to handle classes generated from Avro schemas. In order to use the Avro format the following dependencies are required for projects using a build automation tool (such as Maven or SBT).
+&amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.apache.flink&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;flink-avro&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.16-SNAPSHOT&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; In order to read data from an Avro file, you have to specify an AvroInputFormat.</description>
+    </item>
+    
+    <item>
+      <title>Hadoop</title>
+      <link>//localhost/flink/flink-docs-master/docs/connectors/dataset/formats/hadoop/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/connectors/dataset/formats/hadoop/</guid>
+      <description>Hadoop formats # Project Configuration # Support for Hadoop is contained in the flink-hadoop-compatibility Maven module.
+Add the following dependency to your pom.xml to use hadoop
+&amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.apache.flink&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;flink-hadoop-compatibility_2.12&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.16-SNAPSHOT&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; If you want to run your Flink application locally (e.g. from your IDE), you also need to add a hadoop-client dependency such as:
+&amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.apache.hadoop&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;hadoop-client&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;2.8.5&amp;lt;/version&amp;gt; &amp;lt;scope&amp;gt;provided&amp;lt;/scope&amp;gt; &amp;lt;/dependency&amp;gt; Using Hadoop InputFormats # To use Hadoop InputFormats with Flink the format must first be wrapped using either readHadoopFile or createHadoopInput of the HadoopInputs utility class.</description>
+    </item>
+    
+    <item>
+      <title>Microsoft Azure table</title>
+      <link>//localhost/flink/flink-docs-master/docs/connectors/dataset/formats/azure_table_storage/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/connectors/dataset/formats/azure_table_storage/</guid>
+      <description>Microsoft Azure Table Storage format # This example is using the HadoopInputFormat wrapper to use an existing Hadoop input format implementation for accessing Azure&amp;rsquo;s Table Storage.
+Download and compile the azure-tables-hadoop project. The input format developed by the project is not yet available in Maven Central, therefore, we have to build the project ourselves. Execute the following commands: git clone https://github.com/mooso/azure-tables-hadoop.git cd azure-tables-hadoop mvn clean install Setup a new Flink project using the quickstarts: curl https://flink.</description>
+    </item>
+    
+  </channel>
+</rss>

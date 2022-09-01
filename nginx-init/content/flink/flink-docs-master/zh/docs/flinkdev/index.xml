@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Flink 开发 on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/zh/docs/flinkdev/</link>
+    <description>Recent content in Flink 开发 on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/zh/docs/flinkdev/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>导入 Flink 到 IDE 中</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/flinkdev/ide_setup/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/flinkdev/ide_setup/</guid>
+      <description>导入 Flink 到 IDE 中 # 以下章节描述了如何将 Flink 项目导入到 IDE 中以进行 Flink 本身的源码开发。有关 Flink 程序编写的信息，请参阅 Java API 和 Scala API 快速入门指南。
+每当你的 IDE 无法正常工作时，请优先尝试使用 Maven 命令行（mvn clean package -DskipTests），因为它可能是由于你的 IDE 中存在错误或未正确设置。 准备 # 首先，请从我们的仓库中拉取 Flink 源，例如：
+git clone https://github.com/apache/flink.git 忽略重构提交 # 我们在 .git-blame-ignore-revs 中保留了一个大的重构提交列表。使用 git blame 查看更改注释时，忽略这些注释会很有帮助。你可以使用以下方法来配置 git 和你的 IDE：
+git config blame.ignoreRevsFile .git-blame-ignore-revs IntelliJ IDEA # 该指南介绍了关于如何设置 IntelliJ IDEA IDE 来进行 Flink 核心开发。众所周知由于 Eclipse 混合 Scala 和 Java 项目时存在问题，因此越来越多的贡献者正在迁移到 IntelliJ IDEA。</description>
+    </item>
+    
+    <item>
+      <title>从源码构建 Flink</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/flinkdev/building/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/flinkdev/building/</guid>
+      <description>从源码构建 Flink # 本篇主题是如何从版本 1.16-SNAPSHOT 的源码构建 Flink。
+构建 Flink # 首先需要准备源码。可以从发布版本下载源码 或者从 Git 库克隆 Flink 源码。
+还需要准备 Maven 3 和 JDK (Java开发套件)。Flink 依赖 Java 11 或更新的版本来进行构建。
+*注意：Maven 3.3.x 可以构建 Flink，但是不能正确地屏蔽掉指定的依赖。Maven 3.2.5 可以正确地构建库文件。
+输入以下命令从 Git 克隆代码
+git clone https://github.com/apache/flink.git 最简单的构建 Flink 的方法是执行如下命令：
+mvn clean install -DskipTests 上面的 Maven 指令（mvn）首先删除（clean）所有存在的构建，然后构建一个新的 Flink 运行包（install）。
+为了加速构建，可以：
+使用 &amp;rsquo; -DskipTests&amp;rsquo; 跳过测试 使用 fast Maven profile 跳过 QA 的插件和 JavaDocs 的生成 使用 skip-webui-build Maven profile 跳过 WebUI 编译 使用 Maven 并行构建功能，比如 &amp;lsquo;mvn package -T 1C&amp;rsquo; 会尝试并行使用多核 CPU，同时让每一个 CPU 核构建1个模块。 maven-shade-plugin 现存的 bug 可能会在并行构建时产生死锁。建议分2步进行构建：首先使用并行方式运行 mvn validate/test-compile/test，然后使用单线程方式运行 mvn package/verify/install。 构建脚本如下：</description>
+    </item>
+    
+  </channel>
+</rss>

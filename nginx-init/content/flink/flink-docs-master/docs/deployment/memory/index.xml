@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Memory Configuration on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/docs/deployment/memory/</link>
+    <description>Recent content in Memory Configuration on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/docs/deployment/memory/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Set up Flink&#39;s Process Memory</title>
+      <link>//localhost/flink/flink-docs-master/docs/deployment/memory/mem_setup/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/deployment/memory/mem_setup/</guid>
+      <description>Set up Flink&amp;rsquo;s Process Memory # Apache Flink provides efficient workloads on top of the JVM by tightly controlling the memory usage of its various components. While the community strives to offer sensible defaults to all configurations, the full breadth of applications that users deploy on Flink means this isn&amp;rsquo;t always possible. To provide the most production value to our users, Flink allows both high-level and fine-grained tuning of memory allocation within clusters.</description>
+    </item>
+    
+    <item>
+      <title>Set up TaskManager Memory</title>
+      <link>//localhost/flink/flink-docs-master/docs/deployment/memory/mem_setup_tm/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/deployment/memory/mem_setup_tm/</guid>
+      <description>Set up TaskManager Memory # The TaskManager runs user code in Flink. Configuring memory usage for your needs can greatly reduce Flink&amp;rsquo;s resource footprint and improve Job stability.
+The further described memory configuration is applicable starting with the release version 1.10. If you upgrade Flink from earlier versions, check the migration guide because many changes were introduced with the 1.10 release.
+This memory setup guide is relevant only for TaskManagers!</description>
+    </item>
+    
+    <item>
+      <title>Set up JobManager Memory</title>
+      <link>//localhost/flink/flink-docs-master/docs/deployment/memory/mem_setup_jobmanager/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/deployment/memory/mem_setup_jobmanager/</guid>
+      <description>Set up JobManager Memory # The JobManager is the controlling element of the Flink Cluster. It consists of three distinct components: Resource Manager, Dispatcher and one JobMaster per running Flink Job. This guide walks you through high level and fine-grained memory configurations for the JobManager.
+The further described memory configuration is applicable starting with the release version 1.11. If you upgrade Flink from earlier versions, check the migration guide because many changes were introduced with the 1.</description>
+    </item>
+    
+    <item>
+      <title>Memory Tuning Guide</title>
+      <link>//localhost/flink/flink-docs-master/docs/deployment/memory/mem_tuning/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/deployment/memory/mem_tuning/</guid>
+      <description>Memory tuning guide # In addition to the main memory setup guide, this section explains how to set up memory depending on the use case and which options are important for each case.
+Configure memory for standalone deployment # It is recommended to configure total Flink memory (taskmanager.memory.flink.size or jobmanager.memory.flink.size) or its components for standalone deployment where you want to declare how much memory is given to Flink itself. Additionally, you can adjust JVM metaspace if it causes problems.</description>
+    </item>
+    
+    <item>
+      <title>Troubleshooting</title>
+      <link>//localhost/flink/flink-docs-master/docs/deployment/memory/mem_trouble/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/deployment/memory/mem_trouble/</guid>
+      <description>Troubleshooting # IllegalConfigurationException # If you see an IllegalConfigurationException thrown from TaskExecutorProcessUtils or JobManagerProcessUtils, it usually indicates that there is either an invalid configuration value (e.g. negative memory size, fraction that is greater than 1, etc.) or configuration conflicts. Check the documentation chapters or configuration options related to the memory components mentioned in the exception message.
+OutOfMemoryError: Java heap space # The exception usually indicates that the JVM Heap is too small.</description>
+    </item>
+    
+    <item>
+      <title>Migration Guide</title>
+      <link>//localhost/flink/flink-docs-master/docs/deployment/memory/mem_migration/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/deployment/memory/mem_migration/</guid>
+      <description>Migration Guide # The memory setup has changed a lot with the 1.10 release for TaskManagers and with the 1.11 release for JobManagers. Many configuration options were removed or their semantics changed. This guide will help you to migrate the TaskManager memory configuration from Flink &amp;lt;= 1.9 to &amp;gt;= 1.10 and the JobManager memory configuration from Flink &amp;lt;= 1.10 to &amp;gt;= 1.11.
+It is important to review this guide because the legacy and new memory configuration can result in different sizes of memory components.</description>
+    </item>
+    
+    <item>
+      <title>Network Buffer Tuning</title>
+      <link>//localhost/flink/flink-docs-master/docs/deployment/memory/network_mem_tuning/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/deployment/memory/network_mem_tuning/</guid>
+      <description>Network memory tuning guide # Overview # Each record in Flink is sent to the next subtask compounded with other records in a network buffer, the smallest unit for communication between subtasks. In order to maintain consistent high throughput, Flink uses network buffer queues (also known as in-flight data) on the input and output side of the transmission process.
+Each subtask has an input queue waiting to consume data and an output queue waiting to send data to the next subtask.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -8,35 +8,39 @@ This demo is used by Martijn Visser in his [Flink Forward talk 'Only SQL: Empowe
 
 We'll use Docker Compose to start all necessary services to run the demos. It will start the following services:
 
-* Apache Flink 1.13.2, accessible via http://localhost:8081
-* Apache Flink SQL Client 1.13.2
-* Apache Kafka (including Zookeeper) 6.2.0, accessible via broker:29092
-* Confluent Schema Registry 6.2.0, accessible via http://localhost:8091 (or http://schema-registry:8091 via Docker networking) 
-* Confluent REST Proxy 6.2.0, accessible via http://localhost:8082
-* Elasticsearch 7.15.0, accessible via http://localhost:9200 (or http://elasticsearch:9200 via Docker networking)
-* http-server: a simple static HTTP server, accessible via http://localhost:8080
+* Apache Flink 1.15.1, accessible via http://localhost:8081
+* Apache Flink SQL Client 1.15.1
+* Apache Kafka (including Zookeeper) 7.2.1, accessible via broker:29092
+* Confluent Schema Registry 7.2.1, accessible via http://localhost:8091 (or http://schema-registry:8091 via Docker networking) 
+* Confluent REST Proxy 7.2.1, accessible via http://localhost:8082
+* Elasticsearch 7.16.2, accessible via http://localhost:9200 (or http://elasticsearch:9200 via Docker networking)
+* MySQL 8.0.30, accessible via JDBC at port 3306
+* nginx 1.22.0 (stable): a powerfull HTTP server, accessible via http://localhost
 
 ![Demo only-sql-overview](only-sql-overview.png "Demo overview")
 
 ## Starting the demo
 
 ```bash
-# Start all services
-docker-compose up -d
+# Build and start all services
+docker-compose up --build -d
 
 # Check if all the services are running
 docker-compose ps
 
-# Start the http-server
-docker run -it --rm -p 8080:8080 -v $(pwd)/content:/public danjellz/http-server
-
-# Star the Flink SQL Client
-docker exec -it `docker ps -q --filter "ancestor=ftisiot/flink_sql_cli:1.13.2"` "./sql-client.sh"
+# Start the Flink SQL Client
+docker-compose run sql-client
 ```
 
-## Explore all website behaviour
+## Access the demo website
 
-Any visit to one of the webpages is sent to the Kafka topic `pageview`. In order to explore them, we first need to register this Kafka topic as a table. 
+Visit http://localhost/flink/flink-docs-master/ to access the copy of the Apache Flink documentation, which is our demo 
+website.
+
+## Explore all realtime website behaviour
+
+Any visit to one of the webpages is sent to the Kafka topic `pageview`. 
+In order to explore them, we first need to register this Kafka topic as a table in Flink's catalog.
 
 ```sql
 --Create table pageviews:
@@ -48,17 +52,22 @@ CREATE TABLE pageviews (
     `browser` STRING,
     `screensize` STRING,
     `ts` TIMESTAMP(3) METADATA FROM 'timestamp',
+    `proc_time` AS PROCTIME(),
     WATERMARK FOR `ts` AS `ts` 
 ) WITH (
     'connector' = 'kafka',
     'topic' = 'pageview',
     'properties.bootstrap.servers' = 'broker:29092',
+    'properties.group.id' = 'flink-only-sql',
+    'scan.startup.mode' = 'latest-offset',
     'value.format' = 'avro-confluent',
     'value.avro-confluent.schema-registry.url' = 'http://schema-registry:8091'
 );
 ```
 
-Any cookie that belongs to the domain `localhostd` (which is where our website runs), is also sent to the topic. We are specifically interested in a cookie called `identifier`. We're going to register a view, which returns this value by applying a regular expressing on the incoming data. 
+Any cookie that belongs to the domain `localhost` (which is where our website runs), is also sent to the topic. 
+You are specifically interested in a cookie called `identifier`. You're going to register a view, which returns this 
+value by applying a regular expressing on the incoming data. 
 
 ```sql
 --Create view which already extracts the identifier from the cookies
@@ -71,41 +80,91 @@ CREATE TEMPORARY VIEW web_activities AS
          REGEXP_EXTRACT(cookies, '(^| )identifier=([^;]+)', 2) as `identifier`,
         `browser`,
         `screensize`,
+        `proc_time`,
         `ts`
     FROM pageviews;
 ```
 
 By now running queries on the view while visiting a webpage, you will see data appearing in the Flink SQL Client.
+This is an unbounded (streaming) source of data, meaning that the application will never end. 
 
 ```sql 
 SELECT * from web_activities;
 ```
 
-![Flink SQL Client Results](only-sql-results-01.png "Flink SQL Client Results")
+![Flink SQL Client Results](only-sql-results-01.png "Flink SQL Client Results - Unbounded datasource")
 
-In this example, we're interested in users who visit our homepage more than 3 times in 10 seconds. In order to achieve that, 
-we're first going to select all identifiers (which contains the value of the cookie `identifier`) who are visiting the url that 
-matches with `http://localhost:8080`. We're expanding our selection with the `TUMBLE` function which creates fixed windows of 
-10 seconds. Last but not least, we're using the `HAVING` function to make sure that only the identifiers that are occurring more 
-than 3 times are being selected. The end result looks like this:
+## Explore historical website behaviour
 
-```sql 
---Get the users who visit the homepage more than 3 times in 10 seconds
-SELECT  
-    `identifier`,
-    CONCAT('You Have Seen The Homepage ', CAST(COUNT(*) as VARCHAR), ' Times')  
-FROM web_activities
-WHERE `url` = 'http://localhost:8080/' OR `url` = 'http://127.0.0.1:8080/'
-GROUP BY 
-    TUMBLE(ts, INTERVAL '10' SECONDS), identifier
-HAVING COUNT(*) > 3;
+This demo setup has captured some historical website behaviour data. This has been stored in the MySQL table `history`.
+In order to access this data, you first need to register this table in the Flink catalog. 
+
+```sql
+--Create table history:
+CREATE TABLE history (
+    `title` STRING,
+    `url` STRING,
+    `datetime` STRING,
+    `cookies` STRING,
+    `identifier` STRING,
+    `browser` STRING,
+    `screensize` STRING,
+    `proc_time` STRING,
+    `ts` TIMESTAMP(3),
+    PRIMARY KEY (identifier) NOT ENFORCED
+) WITH (
+   'connector' = 'jdbc',
+   'url' = 'jdbc:mysql://mysql:3306/sql-demo',
+   'table-name' = 'history',
+   'username' = 'flink-only-sql',
+   'password' = 'demo-sql'
+);
 ```
 
-We've just created the list of `identifier` that meet our requirement of visiting the homepage more than 3 times in 10 seconds.
-We now want to act on this data. In order to achieve that, we're going to send the list of `identifer` to our Elasticsearch sink. 
-Our website checks if there's any result in the Elasticsearch results and if so, it will display the notification. 
+By now running a query on this data, you will see the historical data in the Flink SQL Client.
+This is a bounded (batch) source of data, meaning that the application will end after processing all the data. 
 
-To send the data to Elasticsearch, we first have to create another table like we've done before. We use the following DDL:
+```sql 
+SELECT * from history;
+```
+
+![Flink SQL Client Results](only-sql-results-02.png "Flink SQL Client Results - Bounded datasource")
+
+## Determine users that are matching a certain pattern
+
+You are going to use Flink's `MATCH_RECOGNIZE` function to select all identifiers that match a specific pattern. 
+You can use this function for all sorts of Complex Event Processing capabilities.
+In the setup below, you select all identifiers that visit:
+
+1. http://localhost/flink/flink-docs-master/docs/try-flink/datastream/ followed by (both directly and indirectly)
+2. http://localhost/flink/flink-docs-master/docs/try-flink/table_api/ followed by (both directly and indirectly)
+3. http://localhost/flink/flink-docs-master/docs/try-flink/flink-operations-playground/
+
+```sql
+SELECT `identifier`
+FROM web_activities
+    MATCH_RECOGNIZE(
+        PARTITION BY `identifier`
+        ORDER BY `proc_time`
+        MEASURES `url` AS url
+        AFTER MATCH SKIP PAST LAST ROW
+        PATTERN (A+ B+ C)
+        DEFINE
+            A AS A.url = 'http://localhost/flink/flink-docs-master/docs/try-flink/datastream/',
+            B AS B.url = 'http://localhost/flink/flink-docs-master/docs/try-flink/table_api/',
+            C AS C.url = 'http://localhost/flink/flink-docs-master/docs/try-flink/flink-operations-playground/'
+);
+```
+
+## Act on the users that are matching the defined pattern
+
+You've just created the list of `identifier` that meet our defined pattern. 
+You now want to act on this data. 
+In order to achieve that, you're going to send the list of `identifer` to your Elasticsearch sink. 
+The website checks if there's any result in the Elasticsearch results and if so, it will display the notification. 
+
+To send the data to Elasticsearch, you first have to create another table like you've done before in Flink's catalog.
+Use the following DDL:
 
 ```sql
 --Create a sink to display a notification
@@ -122,20 +181,27 @@ CREATE TABLE notifications (
 );
 ```
 
-When that table is created, we'll re-use the previous SQL that returns the list of `identifier` and send those results to the 
-previously created table. 
+When that table is created, you'll re-use the previous SQL that returns the list of `identifier` 
+and send those results to the previously created table. 
 
 ```sql
 INSERT INTO notifications (`identifier`, `notification_id`, `notification_text`)
-    SELECT  
-    `identifier`,
-    'MyFirstNotification',
-    CONCAT('You Have Seen The Homepage ', CAST(COUNT(*) as VARCHAR), ' Times')
-FROM web_activities
-    WHERE `url` = 'http://localhost:8080/'
-GROUP BY
-    TUMBLE(ts, INTERVAL '10' SECONDS), identifier
-HAVING COUNT(*) > 3;
+    SELECT 
+        T.identifier,
+        'MyFirstNotification',
+        'Are you trying to hack Flink?'
+    FROM web_activities
+    MATCH_RECOGNIZE(
+        PARTITION BY `identifier`
+        ORDER BY `proc_time`
+        MEASURES `url` AS url
+        AFTER MATCH SKIP PAST LAST ROW
+        PATTERN (A+ B+ C)
+        DEFINE
+            A AS A.url = 'http://localhost/flink/flink-docs-master/docs/try-flink/datastream/',
+            B AS B.url = 'http://localhost/flink/flink-docs-master/docs/try-flink/table_api/',
+            C AS C.url = 'http://localhost/flink/flink-docs-master/docs/try-flink/flink-operations-playground/'
+) AS T;
 ```
 
 > :warning: The default value of the cookie `identifier` is `anonymous`. No notifications will be displayed if the value is `anonymous`. 
@@ -144,52 +210,90 @@ HAVING COUNT(*) > 3;
 > 
 > In the opened console, you then need to type `document.cookie="identifier=YourIdentifier"` to change the value of the `identifier` cookie. 
 
-If you've changed the value of your `identifier` cookie, and you refresh the page more than 3 times in 10 seconds, a notification will be displayed to you. 
+If you've changed the value of your `identifier` cookie, and you follow the defined pattern, 
+a notification will be displayed to you. 
 
-![Displaying a personal notification](only-sql-results-02.png "Displaying a personal notification")
+![Displaying a personal notification](only-sql-results-03.png "Displaying a personal notification")
 
-Another common use case in SQL is that you need join data from multiple sources. In the next example, we will display a notification
-to a user of our website who is calling us. We're mocking that call by using the [simulate call](http://localhost:8080/simulate-call.html) 
-link from the menu on our website. That page will send data to a separate topic which we'll use with our existing website behaviour data. 
+## Join and enrich streaming data with batch data
+
+Another common use case in SQL is that you need join data from multiple sources. 
+In the next example, you will display a notification to the user of the website 
+who has visited the homepage more then 3 times in 10 seconds. If the `identifier` is `MartijnsMac`, the notification 
+will display a link to the author's Twitter handle. The Twitter handle is retrieved from the external source. 
+In case the identifier is different, no link will be included. 
 
 The first thing that we'll do is create another table, so we can connect to the data. 
 
 ```sql
-CREATE TABLE text_to_speech (
+CREATE TABLE customer (
     `identifier` STRING,
-    `results` STRING,
-    `category` STRING,
-    `ts` TIMESTAMP(3) METADATA FROM 'timestamp',
-    WATERMARK FOR `ts` AS `ts`
+    `fullname` STRING,
+    `twitter_handle` STRING,
+    PRIMARY KEY (identifier) NOT ENFORCED
 ) WITH (
-    'connector' = 'kafka',
-    'topic' = 'texttospeech',
-    'properties.bootstrap.servers' = 'broker:29092',
-    'value.format' = 'avro-confluent',
-    'value.avro-confluent.schema-registry.url' = 'http://schema-registry:8091'
+   'connector' = 'jdbc',
+   'url' = 'jdbc:mysql://mysql:3306/sql-demo',
+   'table-name' = 'customer',
+   'username' = 'flink-only-sql',
+   'password' = 'demo-sql'
 );
 ```
 
-The following SQL statement will do a couple of things:
+You can use a Window Table-Valued Function to determine which identifiers have visited the homepage more then 3 times.
 
-1. It will create a new notification by insert into our Elasticsearch sink, including a link to a page
-2. For all identifiers that are making a call
-3. While they have been active on the website 10 seconds prior to making the call
-4. If their call is about how to contribute
+```sql
+SELECT window_start, window_end, window_time, COUNT(`identifier`) AS `NumberOfVisits` FROM TABLE(
+   TUMBLE(TABLE web_activities, DESCRIPTOR(ts), INTERVAL '10' SECONDS))
+   WHERE `url` = 'http://localhost/flink/flink-docs-master/'
+   GROUP BY window_start, window_end, window_time
+   HAVING COUNT(`identifier`) > 3;
+```
 
-The third step is using an interval join, which means that the join result is only there if the join condition and a time constraint is met.
+The result of the Window Table-Valued Function can also be combined in a JOIN. You can join the previous results with 
+the data in the previously registered `customer` table to enrich the result. You can use the following DDL for this:
+
+```sql
+SELECT w.identifier,
+       COALESCE(c.fullname,'Anonymous') as `fullname`,
+       COALESCE(c.twitter_handle,'https://www.google.com') as `twitter_handle`
+FROM(
+       SELECT `identifier`
+       FROM TABLE(TUMBLE(TABLE `web_activities`, DESCRIPTOR(ts), INTERVAL '10' SECONDS))
+       WHERE `url` = 'http://localhost/flink/flink-docs-master/'
+       GROUP BY `identifier`
+       HAVING COUNT(`identifier`) > 3 ) w
+LEFT JOIN(
+       SELECT *
+       FROM customer ) c
+ON w.identifier = c.identifier
+GROUP BY w.identifier,
+         c.fullname,
+         c.twitter_handle;
+```
+
+With a slight modification to the DDL above, you can use the result for displaying an actionable insight to these
+visitors:
 
 ```sql
 INSERT INTO notifications (`identifier`, `notification_id`, `notification_text`, `notification_link`)
-SELECT  
-    t.identifier,
-    'MySecondNotification',
-    'Here is how you can contribute',
-    '/contributing/how-to-contribute.html'
-FROM text_to_speech t, web_activities w
-WHERE t.identifier = w.identifier
-AND w.ts BETWEEN t.ts - INTERVAL '10' SECONDS AND t.ts
-AND t.category = 'how-to-contribute';
+SELECT w.identifier,
+       'MySecondNotification',
+       CONCAT('Welcome ', COALESCE(c.fullname,'Anonymous')),
+       COALESCE(c.twitter_handle,'https://www.google.com')
+FROM(
+       SELECT `identifier`
+       FROM TABLE(TUMBLE(TABLE `web_activities`, DESCRIPTOR(ts), INTERVAL '10' SECONDS))
+       WHERE `url` = 'http://localhost/flink/flink-docs-master/'
+       GROUP BY `identifier`
+       HAVING COUNT(`identifier`) > 3 ) w
+LEFT JOIN(
+       SELECT *
+       FROM customer ) c
+ON w.identifier = c.identifier
+GROUP BY w.identifier,
+         c.fullname,
+         c.twitter_handle;
 ```
 
-![Displaying a notification with link](only-sql-results-03.png "Displaying a personal notification on how to contribute")
+![Displaying a notification with link](only-sql-results-04.png "Displaying a personal notification on how to contribute")

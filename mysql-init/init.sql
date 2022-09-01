@@ -1,0 +1,34 @@
+CREATE TABLE history (
+  title           VARCHAR(255)   NOT NULL,
+  url             VARCHAR(255)   NOT NULL,
+  datetime        VARCHAR(255)   NOT NULL,
+  cookies         VARCHAR(255)   NOT NULL,
+  identifier      VARCHAR(255)   NOT NULL,
+  browser         VARCHAR(255)   NOT NULL,
+  screensize      VARCHAR(255)   NOT NULL,
+  proc_time       VARCHAR(255)  NOT NULL,
+  ts              TIMESTAMP(3)   NOT NULL
+);
+
+INSERT INTO history VALUES ("Apache Flink Documentation | Apache Flink","http://localhost/flink/flink-docs-master/","2022-09-05T11:34:40.164Z","identifier=MartijnsMac; username=Martijn Visser; welcome=ToTheFlinkOnlySQLTalk","MartijnsMac","Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36","1920x1080","2022-09-05 11:34:41.31Z","2022-09-05 11:34:40.906");
+INSERT INTO history VALUES ("SQL | Apache Flink","http://localhost/flink/flink-docs-master/docs/dev/table/sql/overview/","2022-09-05T11:34:50.339Z","identifier=MartijnsMac; username=Martijn Visser; welcome=ToTheFlinkOnlySQLTalk","MartijnsMac","Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36","1920x1080","2022-09-05 11:34:50.366Z","2022-09-05 11:34:50.355");
+INSERT INTO history VALUES ("Getting Started | Apache Flink","http://localhost/flink/flink-docs-master/docs/dev/table/sql/gettingstarted/","2022-09-05T11:34:51.617Z","identifier=MartijnsMac; username=Martijn Visser; welcome=ToTheFlinkOnlySQLTalk","MartijnsMac","Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36","1920x1080","2022-09-05 11:34:51.631Z","2022-09-05 11:34:51.627");
+INSERT INTO history VALUES ("Overview | Apache Flink","http://localhost/flink/flink-docs-master/docs/dev/table/sql/queries/overview/","2022-09-05T11:34:53.124Z","identifier=MartijnsMac; username=Martijn Visser; welcome=ToTheFlinkOnlySQLTalk","MartijnsMac","Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36","1920x1080","2022-09-05 11:34:53.143Z","2022-09-05 11:34:53.137");
+INSERT INTO history VALUES ("WITH clause | Apache Flink","http://localhost/flink/flink-docs-master/docs/dev/table/sql/queries/with/","2022-09-05T11:34:55.010Z","identifier=MartijnsMac; username=Martijn Visser; welcome=ToTheFlinkOnlySQLTalk","MartijnsMac","Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36","1920x1080","2022-09-05 11:34:55.024Z","2022-09-05 11:34:55.019");
+INSERT INTO history VALUES ("SELECT & WHERE | Apache Flink","http://localhost/flink/flink-docs-master/docs/dev/table/sql/queries/select/","2022-09-05T11:34:56.527Z","identifier=MartijnsMac; username=Martijn Visser; welcome=ToTheFlinkOnlySQLTalk","MartijnsMac","Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36","1920x1080","2022-09-05 11:34:56.56Z","2022-09-05 11:34:56.556");
+INSERT INTO history VALUES ("SELECT DISTINCT | Apache Flink","http://localhost/flink/flink-docs-master/docs/dev/table/sql/queries/select-distinct/","2022-09-05T11:34:57.518Z","identifier=MartijnsMac; username=Martijn Visser; welcome=ToTheFlinkOnlySQLTalk","MartijnsMac","Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36","1920x1080","2022-09-05 11:34:57.531Z","2022-09-05 11:34:57.527");
+INSERT INTO history VALUES ("Windowing TVF | Apache Flink","http://localhost/flink/flink-docs-master/docs/dev/table/sql/queries/window-tvf/","2022-09-05T11:34:58.504Z","identifier=MartijnsMac; username=Martijn Visser; welcome=ToTheFlinkOnlySQLTalk","MartijnsMac","Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36","1920x1080","2022-09-05 11:34:58.522Z","2022-09-05 11:34:58.517");
+INSERT INTO history VALUES ("Joins | Apache Flink","http://localhost/flink/flink-docs-master/docs/dev/table/sql/queries/joins/","2022-09-05T11:34:59.855Z","identifier=MartijnsMac; username=Martijn Visser; welcome=ToTheFlinkOnlySQLTalk","MartijnsMac","Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36","1920x1080","2022-09-05 11:34:59.877Z","2022-09-05 11:34:59.869");
+INSERT INTO history VALUES ("Window JOIN | Apache Flink","http://localhost/flink/flink-docs-master/docs/dev/table/sql/queries/window-join/","2022-09-05T11:35:00.863Z","identifier=MartijnsMac; username=Martijn Visser; welcome=ToTheFlinkOnlySQLTalk","MartijnsMac","Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36","1920x1080","2022-09-05 11:35:00.88Z","2022-09-05 11:35:00.875");
+INSERT INTO history VALUES ("LIMIT clause | Apache Flink","http://localhost/flink/flink-docs-master/docs/dev/table/sql/queries/limit/","2022-09-05T11:35:01.878Z","identifier=MartijnsMac; username=Martijn Visser; welcome=ToTheFlinkOnlySQLTalk","MartijnsMac","Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36","1920x1080","2022-09-05 11:35:01.895Z","2022-09-05 11:35:01.887");
+INSERT INTO history VALUES ("Top-N | Apache Flink","http://localhost/flink/flink-docs-master/docs/dev/table/sql/queries/topn/","2022-09-05T11:35:02.859Z","identifier=MartijnsMac; username=Martijn Visser; welcome=ToTheFlinkOnlySQLTalk","MartijnsMac","Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36","1920x1080","2022-09-05 11:35:02.895Z","2022-09-05 11:35:02.891");
+INSERT INTO history VALUES ("Overview | Apache Flink","http://localhost/flink/flink-docs-master/docs/dev/configuration/overview/","2022-09-05T11:35:05.392Z","identifier=MartijnsMac; username=Martijn Visser; welcome=ToTheFlinkOnlySQLTalk","MartijnsMac","Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36","1920x1080","2022-09-05 11:35:05.422Z","2022-09-05 11:35:05.418");
+INSERT INTO history VALUES ("Apache Flink Documentation | Apache Flink","http://localhost/flink/flink-docs-master/","2022-09-05T11:35:06.377Z","identifier=MartijnsMac; username=Martijn Visser; welcome=ToTheFlinkOnlySQLTalk","MartijnsMac","Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36","1920x1080","2022-09-05 11:35:06.408Z","2022-09-05 11:35:06.404");
+
+CREATE TABLE customer (
+  identifier      VARCHAR(255)   NOT NULL,
+  fullname        VARCHAR(255)   NOT NULL,
+  twitter_handle  VARCHAR(255)   NOT NULL
+);
+
+INSERT INTO customer VALUES ("MartijnsMac", "Martijn Visser", "https://twitter.com/MartijnVisser82");

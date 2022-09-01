@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Operators on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/docs/dev/datastream/operators/</link>
+    <description>Recent content in Operators on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/docs/dev/datastream/operators/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Overview</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/datastream/operators/overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/datastream/operators/overview/</guid>
+      <description>Operators # Operators transform one or more DataStreams into a new DataStream. Programs can combine multiple transformations into sophisticated dataflow topologies.
+This section gives a description of the basic transformations, the effective physical partitioning after applying those as well as insights into Flink&amp;rsquo;s operator chaining.
+DataStream Transformations # Map # DataStream → DataStream # Takes one element and produces one element. A map function that doubles the values of the input stream:</description>
+    </item>
+    
+    <item>
+      <title>Windows</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/datastream/operators/windows/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/datastream/operators/windows/</guid>
+      <description>Windows # Windows are at the heart of processing infinite streams. Windows split the stream into &amp;ldquo;buckets&amp;rdquo; of finite size, over which we can apply computations. This document focuses on how windowing is performed in Flink and how the programmer can benefit to the maximum from its offered functionality.
+The general structure of a windowed Flink program is presented below. The first snippet refers to keyed streams, while the second to non-keyed ones.</description>
+    </item>
+    
+    <item>
+      <title>Joining</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/datastream/operators/joining/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/datastream/operators/joining/</guid>
+      <description>Joining # Window Join # A window join joins the elements of two streams that share a common key and lie in the same window. These windows can be defined by using a window assigner and are evaluated on elements from both of the streams.
+The elements from both sides are then passed to a user-defined JoinFunction or FlatJoinFunction where the user can emit results that meet the join criteria.</description>
+    </item>
+    
+    <item>
+      <title>Process Function</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/datastream/operators/process_function/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/datastream/operators/process_function/</guid>
+      <description>Process Function # The ProcessFunction # The ProcessFunction is a low-level stream processing operation, giving access to the basic building blocks of all (acyclic) streaming applications:
+events (stream elements) state (fault-tolerant, consistent, only on keyed stream) timers (event time and processing time, only on keyed stream) The ProcessFunction can be thought of as a FlatMapFunction with access to keyed state and timers. It handles events by being invoked for each event received in the input stream(s).</description>
+    </item>
+    
+    <item>
+      <title>Async I/O</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/datastream/operators/asyncio/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/datastream/operators/asyncio/</guid>
+      <description>Asynchronous I/O for External Data Access # This page explains the use of Flink&amp;rsquo;s API for asynchronous I/O with external data stores. For users not familiar with asynchronous or event-driven programming, an article about Futures and event-driven programming may be useful preparation.
+Note: Details about the design and implementation of the asynchronous I/O utility can be found in the proposal and design document FLIP-12: Asynchronous I/O Design and Implementation. Details about the new retry support can be found in document FLIP-232: Add Retry Support For Async I/O In DataStream API.</description>
+    </item>
+    
+  </channel>
+</rss>

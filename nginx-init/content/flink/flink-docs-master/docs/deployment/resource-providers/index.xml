@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Resource Providers on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/docs/deployment/resource-providers/</link>
+    <description>Recent content in Resource Providers on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/docs/deployment/resource-providers/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Native Kubernetes</title>
+      <link>//localhost/flink/flink-docs-master/docs/deployment/resource-providers/native_kubernetes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/deployment/resource-providers/native_kubernetes/</guid>
+      <description>Native Kubernetes # This page describes how to deploy Flink natively on Kubernetes.
+Getting Started # This Getting Started section guides you through setting up a fully functional Flink Cluster on Kubernetes.
+Introduction # Kubernetes is a popular container-orchestration system for automating computer application deployment, scaling, and management. Flink&amp;rsquo;s native Kubernetes integration allows you to directly deploy Flink on a running Kubernetes cluster. Moreover, Flink is able to dynamically allocate and de-allocate TaskManagers depending on the required resources because it can directly talk to Kubernetes.</description>
+    </item>
+    
+    <item>
+      <title>YARN</title>
+      <link>//localhost/flink/flink-docs-master/docs/deployment/resource-providers/yarn/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/deployment/resource-providers/yarn/</guid>
+      <description>Apache Hadoop YARN # Getting Started # This Getting Started section guides you through setting up a fully functional Flink Cluster on YARN.
+Introduction # Apache Hadoop YARN is a resource provider popular with many data processing frameworks. Flink services are submitted to YARN&amp;rsquo;s ResourceManager, which spawns containers on machines managed by YARN NodeManagers. Flink deploys its JobManager and TaskManager instances into such containers.
+Flink can dynamically allocate and de-allocate TaskManager resources depending on the number of processing slots required by the job(s) running on the JobManager.</description>
+    </item>
+    
+  </channel>
+</rss>

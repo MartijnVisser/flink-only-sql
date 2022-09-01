@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Libraries on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/zh/docs/libs/</link>
+    <description>Recent content in Libraries on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/zh/docs/libs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>事件处理 (CEP)</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/libs/cep/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/libs/cep/</guid>
+      <description>FlinkCEP - Flink的复杂事件处理 # FlinkCEP是在Flink上层实现的复杂事件处理库。 它可以让你在无限事件流中检测出特定的事件模型，有机会掌握数据中重要的那部分。
+本页讲述了Flink CEP中可用的API，我们首先讲述模式API，它可以让你指定想在数据流中检测的模式，然后讲述如何检测匹配的事件序列并进行处理。 再然后我们讲述Flink在按照事件时间处理迟到事件时的假设， 以及如何从旧版本的Flink向1.13之后的版本迁移作业。
+开始 # 如果你想现在开始尝试，创建一个 Flink 程序， 添加 FlinkCEP 的依赖到项目的pom.xml文件中。
+Java &amp;ltdependency&amp;gt &amp;ltgroupId&amp;gtorg.apache.flink&amp;lt/groupId&amp;gt &amp;ltartifactId&amp;gtflink-cep&amp;lt/artifactId&amp;gt &amp;ltversion&amp;gt1.16-SNAPSHOT&amp;lt/version&amp;gt &amp;lt/dependency&amp;gt Copied to clipboard! Scala &amp;ltdependency&amp;gt &amp;ltgroupId&amp;gtorg.apache.flink&amp;lt/groupId&amp;gt &amp;ltartifactId&amp;gtflink-cep-scala_2.12&amp;lt/artifactId&amp;gt &amp;ltversion&amp;gt1.16-SNAPSHOT&amp;lt/version&amp;gt &amp;lt/dependency&amp;gt Copied to clipboard! FlinkCEP 不是二进制发布包的一部分。在集群上执行如何链接它可以看这里。 现在可以开始使用Pattern API写你的第一个CEP程序了。
+DataStream中的事件，如果你想在上面进行模式匹配的话，必须实现合适的 equals()和hashCode()方法， 因为FlinkCEP使用它们来比较和匹配事件。 Java DataStream&amp;lt;Event&amp;gt; input = ...; Pattern&amp;lt;Event, ?&amp;gt; pattern = Pattern.&amp;lt;Event&amp;gt;begin(&amp;#34;start&amp;#34;).where( new SimpleCondition&amp;lt;Event&amp;gt;() { @Override public boolean filter(Event event) { return event.getId() == 42; } } ).next(&amp;#34;middle&amp;#34;).subtype(SubEvent.class).where( new SimpleCondition&amp;lt;SubEvent&amp;gt;() { @Override public boolean filter(SubEvent subEvent) { return subEvent.</description>
+    </item>
+    
+    <item>
+      <title>State Processor API</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/libs/state_processor_api/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/libs/state_processor_api/</guid>
+      <description>State Processor API # Apache Flink&amp;rsquo;s State Processor API provides powerful functionality to reading, writing, and modifying savepoints and checkpoints using Flink’s DataStream API under BATCH execution. Due to the interoperability of DataStream and Table API, you can even use relational Table API or SQL queries to analyze and process state data.
+For example, you can take a savepoint of a running stream processing application and analyze it with a DataStream batch program to verify that the application behaves correctly.</description>
+    </item>
+    
+  </channel>
+</rss>

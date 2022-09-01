@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Queries on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/docs/dev/table/sql/queries/</link>
+    <description>Recent content in Queries on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/docs/dev/table/sql/queries/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Overview</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/table/sql/queries/overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/table/sql/queries/overview/</guid>
+      <description>Queries # SELECT statements and VALUES statements are specified with the sqlQuery() method of the TableEnvironment. The method returns the result of the SELECT statement (or the VALUES statements) as a Table. A Table can be used in subsequent SQL and Table API queries, be converted into a DataStream, or written to a TableSink. SQL and Table API queries can be seamlessly mixed and are holistically optimized and translated into a single program.</description>
+    </item>
+    
+    <item>
+      <title>Hints</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/table/sql/queries/hints/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/table/sql/queries/hints/</guid>
+      <description>SQL Hints # Batch Streaming
+SQL hints can be used with SQL statements to alter execution plans. This chapter explains how to use hints to force various approaches.
+Generally a hint can be used to:
+Enforce planner: there&amp;rsquo;s no perfect planner, so it makes sense to implement hints to allow user better control the execution; Append meta data(or statistics): some statistics like “table index for scan” and “skew info of some shuffle keys” are somewhat dynamic for the query, it would be very convenient to config them with hints because our planning metadata from the planner is very often not that accurate; Operator resource constraints: for many cases, we would give a default resource configuration for the execution operators, i.</description>
+    </item>
+    
+    <item>
+      <title>WITH clause</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/table/sql/queries/with/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/table/sql/queries/with/</guid>
+      <description>WITH clause # Batch Streaming
+WITH provides a way to write auxiliary statements for use in a larger query. These statements, which are often referred to as Common Table Expression (CTE), can be thought of as defining temporary views that exist just for one query.
+The syntax of WITH statement is:
+WITH &amp;lt;with_item_definition&amp;gt; [ , ... ] SELECT ... FROM ...; &amp;lt;with_item_defintion&amp;gt;: with_item_name (column_name[, ...n]) AS ( &amp;lt;select_query&amp;gt; ) The following example defines a common table expression orders_with_total and use it in a GROUP BY query.</description>
+    </item>
+    
+    <item>
+      <title>SELECT &amp; WHERE</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/table/sql/queries/select/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/table/sql/queries/select/</guid>
+      <description>SELECT &amp;amp; WHERE clause # Batch Streaming
+The general syntax of the SELECT statement is:
+SELECT select_list FROM table_expression [ WHERE boolean_expression ] The table_expression refers to any source of data. It could be an existing table, view, or VALUES clause, the joined results of multiple existing tables, or a subquery. Assuming that the table is available in the catalog, the following would read all rows from Orders.
+SELECT * FROM Orders The select_list specification * means the query will resolve all columns.</description>
+    </item>
+    
+    <item>
+      <title>SELECT DISTINCT</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/table/sql/queries/select-distinct/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/table/sql/queries/select-distinct/</guid>
+      <description>SELECT DISTINCT # Batch Streaming
+If SELECT DISTINCT is specified, all duplicate rows are removed from the result set (one row is kept from each group of duplicates).
+SELECT DISTINCT id FROM Orders For streaming queries, the required state for computing the query result might grow infinitely. State size depends on number of distinct rows. You can provide a query configuration with an appropriate state time-to-live (TTL) to prevent excessive state size.</description>
+    </item>
+    
+    <item>
+      <title>Windowing TVF</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/table/sql/queries/window-tvf/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/table/sql/queries/window-tvf/</guid>
+      <description>Windowing table-valued functions (Windowing TVFs) # Batch Streaming
+Windows are at the heart of processing infinite streams. Windows split the stream into “buckets” of finite size, over which we can apply computations. This document focuses on how windowing is performed in Flink SQL and how the programmer can benefit to the maximum from its offered functionality.
+Apache Flink provides several window table-valued functions (TVF) to divide the elements of your table into windows, including:</description>
+    </item>
+    
+    <item>
+      <title>Window Aggregation</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/table/sql/queries/window-agg/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/table/sql/queries/window-agg/</guid>
+      <description>Window Aggregation # Window TVF Aggregation # Batch Streaming
+Window aggregations are defined in the GROUP BY clause contains &amp;ldquo;window_start&amp;rdquo; and &amp;ldquo;window_end&amp;rdquo; columns of the relation applied Windowing TVF. Just like queries with regular GROUP BY clauses, queries with a group by window aggregation will compute a single result row per group.
+SELECT ... FROM &amp;lt;windowed_table&amp;gt; -- relation applied windowing TVF GROUP BY window_start, window_end, ... Unlike other aggregations on continuous tables, window aggregation do not emit intermediate results but only a final result, the total aggregation at the end of the window.</description>
+    </item>
+    
+    <item>
+      <title>Group Aggregation</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/table/sql/queries/group-agg/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/table/sql/queries/group-agg/</guid>
+      <description>Group Aggregation # Batch Streaming
+Like most data systems, Apache Flink supports aggregate functions; both built-in and user-defined. User-defined functions must be registered in a catalog before use.
+An aggregate function computes a single result from multiple input rows. For example, there are aggregates to compute the COUNT, SUM, AVG (average), MAX (maximum) and MIN (minimum) over a set of rows.
+SELECT COUNT(*) FROM Orders For streaming queries, it is important to understand that Flink runs continuous queries that never terminate.</description>
+    </item>
+    
+    <item>
+      <title>Over Aggregation</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/table/sql/queries/over-agg/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/table/sql/queries/over-agg/</guid>
+      <description>Over Aggregation # Batch Streaming
+OVER aggregates compute an aggregated value for every input row over a range of ordered rows. In contrast to GROUP BY aggregates, OVER aggregates do not reduce the number of result rows to a single row for every group. Instead OVER aggregates produce an aggregated value for every input row.
+The following query computes for every order the sum of amounts of all orders for the same product that were received within one hour before the current order.</description>
+    </item>
+    
+    <item>
+      <title>Joins</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/table/sql/queries/joins/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/table/sql/queries/joins/</guid>
+      <description>Joins # Batch Streaming
+Flink SQL supports complex and flexible join operations over dynamic tables. There are several different types of joins to account for the wide variety of semantics queries may require.
+By default, the order of joins is not optimized. Tables are joined in the order in which they are specified in the FROM clause. You can tweak the performance of your join queries, by listing the tables with the lowest update frequency first and the tables with the highest update frequency last.</description>
+    </item>
+    
+    <item>
+      <title>Window JOIN</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/table/sql/queries/window-join/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/table/sql/queries/window-join/</guid>
+      <description>Window Join # Batch Streaming
+A window join adds the dimension of time into the join criteria themselves. In doing so, the window join joins the elements of two streams that share a common key and are in the same window. The semantic of window join is same to the DataStream window join
+For streaming queries, unlike other joins on continuous tables, window join does not emit intermediate results but only emits final results at the end of the window.</description>
+    </item>
+    
+    <item>
+      <title>Set Operations</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/table/sql/queries/set-ops/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/table/sql/queries/set-ops/</guid>
+      <description>Set Operations # Batch Streaming
+UNION # UNION and UNION ALL return the rows that are found in either table. UNION takes only distinct rows while UNION ALL does not remove duplicates from the result rows.
+Flink SQL&amp;gt; create view t1(s) as values (&amp;#39;c&amp;#39;), (&amp;#39;a&amp;#39;), (&amp;#39;b&amp;#39;), (&amp;#39;b&amp;#39;), (&amp;#39;c&amp;#39;); Flink SQL&amp;gt; create view t2(s) as values (&amp;#39;d&amp;#39;), (&amp;#39;e&amp;#39;), (&amp;#39;a&amp;#39;), (&amp;#39;b&amp;#39;), (&amp;#39;b&amp;#39;); Flink SQL&amp;gt; (SELECT s FROM t1) UNION (SELECT s FROM t2); +---+ | s| +---+ | c| | a| | b| | d| | e| +---+ Flink SQL&amp;gt; (SELECT s FROM t1) UNION ALL (SELECT s FROM t2); +---+ | c| +---+ | c| | a| | b| | b| | c| | d| | e| | a| | b| | b| +---+ INTERSECT # INTERSECT and INTERSECT ALL return the rows that are found in both tables.</description>
+    </item>
+    
+    <item>
+      <title>ORDER BY clause</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/table/sql/queries/orderby/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/table/sql/queries/orderby/</guid>
+      <description>ORDER BY clause # Batch Streaming
+The ORDER BY clause causes the result rows to be sorted according to the specified expression(s). If two rows are equal according to the leftmost expression, they are compared according to the next expression and so on. If they are equal according to all specified expressions, they are returned in an implementation-dependent order.
+When running in streaming mode, the primary sort order of a table must be ascending on a time attribute.</description>
+    </item>
+    
+    <item>
+      <title>LIMIT clause</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/table/sql/queries/limit/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/table/sql/queries/limit/</guid>
+      <description>LIMIT clause # Batch LIMIT clause constrains the number of rows returned by the SELECT statement. In general, this clause is used in conjunction with ORDER BY to ensure that the results are deterministic.
+The following example selects the first 3 rows in Orders table.
+SELECT * FROM Orders ORDER BY orderTime LIMIT 3 Back to top</description>
+    </item>
+    
+    <item>
+      <title>Top-N</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/table/sql/queries/topn/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/table/sql/queries/topn/</guid>
+      <description>Top-N # Batch Streaming
+Top-N queries ask for the N smallest or largest values ordered by columns. Both smallest and largest values sets are considered Top-N queries. Top-N queries are useful in cases where the need is to display only the N bottom-most or the N top- most records from batch/streaming table on a condition. This result set can be used for further analysis.
+Flink uses the combination of a OVER window clause and a filter condition to express a Top-N query.</description>
+    </item>
+    
+    <item>
+      <title>Window Top-N</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/table/sql/queries/window-topn/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/table/sql/queries/window-topn/</guid>
+      <description>Window Top-N # Batch Streaming
+Window Top-N is a special Top-N which returns the N smallest or largest values for each window and other partitioned keys.
+For streaming queries, unlike regular Top-N on continuous tables, window Top-N does not emit intermediate results but only a final result, the total top N records at the end of the window. Moreover, window Top-N purges all intermediate state when no longer needed. Therefore, window Top-N queries have better performance if users don&amp;rsquo;t need results updated per record.</description>
+    </item>
+    
+    <item>
+      <title>Deduplication</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/table/sql/queries/deduplication/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/table/sql/queries/deduplication/</guid>
+      <description>Deduplication # Batch Streaming
+Deduplication removes rows that duplicate over a set of columns, keeping only the first one or the last one. In some cases, the upstream ETL jobs are not end-to-end exactly-once; this may result in duplicate records in the sink in case of failover. However, the duplicate records will affect the correctness of downstream analytical jobs - e.g. SUM, COUNT - so deduplication is needed before further analysis.</description>
+    </item>
+    
+    <item>
+      <title>Window Deduplication</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/table/sql/queries/window-deduplication/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/table/sql/queries/window-deduplication/</guid>
+      <description>Window Deduplication # Streaming Window Deduplication is a special Deduplication which removes rows that duplicate over a set of columns, keeping the first one or the last one for each window and partitioned keys.
+For streaming queries, unlike regular Deduplicate on continuous tables, Window Deduplication does not emit intermediate results but only a final result at the end of the window. Moreover, window Deduplication purges all intermediate state when no longer needed.</description>
+    </item>
+    
+    <item>
+      <title>Pattern Recognition</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/table/sql/queries/match_recognize/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/table/sql/queries/match_recognize/</guid>
+      <description>Pattern Recognition # Streaming It is a common use case to search for a set of event patterns, especially in case of data streams. Flink comes with a complex event processing (CEP) library which allows for pattern detection in event streams. Furthermore, Flink&amp;rsquo;s SQL API provides a relational way of expressing queries with a large set of built-in functions and rule-based optimizations that can be used out of the box.</description>
+    </item>
+    
+  </channel>
+</rss>

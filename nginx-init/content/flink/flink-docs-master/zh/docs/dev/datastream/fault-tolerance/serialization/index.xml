@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>数据类型以及序列化 on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/zh/docs/dev/datastream/fault-tolerance/serialization/</link>
+    <description>Recent content in 数据类型以及序列化 on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/zh/docs/dev/datastream/fault-tolerance/serialization/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>概览</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/datastream/fault-tolerance/serialization/types_serialization/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/datastream/fault-tolerance/serialization/types_serialization/</guid>
+      <description>数据类型以及序列化 # Apache Flink 以其独特的方式来处理数据类型以及序列化，这种方式包括它自身的类型描述符、泛型类型提取以及类型序列化框架。 本文档描述了它们背后的概念和基本原理。
+Supported Data Types # Flink places some restrictions on the type of elements that can be in a DataStream. The reason for this is that the system analyzes the types to determine efficient execution strategies.
+There are seven different categories of data types:
+Java Tuples and Scala Case Classes Java POJOs Primitive Types Regular Classes Values Hadoop Writables Special Types Tuples and Case Classes # Java Tuples are composite types that contain a fixed number of fields with various types.</description>
+    </item>
+    
+    <item>
+      <title>状态数据结构升级</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/datastream/fault-tolerance/serialization/schema_evolution/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/datastream/fault-tolerance/serialization/schema_evolution/</guid>
+      <description>状态数据结构升级 # Apache Flink 流应用通常被设计为永远或者长时间运行。 与所有长期运行的服务一样，应用程序需要随着业务的迭代而进行调整。 应用所处理的数据 schema 也会随着进行变化。
+此页面概述了如何升级状态类型的数据 schema 。 目前对不同类型的状态结构（ValueState、ListState 等）有不同的限制
+请注意，此页面的信息只与 Flink 自己生成的状态序列化器相关 类型序列化框架。 也就是说，在声明状态时，状态描述符不可以配置为使用特定的 TypeSerializer 或 TypeInformation ， 在这种情况下，Flink 会推断状态类型的信息：
+ListStateDescriptor&amp;lt;MyPojoType&amp;gt; descriptor = new ListStateDescriptor&amp;lt;&amp;gt;( &amp;#34;state-name&amp;#34;, MyPojoType.class); checkpointedState = getRuntimeContext().getListState(descriptor); 在内部，状态是否可以进行升级取决于用于读写持久化状态字节的序列化器。 简而言之，状态数据结构只有在其序列化器正确支持时才能升级。 这一过程是被 Flink 的类型序列化框架生成的序列化器透明处理的（下面 列出了当前的支持范围）。
+如果你想要为你的状态类型实现自定义的 TypeSerializer 并且想要学习如何实现支持状态数据结构升级的序列化器， 可以参考 自定义状态序列化器。 本文档也包含一些用于支持状态数据结构升级的状态序列化器与 Flink 状态后端存储相互作用的必要内部细节。
+升级状态数据结构 # 为了对给定的状态类型进行升级，你需要采取以下几个步骤：
+对 Flink 流作业进行 savepoint 操作。 升级程序中的状态类型（例如：修改你的 Avro 结构）。 从 savepoint 恢复作业。当第一次访问状态数据时，Flink 会判断状态数据 schema 是否已经改变，并进行必要的迁移。 用来适应状态结构的改变而进行的状态迁移过程是自动发生的，并且状态之间是互相独立的。 Flink 内部是这样来进行处理的，首先会检查新的序列化器相对比之前的序列化器是否有不同的状态结构；如果有， 那么之前的序列化器用来读取状态数据字节到对象，然后使用新的序列化器将对象回写为字节。</description>
+    </item>
+    
+    <item>
+      <title>Custom State Serialization</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/datastream/fault-tolerance/serialization/custom_serialization/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/datastream/fault-tolerance/serialization/custom_serialization/</guid>
+      <description>Custom Serialization for Managed State # This page is targeted as a guideline for users who require the use of custom serialization for their state, covering how to provide a custom state serializer as well as guidelines and best practices for implementing serializers that allow state schema evolution.
+If you&amp;rsquo;re simply using Flink&amp;rsquo;s own serializers, this page is irrelevant and can be ignored.
+Using custom state serializers # When registering a managed operator or keyed state, a StateDescriptor is required to specify the state&amp;rsquo;s name, as well as information about the type of the state.</description>
+    </item>
+    
+    <item>
+      <title>自定义序列化器</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/datastream/fault-tolerance/serialization/custom_serializers/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/datastream/fault-tolerance/serialization/custom_serializers/</guid>
+      <description>为你的 Flink 程序注册自定义序列化器 # 如果在 Flink 程序中使用了 Flink 类型序列化器无法进行序列化的用户自定义类型，Flink 会回退到通用的 Kryo 序列化器。 可以使用 Kryo 注册自己的序列化器或序列化系统，比如 Google Protobuf 或 Apache Thrift。 使用方法是在 Flink 程序中的 ExecutionConfig 注册类类型以及序列化器。
+final ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment(); // 为类型注册序列化器类 env.getConfig().registerTypeWithKryoSerializer(MyCustomType.class, MyCustomSerializer.class); // 为类型注册序列化器实例 MySerializer mySerializer = new MySerializer(); env.getConfig().registerTypeWithKryoSerializer(MyCustomType.class, mySerializer); 需要确保你的自定义序列化器继承了 Kryo 的序列化器类。 对于 Google Protobuf 或 Apache Thrift，这一点已经为你做好了：
+final ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment(); // 使用 Kryo 注册 Google Protobuf 序列化器 env.getConfig().registerTypeWithKryoSerializer(MyCustomType.class, ProtobufSerializer.class); // 注册 Apache Thrift 序列化器为标准序列化器 // TBaseSerializer 需要初始化为默认的 kryo 序列化器 env.</description>
+    </item>
+    
+  </channel>
+</rss>

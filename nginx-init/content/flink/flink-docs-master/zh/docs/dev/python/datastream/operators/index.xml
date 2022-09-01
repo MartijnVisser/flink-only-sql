@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Operators on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/zh/docs/dev/python/datastream/operators/</link>
+    <description>Recent content in Operators on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/zh/docs/dev/python/datastream/operators/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Overview</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/python/datastream/operators/overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/python/datastream/operators/overview/</guid>
+      <description>Operators # Operators transform one or more DataStreams into a new DataStream. Programs can combine multiple transformations into sophisticated dataflow topologies.
+DataStream Transformations # DataStream programs in Flink are regular programs that implement transformations on data streams (e.g., mapping, filtering, reducing). Please see operators for an overview of the available transformations in Python DataStream API.
+Functions # Transformations accept user-defined functions as input to define the functionality of the transformations.</description>
+    </item>
+    
+    <item>
+      <title>Windows</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/python/datastream/operators/windows/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/python/datastream/operators/windows/</guid>
+      <description> </description>
+    </item>
+    
+    <item>
+      <title>Process Function</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/python/datastream/operators/process_function/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/python/datastream/operators/process_function/</guid>
+      <description>Process Function # ProcessFunction # The ProcessFunction is a low-level stream processing operation, giving access to the basic building blocks of all (acyclic) streaming applications:
+events (stream elements) state (fault-tolerant, consistent, only on keyed stream) timers (event time and processing time, only on keyed stream) The ProcessFunction can be thought of as a FlatMapFunction with access to keyed state and timers. It handles events by being invoked for each event received in the input stream(s).</description>
+    </item>
+    
+  </channel>
+</rss>

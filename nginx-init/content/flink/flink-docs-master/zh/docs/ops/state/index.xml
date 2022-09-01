@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>状态与容错 on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/zh/docs/ops/state/</link>
+    <description>Recent content in 状态与容错 on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/zh/docs/ops/state/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Checkpoints</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/ops/state/checkpoints/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/ops/state/checkpoints/</guid>
+      <description>Checkpoints # 概述 # Checkpoint 使 Flink 的状态具有良好的容错性，通过 checkpoint 机制，Flink 可以对作业的状态和计算位置进行恢复。
+参考 Checkpointing 查看如何在 Flink 程序中开启和配置 checkpoint。
+要了解 checkpoints 和 savepoints 之间的区别，请参阅 checkpoints 与 savepoints。
+保留 Checkpoint # Checkpoint 在默认的情况下仅用于恢复失败的作业，并不保留，当程序取消时 checkpoint 就会被删除。当然，你可以通过配置来保留 checkpoint，这些被保留的 checkpoint 在作业失败或取消时不会被清除。这样，你就可以使用该 checkpoint 来恢复失败的作业。
+CheckpointConfig config = env.getCheckpointConfig(); config.setExternalizedCheckpointCleanup(ExternalizedCheckpointCleanup.RETAIN_ON_CANCELLATION); ExternalizedCheckpointCleanup 配置项定义了当作业取消时，对作业 checkpoint 的操作：
+ExternalizedCheckpointCleanup.RETAIN_ON_CANCELLATION：当作业取消时，保留作业的 checkpoint。注意，这种情况下，需要手动清除该作业保留的 checkpoint。 ExternalizedCheckpointCleanup.DELETE_ON_CANCELLATION：当作业取消时，删除作业的 checkpoint。仅当作业失败时，作业的 checkpoint 才会被保留。 目录结构 # 与 savepoints 相似，checkpoint 由元数据文件、数据文件（与 state backend 相关）组成。可通过配置文件中 &amp;ldquo;state.checkpoints.dir&amp;rdquo; 配置项来指定元数据文件和数据文件的存储路径，另外也可以在代码中针对单个作业特别指定该配置项。
+当前的 checkpoint 目录结构（由 FLINK-8531 引入）如下所示:</description>
+    </item>
+    
+    <item>
+      <title>Checkpointing under backpressure</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/ops/state/checkpointing_under_backpressure/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/ops/state/checkpointing_under_backpressure/</guid>
+      <description>Checkpointing under backpressure # 通常情况下，对齐 Checkpoint 的时长主要受 Checkpointing 过程中的同步和异步两个部分的影响。 然而，当 Flink 作业正运行在严重的背压下时，Checkpoint 端到端延迟的主要影响因子将会是传递 Checkpoint Barrier 到 所有的算子/子任务的时间。这在 checkpointing process) 的概述中有说明原因。并且可以通过高 alignment time and start delay metrics 观察到。 当这种情况发生并成为一个问题时，有三种方法可以解决这个问题：
+消除背压源头，通过优化 Flink 作业，通过调整 Flink 或 JVM 参数，抑或是通过扩容。 减少 Flink 作业中缓冲在 In-flight 数据的数据量。 启用非对齐 Checkpoints。 这些选项并不是互斥的，可以组合在一起。本文档重点介绍后两个选项。 缓冲区 Debloating # Flink 1.14 引入了一个新的工具，用于自动控制在 Flink 算子/子任务之间缓冲的 In-flight 数据的数据量。缓冲区 Debloating 机 制可以通过将属性taskmanager.network.memory.buffer-debloat.enabled设置为true来启用。
+此特性对对齐和非对齐 Checkpoint 都生效，并且在这两种情况下都能缩短 Checkpointing 的时间，不过 Debloating 的效果对于 对齐 Checkpoint 最明显。 当在非对齐 Checkpoint 情况下使用缓冲区 Debloating 时，额外的好处是 Checkpoint 大小会更小，并且恢复时间更快 (需要保存 和恢复的 In-flight 数据更少)。</description>
+    </item>
+    
+    <item>
+      <title>Savepoints</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/ops/state/savepoints/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/ops/state/savepoints/</guid>
+      <description>Savepoints # 什么是 Savepoint ？ # Savepoint 是依据 Flink checkpointing 机制所创建的流作业执行状态的一致镜像。 你可以使用 Savepoint 进行 Flink 作业的停止与重启、fork 或者更新。 Savepoint 由两部分组成：稳定存储（列入 HDFS，S3，&amp;hellip;) 上包含二进制文件的目录（通常很大），和元数据文件（相对较小）。 稳定存储上的文件表示作业执行状态的数据镜像。 Savepoint 的元数据文件以（相对路径）的形式包含（主要）指向作为 Savepoint 一部分的稳定存储上的所有文件的指针。
+注意: 为了允许程序和 Flink 版本之间的升级，请务必查看以下有关分配算子 ID 的部分 。 为了正确使用 savepoints，了解 checkpoints 与 savepoints 之间的区别非常重要，checkpoints 与 savepoints 中对此进行了描述。
+分配算子 ID # 强烈建议你按照本节所述调整你的程序，以便将来能够升级你的程序。主要通过 uid(String) 方法手动指定算子 ID 。这些 ID 将用于恢复每个算子的状态。
+DataStream&amp;lt;String&amp;gt; stream = env. // Stateful source (e.g. Kafka) with ID .addSource(new StatefulSource()) .uid(&amp;#34;source-id&amp;#34;) // ID for the source operator .</description>
+    </item>
+    
+    <item>
+      <title>Checkpoints 与 Savepoints</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/ops/state/checkpoints_vs_savepoints/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/ops/state/checkpoints_vs_savepoints/</guid>
+      <description>Checkpoints 与 Savepoints # 概述 # 从概念上讲，Flink 的 savepoints 与 checkpoints 的不同之处类似于传统数据库系统中的备份与恢复日志之间的差异。
+Checkpoints 的主要目的是为意外失败的作业提供恢复机制。 Checkpoint 的生命周期 由 Flink 管理， 即 Flink 创建，管理和删除 checkpoint - 无需用户交互。 由于 checkpoint 被经常触发，且被用于作业恢复，所以 Checkpoint 的实现有两个设计目标：i）轻量级创建和 ii）尽可能快地恢复。 可能会利用某些特定的属性来达到这个目标，例如， 作业的代码在执行尝试时不会改变。
+在用户终止作业后，会自动删除 Checkpoint（除非明确配置为保留的 Checkpoint）。 Checkpoint 以状态后端特定的（原生的）数据格式存储（有些状态后端可能是增量的）。 尽管 savepoints 在内部使用与 checkpoints 相同的机制创建，但它们在概念上有所不同，并且生成和恢复的成本可能会更高一些。Savepoints的设计更侧重于可移植性和操作灵活性，尤其是在 job 变更方面。Savepoint 的用例是针对计划中的、手动的运维。例如，可能是更新你的 Flink 版本，更改你的作业图等等。
+Savepoint 仅由用户创建、拥有和删除。这意味着 Flink 在作业终止后和恢复后都不会删除 savepoint。 Savepoint 以状态后端独立的（标准的）数据格式存储（注意：从 Flink 1.15 开始，savepoint 也可以以后端特定的原生格式存储，这种格式创建和恢复速度更快，但有一些限制）。 功能和限制 # 下表概述了各种类型的 savepoint 和 checkpoint 的功能和限制。
+✓ - Flink 完全支持这种类型的快照 x - Flink 不支持这种类型的快照 !</description>
+    </item>
+    
+    <item>
+      <title>State Backends</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/ops/state/state_backends/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/ops/state/state_backends/</guid>
+      <description>State Backends # 用 Data Stream API 编写的程序通常以各种形式保存状态：
+在 Window 触发之前要么收集元素、要么聚合 转换函数可以使用 key/value 格式的状态接口来存储状态 转换函数可以实现 CheckpointedFunction 接口，使其本地变量具有容错能力 另请参阅 Streaming API 指南中的 状态部分 。
+在启动 CheckPoint 机制时，状态会随着 CheckPoint 而持久化，以防止数据丢失、保障恢复时的一致性。 状态内部的存储格式、状态在 CheckPoint 时如何持久化以及持久化在哪里均取决于选择的 State Backend。
+可用的 State Backends # Flink 内置了以下这些开箱即用的 state backends ：
+HashMapStateBackend EmbeddedRocksDBStateBackend 如果不设置，默认使用 HashMapStateBackend。
+HashMapStateBackend # 在 HashMapStateBackend 内部，数据以 Java 对象的形式存储在堆中。 Key/value 形式的状态和窗口算子会持有一个 hash table，其中存储着状态值、触发器。
+HashMapStateBackend 的适用场景：
+有较大 state，较长 window 和较大 key/value 状态的 Job。 所有的高可用场景。 建议同时将 managed memory 设为0，以保证将最大限度的内存分配给 JVM 上的用户代码。</description>
+    </item>
+    
+    <item>
+      <title>大状态与 Checkpoint 调优</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/ops/state/large_state_tuning/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/ops/state/large_state_tuning/</guid>
+      <description>大状态与 Checkpoint 调优 # 本文提供了如何配置和调整使用大状态的应用程序指南。
+概述 # Flink 应用要想在大规模场景下可靠地运行，必须要满足如下两个条件：
+应用程序需要能够可靠地创建 checkpoints。
+在应用故障后，需要有足够的资源追赶数据输入流。
+第一部分讨论如何大规模获得良好性能的 checkpoints。 后一部分解释了一些关于要规划使用多少资源的最佳实践。
+监控状态和 Checkpoints # 监控 checkpoint 行为最简单的方法是通过 UI 的 checkpoint 部分。 监控 Checkpoint 的文档说明了如何查看可用的 checkpoint 指标。
+这两个指标（均通过 Task 级别 Checkpointing 指标 展示） 以及在 监控 Checkpoint)中，当看 checkpoint 详细信息时，特别有趣的是:
+算子收到第一个 checkpoint barrier 的时间。当触发 checkpoint 的耗费时间一直很高时，这意味着 checkpoint barrier 需要很长时间才能从 source 到达 operators。 这通常表明系统处于反压下运行。
+Alignment Duration，为处理第一个和最后一个 checkpoint barrier 之间的时间。在 unaligned checkpoints 下，exactly-once 和 at-least-once checkpoints 的 subtasks 处理来自上游 subtasks 的所有数据，且没有任何中断。 然而，对于 aligned exactly-once checkpoints，已经收到 checkpoint barrier 的通道被阻止继续发送数据，直到所有剩余的通道都赶上并接收它们的 checkpoint barrier（对齐时间）。</description>
+    </item>
+    
+    <item>
+      <title>Task 故障恢复</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/ops/state/task_failure_recovery/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/ops/state/task_failure_recovery/</guid>
+      <description>Task 故障恢复 # 当 Task 发生故障时，Flink 需要重启出错的 Task 以及其他受到影响的 Task ，以使得作业恢复到正常执行状态。
+Flink 通过重启策略和故障恢复策略来控制 Task 重启：重启策略决定是否可以重启以及重启的间隔；故障恢复策略决定哪些 Task 需要重启。
+Restart Strategies # Flink 作业如果没有定义重启策略，则会遵循集群启动时加载的默认重启策略。 如果提交作业时设置了重启策略，该策略将覆盖掉集群的默认策略。
+通过 Flink 的配置文件 flink-conf.yaml 来设置默认的重启策略。配置参数 restart-strategy 定义了采取何种策略。 如果没有启用 checkpoint，就采用“不重启”策略。如果启用了 checkpoint 且没有配置重启策略，那么就采用固定延时重启策略， 此时最大尝试重启次数由 Integer.MAX_VALUE 参数设置。下表列出了可用的重启策略和与其对应的配置值。
+每个重启策略都有自己的一组配置参数来控制其行为。 这些参数也在配置文件中设置。 后文的描述中会详细介绍每种重启策略的配置项。
+Key Default Type Description restart-strategy (none) String Defines the restart strategy to use in case of job failures.
+Accepted values are:none, off, disable: No restart strategy.fixeddelay, fixed-delay: Fixed delay restart strategy.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Event Time on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/docs/dev/datastream/event-time/</link>
+    <description>Recent content in Event Time on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/docs/dev/datastream/event-time/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Generating Watermarks</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/datastream/event-time/generating_watermarks/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/datastream/event-time/generating_watermarks/</guid>
+      <description>Generating Watermarks # In this section you will learn about the APIs that Flink provides for working with event time timestamps and watermarks. For an introduction to event time, processing time, and ingestion time, please refer to the introduction to event time.
+Introduction to Watermark Strategies # In order to work with event time, Flink needs to know the events timestamps, meaning each element in the stream needs to have its event timestamp assigned.</description>
+    </item>
+    
+    <item>
+      <title>Builtin Watermark Generators</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/datastream/event-time/built_in/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/datastream/event-time/built_in/</guid>
+      <description>Builtin Watermark Generators # As described in Generating Watermarks, Flink provides abstractions that allow the programmer to assign their own timestamps and emit their own watermarks. More specifically, one can do so by implementing the WatermarkGenerator interface.
+In order to further ease the programming effort for such tasks, Flink comes with some pre-implemented timestamp assigners. This section provides a list of them. Apart from their out-of-the-box functionality, their implementation can serve as an example for custom implementations.</description>
+    </item>
+    
+  </channel>
+</rss>

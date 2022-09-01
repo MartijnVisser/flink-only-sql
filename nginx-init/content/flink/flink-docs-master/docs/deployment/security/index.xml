@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Security on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/docs/deployment/security/</link>
+    <description>Recent content in Security on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/docs/deployment/security/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SSL Setup</title>
+      <link>//localhost/flink/flink-docs-master/docs/deployment/security/security-ssl/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/deployment/security/security-ssl/</guid>
+      <description>SSL Setup # This page provides instructions on how to enable TLS/SSL authentication and encryption for network communication with and between Flink processes. NOTE: TLS/SSL authentication is not enabled by default.
+Internal and External Connectivity # When securing network connections between machines processes through authentication and encryption, Apache Flink differentiates between internal and external connectivity. Internal Connectivity refers to all connections made between Flink processes. These connections run Flink custom protocols.</description>
+    </item>
+    
+    <item>
+      <title>Kerberos</title>
+      <link>//localhost/flink/flink-docs-master/docs/deployment/security/security-kerberos/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/deployment/security/security-kerberos/</guid>
+      <description>Kerberos Authentication Setup and Configuration # This document briefly describes how Flink security works in the context of various deployment mechanisms (Standalone, native Kubernetes, YARN), filesystems, connectors, and state backends.
+Objective # The primary goals of the Flink Kerberos security infrastructure are:
+to enable secure data access for jobs within a cluster via connectors (e.g. Kafka) to authenticate to ZooKeeper (if configured to use SASL) to authenticate to Hadoop components (e.</description>
+    </item>
+    
+  </channel>
+</rss>

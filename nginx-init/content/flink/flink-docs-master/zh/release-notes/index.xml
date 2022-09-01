@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Release-notes on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/zh/release-notes/</link>
+    <description>Recent content in Release-notes on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/zh/release-notes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Release Notes - Flink 1.10</title>
+      <link>//localhost/flink/flink-docs-master/zh/release-notes/flink-1.10/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/release-notes/flink-1.10/</guid>
+      <description>Release Notes - Flink 1.10 # These release notes discuss important aspects, such as configuration, behavior, or dependencies, that changed between Flink 1.9 and Flink 1.10. Please read these notes carefully if you are planning to upgrade your Flink version to 1.10.
+Clusters &amp;amp; Deployment # FileSystems should be loaded via Plugin Architecture # FLINK-11956 # s3-hadoop and s3-presto filesystems do no longer use class relocations and need to be loaded through plugins but now seamlessly integrate with all credential providers.</description>
+    </item>
+    
+    <item>
+      <title>Release Notes - Flink 1.11</title>
+      <link>//localhost/flink/flink-docs-master/zh/release-notes/flink-1.11/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/release-notes/flink-1.11/</guid>
+      <description>Release Notes - Flink 1.11 # These release notes discuss important aspects, such as configuration, behavior, or dependencies, that changed between Flink 1.10 and Flink 1.11. Please read these notes carefully if you are planning to upgrade your Flink version to 1.11.
+Clusters &amp;amp; Deployment # Support for Application Mode # FLIP-85 # The user can now submit applications and choose to execute their main() method on the cluster rather than the client.</description>
+    </item>
+    
+    <item>
+      <title>Release Notes - Flink 1.12</title>
+      <link>//localhost/flink/flink-docs-master/zh/release-notes/flink-1.12/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/release-notes/flink-1.12/</guid>
+      <description>Release Notes - Flink 1.12 # These release notes discuss important aspects, such as configuration, behavior, or dependencies, that changed between Flink 1.11 and Flink 1.12. Please read these notes carefully if you are planning to upgrade your Flink version to 1.12.
+Known Issues # Unaligned checkpoint recovery may lead to corrupted data stream # FLINK-20654 # Using unaligned checkpoints in Flink 1.12.0 combined with two/multiple inputs tasks or with union inputs for single input tasks can result in corrupted state.</description>
+    </item>
+    
+    <item>
+      <title>Release Notes - Flink 1.13</title>
+      <link>//localhost/flink/flink-docs-master/zh/release-notes/flink-1.13/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/release-notes/flink-1.13/</guid>
+      <description>Release Notes - Flink 1.13 # These release notes discuss important aspects, such as configuration, behavior, or dependencies, that changed between Flink 1.12 and Flink 1.13. Please read these notes carefully if you are planning to upgrade your Flink version to 1.13.
+Failover # Remove state.backend.async option. # FLINK-21935 # The state.backend.async option is deprecated. Snapshots are always asynchronous now (as they were by default before) and there is no option to configure a synchronous snapshot any more.</description>
+    </item>
+    
+    <item>
+      <title>Release Notes - Flink 1.14</title>
+      <link>//localhost/flink/flink-docs-master/zh/release-notes/flink-1.14/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/release-notes/flink-1.14/</guid>
+      <description>Release notes - Flink 1.14 # These release notes discuss important aspects, such as configuration, behavior, or dependencies, that changed between Flink 1.13 and Flink 1.14. Please read these notes carefully if you are planning to upgrade your Flink version to 1.14.
+Known issues # Memory leak with Pulsar connector on Java 11 # Netty, which the Pulsar client uses underneath, allocates memory differently on Java 11 and Java 8.</description>
+    </item>
+    
+    <item>
+      <title>Release Notes - Flink 1.5</title>
+      <link>//localhost/flink/flink-docs-master/zh/release-notes/flink-1.5/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/release-notes/flink-1.5/</guid>
+      <description>Release Notes - Flink 1.5 # These release notes discuss important aspects, such as configuration, behavior, or dependencies, that changed between Flink 1.4 and Flink 1.5. Please read these notes carefully if you are planning to upgrade your Flink version to 1.5.
+Update Configuration for Reworked Job Deployment # Flink’s reworked cluster and job deployment component improves the integration with resource managers and enables dynamic resource allocation. One result of these changes is, that you no longer have to specify the number of containers when submitting applications to YARN and Mesos.</description>
+    </item>
+    
+    <item>
+      <title>Release Notes - Flink 1.6</title>
+      <link>//localhost/flink/flink-docs-master/zh/release-notes/flink-1.6/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/release-notes/flink-1.6/</guid>
+      <description>Release Notes - Flink 1.6 # These release notes discuss important aspects, such as configuration, behavior, or dependencies, that changed between Flink 1.5 and Flink 1.6. Please read these notes carefully if you are planning to upgrade your Flink version to 1.6.
+Changed Configuration Default Values # The default value of the slot idle timeout slot.idle.timeout is set to the default value of the heartbeat timeout (50 s).
+Changed ElasticSearch 5.</description>
+    </item>
+    
+    <item>
+      <title>Release Notes - Flink 1.7</title>
+      <link>//localhost/flink/flink-docs-master/zh/release-notes/flink-1.7/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/release-notes/flink-1.7/</guid>
+      <description>Release Notes - Flink 1.7 # These release notes discuss important aspects, such as configuration, behavior, or dependencies, that changed between Flink 1.6 and Flink 1.7. Please read these notes carefully if you are planning to upgrade your Flink version to 1.7.
+Scala 2.12 support # When using Scala 2.12 you might have to add explicit type annotations in places where they were not required when using Scala 2.11. This is an excerpt from the TransitiveClosureNaive.</description>
+    </item>
+    
+    <item>
+      <title>Release Notes - Flink 1.8</title>
+      <link>//localhost/flink/flink-docs-master/zh/release-notes/flink-1.8/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/release-notes/flink-1.8/</guid>
+      <description>Release Notes - Flink 1.8 # These release notes discuss important aspects, such as configuration, behavior, or dependencies, that changed between Flink 1.7 and Flink 1.8. Please read these notes carefully if you are planning to upgrade your Flink version to 1.8.
+State # Continuous incremental cleanup of old Keyed State with TTL # We introduced TTL (time-to-live) for Keyed state in Flink 1.6 (FLINK-9510). This feature allowed to clean up and make inaccessible keyed state entries when accessing them.</description>
+    </item>
+    
+    <item>
+      <title>Release Notes - Flink 1.9</title>
+      <link>//localhost/flink/flink-docs-master/zh/release-notes/flink-1.9/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/release-notes/flink-1.9/</guid>
+      <description>Release Notes - Flink 1.9 # These release notes discuss important aspects, such as configuration, behavior, or dependencies, that changed between Flink 1.8 and Flink 1.9. It also provides an overview on known shortcoming or limitations with new experimental features introduced in 1.9.
+Please read these notes carefully if you are planning to upgrade your Flink version to 1.9.
+Known shortcomings or limitations for new features # New Table / SQL Blink planner # Flink 1.</description>
+    </item>
+    
+  </channel>
+</rss>

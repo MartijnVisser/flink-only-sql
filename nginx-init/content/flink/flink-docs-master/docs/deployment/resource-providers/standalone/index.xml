@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Standalone on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/docs/deployment/resource-providers/standalone/</link>
+    <description>Recent content in Standalone on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/docs/deployment/resource-providers/standalone/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Overview</title>
+      <link>//localhost/flink/flink-docs-master/docs/deployment/resource-providers/standalone/overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/deployment/resource-providers/standalone/overview/</guid>
+      <description>Standalone # Getting Started # This Getting Started section guides you through the local setup (on one machine, but in separate processes) of a Flink cluster. This can easily be expanded to set up a distributed standalone cluster, which we describe in the reference section.
+Introduction # The standalone mode is the most barebone way of deploying Flink: The Flink services described in the deployment overview are just launched as processes on the operating system.</description>
+    </item>
+    
+    <item>
+      <title>Working Directory</title>
+      <link>//localhost/flink/flink-docs-master/docs/deployment/resource-providers/standalone/working_directory/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/deployment/resource-providers/standalone/working_directory/</guid>
+      <description>Working Directory # Flink supports to configure a working directory (FLIP-198) for Flink processes (JobManager and TaskManager). The working directory is used by the processes to store information that can be recovered upon a process restart. The requirement for this to work is that the process is started with the same identity and has access to the volume on which the working directory is stored.
+Configuring the Working Directory # The working directories for the Flink processes are:</description>
+    </item>
+    
+    <item>
+      <title>Docker</title>
+      <link>//localhost/flink/flink-docs-master/docs/deployment/resource-providers/standalone/docker/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/deployment/resource-providers/standalone/docker/</guid>
+      <description>Docker Setup # Getting Started # This Getting Started section guides you through the local setup (on one machine, but in separate containers) of a Flink cluster using Docker containers.
+Introduction # Docker is a popular container runtime. There are official Docker images for Apache Flink available on Docker Hub. You can use the Docker images to deploy a Session or Application cluster on Docker. This page focuses on the setup of Flink on Docker and Docker Compose.</description>
+    </item>
+    
+    <item>
+      <title>Kubernetes</title>
+      <link>//localhost/flink/flink-docs-master/docs/deployment/resource-providers/standalone/kubernetes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/deployment/resource-providers/standalone/kubernetes/</guid>
+      <description>Kubernetes Setup # Getting Started # This Getting Started guide describes how to deploy a Session cluster on Kubernetes.
+Introduction # This page describes deploying a standalone Flink cluster on top of Kubernetes, using Flink&amp;rsquo;s standalone deployment. We generally recommend new users to deploy Flink on Kubernetes using native Kubernetes deployments.
+Preparation # This guide expects a Kubernetes environment to be present. You can ensure that your Kubernetes setup is working by running a command like kubectl get nodes, which lists all connected Kubelets.</description>
+    </item>
+    
+  </channel>
+</rss>
