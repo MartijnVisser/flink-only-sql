@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Data Types &amp; Serialization on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/docs/dev/datastream/fault-tolerance/serialization/</link>
+    <description>Recent content in Data Types &amp; Serialization on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/docs/dev/datastream/fault-tolerance/serialization/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Overview</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/datastream/fault-tolerance/serialization/types_serialization/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/datastream/fault-tolerance/serialization/types_serialization/</guid>
+      <description>Data Types &amp;amp; Serialization # Apache Flink handles data types and serialization in a unique way, containing its own type descriptors, generic type extraction, and type serialization framework. This document describes the concepts and the rationale behind them.
+Supported Data Types # Flink places some restrictions on the type of elements that can be in a DataStream. The reason for this is that the system analyzes the types to determine efficient execution strategies.</description>
+    </item>
+    
+    <item>
+      <title>State Schema Evolution</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/datastream/fault-tolerance/serialization/schema_evolution/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/datastream/fault-tolerance/serialization/schema_evolution/</guid>
+      <description>State Schema Evolution # Apache Flink streaming applications are typically designed to run indefinitely or for long periods of time. As with all long-running services, the applications need to be updated to adapt to changing requirements. This goes the same for data schemas that the applications work against; they evolve along with the application.
+This page provides an overview of how you can evolve your state type&amp;rsquo;s data schema. The current restrictions varies across different types and state structures (ValueState, ListState, etc.</description>
+    </item>
+    
+    <item>
+      <title>Custom State Serialization</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/datastream/fault-tolerance/serialization/custom_serialization/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/datastream/fault-tolerance/serialization/custom_serialization/</guid>
+      <description>Custom Serialization for Managed State # This page is targeted as a guideline for users who require the use of custom serialization for their state, covering how to provide a custom state serializer as well as guidelines and best practices for implementing serializers that allow state schema evolution.
+If you&amp;rsquo;re simply using Flink&amp;rsquo;s own serializers, this page is irrelevant and can be ignored.
+Using custom state serializers # When registering a managed operator or keyed state, a StateDescriptor is required to specify the state&amp;rsquo;s name, as well as information about the type of the state.</description>
+    </item>
+    
+    <item>
+      <title>3rd Party Serializers</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/datastream/fault-tolerance/serialization/third_party_serializers/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/datastream/fault-tolerance/serialization/third_party_serializers/</guid>
+      <description>3rd Party Serializers # If you use a custom type in your Flink program which cannot be serialized by the Flink type serializer, Flink falls back to using the generic Kryo serializer. You may register your own serializer or a serialization system like Google Protobuf or Apache Thrift with Kryo. To do that, simply register the type class and the serializer in the ExecutionConfig of your Flink program.
+final ExecutionEnvironment env = ExecutionEnvironment.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Deployment on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/zh/docs/deployment/</link>
+    <description>Recent content in Deployment on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/zh/docs/deployment/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>概览</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/deployment/overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/deployment/overview/</guid>
+      <description>Deployment # Flink is a versatile framework, supporting many different deployment scenarios in a mix and match fashion.
+Below, we briefly explain the building blocks of a Flink cluster, their purpose and available implementations. If you just want to start Flink locally, we recommend setting up a Standalone Cluster.
+Overview and Reference Architecture # The figure below shows the building blocks of every Flink cluster. There is always somewhere a client running.</description>
+    </item>
+    
+    <item>
+      <title>配置参数</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/deployment/config/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/deployment/config/</guid>
+      <description>配置参数 # All configuration is done in conf/flink-conf.yaml, which is expected to be a flat collection of YAML key value pairs with format key: value.
+The configuration is parsed and evaluated when the Flink processes are started. Changes to the configuration file require restarting the relevant processes.
+The out of the box configuration will use your default Java installation. You can manually set the environment variable JAVA_HOME or the configuration key env.</description>
+    </item>
+    
+    <item>
+      <title>Fine-Grained Resource Management</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/deployment/finegrained_resource/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/deployment/finegrained_resource/</guid>
+      <description>Fine-Grained Resource Management # Apache Flink works hard to auto-derive sensible default resource requirements for all applications out of the box. For users who wish to fine-tune their resource consumption, based on knowledge of their specific scenarios, Flink offers fine-grained resource management.
+This page describes the fine-grained resource management’s usage, applicable scenarios, and how it works.
+Note: This feature is currently an MVP (“minimum viable product”) feature and only available to DataStream API.</description>
+    </item>
+    
+    <item>
+      <title>Speculative Execution</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/deployment/speculative_execution/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/deployment/speculative_execution/</guid>
+      <description>预测执行 # 这个文档描述了预测执行的背景，使用方法，以及如何验证其有效性。
+背景 # 预测执行是一种用于缓解异常机器节点导致作业执行缓慢的机制。机器节点异常包括硬件异常，偶发的输入输出繁忙，高 CPU 负载等问题。 这些问题会导致运行在其上的任务比起在其他节点上运行的任务慢很多，从而影响到整个作业的执行时长。
+在这种情况下，预测执行会为这些慢任务创建一些新的执行实例并部署在正常的机器节点上。这些新的执行实例和其对应的老执行实例(慢任务) 会消费相同的数据，并产出相同的结果。而那些老执行实例也会被保留继续执行。这些执行实例(包括新实例和老实例)中首先成功结束的执行 实例会被认可，其产出的结果会对下游任务可见，其他实例则会被取消掉。
+为了实现这个机制，Flink 会通过一个慢任务检测器来检测慢任务。检测到的慢任务位于的机器节点会被识别为异常机器节点，并被加入机器 节点黑名单中。调度器则会为这些慢节点创建新的执行实例，并将其部署到未被加黑的机器节点上。
+使用方法 # 本章节描述了如何使用预测执行，包含如何启用，调优，以及开发/改进自定义 source 来支持预测执行。
+注意: Flink 尚不支持 sink 的预测执行。这个能力会在后续版本中得到完善。 注意：Flink 不支持 DataSet 作业的预测执行，因为 DataSet API 在不久的将来会被废弃。现在推荐使用 DataStream API 来开发 Flink 批处理作业。 启用预测执行 # 要启用预测执行，你需要设置以下配置项：
+jobmanager.scheduler: AdaptiveBatch 因为当前只有 Adaptive Batch Scheduler 支持预测执行. jobmanager.adaptive-batch-scheduler.speculative.enabled: true 配置调优 # 考虑到不同作业的差异，为了让预测执行获得更好的效果，你可以调优下列调度器配置项：
+jobmanager.adaptive-batch-scheduler.speculative.max-concurrent-executions jobmanager.adaptive-batch-scheduler.speculative.block-slow-node-duration 你还可以调优下列慢任务检测器的配置项：
+slow-task-detector.check-interval slow-task-detector.execution-time.baseline-lower-bound slow-task-detector.execution-time.baseline-multiplier slow-task-detector.execution-time.baseline-ratio 让 Source 支持预测执行 # 如果你的作业有用到自定义 Source , 并且这个 Source 用到了自定义的 SourceEvent , 你需要修改该 Source 的 SplitEnumerator 实现接口 SupportsHandleExecutionAttemptSourceEvent 。</description>
+    </item>
+    
+    <item>
+      <title>弹性扩缩容</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/deployment/elastic_scaling/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/deployment/elastic_scaling/</guid>
+      <description>弹性扩缩容 # 在 Apache Flink 中，可以通过手动停止 Job，然后从停止时创建的 Savepoint 恢复，最后重新指定并行度的方式来重新扩缩容 Job。
+这个文档描述了那些可以使 Flink 自动调整并行度的选项。
+Reactive 模式 # Reactive 模式是一个 MVP （minimum viable product，最小可行产品）特性。目前 Flink 社区正在积极地从邮件列表中获取用户的使用反馈。请注意文中列举的一些局限性。 在 Reactive 模式下，Job 会使用集群中所有的资源。当增加 TaskManager 时，Job 会自动扩容。当删除时，就会自动缩容。Flink 会管理 Job 的并行度，始终会尽可能地使用最大值。
+当发生扩缩容时，Job 会被重启，并且会从最新的 Checkpoint 中恢复。这就意味着不需要花费额外的开销去创建 Savepoint。当然，所需要重新处理的数据量取决于 Checkpoint 的间隔时长，而恢复的时间取决于状态的大小。
+借助 Reactive 模式，Flink 用户可以通过一些外部的监控服务产生的指标，例如：消费延迟、CPU 利用率汇总、吞吐量、延迟等，实现一个强大的自动扩缩容机制。当上述的这些指标超出或者低于一定的阈值时，增加或者减少 TaskManager 的数量。在 Kubernetes 中，可以通过改变 Deployment 的副本数（Replica Factor） 实现。而在 AWS 中，可以通过改变 Auto Scaling 组 来实现。这类外部服务只需要负责资源的分配以及回收，而 Flink 则负责在这些资源上运行 Job。
+入门 # 你可以参考下面的步骤试用 Reactive 模式。以下步骤假设你使用的是单台机器部署 Flink。</description>
+    </item>
+    
+    <item>
+      <title>命令行界面</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/deployment/cli/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/deployment/cli/</guid>
+      <description>命令行界面 # Flink provides a Command-Line Interface (CLI) bin/flink to run programs that are packaged as JAR files and to control their execution. The CLI is part of any Flink setup, available in local single node setups and in distributed setups. It connects to the running JobManager specified in conf/flink-conf.yaml.
+Job Lifecycle Management # A prerequisite for the commands listed in this section to work is to have a running Flink deployment like Kubernetes, YARN or any other option available.</description>
+    </item>
+    
+    <item>
+      <title>Metric Reporters</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/deployment/metric_reporters/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/deployment/metric_reporters/</guid>
+      <description>Metric Reporters # Flink 支持用户将 Flink 的各项运行时指标发送给外部系统。 了解更多指标方面信息可查看 metric 系统相关文档。
+你可以通过 conf/flink-conf.yaml 文件来配置一种或多种发送器，将运行时指标暴露给外部系统。 发送器会在 TaskManager、Flink 作业启动时进行实例化。
+下面列出了所有发送器都适用的参数，可以通过配置文件中的 metrics.reporter.&amp;lt;reporter_name&amp;gt;.&amp;lt;property&amp;gt; 项进行配置。有些发送器有自己特有的配置，详见该发送器章节下的具体说明。
+键 默认值 数据类型 描述 factory.class (none) String 命名为 &amp;lt;name&amp;gt; 发送器的工厂类名称。 interval 10 s Duration 命名为 &amp;lt;name&amp;gt; 发送器的发送间隔，只支持 push 类型发送器。 scope.delimiter &#34;.&#34; String 命名为 &amp;lt;name&amp;gt; 发送器的指标标识符中的间隔符。 scope.variables.additional Map 命名为 &amp;lt;name&amp;gt; 发送器的 map 形式的变量列表，只支持 tags 类型发送器。 scope.variables.excludes &#34;.&#34; String 命名为 &amp;lt;name&amp;gt; 发送器应该忽略的一组变量，只支持 tags 类型发送器。 filter.includes &#34;*:*:*&#34; List&amp;lt;String&amp;gt; 命名为 &amp;lt;name&amp;gt; 发送器应包含的运行指标，其过滤条件以列表形式表示，该列表中每一个过滤条件都应遵循如下规范：</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Project Configuration on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/docs/dev/configuration/</link>
+    <description>Recent content in Project Configuration on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/docs/dev/configuration/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Overview</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/configuration/overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/configuration/overview/</guid>
+      <description>Project Configuration # The guides in this section will show you how to configure your projects via popular build tools (Maven, Gradle), add the necessary dependencies (i.e. connectors and formats, testing), and cover some advanced configuration topics.
+Every Flink application depends on a set of Flink libraries. At a minimum, the application depends on the Flink APIs and, in addition, on certain connector libraries (i.e. Kafka, Cassandra) and 3rd party dependencies required to the user to develop custom functions to process the data.</description>
+    </item>
+    
+    <item>
+      <title>Using Maven</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/configuration/maven/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/configuration/maven/</guid>
+      <description>How to use Maven to configure your project # This guide will show you how to configure a Flink job project with Maven, an open-source build automation tool developed by the Apache Software Foundation that enables you to build, publish, and deploy projects. You can use it to manage the entire lifecycle of your software project.
+Requirements # Maven 3.0.4 (or higher) Java 11 Importing the project into your IDE # Once the project folder and files have been created, we recommend that you import this project into your IDE for developing and testing.</description>
+    </item>
+    
+    <item>
+      <title>Using Gradle</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/configuration/gradle/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/configuration/gradle/</guid>
+      <description>How to use Gradle to configure your project # You will likely need a build tool to configure your Flink project. This guide will show you how to do so with Gradle, an open-source general-purpose build tool that can be used to automate tasks in the development process.
+Requirements # Gradle 7.x Java 11 Importing the project into your IDE # Once the project folder and files have been created, we recommend that you import this project into your IDE for developing and testing.</description>
+    </item>
+    
+    <item>
+      <title>Connectors and Formats</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/configuration/connector/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/configuration/connector/</guid>
+      <description>Connectors and Formats # Flink applications can read from and write to various external systems via connectors. It supports multiple formats in order to encode and decode data to match Flink&amp;rsquo;s data structures.
+An overview of available connectors and formats is available for both DataStream and Table API/SQL.
+Available artifacts # In order to use connectors and formats, you need to make sure Flink has access to the artifacts implementing them.</description>
+    </item>
+    
+    <item>
+      <title>Test Dependencies</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/configuration/testing/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/configuration/testing/</guid>
+      <description>Dependencies for Testing # Flink provides utilities for testing your job that you can add as dependencies.
+DataStream API Testing # You need to add the following dependencies if you want to develop tests for a job built with the DataStream API:
+Maven Open the pom.xml file in your project directory and add the following in the dependencies block. &amp;ltdependency&amp;gt &amp;ltgroupId&amp;gtorg.apache.flink&amp;lt/groupId&amp;gt &amp;ltartifactId&amp;gtflink-test-utils&amp;lt/artifactId&amp;gt &amp;ltversion&amp;gt1.16-SNAPSHOT&amp;lt/version&amp;gt &amp;ltscope&amp;gttest&amp;lt/scope&amp;gt &amp;lt/dependency&amp;gt Copied to clipboard! Check out Project configuration for more details.</description>
+    </item>
+    
+    <item>
+      <title>Advanced Configuration</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/configuration/advanced/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/configuration/advanced/</guid>
+      <description>Advanced Configuration Topics # Anatomy of the Flink distribution # Flink itself consists of a set of classes and dependencies that form the core of Flink&amp;rsquo;s runtime and must be present when a Flink application is started. The classes and dependencies needed to run the system handle areas such as coordination, networking, checkpointing, failover, APIs, operators (such as windowing), resource management, etc.
+These core classes and dependencies are packaged in the flink-dist.</description>
+    </item>
+    
+  </channel>
+</rss>

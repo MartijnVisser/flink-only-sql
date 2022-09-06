@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Deployment on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/docs/deployment/</link>
+    <description>Recent content in Deployment on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/docs/deployment/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Overview</title>
+      <link>//localhost/flink/flink-docs-master/docs/deployment/overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/deployment/overview/</guid>
+      <description>Deployment # Flink is a versatile framework, supporting many different deployment scenarios in a mix and match fashion.
+Below, we briefly explain the building blocks of a Flink cluster, their purpose and available implementations. If you just want to start Flink locally, we recommend setting up a Standalone Cluster.
+Overview and Reference Architecture # The figure below shows the building blocks of every Flink cluster. There is always somewhere a client running.</description>
+    </item>
+    
+    <item>
+      <title>Configuration</title>
+      <link>//localhost/flink/flink-docs-master/docs/deployment/config/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/deployment/config/</guid>
+      <description>Configuration # All configuration is done in conf/flink-conf.yaml, which is expected to be a flat collection of YAML key value pairs with format key: value.
+The configuration is parsed and evaluated when the Flink processes are started. Changes to the configuration file require restarting the relevant processes.
+The out of the box configuration will use your default Java installation. You can manually set the environment variable JAVA_HOME or the configuration key env.</description>
+    </item>
+    
+    <item>
+      <title>Command-Line Interface</title>
+      <link>//localhost/flink/flink-docs-master/docs/deployment/cli/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/deployment/cli/</guid>
+      <description>Command-Line Interface # Flink provides a Command-Line Interface (CLI) bin/flink to run programs that are packaged as JAR files and to control their execution. The CLI is part of any Flink setup, available in local single node setups and in distributed setups. It connects to the running JobManager specified in conf/flink-conf.yaml.
+Job Lifecycle Management # A prerequisite for the commands listed in this section to work is to have a running Flink deployment like Kubernetes, YARN or any other option available.</description>
+    </item>
+    
+    <item>
+      <title>Elastic Scaling</title>
+      <link>//localhost/flink/flink-docs-master/docs/deployment/elastic_scaling/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/deployment/elastic_scaling/</guid>
+      <description>Elastic Scaling # Apache Flink allows you to rescale your jobs. You can do this manually by stopping the job and restarting from the savepoint created during shutdown with a different parallelism.
+This page describes options where Flink automatically adjusts the parallelism instead.
+Reactive Mode # Reactive mode is an MVP (&amp;ldquo;minimum viable product&amp;rdquo;) feature. The Flink community is actively looking for feedback by users through our mailing lists. Please check the limitations listed on this page.</description>
+    </item>
+    
+    <item>
+      <title>Fine-Grained Resource Management</title>
+      <link>//localhost/flink/flink-docs-master/docs/deployment/finegrained_resource/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/deployment/finegrained_resource/</guid>
+      <description>Fine-Grained Resource Management # Apache Flink works hard to auto-derive sensible default resource requirements for all applications out of the box. For users who wish to fine-tune their resource consumption, based on knowledge of their specific scenarios, Flink offers fine-grained resource management.
+This page describes the fine-grained resource management’s usage, applicable scenarios, and how it works.
+Note: This feature is currently an MVP (“minimum viable product”) feature and only available to DataStream API.</description>
+    </item>
+    
+    <item>
+      <title>Speculative Execution</title>
+      <link>//localhost/flink/flink-docs-master/docs/deployment/speculative_execution/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/deployment/speculative_execution/</guid>
+      <description>Speculative Execution # This page describes the background of speculative execution, how to use it, and how to check the effectiveness of it.
+Background # Speculative execution is a mechanism to mitigate job slowness which is caused by problematic nodes. A problematic node may have hardware problems, accident I/O busy, or high CPU load. These problems may make the hosted tasks run much slower than tasks on other nodes, and affect the overall execution time of a batch job.</description>
+    </item>
+    
+    <item>
+      <title>Metric Reporters</title>
+      <link>//localhost/flink/flink-docs-master/docs/deployment/metric_reporters/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/deployment/metric_reporters/</guid>
+      <description>Metric Reporters # Flink allows reporting metrics to external systems. For more information about Flink&amp;rsquo;s metric system go to the metric system documentation.
+Metrics can be exposed to an external system by configuring one or several reporters in conf/flink-conf.yaml. These reporters will be instantiated on each job and task manager when they are started.
+Below is a list of parameters that are generally applicable to all reporters. All properties are configured by setting metrics.</description>
+    </item>
+    
+  </channel>
+</rss>

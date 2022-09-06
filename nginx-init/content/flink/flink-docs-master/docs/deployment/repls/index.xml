@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>REPLs on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/docs/deployment/repls/</link>
+    <description>Recent content in REPLs on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/docs/deployment/repls/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Python REPL</title>
+      <link>//localhost/flink/flink-docs-master/docs/deployment/repls/python_shell/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/deployment/repls/python_shell/</guid>
+      <description>Python REPL # Flink comes with an integrated interactive Python Shell. It can be used in a local setup as well as in a cluster setup. See the standalone resource provider page for more information about how to setup a local Flink. You can also build a local setup from source.
+Note The Python Shell will run the command “python”. Please refer to the Python Table API installation guide on how to set up the Python execution environments.</description>
+    </item>
+    
+  </channel>
+</rss>

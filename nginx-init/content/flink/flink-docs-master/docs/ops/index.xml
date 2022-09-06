@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Operations on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/docs/ops/</link>
+    <description>Recent content in Operations on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/docs/ops/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Metrics</title>
+      <link>//localhost/flink/flink-docs-master/docs/ops/metrics/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/ops/metrics/</guid>
+      <description>Metrics # Flink exposes a metric system that allows gathering and exposing metrics to external systems.
+Registering metrics # You can access the metric system from any user function that extends RichFunction by calling getRuntimeContext().getMetricGroup(). This method returns a MetricGroup object on which you can create and register new metrics.
+Metric types # Flink supports Counters, Gauges, Histograms and Meters.
+Counter # A Counter is used to count something. The current value can be in- or decremented using inc()/inc(long n) or dec()/dec(long n).</description>
+    </item>
+    
+    <item>
+      <title>REST API</title>
+      <link>//localhost/flink/flink-docs-master/docs/ops/rest_api/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/ops/rest_api/</guid>
+      <description>REST API # Flink has a monitoring API that can be used to query status and statistics of running jobs, as well as recent completed jobs. This monitoring API is used by Flink&amp;rsquo;s own dashboard, but is designed to be used also by custom monitoring tools.
+The monitoring API is a REST-ful API that accepts HTTP requests and responds with JSON data.
+Overview # The monitoring API is backed by a web server that runs as part of the JobManager.</description>
+    </item>
+    
+    <item>
+      <title>Upgrading Applications and Flink Versions</title>
+      <link>//localhost/flink/flink-docs-master/docs/ops/upgrading/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/ops/upgrading/</guid>
+      <description>Upgrading Applications and Flink Versions # Flink DataStream programs are typically designed to run for long periods of time such as weeks, months, or even years. As with all long-running services, Flink streaming applications need to be maintained, which includes fixing bugs, implementing improvements, or migrating an application to a Flink cluster of a later version.
+This document describes how to update a Flink streaming application and how to migrate a running streaming application to a different Flink cluster.</description>
+    </item>
+    
+    <item>
+      <title>Production Readiness Checklist</title>
+      <link>//localhost/flink/flink-docs-master/docs/ops/production_ready/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/ops/production_ready/</guid>
+      <description>Production Readiness Checklist # The production readiness checklist provides an overview of configuration options that should be carefully considered before bringing an Apache Flink job into production. While the Flink community has attempted to provide sensible defaults for each configuration, it is important to review this list and ensure the options chosen are sufficient for your needs.
+Set An Explicit Max Parallelism # The max parallelism, set on a per-job and per-operator granularity, determines the maximum parallelism to which a stateful operator can scale.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>High Availability on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/docs/deployment/ha/</link>
+    <description>Recent content in High Availability on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/docs/deployment/ha/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Overview</title>
+      <link>//localhost/flink/flink-docs-master/docs/deployment/ha/overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/deployment/ha/overview/</guid>
+      <description>High Availability # JobManager High Availability (HA) hardens a Flink cluster against JobManager failures. This feature ensures that a Flink cluster will always continue executing your submitted jobs.
+JobManager High Availability # The JobManager coordinates every Flink deployment. It is responsible for both scheduling and resource management.
+By default, there is a single JobManager instance per Flink cluster. This creates a single point of failure (SPOF): if the JobManager crashes, no new programs can be submitted and running programs fail.</description>
+    </item>
+    
+    <item>
+      <title>ZooKeeper HA Services</title>
+      <link>//localhost/flink/flink-docs-master/docs/deployment/ha/zookeeper_ha/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/deployment/ha/zookeeper_ha/</guid>
+      <description>ZooKeeper HA Services # Flink&amp;rsquo;s ZooKeeper HA services use ZooKeeper for high availability services.
+Flink leverages ZooKeeper for distributed coordination between all running JobManager instances. ZooKeeper is a separate service from Flink, which provides highly reliable distributed coordination via leader election and light-weight consistent state storage. Check out ZooKeeper&amp;rsquo;s Getting Started Guide for more information about ZooKeeper. Flink includes scripts to bootstrap a simple ZooKeeper installation.
+Configuration # In order to start an HA-cluster you have to configure the following configuration keys:</description>
+    </item>
+    
+    <item>
+      <title>Kubernetes HA Services</title>
+      <link>//localhost/flink/flink-docs-master/docs/deployment/ha/kubernetes_ha/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/deployment/ha/kubernetes_ha/</guid>
+      <description>Kubernetes HA Services # Flink&amp;rsquo;s Kubernetes HA services use Kubernetes for high availability services.
+Kubernetes high availability services can only be used when deploying to Kubernetes. Consequently, they can be configured when using standalone Flink on Kubernetes or the native Kubernetes integration
+Prerequisites # In order to use Flink&amp;rsquo;s Kubernetes HA services you must fulfill the following prerequisites:
+Kubernetes &amp;gt;= 1.9. Service account with permissions to create, edit, delete ConfigMaps.</description>
+    </item>
+    
+  </channel>
+</rss>

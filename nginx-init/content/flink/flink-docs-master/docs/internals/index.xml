@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Internals on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/docs/internals/</link>
+    <description>Recent content in Internals on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/docs/internals/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Jobs and Scheduling</title>
+      <link>//localhost/flink/flink-docs-master/docs/internals/job_scheduling/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/internals/job_scheduling/</guid>
+      <description>Jobs and Scheduling # This document briefly describes how Flink schedules jobs and how it represents and tracks job status on the JobManager.
+Scheduling # Execution resources in Flink are defined through Task Slots. Each TaskManager will have one or more task slots, each of which can run one pipeline of parallel tasks. A pipeline consists of multiple successive tasks, such as the n-th parallel instance of a MapFunction together with the n-th parallel instance of a ReduceFunction.</description>
+    </item>
+    
+    <item>
+      <title>Task Lifecycle</title>
+      <link>//localhost/flink/flink-docs-master/docs/internals/task_lifecycle/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/internals/task_lifecycle/</guid>
+      <description>Task Lifecycle # A task in Flink is the basic unit of execution. It is the place where each parallel instance of an operator is executed. As an example, an operator with a parallelism of 5 will have each of its instances executed by a separate task.
+The StreamTask is the base for all different task sub-types in Flink&amp;rsquo;s streaming engine. This document goes through the different phases in the lifecycle of the StreamTask and describes the main methods representing each of these phases.</description>
+    </item>
+    
+    <item>
+      <title>File Systems</title>
+      <link>//localhost/flink/flink-docs-master/docs/internals/filesystems/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/internals/filesystems/</guid>
+      <description>File Systems # Flink has its own file system abstraction via the org.apache.flink.core.fs.FileSystem class. This abstraction provides a common set of operations and minimal guarantees across various types of file system implementations.
+The FileSystem&amp;rsquo;s set of available operations is quite limited, in order to support a wide range of file systems. For example, appending to or mutating existing files is not supported.
+File systems are identified by a file system scheme, such as file://, hdfs://, etc.</description>
+    </item>
+    
+  </channel>
+</rss>

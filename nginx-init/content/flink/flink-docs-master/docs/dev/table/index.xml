@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Table API &amp; SQL on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/docs/dev/table/</link>
+    <description>Recent content in Table API &amp; SQL on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/docs/dev/table/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Overview</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/table/overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/table/overview/</guid>
+      <description>Table API &amp;amp; SQL # Apache Flink features two relational APIs - the Table API and SQL - for unified stream and batch processing. The Table API is a language-integrated query API for Java, Scala, and Python that allows the composition of queries from relational operators such as selection, filter, and join in a very intuitive way. Flink&amp;rsquo;s SQL support is based on Apache Calcite which implements the SQL standard.</description>
+    </item>
+    
+    <item>
+      <title>Concepts &amp; Common API</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/table/common/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/table/common/</guid>
+      <description>Concepts &amp;amp; Common API # The Table API and SQL are integrated in a joint API. The central concept of this API is a Table which serves as input and output of queries. This document shows the common structure of programs with Table API and SQL queries, how to register a Table, how to query a Table, and how to emit a Table.
+Structure of Table API and SQL Programs # The following code example shows the common structure of Table API and SQL programs.</description>
+    </item>
+    
+    <item>
+      <title>DataStream API Integration</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/table/data_stream_api/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/table/data_stream_api/</guid>
+      <description>DataStream API Integration # Both Table API and DataStream API are equally important when it comes to defining a data processing pipeline.
+The DataStream API offers the primitives of stream processing (namely time, state, and dataflow management) in a relatively low-level imperative programming API. The Table API abstracts away many internals and provides a structured and declarative API.
+Both APIs can work with bounded and unbounded streams.
+Bounded streams need to be managed when processing historical data.</description>
+    </item>
+    
+    <item>
+      <title>Data Types</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/table/types/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/table/types/</guid>
+      <description>Data Types # Flink SQL has a rich set of native data types available to users.
+Data Type # A data type describes the logical type of a value in the table ecosystem. It can be used to declare input and/or output types of operations.
+Flink&amp;rsquo;s data types are similar to the SQL standard&amp;rsquo;s data type terminology but also contain information about the nullability of a value for efficient handling of scalar expressions.</description>
+    </item>
+    
+    <item>
+      <title>Time Zone</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/table/timezone/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/table/timezone/</guid>
+      <description>Time Zone # Flink provides rich data types for Date and Time, including DATE, TIME, TIMESTAMP, TIMESTAMP_LTZ, INTERVAL YEAR TO MONTH, INTERVAL DAY TO SECOND (please see Date and Time for detailed information). Flink supports setting time zone in session level (please see table.local-time-zone for detailed information). These timestamp data types and time zone support of Flink make it easy to process business data across time zones.
+TIMESTAMP vs TIMESTAMP_LTZ # TIMESTAMP type # TIMESTAMP(p) is an abbreviation for TIMESTAMP(p) WITHOUT TIME ZONE, the precision p supports range is from 0 to 9, 6 by default.</description>
+    </item>
+    
+    <item>
+      <title>Table API</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/table/tableapi/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/table/tableapi/</guid>
+      <description>Table API # The Table API is a unified, relational API for stream and batch processing. Table API queries can be run on batch or streaming input without modifications. The Table API is a super set of the SQL language and is specially designed for working with Apache Flink. The Table API is a language-integrated API for Scala, Java and Python. Instead of specifying queries as String values as common with SQL, Table API queries are defined in a language-embedded style in Java, Scala or Python with IDE support like autocompletion and syntax validation.</description>
+    </item>
+    
+    <item>
+      <title>Modules</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/table/modules/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/table/modules/</guid>
+      <description>Modules # Modules allow users to extend Flink&amp;rsquo;s built-in objects, such as defining functions that behave like Flink built-in functions. They are pluggable, and while Flink provides a few pre-built modules, users can write their own.
+For example, users can define their own geo functions and plug them into Flink as built-in functions to be used in Flink SQL and Table APIs. Another example is users can load an out-of-shelf Hive module to use Hive built-in functions as Flink built-in functions.</description>
+    </item>
+    
+    <item>
+      <title>Catalogs</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/table/catalogs/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/table/catalogs/</guid>
+      <description>Catalogs # Catalogs provide metadata, such as databases, tables, partitions, views, and functions and information needed to access data stored in a database or other external systems.
+One of the most crucial aspects of data processing is managing metadata. It may be transient metadata like temporary tables, or UDFs registered against the table environment. Or permanent metadata, like that in a Hive Metastore. Catalogs provide a unified API for managing metadata and making it accessible from the Table API and SQL Queries.</description>
+    </item>
+    
+    <item>
+      <title>SQL Client</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/table/sqlclient/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/table/sqlclient/</guid>
+      <description>SQL Client # Flink’s Table &amp;amp; SQL API makes it possible to work with queries written in the SQL language, but these queries need to be embedded within a table program that is written in either Java or Scala. Moreover, these programs need to be packaged with a build tool before being submitted to a cluster. This more or less limits the usage of Flink to Java/Scala programmers.
+The SQL Client aims to provide an easy way of writing, debugging, and submitting table programs to a Flink cluster without a single line of Java or Scala code.</description>
+    </item>
+    
+    <item>
+      <title>Configuration</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/table/config/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/table/config/</guid>
+      <description>Configuration # By default, the Table &amp;amp; SQL API is preconfigured for producing accurate results with acceptable performance.
+Depending on the requirements of a table program, it might be necessary to adjust certain parameters for optimization. For example, unbounded streaming programs may need to ensure that the required state size is capped (see streaming concepts).
+Overview # When instantiating a TableEnvironment, EnvironmentSettings can be used to pass the desired configuration for the current session, by passing a Configuration object to the EnvironmentSettings.</description>
+    </item>
+    
+    <item>
+      <title>Performance Tuning</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/table/tuning/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/table/tuning/</guid>
+      <description>Performance Tuning # SQL is the most widely used language for data analytics. Flink&amp;rsquo;s Table API and SQL enables users to define efficient stream analytics applications in less time and effort. Moreover, Flink Table API and SQL is effectively optimized, it integrates a lot of query optimizations and tuned operator implementations. But not all of the optimizations are enabled by default, so for some workloads, it is possible to improve performance by turning on some options.</description>
+    </item>
+    
+    <item>
+      <title>User-defined Sources &amp; Sinks</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/table/sourcessinks/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/table/sourcessinks/</guid>
+      <description>User-defined Sources &amp;amp; Sinks # Dynamic tables are the core concept of Flink&amp;rsquo;s Table &amp;amp; SQL API for processing both bounded and unbounded data in a unified fashion.
+Because dynamic tables are only a logical concept, Flink does not own the data itself. Instead, the content of a dynamic table is stored in external systems (such as databases, key-value stores, message queues) or files.
+Dynamic sources and dynamic sinks can be used to read and write data from and to an external system.</description>
+    </item>
+    
+  </channel>
+</rss>

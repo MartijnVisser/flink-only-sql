@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Standalone on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/zh/docs/deployment/resource-providers/standalone/</link>
+    <description>Recent content in Standalone on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/zh/docs/deployment/resource-providers/standalone/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>概览</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/deployment/resource-providers/standalone/overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/deployment/resource-providers/standalone/overview/</guid>
+      <description>Standalone # 本页面提供了关于如何在静态（但可能异构）集群上以完全分布式方式运行 Flink 的说明。
+需求 # 软件需求 # Flink 运行在所有类 UNIX 环境下，例如 Linux，Mac OS X 和 Cygwin （Windows），集群由一个 master 节点以及一个或多个 worker 节点构成。在配置系统之前，请确保在每个节点上安装有以下软件：
+Java 1.8.x 或更高版本， ssh （必须运行 sshd 以执行用于管理 Flink 各组件的脚本） 如果集群不满足软件要求，那么你需要安装/更新这些软件。
+使集群中所有节点使用免密码 SSH 以及拥有相同的目录结构可以让你使用脚本来控制一切。
+Back to top
+JAVA_HOME 配置 # Flink 需要 master 和所有 worker 节点设置 JAVA_HOME 环境变量，并指向你的 Java 安装目录。
+你可以在 conf/flink-conf.yaml 文件中通过 env.java.home 配置项来设置此变量。
+Back to top
+Flink 设置 # 前往 下载页面 获取可运行的软件包。
+在下载完最新的发布版本后，复制压缩文件到 master 节点并解压：</description>
+    </item>
+    
+    <item>
+      <title>Working Directory</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/deployment/resource-providers/standalone/working_directory/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/deployment/resource-providers/standalone/working_directory/</guid>
+      <description>Working Directory # Flink supports to configure a working directory (FLIP-198) for Flink processes (JobManager and TaskManager). The working directory is used by the processes to store information that can be recovered upon a process restart. The requirement for this to work is that the process is started with the same identity and has access to the volume on which the working directory is stored.
+Configuring the Working Directory # The working directories for the Flink processes are:</description>
+    </item>
+    
+    <item>
+      <title>Docker 设置</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/deployment/resource-providers/standalone/docker/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/deployment/resource-providers/standalone/docker/</guid>
+      <description>Docker Setup # Getting Started # This Getting Started section guides you through the local setup (on one machine, but in separate containers) of a Flink cluster using Docker containers.
+Introduction # Docker is a popular container runtime. There are official Docker images for Apache Flink available on Docker Hub. You can use the Docker images to deploy a Session or Application cluster on Docker. This page focuses on the setup of Flink on Docker, Docker Swarm and Docker Compose.</description>
+    </item>
+    
+    <item>
+      <title>Kubernetes 设置</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/deployment/resource-providers/standalone/kubernetes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/deployment/resource-providers/standalone/kubernetes/</guid>
+      <description>Kubernetes 安装 # 入门 # 本 入门 指南描述了如何在 Kubernetes 上部署 Flink Session 集群。
+介绍 # 本文描述了如何使用 Flink standalone 部署模式在 Kubernetes 上部署 standalone 模式的 Flink 集群。通常我们建议新用户使用 native Kubernetes 部署模式在 Kubernetes上部署 Flink。
+准备 # 本指南假设存在一个 Kubernets 的运行环境。你可以通过运行 kubectl get nodes 命令来确保 Kubernetes 环境运行正常，该命令展示所有连接到 Kubernets 集群的 node 节点信息。
+如果你想在本地运行 Kubernetes，建议使用 MiniKube。
+如果使用 MiniKube，请确保在部署 Flink 集群之前先执行 minikube ssh &#39;sudo ip link set docker0 promisc on&#39;，否则 Flink 组件不能自动地将自己映射到 Kubernetes Service 中。 Kubernetes 上的 Flink session 集群 # Flink session 集群 是以一种长期运行的 Kubernetes Deployment 形式执行的。你可以在一个 session 集群 上运行多个 Flink 作业。当然，只有 session 集群部署好以后才可以在上面提交 Flink 作业。</description>
+    </item>
+    
+  </channel>
+</rss>

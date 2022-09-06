@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>DataStream Connectors on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/docs/connectors/datastream/</link>
+    <description>Recent content in DataStream Connectors on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/docs/connectors/datastream/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Overview</title>
+      <link>//localhost/flink/flink-docs-master/docs/connectors/datastream/overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/connectors/datastream/overview/</guid>
+      <description>DataStream Connectors # Predefined Sources and Sinks # A few basic data sources and sinks are built into Flink and are always available. The predefined data sources include reading from files, directories, and sockets, and ingesting data from collections and iterators. The predefined data sinks support writing to files, to stdout and stderr, and to sockets.
+Bundled Connectors # Connectors provide code for interfacing with various third-party systems. Currently these systems are supported:</description>
+    </item>
+    
+    <item>
+      <title>Fault Tolerance Guarantees</title>
+      <link>//localhost/flink/flink-docs-master/docs/connectors/datastream/guarantees/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/connectors/datastream/guarantees/</guid>
+      <description>Fault Tolerance Guarantees of Data Sources and Sinks # Flink&amp;rsquo;s fault tolerance mechanism recovers programs in the presence of failures and continues to execute them. Such failures include machine hardware failures, network failures, transient program failures, etc.
+Flink can guarantee exactly-once state updates to user-defined state only when the source participates in the snapshotting mechanism. The following table lists the state update guarantees of Flink coupled with the bundled connectors.</description>
+    </item>
+    
+    <item>
+      <title>Kafka</title>
+      <link>//localhost/flink/flink-docs-master/docs/connectors/datastream/kafka/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/connectors/datastream/kafka/</guid>
+      <description>Apache Kafka Connector # Flink provides an Apache Kafka connector for reading data from and writing data to Kafka topics with exactly-once guarantees.
+Dependency # Apache Flink ships with a universal Kafka connector which attempts to track the latest version of the Kafka client. The version of the client it uses may change between Flink releases. Modern Kafka clients are backwards compatible with broker versions 0.10.0 or later. For details on Kafka compatibility, please refer to the official Kafka documentation.</description>
+    </item>
+    
+    <item>
+      <title>Cassandra</title>
+      <link>//localhost/flink/flink-docs-master/docs/connectors/datastream/cassandra/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/connectors/datastream/cassandra/</guid>
+      <description>Apache Cassandra Connector # This connector provides sinks that writes data into a Apache Cassandra database.
+To use this connector, add the following dependency to your project:
+&amp;ltdependency&amp;gt &amp;ltgroupId&amp;gtorg.apache.flink&amp;lt/groupId&amp;gt &amp;ltartifactId&amp;gtflink-connector-cassandra_2.12&amp;lt/artifactId&amp;gt &amp;ltversion&amp;gt1.16-SNAPSHOT&amp;lt/version&amp;gt &amp;lt/dependency&amp;gt Copied to clipboard! Note that the streaming connectors are currently NOT part of the binary distribution. See how to link with them for cluster execution here.
+Installing Apache Cassandra # There are multiple ways to bring up a Cassandra instance on local machine:</description>
+    </item>
+    
+    <item>
+      <title>Elasticsearch</title>
+      <link>//localhost/flink/flink-docs-master/docs/connectors/datastream/elasticsearch/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/connectors/datastream/elasticsearch/</guid>
+      <description>Elasticsearch Connector # This connector provides sinks that can request document actions to an Elasticsearch Index. To use this connector, add one of the following dependencies to your project, depending on the version of the Elasticsearch installation:
+Elasticsearch version Maven Dependency 6.x &amp;ltdependency&amp;gt &amp;ltgroupId&amp;gtorg.apache.flink&amp;lt/groupId&amp;gt &amp;ltartifactId&amp;gtflink-connector-elasticsearch6&amp;lt/artifactId&amp;gt &amp;ltversion&amp;gt1.16-SNAPSHOT&amp;lt/version&amp;gt &amp;lt/dependency&amp;gt Copied to clipboard! 7.x &amp;ltdependency&amp;gt &amp;ltgroupId&amp;gtorg.apache.flink&amp;lt/groupId&amp;gt &amp;ltartifactId&amp;gtflink-connector-elasticsearch7&amp;lt/artifactId&amp;gt &amp;ltversion&amp;gt1.16-SNAPSHOT&amp;lt/version&amp;gt &amp;lt/dependency&amp;gt Copied to clipboard! In order to use the Elasticsearch connector in PyFlink jobs, the following dependencies are required: Elasticsearch version PyFlink JAR 6.</description>
+    </item>
+    
+    <item>
+      <title>Firehose</title>
+      <link>//localhost/flink/flink-docs-master/docs/connectors/datastream/firehose/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/connectors/datastream/firehose/</guid>
+      <description>Amazon Kinesis Data Firehose Sink # The Firehose sink writes to Amazon Kinesis Data Firehose.
+Follow the instructions from the Amazon Kinesis Data Firehose Developer Guide to setup a Kinesis Data Firehose delivery stream.
+To use the connector, add the following Maven dependency to your project:
+&amp;ltdependency&amp;gt &amp;ltgroupId&amp;gtorg.apache.flink&amp;lt/groupId&amp;gt &amp;ltartifactId&amp;gtflink-connector-aws-kinesis-firehose&amp;lt/artifactId&amp;gt &amp;ltversion&amp;gt1.16-SNAPSHOT&amp;lt/version&amp;gt &amp;lt/dependency&amp;gt Copied to clipboard! In order to use the AWS Kinesis Firehose connector in PyFlink jobs, the following dependencies are required: PyFlink JAR Only available for stable releases.</description>
+    </item>
+    
+    <item>
+      <title>Kinesis</title>
+      <link>//localhost/flink/flink-docs-master/docs/connectors/datastream/kinesis/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/connectors/datastream/kinesis/</guid>
+      <description>Amazon Kinesis Data Streams Connector # The Kinesis connector provides access to Amazon Kinesis Data Streams.
+To use this connector, add one or more of the following dependencies to your project, depending on whether you are reading from and/or writing to Kinesis Data Streams:
+KDS Connectivity Maven Dependency Source &amp;ltdependency&amp;gt &amp;ltgroupId&amp;gtorg.apache.flink&amp;lt/groupId&amp;gt &amp;ltartifactId&amp;gtflink-connector-kinesis&amp;lt/artifactId&amp;gt &amp;ltversion&amp;gt1.16-SNAPSHOT&amp;lt/version&amp;gt &amp;lt/dependency&amp;gt Copied to clipboard! Sink &amp;ltdependency&amp;gt &amp;ltgroupId&amp;gtorg.apache.flink&amp;lt/groupId&amp;gt &amp;ltartifactId&amp;gtflink-connector-aws-kinesis-streams&amp;lt/artifactId&amp;gt &amp;ltversion&amp;gt1.16-SNAPSHOT&amp;lt/version&amp;gt &amp;lt/dependency&amp;gt Copied to clipboard! Due to the licensing issue, the flink-connector-kinesis artifact is not deployed to Maven central for the prior versions.</description>
+    </item>
+    
+    <item>
+      <title>FileSystem</title>
+      <link>//localhost/flink/flink-docs-master/docs/connectors/datastream/filesystem/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/connectors/datastream/filesystem/</guid>
+      <description>FileSystem # This connector provides a unified Source and Sink for BATCH and STREAMING that reads or writes (partitioned) files to file systems supported by the Flink FileSystem abstraction. This filesystem connector provides the same guarantees for both BATCH and STREAMING and is designed to provide exactly-once semantics for STREAMING execution.
+The connector supports reading and writing a set of files from any (distributed) file system (e.g. POSIX, S3, HDFS) with a format (e.</description>
+    </item>
+    
+    <item>
+      <title>RabbitMQ</title>
+      <link>//localhost/flink/flink-docs-master/docs/connectors/datastream/rabbitmq/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/connectors/datastream/rabbitmq/</guid>
+      <description>RabbitMQ Connector # License of the RabbitMQ Connector # Flink&amp;rsquo;s RabbitMQ connector defines a Maven dependency on the &amp;ldquo;RabbitMQ AMQP Java Client&amp;rdquo;, is triple-licensed under the Mozilla Public License 1.1 (&amp;ldquo;MPL&amp;rdquo;), the GNU General Public License version 2 (&amp;ldquo;GPL&amp;rdquo;) and the Apache License version 2 (&amp;ldquo;ASL&amp;rdquo;).
+Flink itself neither reuses source code from the &amp;ldquo;RabbitMQ AMQP Java Client&amp;rdquo; nor packages binaries from the &amp;ldquo;RabbitMQ AMQP Java Client&amp;rdquo;.
+Users that create and publish derivative work based on Flink&amp;rsquo;s RabbitMQ connector (thereby re-distributing the &amp;ldquo;RabbitMQ AMQP Java Client&amp;rdquo;) must be aware that this may be subject to conditions declared in the Mozilla Public License 1.</description>
+    </item>
+    
+    <item>
+      <title>Google Cloud PubSub</title>
+      <link>//localhost/flink/flink-docs-master/docs/connectors/datastream/pubsub/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/connectors/datastream/pubsub/</guid>
+      <description>Google Cloud PubSub # This connector provides a Source and Sink that can read from and write to Google Cloud PubSub. To use this connector, add the following dependency to your project:
+&amp;ltdependency&amp;gt &amp;ltgroupId&amp;gtorg.apache.flink&amp;lt/groupId&amp;gt &amp;ltartifactId&amp;gtflink-connector-gcp-pubsub&amp;lt/artifactId&amp;gt &amp;ltversion&amp;gt1.16-SNAPSHOT&amp;lt/version&amp;gt &amp;lt/dependency&amp;gt Copied to clipboard! Note: This connector has been added to Flink recently. It has not received widespread testing yet. Note that the streaming connectors are currently not part of the binary distribution. See here for information about how to package the program with the libraries for cluster execution.</description>
+    </item>
+    
+    <item>
+      <title>Hybrid Source</title>
+      <link>//localhost/flink/flink-docs-master/docs/connectors/datastream/hybridsource/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/connectors/datastream/hybridsource/</guid>
+      <description>Hybrid Source # HybridSource is a source that contains a list of concrete sources. It solves the problem of sequentially reading input from heterogeneous sources to produce a single input stream.
+For example, a bootstrap use case may need to read several days worth of bounded input from S3 before continuing with the latest unbounded input from Kafka. HybridSource switches from FileSource to KafkaSource when the bounded file input finishes without interrupting the application.</description>
+    </item>
+    
+    <item>
+      <title>Pulsar</title>
+      <link>//localhost/flink/flink-docs-master/docs/connectors/datastream/pulsar/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/connectors/datastream/pulsar/</guid>
+      <description>Apache Pulsar Connector # Flink provides an Apache Pulsar connector for reading and writing data from and to Pulsar topics with exactly-once guarantees.
+Dependency # You can use the connector with the Pulsar 2.8.1 or higher. Because the Pulsar connector supports Pulsar transactions, it is recommended to use the Pulsar 2.9.2 or higher. Details on Pulsar compatibility can be found in PIP-72.
+&amp;ltdependency&amp;gt &amp;ltgroupId&amp;gtorg.apache.flink&amp;lt/groupId&amp;gt &amp;ltartifactId&amp;gtflink-connector-pulsar&amp;lt/artifactId&amp;gt &amp;ltversion&amp;gt1.16-SNAPSHOT&amp;lt/version&amp;gt &amp;lt/dependency&amp;gt Copied to clipboard!</description>
+    </item>
+    
+    <item>
+      <title>JDBC</title>
+      <link>//localhost/flink/flink-docs-master/docs/connectors/datastream/jdbc/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/connectors/datastream/jdbc/</guid>
+      <description>JDBC Connector # This connector provides a sink that writes data to a JDBC database.
+To use it, add the following dependency to your project (along with your JDBC driver):
+&amp;ltdependency&amp;gt &amp;ltgroupId&amp;gtorg.apache.flink&amp;lt/groupId&amp;gt &amp;ltartifactId&amp;gtflink-connector-jdbc&amp;lt/artifactId&amp;gt &amp;ltversion&amp;gt1.16-SNAPSHOT&amp;lt/version&amp;gt &amp;lt/dependency&amp;gt Copied to clipboard! Note that the streaming connectors are currently NOT part of the binary distribution. See how to link with them for cluster execution here. A driver dependency is also required to connect to a specified database.</description>
+    </item>
+    
+  </channel>
+</rss>

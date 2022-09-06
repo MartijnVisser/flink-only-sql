@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Streaming Concepts on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/docs/dev/table/concepts/</link>
+    <description>Recent content in Streaming Concepts on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/docs/dev/table/concepts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Overview</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/table/concepts/overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/table/concepts/overview/</guid>
+      <description>Streaming Concepts # Flink&amp;rsquo;s Table API and SQL support are unified APIs for batch and stream processing. This means that Table API and SQL queries have the same semantics regardless whether their input is bounded batch input or unbounded stream input.
+The following pages explain concepts, practical limitations, and stream-specific configuration parameters of Flink&amp;rsquo;s relational APIs on streaming data.
+State Management # Table programs that run in streaming mode leverage all capabilities of Flink as a stateful stream processor.</description>
+    </item>
+    
+    <item>
+      <title>Dynamic Tables</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/table/concepts/dynamic_tables/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/table/concepts/dynamic_tables/</guid>
+      <description>Dynamic Tables # SQL - and the Table API - offer flexible and powerful capabilities for real-time data processing. This page describes how relational concepts elegantly translate to streaming, allowing Flink to achieve the same semantics on unbounded streams.
+Relational Queries on Data Streams # The following table compares traditional relational algebra and stream processing for input data, execution, and output results.
+Relational Algebra / SQL Stream Processing Relations (or tables) are bounded (multi-)sets of tuples.</description>
+    </item>
+    
+    <item>
+      <title>Time Attributes</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/table/concepts/time_attributes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/table/concepts/time_attributes/</guid>
+      <description>Time Attributes # Flink can process data based on different notions of time.
+Processing time refers to the machine&amp;rsquo;s system time (also known as epoch time, e.g. Java&amp;rsquo;s System.currentTimeMillis()) that is executing the respective operation. Event time refers to the processing of streaming data based on timestamps that are attached to each row. The timestamps can encode when an event happened. For more information about time handling in Flink, see the introduction about event time and watermarks.</description>
+    </item>
+    
+    <item>
+      <title>Versioned Tables</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/table/concepts/versioned_tables/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/table/concepts/versioned_tables/</guid>
+      <description>Versioned Tables # Flink SQL operates over dynamic tables that evolve, which may either be append-only or updating. Versioned tables represent a special type of updating table that remembers the past values for each key.
+Concept # Dynamic tables define relations over time. Often, particularly when working with metadata, a key&amp;rsquo;s old value does not become irrelevant when it changes.
+Flink SQL can define versioned tables over any dynamic table with a PRIMARY KEY constraint and time attribute.</description>
+    </item>
+    
+    <item>
+      <title>Temporal Table Function</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/table/concepts/temporal_table_function/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/table/concepts/temporal_table_function/</guid>
+      <description>Temporal Table Function # A Temporal table function provides access to the version of a temporal table at a specific point in time. In order to access the data in a temporal table, one must pass a time attribute that determines the version of the table that will be returned. Flink uses the SQL syntax of table functions to provide a way to express it.
+Unlike a versioned table, temporal table functions can only be defined on top of append-only streams — it does not support changelog inputs.</description>
+    </item>
+    
+  </channel>
+</rss>

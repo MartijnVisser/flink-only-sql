@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Managing Execution on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/docs/dev/datastream/execution/</link>
+    <description>Recent content in Managing Execution on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/docs/dev/datastream/execution/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Execution Configuration</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/datastream/execution/execution_configuration/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/datastream/execution/execution_configuration/</guid>
+      <description>Execution Configuration # The StreamExecutionEnvironment contains the ExecutionConfig which allows to set job specific configuration values for the runtime. To change the defaults that affect all jobs, see Configuration.
+Java StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment(); ExecutionConfig executionConfig = env.getConfig(); Scala val env = StreamExecutionEnvironment.getExecutionEnvironment var executionConfig = env.getConfig Python env = StreamExecutionEnvironment.get_execution_environment() execution_config = env.get_config() The following configuration options are available: (the default is bold)
+setClosureCleanerLevel(). The closure cleaner level is set to ClosureCleanerLevel.</description>
+    </item>
+    
+    <item>
+      <title>Program Packaging</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/datastream/execution/packaging/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/datastream/execution/packaging/</guid>
+      <description>Program Packaging and Distributed Execution # As described earlier, Flink programs can be executed on clusters by using a remote environment. Alternatively, programs can be packaged into JAR Files (Java Archives) for execution. Packaging the program is a prerequisite to executing them through the command line interface.
+Packaging Programs # To support execution from a packaged JAR file via the command line or web interface, a program must use the environment obtained by StreamExecutionEnvironment.</description>
+    </item>
+    
+    <item>
+      <title>Parallel Execution</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/datastream/execution/parallel/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/datastream/execution/parallel/</guid>
+      <description>Parallel Execution # This section describes how the parallel execution of programs can be configured in Flink. A Flink program consists of multiple tasks (transformations/operators, data sources, and sinks). A task is split into several parallel instances for execution and each parallel instance processes a subset of the task&amp;rsquo;s input data. The number of parallel instances of a task is called its parallelism.
+If you want to use savepoints you should also consider setting a maximum parallelism (or max parallelism).</description>
+    </item>
+    
+  </channel>
+</rss>

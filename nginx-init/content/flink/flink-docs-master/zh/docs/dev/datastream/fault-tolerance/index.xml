@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>状态与容错 on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/zh/docs/dev/datastream/fault-tolerance/</link>
+    <description>Recent content in 状态与容错 on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/zh/docs/dev/datastream/fault-tolerance/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Working with State</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/datastream/fault-tolerance/state/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/datastream/fault-tolerance/state/</guid>
+      <description>使用状态 # 本章节您将了解 Flink 用于编写有状态程序的 API。要了解有状态流处理背后的概念，请参阅Stateful Stream Processing。
+Keyed DataStream # 如果你希望使用 keyed state，首先需要为DataStream指定 key（主键）。这个主键用于状态分区（也会给数据流中的记录本身分区）。 你可以使用 DataStream 中 Java/Scala API 的 keyBy(KeySelector) 或者是 Python API 的 key_by(KeySelector) 来指定 key。 它将生成 KeyedStream，接下来允许使用 keyed state 操作。
+Key selector 函数接收单条记录作为输入，返回这条记录的 key。该 key 可以为任何类型，但是它的计算产生方式必须是具备确定性的。
+Flink 的数据模型不基于 key-value 对，因此实际上将数据集在物理上封装成 key 和 value 是没有必要的。 Key 是“虚拟”的。它们定义为基于实际数据的函数，用以操纵分组算子。
+下面的例子展示了 key selector 函数。它仅返回了对象当中的字段。
+Java // some ordinary POJO public class WC { public String word; public int count; public String getWord() { return word; } } DataStream&amp;lt;WC&amp;gt; words = // [.</description>
+    </item>
+    
+    <item>
+      <title>Broadcast State 模式</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/datastream/fault-tolerance/broadcast_state/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/datastream/fault-tolerance/broadcast_state/</guid>
+      <description>Broadcast State 模式 # 你将在本节中了解到如何实际使用 broadcast state。想了解更多有状态流处理的概念，请参考 Stateful Stream Processing。
+提供的 API # 在这里我们使用一个例子来展现 broadcast state 提供的接口。假设存在一个序列，序列中的元素是具有不同颜色与形状的图形，我们希望在序列里相同颜色的图形中寻找满足一定顺序模式的图形对（比如在红色的图形里，有一个长方形跟着一个三角形）。 同时，我们希望寻找的模式也会随着时间而改变。
+在这个例子中，我们定义两个流，一个流包含图形（Item），具有颜色和形状两个属性。另一个流包含特定的规则（Rule），代表希望寻找的模式。
+在图形流中，我们需要首先使用颜色将流进行进行分区（keyBy），这能确保相同颜色的图形会流转到相同的物理机上。
+Java // 将图形使用颜色进行划分 KeyedStream&amp;lt;Item, Color&amp;gt; colorPartitionedStream = itemStream .keyBy(new KeySelector&amp;lt;Item, Color&amp;gt;(){...}); Python # 将图形使用颜色进行划分 color_partitioned_stream = item_stream.key_by(lambda item: ...) 对于规则流，它应该被广播到所有的下游 task 中，下游 task 应当存储这些规则并根据它寻找满足规则的图形对。下面这段代码会完成： i) 将规则广播给所有下游 task； ii) 使用 MapStateDescriptor 来描述并创建 broadcast state 在下游的存储结构
+Java // 一个 map descriptor，它描述了用于存储规则名称与规则本身的 map 存储结构 MapStateDescriptor&amp;lt;String, Rule&amp;gt; ruleStateDescriptor = new MapStateDescriptor&amp;lt;&amp;gt;( &amp;#34;RulesBroadcastState&amp;#34;, BasicTypeInfo.STRING_TYPE_INFO, TypeInformation.</description>
+    </item>
+    
+    <item>
+      <title>Checkpointing</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/datastream/fault-tolerance/checkpointing/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/datastream/fault-tolerance/checkpointing/</guid>
+      <description>Checkpointing # Flink 中的每个方法或算子都能够是有状态的（阅读 working with state 了解更多）。 状态化的方法在处理单个 元素/事件 的时候存储数据，让状态成为使各个类型的算子更加精细的重要部分。 为了让状态容错，Flink 需要为状态添加 checkpoint（检查点）。Checkpoint 使得 Flink 能够恢复状态和在流中的位置，从而向应用提供和无故障执行时一样的语义。
+容错文档 中介绍了 Flink 流计算容错机制内部的技术原理。
+前提条件 # Flink 的 checkpoint 机制会和持久化存储进行交互，读写流与状态。一般需要：
+一个能够回放一段时间内数据的持久化数据源，例如持久化消息队列（例如 Apache Kafka、RabbitMQ、 Amazon Kinesis、 Google PubSub 等）或文件系统（例如 HDFS、 S3、 GFS、 NFS、 Ceph 等）。 存放状态的持久化存储，通常为分布式文件系统（比如 HDFS、 S3、 GFS、 NFS、 Ceph 等）。 开启与配置 Checkpoint # 默认情况下 checkpoint 是禁用的。通过调用 StreamExecutionEnvironment 的 enableCheckpointing(n) 来启用 checkpoint，里面的 n 是进行 checkpoint 的间隔，单位毫秒。
+Checkpoint 其他的属性包括：
+精确一次（exactly-once）对比至少一次（at-least-once）：你可以选择向 enableCheckpointing(long interval, CheckpointingMode mode) 方法中传入一个模式来选择使用两种保证等级中的哪一种。 对于大多数应用来说，精确一次是较好的选择。至少一次可能与某些延迟超低（始终只有几毫秒）的应用的关联较大。</description>
+    </item>
+    
+    <item>
+      <title>Queryable State</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/datastream/fault-tolerance/queryable_state/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/datastream/fault-tolerance/queryable_state/</guid>
+      <description>Queryable State # 目前 querable state 的客户端 API 还在不断演进，不保证现有接口的稳定性。在后续的 Flink 版本中有可能发生 API 变化。 简而言之, 这个特性将 Flink 的 managed keyed (partitioned) state (参考 Working with State) 暴露给外部，从而用户可以在 Flink 外部查询作业 state。 在某些场景中，Queryable State 消除了对外部系统的分布式操作以及事务的需求，比如 KV 存储系统，而这些外部系统往往会成为瓶颈。除此之外，这个特性对于调试作业非常有用。
+注意: 进行查询时，state 会在并发线程中被访问，但 state 不会进行同步和拷贝。这种设计是为了避免同步和拷贝带来的作业延时。对于使用 Java 堆内存的 state backend， 比如 MemoryStateBackend 或者 FsStateBackend，它们获取状态时不会进行拷贝，而是直接引用状态对象，所以对状态的 read-modify-write 是不安全的，并且可能会因为并发修改导致查询失败。但 RocksDBStateBackend 是安全的，不会遇到上述问题。 架构 # 在展示如何使用 Queryable State 之前，先简单描述一下该特性的组成部分，主要包括以下三部分:
+QueryableStateClient，默认运行在 Flink 集群外部，负责提交用户的查询请求； QueryableStateClientProxy，运行在每个 TaskManager 上(即 Flink 集群内部)，负责接收客户端的查询请求，从所负责的 Task Manager 获取请求的 state，并返回给客户端； QueryableStateServer, 运行在 TaskManager 上，负责服务本地存储的 state。 客户端连接到一个代理，并发送请求获取特定 k 对应的 state。 如 Working with State 所述，keyed state 按照 Key Groups 进行划分，每个 TaskManager 会分配其中的一些 key groups。代理会询问 JobManager 以找到 k 所属 key group 的 TaskManager。根据返回的结果, 代理将会向运行在 TaskManager 上的 QueryableStateServer 查询 k 对应的 state， 并将结果返回给客户端。</description>
+    </item>
+    
+    <item>
+      <title>State Backends</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/datastream/fault-tolerance/state_backends/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/datastream/fault-tolerance/state_backends/</guid>
+      <description>State Backends # Flink 提供了多种 state backends，它用于指定状态的存储方式和位置。
+状态可以位于 Java 的堆或堆外内存。取决于你的 state backend，Flink 也可以自己管理应用程序的状态。 为了让应用程序可以维护非常大的状态，Flink 可以自己管理内存（如果有必要可以溢写到磁盘）。 默认情况下，所有 Flink Job 会使用配置文件 flink-conf.yaml 中指定的 state backend。
+但是，配置文件中指定的默认 state backend 会被 Job 中指定的 state backend 覆盖，如下所示。
+关于可用的 state backend 更多详细信息，包括其优点、限制和配置参数等，请参阅部署和运维的相应部分。
+Java StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment(); env.setStateBackend(...); Scala val env = StreamExecutionEnvironment.getExecutionEnvironment() env.setStateBackend(...) Python env = StreamExecutionEnvironment.get_execution_environment() env.set_state_backend(...) Back to top</description>
+    </item>
+    
+  </channel>
+</rss>

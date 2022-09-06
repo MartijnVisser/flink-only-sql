@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Monitoring on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/zh/docs/ops/monitoring/</link>
+    <description>Recent content in Monitoring on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/zh/docs/ops/monitoring/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>监控 Checkpoint</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/ops/monitoring/checkpoint_monitoring/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/ops/monitoring/checkpoint_monitoring/</guid>
+      <description>监控 Checkpoint # 概览（Overview） # Flink 的 Web 界面提供了选项卡/标签（tab）来监视作业的 checkpoint 信息。作业终止后，这些统计信息仍然可用。有四个不同的选项卡可显示有关 checkpoint 的信息：概览（Overview），历史记录（History），摘要信息（Summary）和配置信息（Configuration）。以下各节将依次介绍这些内容。
+监控（Monitoring） # 概览（Overview）选项卡 # 概览选项卡列出了以下统计信息。请注意，这些统计信息在 JobManager 丢失时无法保存，如果 JobManager 发生故障转移，这些统计信息将重置。
+Checkpoint Counts Triggered：自作业开始以来触发的 checkpoint 总数。 In Progress：当前正在进行的 checkpoint 数量。 Completed：自作业开始以来成功完成的 checkpoint 总数。 Failed：自作业开始以来失败的 checkpoint 总数。 Restored：自作业开始以来进行的恢复操作的次数。这还表示自 提交以来已重新启动多少次。请注意，带有 savepoint 的初始提交也算作一次恢复，如果 JobManager 在此操作过程中丢失，则该统计将重新计数。 Latest Completed Checkpoint：最新（最近）成功完成的 checkpoint。点击 More details 可以得到 subtask 级别的详细统计信息。 Latest Failed Checkpoint：最新失败的 checkpoint。点击 More details 可以得到 subtask 级别的详细统计信息。 Latest Savepoint：最新触发的 savepoint 及其外部路径。点击 More details 可以得到 subtask 级别的详细统计信息。 Latest Restore：有两种类型的恢复操作。 Restore from Checkpoint：从 checkpoint 恢复。 Restore from Savepoint：从 savepoint 恢复。 历史记录（History）选项卡 # Checkpoint 历史记录保存有关最近触发的 checkpoint 的统计信息，包括当前正在进行的 checkpoint。</description>
+    </item>
+    
+    <item>
+      <title>监控反压</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/ops/monitoring/back_pressure/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/ops/monitoring/back_pressure/</guid>
+      <description>监控反压 # Flink Web 界面提供了一个选项卡来监控正在运行 jobs 的反压行为。
+反压 # 如果你看到一个 task 发生 反压警告（例如： High），意味着它生产数据的速率比下游 task 消费数据的速率要快。 在工作流中数据记录是从上游向下游流动的（例如：从 Source 到 Sink）。反压沿着相反的方向传播，沿着数据流向上游传播。
+以一个简单的 Source -&amp;gt; Sink job 为例。如果看到 Source 发生了警告，意味着 Sink 消费数据的速率比 Source 生产数据的速率要慢。 Sink 正在向上游的 Source 算子产生反压。
+Task 性能指标 # Task（SubTask）的每个并行实例都可以用三个一组的指标评价：
+backPressureTimeMsPerSecond，subtask 被反压的时间 idleTimeMsPerSecond，subtask 等待某类处理的时间 busyTimeMsPerSecond，subtask 实际工作时间 在任何时间点，这三个指标相加都约等于1000ms。 这些指标每两秒更新一次，上报的值表示 subtask 在最近两秒被反压（或闲或忙）的平均时长。 当你的工作负荷是变化的时需要尤其引起注意。比如，一个以恒定50%负载工作的 subtask 和另一个每秒钟在满负载和闲置切换的 subtask 的busyTimeMsPerSecond值相同，都是500ms。
+在内部，反压根据输出 buffers 的可用性来进行判断的。 如果一个 task 没有可用的输出 buffers，那么这个 task 就被认定是在被反压。 相反，如果有可用的输入，则可认定为闲置，
+示例 # WebUI 集合了所有 subTasks 的反压和繁忙指标的最大值，并在 JobGraph 中将集合的值进行显示。除了显示原始的数值，tasks 也用颜色进行了标记，使检查更加容易。</description>
+    </item>
+    
+  </channel>
+</rss>

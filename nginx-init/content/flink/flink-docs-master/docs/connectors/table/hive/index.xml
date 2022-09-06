@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hive on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/docs/connectors/table/hive/</link>
+    <description>Recent content in Hive on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/docs/connectors/table/hive/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Overview</title>
+      <link>//localhost/flink/flink-docs-master/docs/connectors/table/hive/overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/connectors/table/hive/overview/</guid>
+      <description>Apache Hive # Apache Hive has established itself as a focal point of the data warehousing ecosystem. It serves as not only a SQL engine for big data analytics and ETL, but also a data management platform, where data is discovered, defined, and evolved.
+Flink offers a two-fold integration with Hive.
+The first is to leverage Hive&amp;rsquo;s Metastore as a persistent catalog with Flink&amp;rsquo;s HiveCatalog for storing Flink specific metadata across sessions.</description>
+    </item>
+    
+    <item>
+      <title>Hive Catalog</title>
+      <link>//localhost/flink/flink-docs-master/docs/connectors/table/hive/hive_catalog/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/connectors/table/hive/hive_catalog/</guid>
+      <description>Hive Catalog # Hive Metastore has evolved into the de facto metadata hub over the years in Hadoop ecosystem. Many companies have a single Hive Metastore service instance in their production to manage all of their metadata, either Hive metadata or non-Hive metadata, as the source of truth.
+For users who have both Hive and Flink deployments, HiveCatalog enables them to use Hive Metastore to manage Flink&amp;rsquo;s metadata.
+For users who have just Flink deployment, HiveCatalog is the only persistent catalog provided out-of-box by Flink.</description>
+    </item>
+    
+    <item>
+      <title>Hive Dialect</title>
+      <link>//localhost/flink/flink-docs-master/docs/connectors/table/hive/hive_dialect/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/connectors/table/hive/hive_dialect/</guid>
+      <description>Hive Dialect # Flink allows users to write SQL statements in Hive syntax when Hive dialect is used. By providing compatibility with Hive syntax, we aim to improve the interoperability with Hive and reduce the scenarios when users need to switch between Flink and Hive in order to execute different statements.
+Use Hive Dialect # Flink currently supports two SQL dialects: default and hive. You need to switch to Hive dialect before you can write in Hive syntax.</description>
+    </item>
+    
+    <item>
+      <title>Hive Read &amp; Write</title>
+      <link>//localhost/flink/flink-docs-master/docs/connectors/table/hive/hive_read_write/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/connectors/table/hive/hive_read_write/</guid>
+      <description>Hive Read &amp;amp; Write # Using the HiveCatalog, Apache Flink can be used for unified BATCH and STREAM processing of Apache Hive Tables. This means Flink can be used as a more performant alternative to Hive’s batch engine, or to continuously read and write data into and out of Hive tables to power real-time data warehousing applications.
+Reading # Flink supports reading data from Hive in both BATCH and STREAMING modes.</description>
+    </item>
+    
+    <item>
+      <title>Hive Functions</title>
+      <link>//localhost/flink/flink-docs-master/docs/connectors/table/hive/hive_functions/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/connectors/table/hive/hive_functions/</guid>
+      <description>Hive Functions # Use Hive Built-in Functions via HiveModule # The HiveModule provides Hive built-in functions as Flink system (built-in) functions to Flink SQL and Table API users.
+For detailed information, please refer to HiveModule.
+Java String name = &amp;#34;myhive&amp;#34;; String version = &amp;#34;2.3.4&amp;#34;; tableEnv.loadModue(name, new HiveModule(version)); Scala val name = &amp;#34;myhive&amp;#34; val version = &amp;#34;2.3.4&amp;#34; tableEnv.loadModue(name, new HiveModule(version)); Python from pyflink.table.module import HiveModule name = &amp;#34;myhive&amp;#34; version = &amp;#34;2.</description>
+    </item>
+    
+  </channel>
+</rss>

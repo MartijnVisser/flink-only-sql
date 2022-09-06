@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Security on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/zh/docs/deployment/security/</link>
+    <description>Recent content in Security on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/zh/docs/deployment/security/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SSL 设置</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/deployment/security/security-ssl/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/deployment/security/security-ssl/</guid>
+      <description>SSL 设置 # This page provides instructions on how to enable TLS/SSL authentication and encryption for network communication with and between Flink processes. NOTE: TLS/SSL authentication is not enabled by default.
+Internal and External Connectivity # When securing network connections between machines processes through authentication and encryption, Apache Flink differentiates between internal and external connectivity. Internal Connectivity refers to all connections made between Flink processes. These connections run Flink custom protocols.</description>
+    </item>
+    
+    <item>
+      <title>Kerberos</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/deployment/security/security-kerberos/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/deployment/security/security-kerberos/</guid>
+      <description>Kerberos 身份认证设置和配置 # 本文简要描述了 Flink 如何在各种部署机制（Standalone, native Kubernetes, YARN）、文件系统、connector 以及 state backend 的上下文中安全工作。
+目标 # Flink Kerberos 安全框架的主要目标如下：
+在集群内使用 connector（例如 Kafka）时确保作业安全地访问数据； 对 zookeeper 进行身份认证（如果配置了 SASL）； 对 Hadoop 组件进行身份认证（例如 HDFS，HBASE）。 生产部署场景中，流式作业通常会运行很长一段时间（天、周、月级别的时间段），并且需要在作业的整个生命周期中对其进行身份认证以保护数据源。与 Hadoop delegation token 和 ticket 缓存项不同，Kerberos keytab 不会在该时间段内过期。
+当前的实现支持使用可配置的 keytab credential 或 Hadoop delegation token 来运行 Flink 集群（JobManager / TaskManager / 作业）。
+请注意，所有作业都能共享为指定集群配置的凭据。如果想为一个作业使用不同的 keytab，只需单独启动一个具有不同配置的 Flink 集群。多个 Flink 集群可以在 Kubernetes 或 YARN 环境中并行运行。
+Flink Security 如何工作 # 理论上，Flink 程序可以使用自己的或第三方的 connector（Kafka、HDFS、Cassandra、Flume、Kinesis 等），同时需要支持任意的认证方式（Kerberos、SSL/TLS、用户名/密码等）。满足所有 connector 的安全需求还在进行中，不过 Flink 提供了针对 Kerberos 身份认证的一流支持。Kerberos 身份认证支持以下服务和 connector：</description>
+    </item>
+    
+  </channel>
+</rss>

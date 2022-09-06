@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>实践练习 on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/zh/docs/learn-flink/</link>
+    <description>Recent content in 实践练习 on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/zh/docs/learn-flink/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>概览</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/learn-flink/overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/learn-flink/overview/</guid>
+      <description>实践练习 # 本章教程的目标及涵盖范围 # 本章教程对 Apache Flink 的基本概念进行了介绍，虽然省略了许多重要细节，但是如果你掌握了本章内容，就足以实现可扩展并行度的 ETL、数据分析以及事件驱动的流式应用程序。本章重点对 Flink API 中的状态管理和时间进行了介绍，掌握了这些基础知识后，你将能更好地从其他详细参考文档中获取和掌握你所需要的知识。每小节结尾都有链接去引导你了解更多内容。
+具体来说，你将在本章学习到以下内容：
+如何实现流数据处理管道（pipelines） Flink 如何管理状态以及为何需要管理状态 如何使用事件时间（event time）来一致并准确地进行计算分析 如何在源源不断的数据流上构建事件驱动的应用程序 Flink 如何提供具有精确一次（exactly-once）计算语义的可容错、有状态流处理 本章教程着重介绍四个概念：源源不断的流式数据处理、事件时间、有状态流处理和状态快照。基本概念介绍如下。
+每小节教程都有实践练习引导你如何在程序中使用其所述的概念，并在小节结尾都提供了相关实践练习的代码链接。 Back to top
+流处理 # 在自然环境中，数据的产生原本就是流式的。无论是来自 Web 服务器的事件数据，证券交易所的交易数据，还是来自工厂车间机器上的传感器数据，其数据都是流式的。但是当你分析数据时，可以围绕 有界流（bounded）或 无界流（unbounded）两种模型来组织处理数据，当然，选择不同的模型，程序的执行和处理方式也都会不同。
+批处理是有界数据流处理的范例。在这种模式下，你可以选择在计算结果输出之前输入整个数据集，这也就意味着你可以对整个数据集的数据进行排序、统计或汇总计算后再输出结果。
+流处理正相反，其涉及无界数据流。至少理论上来说，它的数据输入永远不会结束，因此程序必须持续不断地对到达的数据进行处理。
+在 Flink 中，应用程序由用户自定义算子转换而来的流式 dataflows 所组成。这些流式 dataflows 形成了有向图，以一个或多个源（source）开始，并以一个或多个汇（sink）结束。
+通常，程序代码中的 transformation 和 dataflow 中的算子（operator）之间是一一对应的。但有时也会出现一个 transformation 包含多个算子的情况，如上图所示。
+Flink 应用程序可以消费来自消息队列或分布式日志这类流式数据源（例如 Apache Kafka 或 Kinesis）的实时数据，也可以从各种的数据源中消费有界的历史数据。同样，Flink 应用程序生成的结果流也可以发送到各种数据汇中。
+并行 Dataflows # Flink 程序本质上是分布式并行程序。在程序执行期间，一个流有一个或多个流分区（Stream Partition），每个算子有一个或多个算子子任务（Operator Subtask）。每个子任务彼此独立，并在不同的线程中运行，或在不同的计算机或容器中运行。
+算子子任务数就是其对应算子的并行度。在同一程序中，不同算子也可能具有不同的并行度。
+Flink 算子之间可以通过一对一（直传）模式或重新分发模式传输数据：
+一对一模式（例如上图中的 Source 和 map() 算子之间）可以保留元素的分区和顺序信息。这意味着 map() 算子的 subtask[1] 输入的数据以及其顺序与 Source 算子的 subtask[1] 输出的数据和顺序完全相同，即同一分区的数据只会进入到下游算子的同一分区。</description>
+    </item>
+    
+    <item>
+      <title>DataStream API 简介</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/learn-flink/datastream_api/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/learn-flink/datastream_api/</guid>
+      <description>DataStream API 简介 # 该练习的重点是充分全面地了解 DataStream API，以便于编写流式应用入门。
+什么能被转化成流？ # Flink 的 Java 和 Scala DataStream API 可以将任何可序列化的对象转化为流。Flink 自带的序列化器有
+基本类型，即 String、Long、Integer、Boolean、Array 复合类型：Tuples、POJOs 和 Scala case classes 而且 Flink 会交给 Kryo 序列化其他类型。也可以将其他序列化器和 Flink 一起使用。特别是有良好支持的 Avro。
+Java tuples 和 POJOs # Flink 的原生序列化器可以高效地操作 tuples 和 POJOs
+Tuples # 对于 Java，Flink 自带有 Tuple0 到 Tuple25 类型。
+Tuple2&amp;lt;String, Integer&amp;gt; person = Tuple2.of(&amp;#34;Fred&amp;#34;, 35); // zero based index! String name = person.f0; Integer age = person.</description>
+    </item>
+    
+    <item>
+      <title>数据管道 &amp; ETL</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/learn-flink/etl/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/learn-flink/etl/</guid>
+      <description>数据管道 &amp;amp; ETL # Apache Flink 的一种常见应用场景是 ETL（抽取、转换、加载）管道任务。从一个或多个数据源获取数据，进行一些转换操作和信息补充，将结果存储起来。在这个教程中，我们将介绍如何使用 Flink 的 DataStream API 实现这类应用。
+这里注意，Flink 的 Table 和 SQL API 完全可以满足很多 ETL 使用场景。但无论你最终是否直接使用 DataStream API，对这里介绍的基本知识有扎实的理解都是有价值的。
+无状态的转换 # 本节涵盖了 map() 和 flatmap()，这两种算子可以用来实现无状态转换的基本操作。本节中的示例建立在你已经熟悉 flink-training-repo 中的出租车行程数据的基础上。
+map() # 在第一个练习中，你将过滤出租车行程数据中的事件。在同一代码仓库中，有一个 GeoUtils 类，提供了一个静态方法 GeoUtils.mapToGridCell(float lon, float lat)，它可以将位置坐标（经度，维度）映射到 100x100 米的对应不同区域的网格单元。
+现在让我们为每个出租车行程时间的数据对象增加 startCell 和 endCell 字段。你可以创建一个继承 TaxiRide 的 EnrichedRide 类，添加这些字段：
+public static class EnrichedRide extends TaxiRide { public int startCell; public int endCell; public EnrichedRide() {} public EnrichedRide(TaxiRide ride) { this.</description>
+    </item>
+    
+    <item>
+      <title>流式分析</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/learn-flink/streaming_analytics/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/learn-flink/streaming_analytics/</guid>
+      <description>流式分析 # Event Time and Watermarks # 概要 # Flink 明确支持以下三种时间语义:
+事件时间(event time)： 事件产生的时间，记录的是设备生产(或者存储)事件的时间
+摄取时间(ingestion time)： Flink 读取事件时记录的时间
+处理时间(processing time)： Flink pipeline 中具体算子处理事件的时间
+为了获得可重现的结果，例如在计算过去的特定一天里第一个小时股票的最高价格时，我们应该使用事件时间。这样的话，无论什么时间去计算都不会影响输出结果。然而如果使用处理时间的话，实时应用程序的结果是由程序运行的时间所决定。多次运行基于处理时间的实时程序，可能得到的结果都不相同，也可能会导致再次分析历史数据或者测试新代码变得异常困难。
+使用 Event Time # 如果想要使用事件时间，需要额外给 Flink 提供一个时间戳提取器和 Watermark 生成器，Flink 将使用它们来跟踪事件时间的进度。这将在选节使用 Watermarks 中介绍，但是首先我们需要解释一下 watermarks 是什么。
+Watermarks # 让我们通过一个简单的示例来演示为什么需要 watermarks 及其工作方式。
+在此示例中，我们将看到带有混乱时间戳的事件流，如下所示。显示的数字表达的是这些事件实际发生时间的时间戳。到达的第一个事件发生在时间 4，随后发生的事件发生在更早的时间 2，依此类推：
+··· 23 19 22 24 21 14 17 13 12 15 9 11 7 2 4 → 假设我们要对数据流排序，我们想要达到的目的是：应用程序应该在数据流里的事件到达时就有一个算子（我们暂且称之为排序）开始处理事件，这个算子所输出的流是按照时间戳排序好的。
+让我们重新审视这些数据:
+(1) 我们的排序器看到的第一个事件的时间戳是 4，但是我们不能立即将其作为已排序的流释放。因为我们并不能确定它是有序的，并且较早的事件有可能并未到达。事实上，如果站在上帝视角，我们知道，必须要等到时间戳为 2 的元素到来时，排序器才可以有事件输出。</description>
+    </item>
+    
+    <item>
+      <title>事件驱动应用</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/learn-flink/event_driven/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/learn-flink/event_driven/</guid>
+      <description>事件驱动应用 # 处理函数（Process Functions） # 简介 # ProcessFunction 将事件处理与 Timer，State 结合在一起，使其成为流处理应用的强大构建模块。 这是使用 Flink 创建事件驱动应用程序的基础。它和 RichFlatMapFunction 十分相似， 但是增加了 Timer。
+示例 # 如果你已经体验了 流式分析训练 的动手实践， 你应该记得，它是采用 TumblingEventTimeWindow 来计算每个小时内每个司机的小费总和， 像下面的示例这样：
+// 计算每个司机每小时的小费总和 DataStream&amp;lt;Tuple3&amp;lt;Long, Long, Float&amp;gt;&amp;gt; hourlyTips = fares .keyBy((TaxiFare fare) -&amp;gt; fare.driverId) .window(TumblingEventTimeWindows.of(Time.hours(1))) .process(new AddTips()); 使用 KeyedProcessFunction 去实现相同的操作更加直接且更有学习意义。 让我们开始用以下代码替换上面的代码：
+// 计算每个司机每小时的小费总和 DataStream&amp;lt;Tuple3&amp;lt;Long, Long, Float&amp;gt;&amp;gt; hourlyTips = fares .keyBy((TaxiFare fare) -&amp;gt; fare.driverId) .process(new PseudoWindow(Time.hours(1))); 在这个代码片段中，一个名为 PseudoWindow 的 KeyedProcessFunction 被应用于 KeyedStream， 其结果是一个 DataStream&amp;lt;Tuple3&amp;lt;Long, Long, Float&amp;gt;&amp;gt; （与使用 Flink 内置时间窗口的实现生成的流相同）。</description>
+    </item>
+    
+    <item>
+      <title>容错处理</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/learn-flink/fault_tolerance/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/learn-flink/fault_tolerance/</guid>
+      <description>通过状态快照实现容错处理 # State Backends # 由 Flink 管理的 keyed state 是一种分片的键/值存储，每个 keyed state 的工作副本都保存在负责该键的 taskmanager 本地中。另外，Operator state 也保存在机器节点本地。Flink 定期获取所有状态的快照，并将这些快照复制到持久化的位置，例如分布式文件系统。
+如果发生故障，Flink 可以恢复应用程序的完整状态并继续处理，就如同没有出现过异常。
+Flink 管理的状态存储在 state backend 中。Flink 有两种 state backend 的实现 &amp;ndash; 一种基于 RocksDB 内嵌 key/value 存储将其工作状态保存在磁盘上的，另一种基于堆的 state backend，将其工作状态保存在 Java 的堆内存中。这种基于堆的 state backend 有两种类型：FsStateBackend，将其状态快照持久化到分布式文件系统；MemoryStateBackend，它使用 JobManager 的堆保存状态快照。
+名称 Working State 状态备份 快照 RocksDBStateBackend 本地磁盘（tmp dir） 分布式文件系统 全量 / 增量 支持大于内存大小的状态 经验法则：比基于堆的后端慢10倍 FsStateBackend JVM Heap 分布式文件系统 全量 快速，需要大的堆内存 受限制于 GC MemoryStateBackend JVM Heap JobManager JVM Heap 全量 适用于小状态（本地）的测试和实验 当使用基于堆的 state backend 保存状态时，访问和更新涉及在堆上读写对象。但是对于保存在 RocksDBStateBackend 中的对象，访问和更新涉及序列化和反序列化，所以会有更大的开销。但 RocksDB 的状态量仅受本地磁盘大小的限制。还要注意，只有 RocksDBStateBackend 能够进行增量快照，这对于具有大量变化缓慢状态的应用程序来说是大有裨益的。</description>
+    </item>
+    
+  </channel>
+</rss>

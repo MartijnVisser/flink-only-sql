@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>DataSet API (Legacy) on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/docs/dev/dataset/</link>
+    <description>Recent content in DataSet API (Legacy) on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/docs/dev/dataset/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Overview</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/dataset/overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/dataset/overview/</guid>
+      <description>DataSet API # DataSet programs in Flink are regular programs that implement transformations on data sets (e.g., filtering, mapping, joining, grouping). The data sets are initially created from certain sources (e.g., by reading files, or from local collections). Results are returned via sinks, which may for example write the data to (distributed) files, or to standard output (for example the command line terminal). Flink programs run in a variety of contexts, standalone, or embedded in other programs.</description>
+    </item>
+    
+    <item>
+      <title>Transformations</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/dataset/transformations/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/dataset/transformations/</guid>
+      <description>DataSet Transformations # This document gives a deep-dive into the available transformations on DataSets. For a general introduction to the Flink Java API, please refer to the Programming Guide.
+For zipping elements in a data set with a dense index, please refer to the Zip Elements Guide.
+Map # The Map transformation applies a user-defined map function on each element of a DataSet. It implements a one-to-one mapping, that is, exactly one element must be returned by the function.</description>
+    </item>
+    
+    <item>
+      <title>Iterations</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/dataset/iterations/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/dataset/iterations/</guid>
+      <description>Iterations # Iterative algorithms occur in many domains of data analysis, such as machine learning or graph analysis. Such algorithms are crucial in order to realize the promise of Big Data to extract meaningful information out of your data. With increasing interest to run these kinds of algorithms on very large data sets, there is a need to execute iterations in a massively parallel fashion.
+Flink programs implement iterative algorithms by defining a step function and embedding it into a special iteration operator.</description>
+    </item>
+    
+    <item>
+      <title>Zipping Elements</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/dataset/zip_elements_guide/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/dataset/zip_elements_guide/</guid>
+      <description>Zipping Elements in a DataSet # In certain algorithms, one may need to assign unique identifiers to data set elements. This document shows how DataSetUtils can be used for that purpose.
+Zip with a Dense Index # zipWithIndex assigns consecutive labels to the elements, receiving a data set as input and returning a new data set of (unique id, initial value) 2-tuples. This process requires two passes, first counting then labeling elements, and cannot be pipelined due to the synchronization of counts.</description>
+    </item>
+    
+    <item>
+      <title>Hadoop MapReduce compatibility with Flink</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/dataset/hadoop_map_reduce/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/dataset/hadoop_map_reduce/</guid>
+      <description>Flink and Map Reduce compatibility # Flink is compatible with Apache Hadoop MapReduce interfaces and therefore allows reusing code that was implemented for Hadoop MapReduce.
+You can:
+use Hadoop&amp;rsquo;s Writable data types in Flink programs. use any Hadoop InputFormat as a DataSource. use any Hadoop OutputFormat as a DataSink. use a Hadoop Mapper as FlatMapFunction. use a Hadoop Reducer as GroupReduceFunction. This document shows how to use existing Hadoop MapReduce code with Flink.</description>
+    </item>
+    
+    <item>
+      <title>Local Execution</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/dataset/local_execution/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/dataset/local_execution/</guid>
+      <description>Local Execution # Flink can run on a single machine, even in a single Java Virtual Machine. This allows users to test and debug Flink programs locally. This section gives an overview of the local execution mechanisms.
+The local environments and executors allow you to run Flink programs in a local Java Virtual Machine, or with within any JVM as part of existing programs. Most examples can be launched locally by simply hitting the &amp;ldquo;Run&amp;rdquo; button of your IDE.</description>
+    </item>
+    
+    <item>
+      <title>Cluster Execution</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/dataset/cluster_execution/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/dataset/cluster_execution/</guid>
+      <description>Cluster Execution # Flink programs can run distributed on clusters of many machines. There are two ways to send a program to a cluster for execution:
+Command Line Interface # The command line interface lets you submit packaged programs (JARs) to a cluster (or single machine setup).
+Please refer to the Command Line Interface documentation for details.
+Remote Environment # The remote environment lets you execute Flink Java programs on a cluster directly.</description>
+    </item>
+    
+    <item>
+      <title>Batch Examples</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/dataset/examples/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/dataset/examples/</guid>
+      <description>Batch Examples # The following example programs showcase different applications of Flink from simple word counting to graph algorithms. The code samples illustrate the use of Flink&amp;rsquo;s DataSet API.
+The full source code of the following and more examples can be found in the flink-examples-batch module of the Flink source repository.
+Running an example # In order to run a Flink example, we assume you have a running Flink instance available.</description>
+    </item>
+    
+  </channel>
+</rss>

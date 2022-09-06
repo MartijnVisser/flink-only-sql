@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Table API on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/zh/docs/dev/python/table/</link>
+    <description>Recent content in Table API on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/zh/docs/dev/python/table/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Python Table API 简介</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/python/table/intro_to_table_api/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/python/table/intro_to_table_api/</guid>
+      <description>Python Table API 简介 # 本文档是对 PyFlink Table API 的简要介绍，用于帮助新手用户快速理解 PyFlink Table API 的基本用法。 关于高级用法，请参阅用户指南中的其他文档。
+Python Table API 程序的基本结构 # 所有的 Table API 和 SQL 程序，不管批模式，还是流模式，都遵循相同的结构。下面代码示例展示了 Table API 和 SQL 程序的基本结构。
+from pyflink.table import EnvironmentSettings, TableEnvironment # 1. 创建 TableEnvironment env_settings = EnvironmentSettings.in_streaming_mode() table_env = TableEnvironment.create(env_settings) # 2. 创建 source 表 table_env.execute_sql(&amp;#34;&amp;#34;&amp;#34; CREATE TABLE datagen ( id INT, data STRING ) WITH ( &amp;#39;connector&amp;#39; = &amp;#39;datagen&amp;#39;, &amp;#39;fields.id.kind&amp;#39; = &amp;#39;sequence&amp;#39;, &amp;#39;fields.</description>
+    </item>
+    
+    <item>
+      <title>TableEnvironment</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/python/table/table_environment/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/python/table/table_environment/</guid>
+      <description>TableEnvironment # 本篇文档是对 PyFlink TableEnvironment 的介绍。 文档包括对 TableEnvironment 类中每个公共接口的详细描述。
+创建 TableEnvironment # 创建 TableEnvironment 的推荐方式是通过 EnvironmentSettings 对象创建:
+from pyflink.common import Configuration from pyflink.table import EnvironmentSettings, TableEnvironment # create a streaming TableEnvironment config = Configuration() config.set_string(&amp;#39;execution.buffer-timeout&amp;#39;, &amp;#39;1 min&amp;#39;) env_settings = EnvironmentSettings \ .new_instance() \ .in_streaming_mode() \ .with_configuration(config) \ .build() table_env = TableEnvironment.create(env_settings) 或者，用户可以从现有的 StreamExecutionEnvironment 创建 StreamTableEnvironment，以与 DataStream API 进行互操作。
+from pyflink.datastream import StreamExecutionEnvironment from pyflink.table import StreamTableEnvironment # create a streaming TableEnvironment from a StreamExecutionEnvironment env = StreamExecutionEnvironment.</description>
+    </item>
+    
+    <item>
+      <title>数据类型</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/python/table/python_types/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/python/table/python_types/</guid>
+      <description>数据类型 # 本节描述PyFlink Table API中所支持的数据类型.
+Data Type # 在Table生态系统中，数据类型用于描述值的逻辑类型。它可以用来声明Python用户自定义函数的输入／输出类型。 Python Table API的用户可以在Python Table API中，或者定义Python用户自定义函数时，使用pyflink.table.types.DataType实例。
+DataType实例声明了数据的逻辑类型，这并不能用于推断数据在进行传输或存储时的具体物理表示形式。 所有预定义的数据类型都位于pyflink.table.types中，并且可以通过类pyflink.table.types.DataTypes中所定义的方法创建。
+可以在下面找到所有预定义数据类型的列表。
+数据类型（Data Type）和Python类型的映射关系 # 数据类型可用于声明Python用户自定义函数的输入/输出类型。输入数据将被转换为与所定义的数据类型相对应的Python对象，用户自定义函数的执行结果的类型也必须与所定义的数据类型匹配。
+对于向量化Python UDF，输入类型和输出类型都为pandas.Series。pandas.Series中的元素类型对应于指定的数据类型。
+Data Type Python Type Pandas Type BOOLEAN bool numpy.bool_ TINYINT int numpy.int8 SMALLINT int numpy.int16 INT int numpy.int32 BIGINT int numpy.int64 FLOAT float numpy.float32 DOUBLE float numpy.float64 VARCHAR str str VARBINARY bytes bytes DECIMAL decimal.Decimal decimal.Decimal DATE datetime.date datetime.date TIME datetime.time datetime.time TimestampType datetime.datetime datetime.datetime LocalZonedTimestampType datetime.</description>
+    </item>
+    
+    <item>
+      <title>系统（内置）函数</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/python/table/system_functions/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/python/table/system_functions/</guid>
+      <description> </description>
+    </item>
+    
+    <item>
+      <title>PyFlink Table 和 Pandas DataFrame 互转</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/python/table/conversion_of_pandas/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/python/table/conversion_of_pandas/</guid>
+      <description>PyFlink Table 和 Pandas DataFrame 互转 # PyFlink 支持 PyFlink Table 和 Pandas DataFrame 之间进行互转。
+将 Pandas DataFrame 转换为 PyFlink Table # PyFlink 支持将 Pandas DataFrame 转换成 PyFlink Table。在内部实现上，会在客户端将 Pandas DataFrame 序列化成 Arrow 列存格式，序列化后的数据 在作业执行期间，在 Arrow 源中会被反序列化，并进行处理。Arrow 源除了可以用在批作业中外，还可以用于流作业，它将正确处理检查点并提供恰好一次的保证。
+以下示例显示如何从 Pandas DataFrame 创建 PyFlink Table：
+from pyflink.table import DataTypes import pandas as pd import numpy as np # 创建一个Pandas DataFrame pdf = pd.DataFrame(np.random.rand(1000, 2)) # 由Pandas DataFrame创建PyFlink表 table = t_env.from_pandas(pdf) # 由Pandas DataFrame创建指定列名的PyFlink表 table = t_env.</description>
+    </item>
+    
+    <item>
+      <title>Table 和 DataStream 互转</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/python/table/conversion_of_data_stream/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/python/table/conversion_of_data_stream/</guid>
+      <description> </description>
+    </item>
+    
+    <item>
+      <title>SQL</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/python/table/sql/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/python/table/sql/</guid>
+      <description> </description>
+    </item>
+    
+    <item>
+      <title>Catalogs</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/python/table/catalogs/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/python/table/catalogs/</guid>
+      <description> </description>
+    </item>
+    
+    <item>
+      <title>指标</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/python/table/metrics/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/python/table/metrics/</guid>
+      <description>指标 # PyFlink 支持指标系统，该指标系统允许收集指标并将其暴露给外部系统。
+注册指标 # 您可以通过在Python 用户自定义函数的 open 方法中调用 function_context.get_metric_group() 来访问指标系统。 get_metric_group() 方法返回一个 MetricGroup 对象，您可以在该对象上创建和注册新指标。
+指标类型 # PyFlink 支持计数器 Counters，量表 Gauges ，分布 Distribution 和仪表 Meters。
+计数器 Counter # Counter 用于计算某个东西的出现次数。可以通过 inc()/inc(n: int) 或 dec()/dec(n: int) 增加或减少当前值。 您可以通过在 MetricGroup 上调用 counter(name: str) 来创建和注册 Counter。
+Python from pyflink.table.udf import ScalarFunction class MyUDF(ScalarFunction): def __init__(self): self.counter = None def open(self, function_context): self.counter = function_context.get_metric_group().counter(&amp;#34;my_counter&amp;#34;) def eval(self, i): self.counter.inc(i) return i 量表 # Gauge 可按需返回数值。您可以通过在 MetricGroup 上调用 gauge(name: str, obj: Callable[[], int]) 来注册一个量表。Callable 对象将用于汇报数值。量表指标(Gauge metrics)只能用于汇报整数值。</description>
+    </item>
+    
+    <item>
+      <title>连接器</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/python/table/python_table_api_connectors/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/python/table/python_table_api_connectors/</guid>
+      <description>连接器 # 本篇描述了如何在 PyFlink 中使用连接器，并着重介绍了在 Python 程序中使用 Flink 连接器时需要注意的细节。
+Note 想要了解常见的连接器信息和通用配置，请查阅相关的 Java/Scala 文档。
+下载连接器（connector）和格式（format）jar 包 # 由于 Flink 是一个基于 Java/Scala 的项目，连接器（connector）和格式（format）的实现是作为 jar 包存在的， 要在 PyFlink 作业中使用，首先需要将其指定为作业的 依赖。
+table_env.get_config().set(&amp;#34;pipeline.jars&amp;#34;, &amp;#34;file:///my/jar/path/connector.jar;file:///my/jar/path/json.jar&amp;#34;) 如何使用连接器 # 在 PyFlink Table API 中，DDL 是定义 source 和 sink 比较推荐的方式，这可以通过 TableEnvironment 中的 execute_sql() 方法来完成，然后就可以在作业中使用这张表了。
+source_ddl = &amp;#34;&amp;#34;&amp;#34; CREATE TABLE source_table( a VARCHAR, b INT ) WITH ( &amp;#39;connector&amp;#39; =&amp;#39; = &amp;#39;kafka&amp;#39;, &amp;#39;topic&amp;#39; = &amp;#39;source_topic&amp;#39;, &amp;#39;properties.bootstrap.servers&amp;#39; = &amp;#39;kafka:9092&amp;#39;, &amp;#39;properties.group.id&amp;#39; = &amp;#39;test_3&amp;#39;, &amp;#39;scan.</description>
+    </item>
+    
+  </channel>
+</rss>

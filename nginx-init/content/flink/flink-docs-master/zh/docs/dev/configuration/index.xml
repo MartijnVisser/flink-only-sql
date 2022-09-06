@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>项目配置 on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/zh/docs/dev/configuration/</link>
+    <description>Recent content in 项目配置 on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/zh/docs/dev/configuration/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>概览</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/configuration/overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/configuration/overview/</guid>
+      <description>项目配置 # 本节将向你展示如何通过流行的构建工具 (Maven、Gradle) 配置你的项目，必要的依赖项（比如连接器和格式），以及覆盖一些高级配置主题。
+每个 Flink 应用程序都依赖于一组 Flink 库。应用程序至少依赖于 Flink API，此外还依赖于某些连接器库（比如 Kafka、Cassandra），以及用户开发的自定义的数据处理逻辑所需要的第三方依赖项。
+开始 # 要开始使用 Flink 应用程序，请使用以下命令、脚本和模板来创建 Flink 项目。
+Maven 你可以使用如下的 Maven 命令或快速启动脚本，基于原型创建一个项目。
+Maven 命令 # $ mvn archetype:generate \ -DarchetypeGroupId=org.apache.flink \ -DarchetypeArtifactId=flink-quickstart-java \ -DarchetypeVersion=1.16-SNAPSHOT 这允许你命名新建的项目，而且会交互式地询问 groupId、artifactId、package 的名字。
+快速启动脚本 # $ curl https://flink.apache.org/q/quickstart.sh | bash -s 1.16-SNAPSHOT Gradle 你可以创建一个空项目，你需要在其中手动创建 src/main/java 和 src/main/resources 目录并开始在其中编写一些类，使用如下 Gradle 构建脚本或下面提供的快速启动脚本以获得功能齐全的启动项目。
+Gradle 构建脚本 # 请在脚本的所在目录执行 gradle 命令来执行这些构建配置脚本。
+build.gradle
+plugins { id &amp;#39;java&amp;#39; id &amp;#39;application&amp;#39; // shadow plugin to produce fat JARs id &amp;#39;com.</description>
+    </item>
+    
+    <item>
+      <title>使用 Maven</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/configuration/maven/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/configuration/maven/</guid>
+      <description>如何使用 Maven 配置您的项目 # 本指南将向您展示如何使用 Maven 配置 Flink 作业项目，Maven是 由 Apache Software Foundation 开源的自动化构建工具，使您能够构建、发布和部署项目。您可以使用它来管理软件项目的整个生命周期。
+要求 # Maven 3.0.4 (or higher) Java 11 将项目导入 IDE # 创建项目目录和文件后，我们建议您将此项目导入到 IDE 进行开发和测试。
+IntelliJ IDEA 支持开箱即用的 Maven 项目。Eclipse 提供了 m2e 插件 来导入 Maven 项目。
+注意： Java 的默认 JVM 堆大小对于 Flink 来说可能太小，您应该手动增加它。在 Eclipse 中，选中 Run Configurations -&amp;gt; Arguments 并在 VM Arguments 框里填上：-Xmx800m。在 IntelliJ IDEA 中，推荐选中 Help | Edit Custom VM Options 菜单修改 JVM 属性。详情请查阅本文。
+关于 IntelliJ 的注意事项： 要使应用程序在 IntelliJ IDEA 中运行，需要在运行配置中的 Include dependencies with &amp;ldquo;Provided&amp;rdquo; scope打勾。如果此选项不可用（可能是由于使用了较旧的 IntelliJ IDEA 版本），可创建一个调用应用程序main()` 方法的测试用例。</description>
+    </item>
+    
+    <item>
+      <title>使用 Gradle</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/configuration/gradle/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/configuration/gradle/</guid>
+      <description>如何使用 Gradle 配置您的项目 # 您可能需要一个构建工具来配置您的 Flink 项目，本指南将向您展示如何使用 Gradle 执行此操作。Gradle 是一个开源的通用构建工具，可用于在开发过程中自动化执行任务。
+要求 # Gradle 7.x Java 11 将项目导入 IDE # 创建项目目录和文件后，我们建议您将此项目导入到 IDE 进行开发和测试。
+IntelliJ IDEA 通过 Gradle 插件支持 Gradle 项目。
+Eclipse 通过 Eclipse Buildship 插件执行此操作（确保在导入向导的最后一步中指定 Gradle 版本 &amp;gt;= 3.0，shadow 插件会用到它）。您还可以使用 Gradle 的 IDE 集成 来使用 Gradle 创建项目文件。
+注意： Java 的默认 JVM 堆大小对于 Flink 来说可能太小，您应该手动增加它。在 Eclipse 中，选中 Run Configurations -&amp;gt; Arguments 并在 VM Arguments 框里填上：-Xmx800m。在 IntelliJ IDEA 中，推荐选中 Help | Edit Custom VM Options 菜单修改 JVM 属性。详情请查阅本文。</description>
+    </item>
+    
+    <item>
+      <title>连接器和格式</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/configuration/connector/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/configuration/connector/</guid>
+      <description> 连接器和格式 # Flink 应用程序可以通过连接器读取和写入各种外部系统。它支持多种格式，以便对数据进行编码和解码以匹配 Flink 的数据结构。
+DataStream 和 Table API/SQL 都提供了连接器和格式的概述。
+可用的组件 # 为了使用连接器和格式，您需要确保 Flink 可以访问实现了这些功能的组件。对于 Flink 社区支持的每个连接器，我们在 Maven Central 发布了两类组件：
+flink-connector-&amp;lt;NAME&amp;gt; 这是一个精简 JAR，仅包括连接器代码，但不包括最终的第三方依赖项； flink-sql-connector-&amp;lt;NAME&amp;gt; 这是一个包含连接器第三方依赖项的 uber JAR； 这同样适用于格式。请注意，某些连接器可能没有相应的 flink-sql-connector-&amp;lt;NAME&amp;gt; 组件，因为它们不需要第三方依赖项。
+uber/fat JAR 主要与SQL 客户端一起使用，但您也可以在任何 DataStream/Table 应用程序中使用它们。 使用组件 # 为了使用连接器/格式模块，您可以：
+把精简 JAR 及其传递依赖项打包进您的作业 JAR； 把 uber JAR 打包进您的作业 JAR； 把 uber JAR 直接复制到 Flink 发行版的 /lib 文件夹内； 关于打包依赖项，请查看 Maven 和 Gradle 指南。有关 Flink 发行版的参考，请查看Flink 依赖剖析。
+决定是打成 uber JAR、精简 JAR 还是仅在发行版包含依赖项取决于您和您的使用场景。如果您使用 uber JAR，您将对作业里的依赖项版本有更多的控制权；如果您使用精简 JAR，由于您可以在不更改连接器版本的情况下更改版本（允许二进制兼容），您将对传递依赖项有更多的控制权；如果您直接在 Flink 发行版的 /lib 目录里内嵌连接器 uber JAR，您将能够在一处控制所有作业的连接器版本。 </description>
+    </item>
+    
+    <item>
+      <title>测试的依赖项</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/configuration/testing/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/configuration/testing/</guid>
+      <description>用于测试的依赖项 # Flink 提供了用于测试作业的实用程序，您可以将其添加为依赖项。
+DataStream API 测试 # 如果要为使用 DataStream API 构建的作业开发测试用例，则需要添加以下依赖项：
+Maven Open the pom.xml file in your project directory and add the following in the dependencies block. &amp;ltdependency&amp;gt &amp;ltgroupId&amp;gtorg.apache.flink&amp;lt/groupId&amp;gt &amp;ltartifactId&amp;gtflink-test-utils&amp;lt/artifactId&amp;gt &amp;ltversion&amp;gt1.16-SNAPSHOT&amp;lt/version&amp;gt &amp;ltscope&amp;gttest&amp;lt/scope&amp;gt &amp;lt/dependency&amp;gt Copied to clipboard! Check out Project configuration for more details. Gradle Open the build.gradle file in your project directory and add the following in the dependencies block. testCompile &#34;org.apache.flink:flink-test-utils:1.16-SNAPSHOT&#34; Copied to clipboard! Note: This assumes that you have created your project using our Gradle build script or quickstart script.</description>
+    </item>
+    
+    <item>
+      <title>高级配置</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/configuration/advanced/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/configuration/advanced/</guid>
+      <description>高级配置主题 # Flink 依赖剖析 # Flink 自身由一组类和依赖项组成，这些共同构成了 Flink 运行时的核心，在 Flink 应用程序启动时必须存在，会提供诸如通信协调、网络管理、检查点、容错、API、算子（如窗口）、资源管理等领域的服务。
+这些核心类和依赖项都打包在 flink-dist.jar，可以在下载的发行版 /lib 文件夹中找到，也是 Flink 容器镜像的基础部分。您可以将其近似地看作是包含 String 和 List 等公用类的 Java 核心库。
+为了保持核心依赖项尽可能小并避免依赖冲突，Flink Core Dependencies 不包含任何连接器或库（如 CEP、SQL、ML），以避免在类路径中有过多的类和依赖项。
+Flink 发行版的 /lib 目录里还有包括常用模块在内的各种 JAR 文件，例如 执行 Table 作业的必需模块 、一组连接器和 format。默认情况下会自动加载，若要禁止加载只需将它们从 classpath 中的 /lib 目录中删除即可。
+Flink 还在 /opt 文件夹下提供了额外的可选依赖项，可以通过移动这些 JAR 文件到 /lib 目录来启用这些依赖项。
+有关类加载的更多细节，请查阅 Flink 类加载。
+Scala 版本 # 不同的 Scala 版本二进制不兼容，所有（传递地）依赖于 Scala 的 Flink 依赖项都以它们构建的 Scala 版本为后缀（如 flink-streaming-scala_2.12）。
+如果您只使用 Flink 的 Java API，您可以使用任何 Scala 版本。如果您使用 Flink 的 Scala API，则需要选择与应用程序的 Scala 匹配的 Scala 版本。</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Table API Connectors on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/docs/connectors/table/</link>
+    <description>Recent content in Table API Connectors on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/docs/connectors/table/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Overview</title>
+      <link>//localhost/flink/flink-docs-master/docs/connectors/table/overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/connectors/table/overview/</guid>
+      <description>Table &amp;amp; SQL Connectors # Flink&amp;rsquo;s Table API &amp;amp; SQL programs can be connected to other external systems for reading and writing both batch and streaming tables. A table source provides access to data which is stored in external systems (such as a database, key-value store, message queue, or file system). A table sink emits a table to an external storage system. Depending on the type of source and sink, they support different formats such as CSV, Avro, Parquet, or ORC.</description>
+    </item>
+    
+    <item>
+      <title>Kafka</title>
+      <link>//localhost/flink/flink-docs-master/docs/connectors/table/kafka/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/connectors/table/kafka/</guid>
+      <description>Apache Kafka SQL Connector # Scan Source: Unbounded Sink: Streaming Append Mode
+The Kafka connector allows for reading data from and writing data into Kafka topics.
+Dependencies # In order to use the Kafka connector the following dependencies are required for both projects using a build automation tool (such as Maven or SBT) and SQL Client with SQL JAR bundles.
+Kafka version Maven dependency SQL Client JAR universal &amp;ltdependency&amp;gt &amp;ltgroupId&amp;gtorg.</description>
+    </item>
+    
+    <item>
+      <title>Upsert Kafka</title>
+      <link>//localhost/flink/flink-docs-master/docs/connectors/table/upsert-kafka/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/connectors/table/upsert-kafka/</guid>
+      <description>Upsert Kafka SQL Connector # Scan Source: Unbounded Sink: Streaming Upsert Mode
+The Upsert Kafka connector allows for reading data from and writing data into Kafka topics in the upsert fashion.
+As a source, the upsert-kafka connector produces a changelog stream, where each data record represents an update or delete event. More precisely, the value in a data record is interpreted as an UPDATE of the last value for the same key, if any (if a corresponding key doesn’t exist yet, the update will be considered an INSERT).</description>
+    </item>
+    
+    <item>
+      <title>Firehose</title>
+      <link>//localhost/flink/flink-docs-master/docs/connectors/table/firehose/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/connectors/table/firehose/</guid>
+      <description>Amazon Kinesis Data Firehose SQL Connector # Sink: Streaming Append Mode The Kinesis Data Firehose connector allows for writing data into Amazon Kinesis Data Firehose (KDF).
+Dependencies # In order to use the AWS Kinesis Firehose connector the following dependencies are required for both projects using a build automation tool (such as Maven or SBT) and SQL Client with SQL JAR bundles.
+Maven dependency SQL Client &amp;ltdependency&amp;gt &amp;ltgroupId&amp;gtorg.apache.flink&amp;lt/groupId&amp;gt &amp;ltartifactId&amp;gtflink-connector-kinesis-firehose&amp;lt/artifactId&amp;gt &amp;ltversion&amp;gt1.</description>
+    </item>
+    
+    <item>
+      <title>Kinesis</title>
+      <link>//localhost/flink/flink-docs-master/docs/connectors/table/kinesis/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/connectors/table/kinesis/</guid>
+      <description>Amazon Kinesis Data Streams SQL Connector # Scan Source: Unbounded Sink: Streaming Append Mode
+The Kinesis connector allows for reading data from and writing data into Amazon Kinesis Data Streams (KDS).
+Dependencies # In order to use the Kinesis connector the following dependencies are required for both projects using a build automation tool (such as Maven or SBT) and SQL Client with SQL JAR bundles.
+Maven dependency SQL Client &amp;ltdependency&amp;gt &amp;ltgroupId&amp;gtorg.</description>
+    </item>
+    
+    <item>
+      <title>JDBC</title>
+      <link>//localhost/flink/flink-docs-master/docs/connectors/table/jdbc/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/connectors/table/jdbc/</guid>
+      <description>JDBC SQL Connector # Scan Source: Bounded Lookup Source: Sync Mode Sink: Batch Sink: Streaming Append &amp;amp; Upsert Mode
+The JDBC connector allows for reading data from and writing data into any relational databases with a JDBC driver. This document describes how to setup the JDBC connector to run SQL queries against relational databases.
+The JDBC sink operate in upsert mode for exchange UPDATE/DELETE messages with the external system if a primary key is defined on the DDL, otherwise, it operates in append mode and doesn&amp;rsquo;t support to consume UPDATE/DELETE messages.</description>
+    </item>
+    
+    <item>
+      <title>Elasticsearch</title>
+      <link>//localhost/flink/flink-docs-master/docs/connectors/table/elasticsearch/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/connectors/table/elasticsearch/</guid>
+      <description>Elasticsearch SQL Connector # Sink: Batch Sink: Streaming Append &amp;amp; Upsert Mode
+The Elasticsearch connector allows for writing into an index of the Elasticsearch engine. This document describes how to setup the Elasticsearch Connector to run SQL queries against Elasticsearch.
+The connector can operate in upsert mode for exchanging UPDATE/DELETE messages with the external system using the primary key defined on the DDL.
+If no primary key is defined on the DDL, the connector can only operate in append mode for exchanging INSERT only messages with external system.</description>
+    </item>
+    
+    <item>
+      <title>FileSystem</title>
+      <link>//localhost/flink/flink-docs-master/docs/connectors/table/filesystem/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/connectors/table/filesystem/</guid>
+      <description>FileSystem SQL Connector # This connector provides access to partitioned files in filesystems supported by the Flink FileSystem abstraction.
+The file system connector itself is included in Flink and does not require an additional dependency. The corresponding jar can be found in the Flink distribution inside the /lib directory. A corresponding format needs to be specified for reading and writing rows from and to a file system.
+The file system connector allows for reading and writing from a local or distributed filesystem.</description>
+    </item>
+    
+    <item>
+      <title>HBase</title>
+      <link>//localhost/flink/flink-docs-master/docs/connectors/table/hbase/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/connectors/table/hbase/</guid>
+      <description>HBase SQL Connector # Scan Source: Bounded Lookup Source: Sync Mode Sink: Batch Sink: Streaming Upsert Mode
+The HBase connector allows for reading from and writing to an HBase cluster. This document describes how to setup the HBase Connector to run SQL queries against HBase.
+HBase always works in upsert mode for exchange changelog messages with the external system using a primary key defined on the DDL. The primary key must be defined on the HBase rowkey field (rowkey field must be declared).</description>
+    </item>
+    
+    <item>
+      <title>DataGen</title>
+      <link>//localhost/flink/flink-docs-master/docs/connectors/table/datagen/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/connectors/table/datagen/</guid>
+      <description>DataGen SQL Connector # Scan Source: Bounded Scan Source: UnBounded
+The DataGen connector allows for creating tables based on in-memory data generation. This is useful when developing queries locally without access to external systems such as Kafka. Tables can include Computed Column syntax which allows for flexible record generation.
+The DataGen connector is built-in, no additional dependencies are required.
+Usage # By default, a DataGen table will create an unbounded number of rows with a random value for each column.</description>
+    </item>
+    
+    <item>
+      <title>Print</title>
+      <link>//localhost/flink/flink-docs-master/docs/connectors/table/print/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/connectors/table/print/</guid>
+      <description>Print SQL Connector # Sink The Print connector allows for writing every row to the standard output or standard error stream.
+It is designed for:
+Easy test for streaming job. Very useful in production debugging. Four possible format options:
+Print Condition1 Condition2 PRINT_IDENTIFIER:taskId&gt; output PRINT_IDENTIFIER provided parallelism &gt; 1 PRINT_IDENTIFIER&gt; output PRINT_IDENTIFIER provided parallelism == 1 taskId&gt; output no PRINT_IDENTIFIER provided parallelism &gt; 1 output no PRINT_IDENTIFIER provided parallelism == 1 The output string format is &amp;ldquo;$row_kind(f0,f1,f2&amp;hellip;)&amp;rdquo;, row_kind is the short string of RowKind, example is: &amp;ldquo;+I(1,1)&amp;rdquo;.</description>
+    </item>
+    
+    <item>
+      <title>BlackHole</title>
+      <link>//localhost/flink/flink-docs-master/docs/connectors/table/blackhole/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/connectors/table/blackhole/</guid>
+      <description>BlackHole SQL Connector # Sink Sink
+The BlackHole connector allows for swallowing all input records. It is designed for:
+high performance testing. UDF to output, not substantive sink. Just like /dev/null device on Unix-like operating systems.
+The BlackHole connector is built-in.
+How to create a BlackHole table # CREATE TABLE blackhole_table ( f0 INT, f1 INT, f2 STRING, f3 DOUBLE ) WITH ( &amp;#39;connector&amp;#39; = &amp;#39;blackhole&amp;#39; ); Alternatively, it may be based on an existing schema using the LIKE Clause.</description>
+    </item>
+    
+    <item>
+      <title>Download</title>
+      <link>//localhost/flink/flink-docs-master/docs/connectors/table/downloads/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/connectors/table/downloads/</guid>
+      <description>SQL Connectors download page # Download links are available only for stable releases. The page contains links to optional SQL Client connectors and formats that are not part of the binary distribution.
+Optional SQL formats # Name Download link Avro Only available for stable versions. Avro Schema Registry Only available for stable versions. Debezium Only available for stable versions. ORC Only available for stable versions. Parquet Only available for stable versions.</description>
+    </item>
+    
+  </channel>
+</rss>

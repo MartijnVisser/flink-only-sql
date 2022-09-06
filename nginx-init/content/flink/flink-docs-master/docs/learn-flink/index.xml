@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Learn Flink on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/docs/learn-flink/</link>
+    <description>Recent content in Learn Flink on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/docs/learn-flink/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Overview</title>
+      <link>//localhost/flink/flink-docs-master/docs/learn-flink/overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/learn-flink/overview/</guid>
+      <description>Learn Flink: Hands-On Training # Goals and Scope of this Training # This training presents an introduction to Apache Flink that includes just enough to get you started writing scalable streaming ETL, analytics, and event-driven applications, while leaving out a lot of (ultimately important) details. The focus is on providing straightforward introductions to Flink’s APIs for managing state and time, with the expectation that having mastered these fundamentals, you’ll be much better equipped to pick up the rest of what you need to know from the more detailed reference documentation.</description>
+    </item>
+    
+    <item>
+      <title>Intro to the DataStream API</title>
+      <link>//localhost/flink/flink-docs-master/docs/learn-flink/datastream_api/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/learn-flink/datastream_api/</guid>
+      <description>Intro to the DataStream API # The focus of this training is to broadly cover the DataStream API well enough that you will be able to get started writing streaming applications.
+What can be Streamed? # Flink&amp;rsquo;s DataStream APIs for Java and Scala will let you stream anything they can serialize. Flink&amp;rsquo;s own serializer is used for
+basic types, i.e., String, Long, Integer, Boolean, Array composite types: Tuples, POJOs, and Scala case classes and Flink falls back to Kryo for other types.</description>
+    </item>
+    
+    <item>
+      <title>Data Pipelines &amp; ETL</title>
+      <link>//localhost/flink/flink-docs-master/docs/learn-flink/etl/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/learn-flink/etl/</guid>
+      <description>Data Pipelines &amp;amp; ETL # One very common use case for Apache Flink is to implement ETL (extract, transform, load) pipelines that take data from one or more sources, perform some transformations and/or enrichments, and then store the results somewhere. In this section we are going to look at how to use Flink&amp;rsquo;s DataStream API to implement this kind of application.
+Note that Flink&amp;rsquo;s Table and SQL APIs are well suited for many ETL use cases.</description>
+    </item>
+    
+    <item>
+      <title>Streaming Analytics</title>
+      <link>//localhost/flink/flink-docs-master/docs/learn-flink/streaming_analytics/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/learn-flink/streaming_analytics/</guid>
+      <description>Streaming Analytics # Event Time and Watermarks # Introduction # Flink explicitly supports three different notions of time:
+event time: the time when an event occurred, as recorded by the device producing (or storing) the event
+ingestion time: a timestamp recorded by Flink at the moment it ingests the event
+processing time: the time when a specific operator in your pipeline is processing the event
+For reproducible results, e.g., when computing the maximum price a stock reached during the first hour of trading on a given day, you should use event time.</description>
+    </item>
+    
+    <item>
+      <title>Event-driven Applications</title>
+      <link>//localhost/flink/flink-docs-master/docs/learn-flink/event_driven/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/learn-flink/event_driven/</guid>
+      <description>Event-driven Applications # Process Functions # Introduction # A ProcessFunction combines event processing with timers and state, making it a powerful building block for stream processing applications. This is the basis for creating event-driven applications with Flink. It is very similar to a RichFlatMapFunction, but with the addition of timers.
+Example # If you&amp;rsquo;ve done the hands-on exercise in the Streaming Analytics training, you will recall that it uses a TumblingEventTimeWindow to compute the sum of the tips for each driver during each hour, like this:</description>
+    </item>
+    
+    <item>
+      <title>Fault Tolerance</title>
+      <link>//localhost/flink/flink-docs-master/docs/learn-flink/fault_tolerance/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/learn-flink/fault_tolerance/</guid>
+      <description>Fault Tolerance via State Snapshots # State Backends # The keyed state managed by Flink is a sort of sharded, key/value store, and the working copy of each item of keyed state is kept somewhere local to the taskmanager responsible for that key. Operator state is also local to the machine(s) that need(s) it.
+This state that Flink manages is stored in a state backend. Two implementations of state backends are available &amp;ndash; one based on RocksDB, an embedded key/value store that keeps its working state on disk, and another heap-based state backend that keeps its working state in memory, on the Java heap.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>内存配置 on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/zh/docs/deployment/memory/</link>
+    <description>Recent content in 内存配置 on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/zh/docs/deployment/memory/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>配置 Flink 进程的内存</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/deployment/memory/mem_setup/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/deployment/memory/mem_setup/</guid>
+      <description>配置 Flink 进程的内存 # Apache Flink 基于 JVM 的高效处理能力，依赖于其对各组件内存用量的细致掌控。 考虑到用户在 Flink 上运行的应用的多样性，尽管社区已经努力为所有配置项提供合理的默认值，仍无法满足所有情况下的需求。 为了给用户生产提供最大化的价值， Flink 允许用户在整体上以及细粒度上对集群的内存分配进行调整。为了优化内存需求，参考网络内存调优指南。
+本文接下来介绍的内存配置方法适用于 1.10 及以上版本的 TaskManager 进程和 1.11 及以上版本的 JobManager 进程。 Flink 在 1.10 和 1.11 版本中对内存配置部分进行了较大幅度的改动，从早期版本升级的用户请参考升级指南。
+配置总内存 # Flink JVM 进程的*进程总内存（Total Process Memory）*包含了由 Flink 应用使用的内存（Flink 总内存）以及由运行 Flink 的 JVM 使用的内存。 Flink 总内存（Total Flink Memory）包括 JVM 堆内存（Heap Memory）和堆外内存（Off-Heap Memory）。 其中堆外内存包括直接内存（Direct Memory）和本地内存（Native Memory）。
+配置 Flink 进程内存最简单的方法是指定以下两个配置项中的任意一个：
+配置项 TaskManager 配置参数 JobManager 配置参数 Flink 总内存 taskmanager.memory.flink.size jobmanager.memory.flink.size 进程总内存 taskmanager.memory.process.size jobmanager.</description>
+    </item>
+    
+    <item>
+      <title>配置 TaskManager 内存</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/deployment/memory/mem_setup_tm/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/deployment/memory/mem_setup_tm/</guid>
+      <description>配置 TaskManager 内存 # Flink 的 TaskManager 负责执行用户代码。 根据实际需求为 TaskManager 配置内存将有助于减少 Flink 的资源占用，增强作业运行的稳定性。
+本文接下来介绍的内存配置方法适用于 1.10 及以上版本。 Flink 在 1.10 版本中对内存配置部分进行了较大幅度的改动，从早期版本升级的用户请参考升级指南。
+提示 本篇内存配置文档仅针对 TaskManager！ 与 JobManager 相比，TaskManager 具有相似但更加复杂的内存模型。
+配置总内存 # Flink JVM 进程的*进程总内存（Total Process Memory）*包含了由 Flink 应用使用的内存（Flink 总内存）以及由运行 Flink 的 JVM 使用的内存。 其中，*Flink 总内存（Total Flink Memory）*包括 JVM 堆内存（Heap Memory）、*托管内存（Managed Memory）*以及其他直接内存（Direct Memory）或本地内存（Native Memory）。
+如果你是在本地运行 Flink（例如在 IDE 中）而非创建一个集群，那么本文介绍的配置并非所有都是适用的，详情请参考本地执行。
+其他情况下，配置 Flink 内存最简单的方法就是配置总内存。 此外，Flink 也支持更细粒度的内存配置方式。
+Flink 会根据默认值或其他配置参数自动调整剩余内存部分的大小。 接下来的章节将介绍关于各内存部分的更多细节。
+配置堆内存和托管内存 # 如配置总内存中所述，另一种配置 Flink 内存的方式是同时设置任务堆内存和托管内存。 通过这种方式，用户可以更好地掌控用于 Flink 任务的 JVM 堆内存及 Flink 的托管内存大小。</description>
+    </item>
+    
+    <item>
+      <title>配置 JobManager 内存</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/deployment/memory/mem_setup_jobmanager/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/deployment/memory/mem_setup_jobmanager/</guid>
+      <description>配置 JobManager 内存 # JobManager 是 Flink 集群的控制单元。 它由三种不同的组件组成：ResourceManager、Dispatcher 和每个正在运行作业的 JobMaster。 本篇文档将介绍 JobManager 内存在整体上以及细粒度上的配置方法。
+本文接下来介绍的内存配置方法适用于 1.11 及以上版本。 Flink 在 1.11 版本中对内存配置部分进行了较大幅度的改动，从早期版本升级的用户请参考升级指南。
+提示 本篇内存配置文档仅针对 JobManager！ 与 TaskManager 相比，JobManager 具有相似但更加简单的内存模型。
+配置总内存 # 配置 JobManager 内存最简单的方法就是进程的配置总内存。 本地执行模式下不需要为 JobManager 进行内存配置，配置参数将不会生效。
+详细配置 # 如上图所示，下表中列出了 Flink JobManager 内存模型的所有组成部分，以及影响其大小的相关配置参数。
+组成部分 配置参数 描述 JVM 堆内存 jobmanager.memory.heap.size JobManager 的 JVM 堆内存。 堆外内存 jobmanager.memory.off-heap.size JobManager 的堆外内存（直接内存或本地内存）。 JVM Metaspace jobmanager.memory.jvm-metaspace.size Flink JVM 进程的 Metaspace。 JVM 开销 jobmanager.memory.jvm-overhead.min jobmanager.memory.jvm-overhead.max jobmanager.memory.jvm-overhead.fraction 用于其他 JVM 开销的本地内存，例如栈空间、垃圾回收空间等。该内存部分为基于进程总内存的受限的等比内存部分。 配置 JVM 堆内存 # 如配置总内存中所述，另一种配置 JobManager 内存的方式是明确指定 JVM 堆内存的大小（jobmanager.</description>
+    </item>
+    
+    <item>
+      <title>调优指南</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/deployment/memory/mem_tuning/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/deployment/memory/mem_tuning/</guid>
+      <description>调优指南 # 本文在的基本的配置指南的基础上，介绍如何根据具体的使用场景调整内存配置，以及在不同使用场景下分别需要重点关注哪些配置参数。
+独立部署模式（Standalone Deployment）下的内存配置 # 独立部署模式下，我们通常更关注 Flink 应用本身使用的内存大小。 建议配置 Flink 总内存（taskmanager.memory.flink.size 或者 jobmanager.memory.flink.size）或其组成部分。 此外，如果出现 Metaspace 不足的问题，可以调整 JVM Metaspace 的大小。
+这种情况下通常无需配置进程总内存，因为不管是 Flink 还是部署环境都不会对 JVM 开销 进行限制，它只与机器的物理资源相关。
+容器（Container）的内存配置 # 在容器化部署模式（Containerized Deployment）下（Kubernetes 或 Yarn），建议配置进程总内存（taskmanager.memory.process.size 或者 jobmanager.memory.process.size）。 该配置参数用于指定分配给 Flink JVM 进程的总内存，也就是需要申请的容器大小。
+提示 如果配置了 Flink 总内存，Flink 会自动加上 JVM 相关的内存部分，根据推算出的进程总内存大小申请容器。
+注意： 如果 Flink 或者用户代码分配超过容器大小的非托管的堆外（本地）内存，部署环境可能会杀掉超用内存的容器，造成作业执行失败。 请参考容器内存超用中的相关描述。
+State Backend 的内存配置 # 本章节内容仅与 TaskManager 相关。
+在部署 Flink 流处理应用时，可以根据 State Backend 的类型对集群的配置进行优化。
+Heap State Backend # 执行无状态作业或者使用 Heap State Backend（MemoryStateBackend 或 FsStateBackend）时，建议将托管内存设置为 0。 这样能够最大化分配给 JVM 上用户代码的内存。</description>
+    </item>
+    
+    <item>
+      <title>常见问题</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/deployment/memory/mem_trouble/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/deployment/memory/mem_trouble/</guid>
+      <description>常见问题 # IllegalConfigurationException # 如果遇到从 TaskExecutorProcessUtils 或 JobManagerProcessUtils 抛出的 IllegalConfigurationException 异常，这通常说明您的配置参数中存在无效值（例如内存大小为负数、占比大于 1 等）或者配置冲突。 请根据异常信息，确认出错的内存部分的相关文档及配置信息。
+OutOfMemoryError: Java heap space # 该异常说明 JVM 的堆空间过小。 可以通过增大总内存、TaskManager 的任务堆内存、JobManager 的 JVM 堆内存等方法来增大 JVM 堆空间。
+提示 也可以增大 TaskManager 的框架堆内存。 这是一个进阶配置，只有在确认是 Flink 框架自身需要更多内存时才应该去调整。
+OutOfMemoryError: Direct buffer memory # 该异常通常说明 JVM 的直接内存限制过小，或者存在直接内存泄漏（Direct Memory Leak）。 请确认用户代码及外部依赖中是否使用了 JVM 直接内存，以及如果使用了直接内存，是否配置了足够的内存空间。 可以通过调整堆外内存来增大直接内存限制。 有关堆外内存的配置方法，请参考 TaskManager、JobManager 以及 JVM 参数的相关文档。
+OutOfMemoryError: Metaspace # 该异常说明 JVM Metaspace 限制过小。 可以尝试调整 TaskManager、JobManager 的 JVM Metaspace。
+IOException: Insufficient number of network buffers # 该异常仅与 TaskManager 相关。</description>
+    </item>
+    
+    <item>
+      <title>升级指南</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/deployment/memory/mem_migration/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/deployment/memory/mem_migration/</guid>
+      <description>升级指南 # 在 1.10 和 1.11 版本中，Flink 分别对 TaskManager 和 JobManager 的内存配置方法做出了较大的改变。 部分配置参数被移除了，或是语义上发生了变化。 本篇升级指南将介绍如何将 Flink 1.9 及以前版本的 TaskManager 内存配置升级到 Flink 1.10 及以后版本， 以及如何将 Flink 1.10 及以前版本的 JobManager 内存配置升级到 Flink 1.11 及以后版本。
+toc 注意： 请仔细阅读本篇升级指南。 使用原本的和新的内存配制方法可能会使内存组成部分具有截然不同的大小。 未经调整直接沿用 Flink 1.10 以前版本的 TaskManager 配置文件或 Flink 1.11 以前版本的 JobManager 配置文件，可能导致应用的行为、性能发生变化，甚至造成应用执行失败。 提示 在 1.10/1.11 版本之前，Flink 不要求用户一定要配置 TaskManager/JobManager 内存相关的参数，因为这些参数都具有默认值。 新的内存配置要求用户至少指定下列配置参数（或参数组合）的其中之一，否则 Flink 将无法启动。
+TaskManager: JobManager: taskmanager.memory.flink.size jobmanager.memory.flink.size taskmanager.memory.process.size jobmanager.memory.process.size taskmanager.memory.task.heap.size 和 taskmanager.memory.managed.size jobmanager.memory.heap.size Flink 自带的默认 flink-conf.yaml 文件指定了 taskmanager.</description>
+    </item>
+    
+    <item>
+      <title>网络缓冲调优</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/deployment/memory/network_mem_tuning/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/deployment/memory/network_mem_tuning/</guid>
+      <description>网络内存调优指南 # 概述 # Flink 中每条消息都会被放到网络缓冲（network buffer） 中，并以此为最小单位发送到下一个 subtask。 为了维持连续的高吞吐，Flink 在传输过程的输入端和输出端使用了网络缓冲队列。
+每个 subtask 都有一个输入队列来接收数据和一个输出队列来发送数据到下一个 subtask。 在 pipeline 场景，拥有更多的中间缓存数据可以使 Flink 提供更高、更富有弹性的吞吐量，但是也会增加快照时间。
+只有所有的 subtask 都收到了全部注入的 checkpoint barrier 才能完成快照。 在对齐的 checkpoints 中，checkpoint barrier 会跟着网络缓冲数据在 job graph 中流动。 缓冲数据越多，checkpoint barrier 流动的时间就越长。在非对齐的 checkpoints 中，缓冲数据越多，checkpoint 就会越大，因为这些数据都会被持久化到 checkpoint 中。
+缓冲消胀机制（Buffer Debloating） # 之前，配置缓冲数据量的唯一方法是指定缓冲区的数量和大小。然而，因为每次部署的不同很难配置一组完美的参数。 Flink 1.14 新引入的缓冲消胀机制尝试通过自动调整缓冲数据量到一个合理值来解决这个问题。
+缓冲消胀功能计算 subtask 可能达到的最大吞吐（始终保持繁忙状态时）并且通过调整缓冲数据量来使得数据的消费时间达到配置值。
+可以通过设置 taskmanager.network.memory.buffer-debloat.enabled 为 true 来开启缓冲消胀机制。 通过设置 taskmanager.network.memory.buffer-debloat.target 为 duration 类型的值来指定消费缓冲数据的目标时间。 默认值应该能满足大多数场景。
+这个功能使用过去的吞吐数据来预测消费剩余缓冲数据的时间。如果预测不准，缓冲消胀机制会导致以下问题：
+没有足够的缓存数据来提供全量吞吐。 有太多缓冲数据对 checkpoint barrier 推进或者非对齐的 checkpoint 的大小造成不良影响。 如果您的作业负载经常变化（即，突如其来的数据尖峰，定期的窗口聚合触发或者 join ），您可能需要调整以下设置：</description>
+    </item>
+    
+  </channel>
+</rss>

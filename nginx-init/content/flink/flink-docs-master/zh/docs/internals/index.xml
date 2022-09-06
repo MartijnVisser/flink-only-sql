@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>内幕 on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/zh/docs/internals/</link>
+    <description>Recent content in 内幕 on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/zh/docs/internals/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>作业调度</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/internals/job_scheduling/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/internals/job_scheduling/</guid>
+      <description>作业调度 # 这篇文档简要描述了 Flink 怎样调度作业, 怎样在 JobManager 里描述和追踪作业状态
+调度 # Flink 通过 Task Slots 来定义执行资源。每个 TaskManager 有一到多个 task slot，每个 task slot 可以运行一条由多个并行 task 组成的流水线。 这样一条流水线由多个连续的 task 组成，比如并行度为 n 的 MapFunction 和 并行度为 n 的 ReduceFunction。需要注意的是 Flink 经常并发执行连续的 task，不仅在流式作业中到处都是，在批量作业中也很常见。
+下图很好的阐释了这一点，一个由数据源、MapFunction 和 ReduceFunction 组成的 Flink 作业，其中数据源和 MapFunction 的并行度为 4 ，ReduceFunction 的并行度为 3 。流水线由一系列的 Source - Map - Reduce 组成，运行在 2 个 TaskManager 组成的集群上，每个 TaskManager 包含 3 个 slot，整个作业的运行如下图所示。
+Flink 内部通过 SlotSharingGroup 和 CoLocationGroup 来定义哪些 task 可以共享一个 slot， 哪些 task 必须严格放到同一个 slot。</description>
+    </item>
+    
+    <item>
+      <title>Task 生命周期</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/internals/task_lifecycle/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/internals/task_lifecycle/</guid>
+      <description>Task 生命周期 # Task 是 Flink 的基本执行单元。算子的每个并行实例都在 task 里执行。例如，一个并行度为 5 的算子，它的每个实例都由一个单独的 task 来执行。
+StreamTask 是 Flink 流式计算引擎中所有不同 task 子类的基础。本文会深入讲解 StreamTask 生命周期的不同阶段，并阐述每个阶段的主要方法。
+算子生命周期简介 # 因为 task 是算子并行实例的执行实体，所以它的生命周期跟算子的生命周期紧密联系在一起。因此，在深入介绍 StreamTask 生命周期之前，先简要介绍一下代表算子生命周期的基本方法。这些方法按调用的先后顺序如下所示。考虑到算子可能是用户自定义函数（UDF），因此我们在每个算子下也展示（以缩进的方式）了 UDF 生命周期中调用的各个方法。AbstractUdfStreamOperator 是所有执行 UDF 的算子的基类，如果算子继承了 AbstractUdfStreamOperator，那么这些方法都是可用的。
+// 初始化阶段 OPERATOR::setup UDF::setRuntimeContext OPERATOR::initializeState OPERATOR::open UDF::open // 处理阶段（对每个 element 或 watermark 调用） OPERATOR::processElement UDF::run OPERATOR::processWatermark // checkpointing 阶段（对每个 checkpoint 异步调用） OPERATOR::snapshotState // 通知 operator 处理记录的过程结束 OPERATOR::finish // 结束阶段 OPERATOR::close UDF::close 简而言之，在算子初始化时调用 setup() 来初始化算子的特定设置，比如 RuntimeContext 和指标收集的数据结构。在这之后，算子通过 initializeState() 初始化状态，算子的所有初始化工作在 open() 方法中执行，比如在继承 AbstractUdfStreamOperator 的情况下，初始化用户自定义函数。</description>
+    </item>
+    
+    <item>
+      <title>文件系统</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/internals/filesystems/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/internals/filesystems/</guid>
+      <description>文件系统 # Flink has its own file system abstraction via the org.apache.flink.core.fs.FileSystem class. This abstraction provides a common set of operations and minimal guarantees across various types of file system implementations.
+The FileSystem&amp;rsquo;s set of available operations is quite limited, in order to support a wide range of file systems. For example, appending to or mutating existing files is not supported.
+File systems are identified by a file system scheme, such as file://, hdfs://, etc.</description>
+    </item>
+    
+  </channel>
+</rss>

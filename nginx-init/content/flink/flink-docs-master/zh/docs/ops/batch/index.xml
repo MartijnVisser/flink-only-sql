@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Batch on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/zh/docs/ops/batch/</link>
+    <description>Recent content in Batch on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/zh/docs/ops/batch/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Batch Shuffle</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/ops/batch/batch_shuffle/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/ops/batch/batch_shuffle/</guid>
+      <description>Batch Shuffle # 总览 # Flink DataStream API 和 Table / SQL 都支持通过批处理执行模式处理有界输入。 在批处理模式下，Flink 提供了两种网络交换模式: Blocking Shuffle 和 Hybrid Shuffle.
+Blocking Shuffle 是批处理的默认数据交换模式。它会持久化所有的中间数据，只有当数据产出完全后才能被消费。 Hybrid Shuffle 是下一代的批处理数据交换模式. 他会更加智能地持久化数据, 并且允许在数据生产的同时进行消费. 该特性目前仍处于实验阶段并且存在一些已知的 限制. Blocking Shuffle # 与流式应用使用管道 shuffle 交换数据的方式不同，blocking 交换持久化数据到存储中，然后下游任务通过网络获取这些值。这种交换减少了执行作业所需的资源，因为它不需要同时运行上游和下游任务。
+总的来说，Flink 提供了两种不同类型的 blocking shuffles：Hash shuffle 和 Sort shuffle。
+Hash Shuffle # 对于 1.14 以及更低的版本，Hash Shuffle 是 blocking shuffle 的默认实现，它为每个下游任务将每个上游任务的结果以单独文件的方式保存在 TaskManager 本地磁盘上。当下游任务运行时会向上游的 TaskManager 请求分片，TaskManager 读取文件之后通过网络传输（给下游任务）。
+Hash Shuffle 为读写文件提供了不同的机制:
+file: 通过标准文件 IO 写文件，读取和传输文件需要通过 Netty 的 FileRegion。FileRegion 依靠系统调用 sendfile 来减少数据拷贝和内存消耗。 mmap: 通过系统调用 mmap 来读写文件。 auto: 通过标准文件 IO 写文件，对于文件读取，在 32 位机器上降级到 file 选项并且在 64 位机器上使用 mmap 。这是为了避免在 32 位机器上 java 实现 mmap 的文件大小限制。 可通过设置 TaskManager 参数 选择不同的机制。</description>
+    </item>
+    
+  </channel>
+</rss>

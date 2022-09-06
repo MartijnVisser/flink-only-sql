@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Table API on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/docs/dev/python/table/</link>
+    <description>Recent content in Table API on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/docs/dev/python/table/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Intro to the Python Table API</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/python/table/intro_to_table_api/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/python/table/intro_to_table_api/</guid>
+      <description>Intro to the Python Table API # This document is a short introduction to the PyFlink Table API, which is used to help novice users quickly understand the basic usage of PyFlink Table API. For advanced usage, please refer to other documents in this user guide.
+Common Structure of Python Table API Program # All Table API and SQL programs, both batch and streaming, follow the same pattern. The following code example shows the common structure of Table API and SQL programs.</description>
+    </item>
+    
+    <item>
+      <title>TableEnvironment</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/python/table/table_environment/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/python/table/table_environment/</guid>
+      <description>TableEnvironment # This document is an introduction of PyFlink TableEnvironment. It includes detailed descriptions of every public interface of the TableEnvironment class.
+Create a TableEnvironment # The recommended way to create a TableEnvironment is to create from an EnvironmentSettings object:
+from pyflink.common import Configuration from pyflink.table import EnvironmentSettings, TableEnvironment # create a streaming TableEnvironment config = Configuration() config.set_string(&amp;#39;execution.buffer-timeout&amp;#39;, &amp;#39;1 min&amp;#39;) env_settings = EnvironmentSettings \ .new_instance() \ .in_streaming_mode() \ .with_configuration(config) \ .</description>
+    </item>
+    
+    <item>
+      <title>Data Types</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/python/table/python_types/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/python/table/python_types/</guid>
+      <description>Data Types # This page describes the data types supported in PyFlink Table API.
+Data Type # A data type describes the logical type of a value in the table ecosystem. It can be used to declare input and/or output types of Python user-defined functions. Users of the Python Table API work with instances of pyflink.table.types.DataType within the Python Table API or when defining user-defined functions.
+A DataType instance declares the logical type which does not imply a concrete physical representation for transmission or storage.</description>
+    </item>
+    
+    <item>
+      <title>System (Built-in) Functions</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/python/table/system_functions/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/python/table/system_functions/</guid>
+      <description> </description>
+    </item>
+    
+    <item>
+      <title>Conversions between PyFlink Table and Pandas DataFrame</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/python/table/conversion_of_pandas/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/python/table/conversion_of_pandas/</guid>
+      <description>Conversions between PyFlink Table and Pandas DataFrame # PyFlink Table API supports conversion between PyFlink Table and Pandas DataFrame.
+Convert Pandas DataFrame to PyFlink Table # Pandas DataFrames can be converted into a PyFlink Table. Internally, PyFlink will serialize the Pandas DataFrame using Arrow columnar format on the client. The serialized data will be processed and deserialized in Arrow source during execution. The Arrow source can also be used in streaming jobs, and is integrated with checkpointing to provide exactly-once guarantees.</description>
+    </item>
+    
+    <item>
+      <title>Conversions between Table and DataStream</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/python/table/conversion_of_data_stream/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/python/table/conversion_of_data_stream/</guid>
+      <description> </description>
+    </item>
+    
+    <item>
+      <title>SQL</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/python/table/sql/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/python/table/sql/</guid>
+      <description> </description>
+    </item>
+    
+    <item>
+      <title>Catalogs</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/python/table/catalogs/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/python/table/catalogs/</guid>
+      <description> </description>
+    </item>
+    
+    <item>
+      <title>Metrics</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/python/table/metrics/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/python/table/metrics/</guid>
+      <description>Metrics # PyFlink exposes a metric system that allows gathering and exposing metrics to external systems.
+Registering metrics # You can access the metric system from a Python user-defined function by calling function_context.get_metric_group() in the open method. The get_metric_group() method returns a MetricGroup object on which you can create and register new metrics.
+Metric types # PyFlink supports Counters, Gauges, Distribution and Meters.
+Counter # A Counter is used to count something.</description>
+    </item>
+    
+    <item>
+      <title>Connectors</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/python/table/python_table_api_connectors/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/python/table/python_table_api_connectors/</guid>
+      <description>Connectors # This page describes how to use connectors in PyFlink and highlights the details to be aware of when using Flink connectors in Python programs.
+Note For general connector information and common configuration, please refer to the corresponding Java/Scala documentation.
+Download connector and format jars # Since Flink is a Java/Scala-based project, for both connectors and formats, implementations are available as jars that need to be specified as job dependencies.</description>
+    </item>
+    
+  </channel>
+</rss>

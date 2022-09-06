@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Formats on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/docs/connectors/datastream/formats/</link>
+    <description>Recent content in Formats on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/docs/connectors/datastream/formats/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Overview</title>
+      <link>//localhost/flink/flink-docs-master/docs/connectors/datastream/formats/overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/connectors/datastream/formats/overview/</guid>
+      <description>DataStream Formats # Available Formats # Formats define how information is encoded for storage. Currently these formats are supported:
+Avro Azure Table Hadoop Parquet Text files Back to top</description>
+    </item>
+    
+    <item>
+      <title>Avro</title>
+      <link>//localhost/flink/flink-docs-master/docs/connectors/datastream/formats/avro/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/connectors/datastream/formats/avro/</guid>
+      <description>Avro format # Flink has built-in support for Apache Avro. This allows to easily read and write Avro data based on an Avro schema with Flink. The serialization framework of Flink is able to handle classes generated from Avro schemas. In order to use the Avro format the following dependencies are required for projects using a build automation tool (such as Maven or SBT).
+&amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.apache.flink&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;flink-avro&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.16-SNAPSHOT&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; In order to use the Avro format in PyFlink jobs, the following dependencies are required: PyFlink JAR Only available for stable releases.</description>
+    </item>
+    
+    <item>
+      <title>Azure Table storage</title>
+      <link>//localhost/flink/flink-docs-master/docs/connectors/datastream/formats/azure_table_storage/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/connectors/datastream/formats/azure_table_storage/</guid>
+      <description>Azure Table Storage # This example is using the HadoopInputFormat wrapper to use an existing Hadoop input format implementation for accessing Azure&amp;rsquo;s Table Storage.
+Download and compile the azure-tables-hadoop project. The input format developed by the project is not yet available in Maven Central, therefore, we have to build the project ourselves. Execute the following commands: git clone https://github.com/mooso/azure-tables-hadoop.git cd azure-tables-hadoop mvn clean install Setup a new Flink project using the quickstarts: curl https://flink.</description>
+    </item>
+    
+    <item>
+      <title>CSV</title>
+      <link>//localhost/flink/flink-docs-master/docs/connectors/datastream/formats/csv/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/connectors/datastream/formats/csv/</guid>
+      <description>CSV format # To use the CSV format you need to add the Flink CSV dependency to your project:
+&amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.apache.flink&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;flink-csv&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.16-SNAPSHOT&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; For PyFlink users, you could use it directly in your jobs.
+Flink supports reading CSV files using CsvReaderFormat. The reader utilizes Jackson library and allows passing the corresponding configuration for the CSV schema and parsing options.
+CsvReaderFormat can be initialized and used like this:
+CsvReaderFormat&amp;lt;SomePojo&amp;gt; csvFormat = CsvReaderFormat.</description>
+    </item>
+    
+    <item>
+      <title>Hadoop</title>
+      <link>//localhost/flink/flink-docs-master/docs/connectors/datastream/formats/hadoop/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/connectors/datastream/formats/hadoop/</guid>
+      <description>Hadoop formats # Project Configuration # Support for Hadoop is contained in the flink-hadoop-compatibility Maven module.
+Add the following dependency to your pom.xml to use hadoop
+&amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.apache.flink&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;flink-hadoop-compatibility_2.12&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.16-SNAPSHOT&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; If you want to run your Flink application locally (e.g. from your IDE), you also need to add a hadoop-client dependency such as:
+&amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.apache.hadoop&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;hadoop-client&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;2.8.5&amp;lt;/version&amp;gt; &amp;lt;scope&amp;gt;provided&amp;lt;/scope&amp;gt; &amp;lt;/dependency&amp;gt; Using Hadoop InputFormats # To use Hadoop InputFormats with Flink the format must first be wrapped using either readHadoopFile or createHadoopInput of the HadoopInputs utility class.</description>
+    </item>
+    
+    <item>
+      <title>JSON</title>
+      <link>//localhost/flink/flink-docs-master/docs/connectors/datastream/formats/json/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/connectors/datastream/formats/json/</guid>
+      <description>Json format # To use the JSON format you need to add the Flink JSON dependency to your project:
+&amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.apache.flink&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;flink-json&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.16-SNAPSHOT&amp;lt;/version&amp;gt; &amp;lt;scope&amp;gt;provided&amp;lt;/scope&amp;gt; &amp;lt;/dependency&amp;gt; For PyFlink users, you could use it directly in your jobs.
+Flink supports reading/writing JSON records via the JsonSerializationSchema/JsonDeserializationSchema. These utilize the Jackson library, and support any type that is supported by Jackson, including, but not limited to, POJOs and ObjectNode.
+The JsonDeserializationSchema can be used with any connector that supports the DeserializationSchema.</description>
+    </item>
+    
+    <item>
+      <title>Parquet</title>
+      <link>//localhost/flink/flink-docs-master/docs/connectors/datastream/formats/parquet/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/connectors/datastream/formats/parquet/</guid>
+      <description>Parquet format # Flink supports reading Parquet files, producing Flink RowData and producing Avro records. To use the format you need to add the flink-parquet dependency to your project:
+&amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.apache.flink&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;flink-parquet&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.16-SNAPSHOT&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; To read Avro records, you will need to add the parquet-avro dependency:
+&amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.apache.parquet&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;parquet-avro&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.12.2&amp;lt;/version&amp;gt; &amp;lt;optional&amp;gt;true&amp;lt;/optional&amp;gt; &amp;lt;exclusions&amp;gt; &amp;lt;exclusion&amp;gt; &amp;lt;groupId&amp;gt;org.apache.hadoop&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;hadoop-client&amp;lt;/artifactId&amp;gt; &amp;lt;/exclusion&amp;gt; &amp;lt;exclusion&amp;gt; &amp;lt;groupId&amp;gt;it.unimi.dsi&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;fastutil&amp;lt;/artifactId&amp;gt; &amp;lt;/exclusion&amp;gt; &amp;lt;/exclusions&amp;gt; &amp;lt;/dependency&amp;gt; In order to use the Parquet format in PyFlink jobs, the following dependencies are required: PyFlink JAR Only available for stable releases.</description>
+    </item>
+    
+    <item>
+      <title>Text files</title>
+      <link>//localhost/flink/flink-docs-master/docs/connectors/datastream/formats/text_files/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/connectors/datastream/formats/text_files/</guid>
+      <description>Text files format # Flink supports reading from text lines from a file using TextLineInputFormat. This format uses Java&amp;rsquo;s built-in InputStreamReader to decode the byte stream using various supported charset encodings. To use the format you need to add the Flink Connector Files dependency to your project:
+&amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.apache.flink&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;flink-connector-files&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.16-SNAPSHOT&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; For PyFlink users, you could use it directly in your jobs.
+This format is compatible with the new Source that can be used in both batch and streaming modes.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>流式概念 on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/zh/docs/dev/table/concepts/</link>
+    <description>Recent content in 流式概念 on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/zh/docs/dev/table/concepts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>流式概念</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/table/concepts/overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/table/concepts/overview/</guid>
+      <description>流式概念 # Flink 的 Table API 和 SQL 是流批统一的 API。 这意味着 Table API &amp;amp; SQL 在无论有限的批式输入还是无限的流式输入下，都具有相同的语义。 因为传统的关系代数以及 SQL 最开始都是为了批式处理而设计的， 关系型查询在流式场景下不如在批式场景下容易懂。
+下面这些页面包含了概念、实际的限制，以及流式数据处理中的一些特定的配置。
+状态管理 # 流模式下运行的表程序利用了 Flink 作为有状态流处理器的所有能力。
+事实上，一个表程序（Table program）可以配置一个 state backend 和多个不同的 checkpoint 选项 以处理对不同状态大小和容错需求。这可以对正在运行的 Table API &amp;amp; SQL 管道（pipeline）生成 savepoint，并在这之后用其恢复应用程序的状态。
+状态使用 # 由于 Table API &amp;amp; SQL 程序是声明式的，管道内的状态会在哪以及如何被使用并不明确。 Planner 会确认是否需要状态来得到正确的计算结果， 管道会被现有优化规则集优化成尽可能少地使用状态。
+从概念上讲， 源表从来不会在状态中被完全保存。 实现者处理的是逻辑表（即动态表）。 它们的状态取决于用到的操作。 形如 SELECT ... FROM ... WHERE 这种只包含字段映射或过滤器的查询的查询语句通常是无状态的管道。 然而诸如 join、 聚合或去重操作需要在 Flink 抽象的容错存储内保存中间结果。
+请参考独立的算子文档来获取更多关于状态需求量和限制潜在增长状态大小的信息。 例如对两个表进行 join 操作的普通 SQL 需要算子保存两个表的全部输入。基于正确的 SQL 语义，运行时假设两表会在任意时间点进行匹配。 Flink 提供了 优化窗口和时段 Join 聚合 以利用 watermarks 概念来让保持较小的状态规模。</description>
+    </item>
+    
+    <item>
+      <title>动态表 (Dynamic Table)</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/table/concepts/dynamic_tables/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/table/concepts/dynamic_tables/</guid>
+      <description>动态表 (Dynamic Table) # SQL 和关系代数在设计时并未考虑流数据。因此，在关系代数(和 SQL)之间几乎没有概念上的差异。
+本文会讨论这种差异，并介绍 Flink 如何在无界数据集上实现与数据库引擎在有界数据上的处理具有相同的语义。
+DataStream 上的关系查询 # 下表比较了传统的关系代数和流处理与输入数据、执行和输出结果的关系。
+关系代数 / SQL 流处理 关系(或表)是有界(多)元组集合。 流是一个无限元组序列。 对批数据(例如关系数据库中的表)执行的查询可以访问完整的输入数据。 流式查询在启动时不能访问所有数据，必须“等待”数据流入。 批处理查询在产生固定大小的结果后终止。 流查询不断地根据接收到的记录更新其结果，并且始终不会结束。 尽管存在这些差异，但是使用关系查询和 SQL 处理流并不是不可能的。高级关系数据库系统提供了一个称为 物化视图(Materialized Views) 的特性。物化视图被定义为一条 SQL 查询，就像常规的虚拟视图一样。与虚拟视图相反，物化视图缓存查询的结果，因此在访问视图时不需要对查询进行计算。缓存的一个常见难题是防止缓存为过期的结果提供服务。当其定义查询的基表被修改时，物化视图将过期。 即时视图维护(Eager View Maintenance) 是一种一旦更新了物化视图的基表就立即更新视图的技术。
+如果我们考虑以下问题，那么即时视图维护和流上的SQL查询之间的联系就会变得显而易见:
+数据库表是 INSERT、UPDATE 和 DELETE DML 语句的 stream 的结果，通常称为 changelog stream 。 物化视图被定义为一条 SQL 查询。为了更新视图，查询不断地处理视图的基本关系的changelog 流。 物化视图是流式 SQL 查询的结果。 了解了这些要点之后，我们将在下一节中介绍 动态表(Dynamic tables) 的概念。
+动态表 &amp;amp; 连续查询(Continuous Query) # 动态表 是 Flink 的支持流数据的 Table API 和 SQL 的核心概念。与表示批处理数据的静态表不同，动态表是随时间变化的。可以像查询静态批处理表一样查询它们。查询动态表将生成一个 连续查询 。一个连续查询永远不会终止，结果会生成一个动态表。查询不断更新其(动态)结果表，以反映其(动态)输入表上的更改。本质上，动态表上的连续查询非常类似于定义物化视图的查询。</description>
+    </item>
+    
+    <item>
+      <title>时间属性</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/table/concepts/time_attributes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/table/concepts/time_attributes/</guid>
+      <description>时间属性 # Flink 可以基于几种不同的 时间 概念来处理数据。
+处理时间 指的是执行具体操作时的机器时间（大家熟知的绝对时间, 例如 Java的 System.currentTimeMillis()) ） 事件时间 指的是数据本身携带的时间。这个时间是在事件产生时的时间。 摄入时间 指的是数据进入 Flink 的时间；在系统内部，会把它当做事件时间来处理。 对于时间相关的更多信息，可以参考 事件时间和Watermark。
+本页面说明了如何在 Flink Table API &amp;amp; SQL 里面定义时间以及相关的操作。
+时间属性介绍 # 像窗口（在 Table API 和 SQL ）这种基于时间的操作，需要有时间信息。因此，Table API 中的表就需要提供逻辑时间属性来表示时间，以及支持时间相关的操作。
+每种类型的表都可以有时间属性，可以在用CREATE TABLE DDL创建表的时候指定、也可以在 DataStream 中指定、也可以在定义 TableSource 时指定。一旦时间属性定义好，它就可以像普通列一样使用，也可以在时间相关的操作中使用。
+只要时间属性没有被修改，而是简单地从一个表传递到另一个表，它就仍然是一个有效的时间属性。时间属性可以像普通的时间戳的列一样被使用和计算。一旦时间属性被用在了计算中，它就会被物化，进而变成一个普通的时间戳。普通的时间戳是无法跟 Flink 的时间以及watermark等一起使用的，所以普通的时间戳就无法用在时间相关的操作中。
+Table API 程序需要在 streaming environment 中指定时间属性：
+Java final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment(); env.setStreamTimeCharacteristic(TimeCharacteristic.ProcessingTime); // default // 或者: // env.setStreamTimeCharacteristic(TimeCharacteristic.IngestionTime); // env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime); Scala val env = StreamExecutionEnvironment.</description>
+    </item>
+    
+    <item>
+      <title>时态表（Temporal Tables）</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/table/concepts/versioned_tables/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/table/concepts/versioned_tables/</guid>
+      <description>时态表（Temporal Tables） # 时态表（Temporal Table）是一张随时间变化的表 &amp;ndash; 在 Flink 中称为动态表，时态表中的每条记录都关联了一个或多个时间段，所有的 Flink 表都是时态的（动态的）。
+时态表包含表的一个或多个有版本的表快照，时态表可以是一张跟踪所有变更记录的表（例如数据库表的 changelog，包含多个表快照），也可以是物化所有变更之后的表（例如数据库表，只有最新表快照）。
+版本: 时态表可以划分成一系列带版本的表快照集合，表快照中的版本代表了快照中所有记录的有效区间，有效区间的开始时间和结束时间可以通过用户指定，根据时态表是否可以追踪自身的历史版本与否，时态表可以分为 版本表 和 普通表。
+版本表: 如果时态表中的记录可以追踪和并访问它的历史版本，这种表我们称之为版本表，来自数据库的 changelog 可以定义成版本表。
+普通表: 如果时态表中的记录仅仅可以追踪并和它的最新版本，这种表我们称之为普通表，来自数据库 或 HBase 的表可以定义成普通表。
+设计初衷 # 关联一张版本表 # 以订单流关联产品表这个场景举例，orders 表包含了来自 Kafka 的实时订单流，product_changelog 表来自数据库表 products 的 changelog , 产品的价格在数据库表 products 中是随时间实时变化的。
+SELECT * FROM product_changelog; (changelog kind) update_time product_id product_name price ================= =========== ========== ============ ===== +(INSERT) 00:01:00 p_001 scooter 11.11 +(INSERT) 00:02:00 p_002 basketball 23.11 -(UPDATE_BEFORE) 12:00:00 p_001 scooter 11.</description>
+    </item>
+    
+    <item>
+      <title>Temporal Table Function</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/table/concepts/temporal_table_function/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/table/concepts/temporal_table_function/</guid>
+      <description>Temporal Table Function # A Temporal table function provides access to the version of a temporal table at a specific point in time. In order to access the data in a temporal table, one must pass a time attribute that determines the version of the table that will be returned. Flink uses the SQL syntax of table functions to provide a way to express it.
+Unlike a versioned table, temporal table functions can only be defined on top of append-only streams — it does not support changelog inputs.</description>
+    </item>
+    
+  </channel>
+</rss>

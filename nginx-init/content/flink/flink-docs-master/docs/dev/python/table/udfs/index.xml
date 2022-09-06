@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>User Defined Functions on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/docs/dev/python/table/udfs/</link>
+    <description>Recent content in User Defined Functions on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/docs/dev/python/table/udfs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Overview</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/python/table/udfs/overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/python/table/udfs/overview/</guid>
+      <description>User-defined Functions # PyFlink Table API empowers users to do data transformations with Python user-defined functions.
+Currently, it supports two kinds of Python user-defined functions: the general Python user-defined functions which process data one row at a time and vectorized Python user-defined functions which process data one batch at a time.
+Bundling UDFs # To run Python UDFs (as well as Pandas UDFs) in any non-local mode, it is strongly recommended bundling your Python UDF definitions using the config option python-files, if your Python UDFs live outside the file where the main() function is defined.</description>
+    </item>
+    
+    <item>
+      <title>General User-defined Functions</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/python/table/udfs/python_udfs/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/python/table/udfs/python_udfs/</guid>
+      <description>General User-defined Functions # User-defined functions are important features, because they significantly extend the expressiveness of Python Table API programs.
+NOTE: Python UDF execution requires Python version (3.6, 3.7, 3.8 or 3.9) with PyFlink installed. It&amp;rsquo;s required on both the client side and the cluster side.
+Scalar Functions # It supports to use Python scalar functions in Python Table API programs. In order to define a Python scalar function, one can extend the base class ScalarFunction in pyflink.</description>
+    </item>
+    
+    <item>
+      <title>Vectorized User-defined Functions</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/python/table/udfs/vectorized_python_udfs/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/python/table/udfs/vectorized_python_udfs/</guid>
+      <description>Vectorized User-defined Functions # Vectorized Python user-defined functions are functions which are executed by transferring a batch of elements between JVM and Python VM in Arrow columnar format. The performance of vectorized Python user-defined functions are usually much higher than non-vectorized Python user-defined functions as the serialization/deserialization overhead and invocation overhead are much reduced. Besides, users could leverage the popular Python libraries such as Pandas, Numpy, etc for the vectorized Python user-defined functions implementation.</description>
+    </item>
+    
+  </channel>
+</rss>

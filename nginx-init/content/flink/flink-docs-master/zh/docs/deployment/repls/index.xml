@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>REPLs on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/zh/docs/deployment/repls/</link>
+    <description>Recent content in REPLs on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/zh/docs/deployment/repls/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Python REPL</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/deployment/repls/python_shell/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/deployment/repls/python_shell/</guid>
+      <description>Python REPL # Flink附带了一个集成的交互式Python Shell。 它既能够运行在本地启动的local模式，也能够运行在集群启动的cluster模式下。 本地安装Flink，请看本地安装页面。 您也可以从源码安装Flink，请看从源码构建 Flink页面。
+注意 Python Shell会调用“python”命令。关于Python执行环境的要求，请参考Python Table API环境安装。
+你可以通过PyPi安装PyFlink，然后使用Python Shell:
+# 安装 PyFlink $ python -m pip install apache-flink # 执行脚本 $ pyflink-shell.sh local 关于如何在一个Cluster集群上运行Python shell，可以参考启动章节介绍。
+使用 # 当前Python shell支持Table API的功能。 在启动之后，Table Environment的相关内容将会被自动加载。 可以通过变量&amp;quot;bt_env&amp;quot;来使用BatchTableEnvironment，通过变量&amp;quot;st_env&amp;quot;来使用StreamTableEnvironment。
+Table API # 下面是一个通过Python Shell 运行的简单示例: stream &amp;gt;&amp;gt;&amp;gt; import tempfile &amp;gt;&amp;gt;&amp;gt; import os &amp;gt;&amp;gt;&amp;gt; import shutil &amp;gt;&amp;gt;&amp;gt; sink_path = tempfile.gettempdir() + &amp;#39;/streaming.csv&amp;#39; &amp;gt;&amp;gt;&amp;gt; if os.path.exists(sink_path): ... if os.path.isfile(sink_path): ... os.</description>
+    </item>
+    
+  </channel>
+</rss>

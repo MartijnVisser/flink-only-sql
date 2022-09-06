@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>算子 on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/zh/docs/dev/datastream/operators/</link>
+    <description>Recent content in 算子 on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/zh/docs/dev/datastream/operators/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>概览</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/datastream/operators/overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/datastream/operators/overview/</guid>
+      <description>算子 # 用户通过算子能将一个或多个 DataStream 转换成新的 DataStream，在应用程序中可以将多个数据转换算子合并成一个复杂的数据流拓扑。
+这部分内容将描述 Flink DataStream API 中基本的数据转换 API，数据转换后各种数据分区方式，以及算子的链接策略。
+数据流转换 # Map # DataStream → DataStream # 输入一个元素同时输出一个元素。下面是将输入流中元素数值加倍的 map function：
+Java DataStream&amp;lt;Integer&amp;gt; dataStream = //... dataStream.map(new MapFunction&amp;lt;Integer, Integer&amp;gt;() { @Override public Integer map(Integer value) throws Exception { return 2 * value; } }); Scala dataStream.map { x =&amp;gt; x * 2 } Python data_stream = env.from_collection(collection=[1, 2, 3, 4, 5]) data_stream.map(lambda x: 2 * x, output_type=Types.INT()) FlatMap # DataStream → DataStream # 输入一个元素同时产生零个、一个或多个元素。下面是将句子拆分为单词的 flatmap function：</description>
+    </item>
+    
+    <item>
+      <title>窗口</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/datastream/operators/windows/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/datastream/operators/windows/</guid>
+      <description>窗口 # 窗口（Window）是处理无界流的关键所在。窗口可以将数据流装入大小有限的“桶”中，再对每个“桶”加以处理。 本文的重心将放在 Flink 如何进行窗口操作以及开发者如何尽可能地利用 Flink 所提供的功能。
+下面展示了 Flink 窗口在 keyed streams 和 non-keyed streams 上使用的基本结构。 我们可以看到，这两者唯一的区别仅在于：keyed streams 要调用 keyBy(...)后再调用 window(...) ， 而 non-keyed streams 只用直接调用 windowAll(...)。留意这个区别，它能帮我们更好地理解后面的内容。
+Keyed Windows
+Java/Scala stream .keyBy(...) &amp;lt;- 仅 keyed 窗口需要 .window(...) &amp;lt;- 必填项：&amp;quot;assigner&amp;quot; [.trigger(...)] &amp;lt;- 可选项：&amp;quot;trigger&amp;quot; (省略则使用默认 trigger) [.evictor(...)] &amp;lt;- 可选项：&amp;quot;evictor&amp;quot; (省略则不使用 evictor) [.allowedLateness(...)] &amp;lt;- 可选项：&amp;quot;lateness&amp;quot; (省略则为 0) [.sideOutputLateData(...)] &amp;lt;- 可选项：&amp;quot;output tag&amp;quot; (省略则不对迟到数据使用 side output) .reduce/aggregate/apply() &amp;lt;- 必填项：&amp;quot;function&amp;quot; [.getSideOutput(...)] &amp;lt;- 可选项：&amp;quot;output tag&amp;quot; Python stream .</description>
+    </item>
+    
+    <item>
+      <title>Joining</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/datastream/operators/joining/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/datastream/operators/joining/</guid>
+      <description>Joining # Window Join # Window join 作用在两个流中有相同 key 且处于相同窗口的元素上。这些窗口可以通过 window assigner 定义，并且两个流中的元素都会被用于计算窗口的结果。
+两个流中的元素在组合之后，会被传递给用户定义的 JoinFunction 或 FlatJoinFunction，用户可以用它们输出符合 join 要求的结果。
+常见的用例可以总结为以下代码：
+stream.join(otherStream) .where(&amp;lt;KeySelector&amp;gt;) .equalTo(&amp;lt;KeySelector&amp;gt;) .window(&amp;lt;WindowAssigner&amp;gt;) .apply(&amp;lt;JoinFunction&amp;gt;); 语义上有一些值得注意的地方：
+从两个流中创建成对的元素与 inner-join 类似，即一个流中的元素在与另一个流中对应的元素完成 join 之前不会被输出。 完成 join 的元素会将他们的 timestamp 设为对应窗口中允许的最大 timestamp。比如一个边界为 [5, 10) 窗口中的元素在 join 之后的 timestamp 为 9。 接下来我们会用例子说明各种 window join 如何运作。
+滚动 Window Join # 使用滚动 window join 时，所有 key 相同且共享一个滚动窗口的元素会被组合成对，并传递给 JoinFunction 或 FlatJoinFunction。因为这个行为与 inner join 类似，所以一个流中的元素如果没有与另一个流中的元素组合起来，它就不会被输出！
+如图所示，我们定义了一个大小为 2 毫秒的滚动窗口，即形成了边界为 [0,1], [2,3], .</description>
+    </item>
+    
+    <item>
+      <title>Process Function</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/datastream/operators/process_function/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/datastream/operators/process_function/</guid>
+      <description>Process Function # The ProcessFunction # The ProcessFunction is a low-level stream processing operation, giving access to the basic building blocks of all (acyclic) streaming applications:
+events (stream elements) state (fault-tolerant, consistent, only on keyed stream) timers (event time and processing time, only on keyed stream) The ProcessFunction can be thought of as a FlatMapFunction with access to keyed state and timers. It handles events by being invoked for each event received in the input stream(s).</description>
+    </item>
+    
+    <item>
+      <title>异步 I/O</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/dev/datastream/operators/asyncio/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/dev/datastream/operators/asyncio/</guid>
+      <description>用于外部数据访问的异步 I/O # 本文讲解 Flink 用于访问外部数据存储的异步 I/O API。 对于不熟悉异步或者事件驱动编程的用户，建议先储备一些关于 Future 和事件驱动编程的知识。
+提示：这篇文档 FLIP-12: 异步 I/O 的设计和实现介绍了关于设计和实现异步 I/O 功能的细节。 对于新增的重试支持的实现细节可以参考FLIP-232: 为 DataStream API 异步 I/O 操作增加重试支持。
+对于异步 I/O 操作的需求 # 在与外部系统交互（用数据库中的数据扩充流数据）的时候，需要考虑与外部系统的通信延迟对整个流处理应用的影响。
+简单地访问外部数据库的数据，比如使用 MapFunction，通常意味着同步交互： MapFunction 向数据库发送一个请求然后一直等待，直到收到响应。在许多情况下，等待占据了函数运行的大部分时间。
+与数据库异步交互是指一个并行函数实例可以并发地处理多个请求和接收多个响应。这样，函数在等待的时间可以发送其他请求和接收其他响应。至少等待的时间可以被多个请求摊分。大多数情况下，异步交互可以大幅度提高流处理的吞吐量。
+注意： 仅仅提高 MapFunction 的并行度（parallelism）在有些情况下也可以提升吞吐量，但是这样做通常会导致非常高的资源消耗：更多的并行 MapFunction 实例意味着更多的 Task、更多的线程、更多的 Flink 内部网络连接、 更多的与数据库的网络连接、更多的缓冲和更多程序内部协调的开销。
+先决条件 # 如上节所述，正确地实现数据库（或键/值存储）的异步 I/O 交互需要支持异步请求的数据库客户端。许多主流数据库都提供了这样的客户端。
+如果没有这样的客户端，可以通过创建多个客户端并使用线程池处理同步调用的方法，将同步客户端转换为有限并发的客户端。然而，这种方法通常比正规的异步客户端效率低。
+异步 I/O API # Flink 的异步 I/O API 允许用户在流处理中使用异步请求客户端。API 处理与数据流的集成，同时还能处理好顺序、事件时间和容错等。
+在具备异步数据库客户端的基础上，实现数据流转换操作与数据库的异步 I/O 交互需要以下三部分：
+实现分发请求的 AsyncFunction 获取数据库交互的结果并发送给 ResultFuture 的 回调 函数 将异步 I/O 操作应用于 DataStream 作为 DataStream 的一次转换操作, 启用或者不启用重试。 下面是基本的代码模板：</description>
+    </item>
+    
+  </channel>
+</rss>

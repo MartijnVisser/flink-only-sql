@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Graphs on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/docs/libs/gelly/</link>
+    <description>Recent content in Graphs on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/docs/libs/gelly/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Overview</title>
+      <link>//localhost/flink/flink-docs-master/docs/libs/gelly/overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/libs/gelly/overview/</guid>
+      <description>Gelly: Flink Graph API # Gelly is a Graph API for Flink. It contains a set of methods and utilities which aim to simplify the development of graph analysis applications in Flink. In Gelly, graphs can be transformed and modified using high-level functions similar to the ones provided by the batch processing API. Gelly provides methods to create, transform and modify graphs, as well as a library of graph algorithms.</description>
+    </item>
+    
+    <item>
+      <title>Graph API</title>
+      <link>//localhost/flink/flink-docs-master/docs/libs/gelly/graph_api/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/libs/gelly/graph_api/</guid>
+      <description>Graph API # Graph Representation # In Gelly, a Graph is represented by a DataSet of vertices and a DataSet of edges.
+The Graph nodes are represented by the Vertex type. A Vertex is defined by a unique ID and a value. Vertex IDs should implement the Comparable interface. Vertices without value can be represented by setting the value type to NullValue.
+Java // create a new vertex with a Long ID and a String value Vertex&amp;lt;Long, String&amp;gt; v = new Vertex&amp;lt;Long, String&amp;gt;(1L, &amp;#34;foo&amp;#34;); // create a new vertex with a Long ID and no value Vertex&amp;lt;Long, NullValue&amp;gt; v = new Vertex&amp;lt;Long, NullValue&amp;gt;(1L, NullValue.</description>
+    </item>
+    
+    <item>
+      <title>Iterative Graph Processing</title>
+      <link>//localhost/flink/flink-docs-master/docs/libs/gelly/iterative_graph_processing/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/libs/gelly/iterative_graph_processing/</guid>
+      <description>Iterative Graph Processing # Gelly exploits Flink&amp;rsquo;s efficient iteration operators to support large-scale iterative graph processing. Currently, we provide implementations of the vertex-centric, scatter-gather, and gather-sum-apply models. In the following sections, we describe these abstractions and show how you can use them in Gelly.
+Vertex-Centric Iterations # The vertex-centric model, also known as &amp;ldquo;think like a vertex&amp;rdquo; or &amp;ldquo;Pregel&amp;rdquo;, expresses computation from the perspective of a vertex in the graph.</description>
+    </item>
+    
+    <item>
+      <title>Library Methods</title>
+      <link>//localhost/flink/flink-docs-master/docs/libs/gelly/library_methods/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/libs/gelly/library_methods/</guid>
+      <description>Library Methods # Gelly has a growing collection of graph algorithms for easily analyzing large-scale Graphs.
+Gelly&amp;rsquo;s library methods can be used by simply calling the run() method on the input graph:
+Java ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment(); Graph&amp;lt;Long, Long, NullValue&amp;gt; graph = ...; // run Label Propagation for 30 iterations to detect communities on the input graph DataSet&amp;lt;Vertex&amp;lt;Long, Long&amp;gt;&amp;gt; verticesWithCommunity = graph.run(new LabelPropagation&amp;lt;Long&amp;gt;(30)); // print the result verticesWithCommunity.print(); Scala val env = ExecutionEnvironment.</description>
+    </item>
+    
+    <item>
+      <title>Graph Algorithms</title>
+      <link>//localhost/flink/flink-docs-master/docs/libs/gelly/graph_algorithms/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/libs/gelly/graph_algorithms/</guid>
+      <description>Graph Algorithms # The logic blocks with which the Graph API and top-level algorithms are assembled are accessible in Gelly as graph algorithms in the org.apache.flink.graph.asm package. These algorithms provide optimization and tuning through configuration parameters and may provide implicit runtime reuse when processing the same input with a similar configuration.
+VertexInDegree # Annotate vertices of a directed graph with the in-degree.
+DataSet&amp;lt;Vertex&amp;lt;K, LongValue&amp;gt;&amp;gt; inDegree = graph .run(new VertexInDegree().setIncludeZeroDegreeVertices(true)); Optional Configuration:</description>
+    </item>
+    
+    <item>
+      <title>Graph Generators</title>
+      <link>//localhost/flink/flink-docs-master/docs/libs/gelly/graph_generators/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/libs/gelly/graph_generators/</guid>
+      <description>Graph Generators # Gelly provides a collection of scalable graph generators. Each generator is
+parallelizable, in order to create large datasets scale-free, generating the same graph regardless of parallelism thrifty, using as few operators as possible Graph generators are configured using the builder pattern. The parallelism of generator operators can be set explicitly by calling setParallelism(parallelism). Lowering the parallelism will reduce the allocation of memory and network buffers.
+Graph-specific configuration must be called first, then configuration common to all generators, and lastly the call to generate().</description>
+    </item>
+    
+    <item>
+      <title>Bipartite Graph</title>
+      <link>//localhost/flink/flink-docs-master/docs/libs/gelly/bipartite_graph/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/libs/gelly/bipartite_graph/</guid>
+      <description>Bipartite Graph # Bipartite Graph currently only supported in Gelly Java API. Bipartite Graph # A bipartite graph (also called a two-mode graph) is a type of graph where vertices are separated into two disjoint sets. These sets are usually called top and bottom vertices. An edge in this graph can only connect vertices from opposite sets (i.e. bottom vertex to top vertex) and cannot connect two vertices in the same set.</description>
+    </item>
+    
+  </channel>
+</rss>

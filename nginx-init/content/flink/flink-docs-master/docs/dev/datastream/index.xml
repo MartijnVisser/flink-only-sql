@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>DataStream API on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/docs/dev/datastream/</link>
+    <description>Recent content in DataStream API on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/docs/dev/datastream/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Overview</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/datastream/overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/datastream/overview/</guid>
+      <description>Flink DataStream API Programming Guide # DataStream programs in Flink are regular programs that implement transformations on data streams (e.g., filtering, updating state, defining windows, aggregating). The data streams are initially created from various sources (e.g., message queues, socket streams, files). Results are returned via sinks, which may for example write the data to files, or to standard output (for example the command line terminal). Flink programs run in a variety of contexts, standalone, or embedded in other programs.</description>
+    </item>
+    
+    <item>
+      <title>Execution Mode (Batch/Streaming)</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/datastream/execution_mode/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/datastream/execution_mode/</guid>
+      <description>Execution Mode (Batch/Streaming) # The DataStream API supports different runtime execution modes from which you can choose depending on the requirements of your use case and the characteristics of your job.
+There is the &amp;ldquo;classic&amp;rdquo; execution behavior of the DataStream API, which we call STREAMING execution mode. This should be used for unbounded jobs that require continuous incremental processing and are expected to stay online indefinitely.
+Additionally, there is a batch-style execution mode that we call BATCH execution mode.</description>
+    </item>
+    
+    <item>
+      <title>User-Defined Functions</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/datastream/user_defined_functions/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/datastream/user_defined_functions/</guid>
+      <description>User-Defined Functions # Most operations require a user-defined function. This section lists different ways of how they can be specified. We also cover Accumulators, which can be used to gain insights into your Flink application.
+Java Implementing an interface # The most basic way is to implement one of the provided interfaces:
+class MyMapFunction implements MapFunction&amp;lt;String, Integer&amp;gt; { public Integer map(String value) { return Integer.parseInt(value); } } data.map(new MyMapFunction()); Anonymous classes # You can pass a function as an anonymous class:</description>
+    </item>
+    
+    <item>
+      <title>Data Sources</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/datastream/sources/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/datastream/sources/</guid>
+      <description>Data Sources # This page describes Flink&amp;rsquo;s Data Source API and the concepts and architecture behind it. Read this, if you are interested in how data sources in Flink work, or if you want to implement a new Data Source.
+If you are looking for pre-defined source connectors, please check the Connector Docs.
+Data Source Concepts # Core Components
+A Data Source has three core components: Splits, the SplitEnumerator, and the SourceReader.</description>
+    </item>
+    
+    <item>
+      <title>Side Outputs</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/datastream/side_output/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/datastream/side_output/</guid>
+      <description>Side Outputs # In addition to the main stream that results from DataStream operations, you can also produce any number of additional side output result streams. The type of data in the result streams does not have to match the type of data in the main stream and the types of the different side outputs can also differ. This operation can be useful when you want to split a stream of data where you would normally have to replicate the stream and then filter out from each stream the data that you don&amp;rsquo;t want to have.</description>
+    </item>
+    
+    <item>
+      <title>Handling Application Parameters</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/datastream/application_parameters/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/datastream/application_parameters/</guid>
+      <description>Handling Application Parameters # Handling Application Parameters # Almost all Flink applications, both batch and streaming, rely on external configuration parameters. They are used to specify input and output sources (like paths or addresses), system parameters (parallelism, runtime configuration), and application specific parameters (typically used within user functions).
+Flink provides a simple utility called ParameterTool to provide some basic tooling for solving these problems. Please note that you don&amp;rsquo;t have to use the ParameterTool described here.</description>
+    </item>
+    
+    <item>
+      <title>Testing</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/datastream/testing/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/datastream/testing/</guid>
+      <description>Testing # Testing is an integral part of every software development process as such Apache Flink comes with tooling to test your application code on multiple levels of the testing pyramid.
+Testing User-Defined Functions # Usually, one can assume that Flink produces correct results outside of a user-defined function. Therefore, it is recommended to test those classes that contain the main business logic with unit tests as much as possible.</description>
+    </item>
+    
+    <item>
+      <title>Experimental Features</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/datastream/experimental/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/datastream/experimental/</guid>
+      <description>Experimental Features # This section describes experimental features in the DataStream API. Experimental features are still evolving and can be either unstable, incomplete, or subject to heavy change in future versions.
+Reinterpreting a pre-partitioned data stream as keyed stream # We can re-interpret a pre-partitioned data stream as a keyed stream to avoid shuffling.
+WARNING: The re-interpreted data stream MUST already be pre-partitioned in EXACTLY the same way Flink&amp;rsquo;s keyBy would partition the data in a shuffle w.</description>
+    </item>
+    
+    <item>
+      <title>Scala API Extensions</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/datastream/scala_api_extensions/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/datastream/scala_api_extensions/</guid>
+      <description>Scala API Extensions # In order to keep a fair amount of consistency between the Scala and Java APIs, some of the features that allow a high-level of expressiveness in Scala have been left out from the standard APIs for both batch and streaming.
+If you want to enjoy the full Scala experience you can choose to opt-in to extensions that enhance the Scala API via implicit conversions.
+To use all the available extensions, you can just add a simple import for the DataStream API</description>
+    </item>
+    
+    <item>
+      <title>Java Lambda Expressions</title>
+      <link>//localhost/flink/flink-docs-master/docs/dev/datastream/java_lambdas/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/dev/datastream/java_lambdas/</guid>
+      <description>Java Lambda Expressions # Java 8 introduced several new language features designed for faster and clearer coding. With the most important feature, the so-called &amp;ldquo;Lambda Expressions&amp;rdquo;, it opened the door to functional programming. Lambda expressions allow for implementing and passing functions in a straightforward way without having to declare additional (anonymous) classes.
+Flink supports the usage of lambda expressions for all operators of the Java API, however, whenever a lambda expression uses Java generics you need to declare type information explicitly.</description>
+    </item>
+    
+  </channel>
+</rss>

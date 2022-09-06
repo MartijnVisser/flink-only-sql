@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Formats on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/docs/connectors/table/formats/</link>
+    <description>Recent content in Formats on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/docs/connectors/table/formats/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Formats</title>
+      <link>//localhost/flink/flink-docs-master/docs/connectors/table/formats/overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/connectors/table/formats/overview/</guid>
+      <description> Formats # Flink provides a set of table formats that can be used with table connectors. A table format is a storage format defines how to map binary data onto table columns.
+Flink supports the following formats:
+Formats Supported Connectors CSV Apache Kafka, Upsert Kafka, Amazon Kinesis Data Streams, Filesystem JSON Apache Kafka, Upsert Kafka, Amazon Kinesis Data Streams, Filesystem, Elasticsearch Apache Avro Apache Kafka, Upsert Kafka, Amazon Kinesis Data Streams, Filesystem Confluent Avro Apache Kafka, Upsert Kafka Debezium CDC Apache Kafka, Filesystem Canal CDC Apache Kafka, Filesystem Maxwell CDC Apache Kafka, Filesystem OGG CDC Apache Kafka, Filesystem Apache Parquet Filesystem Apache ORC Filesystem Raw Apache Kafka, Upsert Kafka, Amazon Kinesis Data Streams, Filesystem </description>
+    </item>
+    
+    <item>
+      <title>CSV</title>
+      <link>//localhost/flink/flink-docs-master/docs/connectors/table/formats/csv/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/connectors/table/formats/csv/</guid>
+      <description>CSV Format # Format: Serialization Schema Format: Deserialization Schema
+The CSV format allows to read and write CSV data based on an CSV schema. Currently, the CSV schema is derived from table schema.
+Dependencies # In order to use the CSV format the following dependencies are required for both projects using a build automation tool (such as Maven or SBT) and SQL Client with SQL JAR bundles.
+Maven dependency SQL Client &amp;ltdependency&amp;gt &amp;ltgroupId&amp;gtorg.</description>
+    </item>
+    
+    <item>
+      <title>JSON</title>
+      <link>//localhost/flink/flink-docs-master/docs/connectors/table/formats/json/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/connectors/table/formats/json/</guid>
+      <description>JSON Format # Format: Serialization Schema Format: Deserialization Schema
+The JSON format allows to read and write JSON data based on an JSON schema. Currently, the JSON schema is derived from table schema.
+The JSON format supports append-only streams, unless you&amp;rsquo;re using a connector that explicitly support retract streams and/or upsert streams like the Upsert Kafka connector. If you need to write retract streams and/or upsert streams, we suggest you to look at CDC JSON formats like Debezium JSON and Canal JSON.</description>
+    </item>
+    
+    <item>
+      <title>Avro</title>
+      <link>//localhost/flink/flink-docs-master/docs/connectors/table/formats/avro/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/connectors/table/formats/avro/</guid>
+      <description>Avro Format # Format: Serialization Schema Format: Deserialization Schema
+The Apache Avro format allows to read and write Avro data based on an Avro schema. Currently, the Avro schema is derived from table schema.
+Dependencies # In order to use the Avro format the following dependencies are required for both projects using a build automation tool (such as Maven or SBT) and SQL Client with SQL JAR bundles.
+Maven dependency SQL Client &amp;ltdependency&amp;gt &amp;ltgroupId&amp;gtorg.</description>
+    </item>
+    
+    <item>
+      <title>Confluent Avro</title>
+      <link>//localhost/flink/flink-docs-master/docs/connectors/table/formats/avro-confluent/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/connectors/table/formats/avro-confluent/</guid>
+      <description>Confluent Avro Format # Format: Serialization Schema Format: Deserialization Schema
+The Avro Schema Registry (avro-confluent) format allows you to read records that were serialized by the io.confluent.kafka.serializers.KafkaAvroSerializer and to write records that can in turn be read by the io.confluent.kafka.serializers.KafkaAvroDeserializer.
+When reading (deserializing) a record with this format the Avro writer schema is fetched from the configured Confluent Schema Registry based on the schema version id encoded in the record while the reader schema is inferred from table schema.</description>
+    </item>
+    
+    <item>
+      <title>Protobuf</title>
+      <link>//localhost/flink/flink-docs-master/docs/connectors/table/formats/protobuf/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/connectors/table/formats/protobuf/</guid>
+      <description>Protobuf Format # Format: Serialization Schema Format: Deserialization Schema
+The Protocol Buffers Protobuf format allows you to read and write Protobuf data, based on Protobuf generated classes.
+Dependencies # In order to use the Protobuf format the following dependencies are required for both projects using a build automation tool (such as Maven or SBT) and SQL Client with SQL JAR bundles.
+Maven dependency SQL Client &amp;ltdependency&amp;gt &amp;ltgroupId&amp;gtorg.apache.flink&amp;lt/groupId&amp;gt &amp;ltartifactId&amp;gtflink-protobuf&amp;lt/artifactId&amp;gt &amp;ltversion&amp;gt1.16-SNAPSHOT&amp;lt/version&amp;gt &amp;lt/dependency&amp;gt Copied to clipboard!</description>
+    </item>
+    
+    <item>
+      <title>Debezium</title>
+      <link>//localhost/flink/flink-docs-master/docs/connectors/table/formats/debezium/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/connectors/table/formats/debezium/</guid>
+      <description>Debezium Format # Changelog-Data-Capture Format Format: Serialization Schema Format: Deserialization Schema
+Debezium is a CDC (Changelog Data Capture) tool that can stream changes in real-time from MySQL, PostgreSQL, Oracle, Microsoft SQL Server and many other databases into Kafka. Debezium provides a unified format schema for changelog and supports to serialize messages using JSON and Apache Avro.
+Flink supports to interpret Debezium JSON and Avro messages as INSERT/UPDATE/DELETE messages into Flink SQL system.</description>
+    </item>
+    
+    <item>
+      <title>Canal</title>
+      <link>//localhost/flink/flink-docs-master/docs/connectors/table/formats/canal/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/connectors/table/formats/canal/</guid>
+      <description>Canal Format # Changelog-Data-Capture Format Format: Serialization Schema Format: Deserialization Schema
+Canal is a CDC (Changelog Data Capture) tool that can stream changes in real-time from MySQL into other systems. Canal provides a unified format schema for changelog and supports to serialize messages using JSON and protobuf (protobuf is the default format for Canal).
+Flink supports to interpret Canal JSON messages as INSERT/UPDATE/DELETE messages into Flink SQL system. This is useful in many cases to leverage this feature, such as</description>
+    </item>
+    
+    <item>
+      <title>Maxwell</title>
+      <link>//localhost/flink/flink-docs-master/docs/connectors/table/formats/maxwell/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/connectors/table/formats/maxwell/</guid>
+      <description>Maxwell Format # Changelog-Data-Capture Format Format: Serialization Schema Format: Deserialization Schema
+Maxwell is a CDC (Changelog Data Capture) tool that can stream changes in real-time from MySQL into Kafka, Kinesis and other streaming connectors. Maxwell provides a unified format schema for changelog and supports to serialize messages using JSON.
+Flink supports to interpret Maxwell JSON messages as INSERT/UPDATE/DELETE messages into Flink SQL system. This is useful in many cases to leverage this feature, such as</description>
+    </item>
+    
+    <item>
+      <title>Ogg</title>
+      <link>//localhost/flink/flink-docs-master/docs/connectors/table/formats/ogg/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/connectors/table/formats/ogg/</guid>
+      <description>Ogg Format # Changelog-Data-Capture Format Format: Serialization Schema Format: Deserialization Schema
+Oracle GoldenGate (a.k.a ogg) is a managed service providing a real-time data mesh platform, which uses replication to keep data highly available, and enabling real-time analysis. Customers can design, execute, and monitor their data replication and stream data processing solutions without the need to allocate or manage compute environments. Ogg provides a format schema for changelog and supports to serialize messages using JSON.</description>
+    </item>
+    
+    <item>
+      <title>Parquet</title>
+      <link>//localhost/flink/flink-docs-master/docs/connectors/table/formats/parquet/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/connectors/table/formats/parquet/</guid>
+      <description>Parquet Format # Format: Serialization Schema Format: Deserialization Schema
+The Apache Parquet format allows to read and write Parquet data.
+Dependencies # In order to use the Parquet format the following dependencies are required for both projects using a build automation tool (such as Maven or SBT) and SQL Client with SQL JAR bundles.
+Maven dependency SQL Client &amp;ltdependency&amp;gt &amp;ltgroupId&amp;gtorg.apache.flink&amp;lt/groupId&amp;gt &amp;ltartifactId&amp;gtflink-parquet&amp;lt/artifactId&amp;gt &amp;ltversion&amp;gt1.16-SNAPSHOT&amp;lt/version&amp;gt &amp;lt/dependency&amp;gt Copied to clipboard! Only available for stable releases.</description>
+    </item>
+    
+    <item>
+      <title>Orc</title>
+      <link>//localhost/flink/flink-docs-master/docs/connectors/table/formats/orc/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/connectors/table/formats/orc/</guid>
+      <description>Orc Format # Format: Serialization Schema Format: Deserialization Schema
+The Apache Orc format allows to read and write Orc data.
+Dependencies # In order to use the ORC format the following dependencies are required for both projects using a build automation tool (such as Maven or SBT) and SQL Client with SQL JAR bundles.
+Maven dependency SQL Client &amp;ltdependency&amp;gt &amp;ltgroupId&amp;gtorg.apache.flink&amp;lt/groupId&amp;gt &amp;ltartifactId&amp;gtflink-orc&amp;lt/artifactId&amp;gt &amp;ltversion&amp;gt1.16-SNAPSHOT&amp;lt/version&amp;gt &amp;lt/dependency&amp;gt Copied to clipboard! Only available for stable releases.</description>
+    </item>
+    
+    <item>
+      <title>Raw</title>
+      <link>//localhost/flink/flink-docs-master/docs/connectors/table/formats/raw/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/docs/connectors/table/formats/raw/</guid>
+      <description>Raw Format # Format: Serialization Schema Format: Deserialization Schema
+The Raw format allows to read and write raw (byte based) values as a single column.
+Note: this format encodes null values as null of byte[] type. This may have limitation when used in upsert-kafka, because upsert-kafka treats null values as a tombstone message (DELETE on the key). Therefore, we recommend avoiding using upsert-kafka connector and the raw format as a value.</description>
+    </item>
+    
+  </channel>
+</rss>

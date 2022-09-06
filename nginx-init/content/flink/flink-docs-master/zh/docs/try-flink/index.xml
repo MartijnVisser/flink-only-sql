@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Try Flink on Apache Flink</title>
+    <link>//localhost/flink/flink-docs-master/zh/docs/try-flink/</link>
+    <description>Recent content in Try Flink on Apache Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//localhost/flink/flink-docs-master/zh/docs/try-flink/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>本地模式安装</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/try-flink/local_installation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/try-flink/local_installation/</guid>
+      <description>本地模式安装 # 注意：Apache Flink 社区只发布 Apache Flink 的 release 版本。
+由于你当前正在查看的是文档最新的 SNAPSHOT 版本，因此相关内容会被隐藏。请通过左侧菜单底部的版本选择将文档切换到最新的 release 版本。
+请按照以下几个步骤下载最新的稳定版本开始使用。
+步骤 1：下载 # 为了运行Flink，只需提前安装好 Java 11。你可以通过以下命令来检查 Java 是否已经安装正确。
+java -version 下载 release 1.16-SNAPSHOT 并解压。
+$ tar -xzf flink-1.16-SNAPSHOT-bin-scala_2.12.tgz $ cd flink-1.16-SNAPSHOT-bin-scala_2.12 步骤 2：启动集群 # Flink 附带了一个 bash 脚本，可以用于启动本地集群。
+$ ./bin/start-cluster.sh Starting cluster. Starting standalonesession daemon on host. Starting taskexecutor daemon on host. 步骤 3：提交作业（Job） # Flink 的 Releases 附带了许多的示例作业。你可以任意选择一个，快速部署到已运行的集群上。
+$ ./bin/flink run examples/streaming/WordCount.jar $ tail log/flink-*-taskexecutor-*.</description>
+    </item>
+    
+    <item>
+      <title>基于 DataStream API 实现欺诈检测</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/try-flink/datastream/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/try-flink/datastream/</guid>
+      <description>基于 DataStream API 实现欺诈检测 # Apache Flink 提供了 DataStream API 来实现稳定可靠的、有状态的流处理应用程序。 Flink 支持对状态和时间的细粒度控制，以此来实现复杂的事件驱动数据处理系统。 这个入门指导手册讲述了如何通过 Flink DataStream API 来实现一个有状态流处理程序。
+你要搭建一个什么系统 # 在当今数字时代，信用卡欺诈行为越来越被重视。 罪犯可以通过诈骗或者入侵安全级别较低系统来盗窃信用卡卡号。 用盗得的信用卡进行很小额度的例如一美元或者更小额度的消费进行测试。 如果测试消费成功，那么他们就会用这个信用卡进行大笔消费，来购买一些他们希望得到的，或者可以倒卖的财物。
+在这个教程中，你将会建立一个针对可疑信用卡交易行为的反欺诈检测系统。 通过使用一组简单的规则，你将了解到 Flink 如何为我们实现复杂业务逻辑并实时执行。
+准备条件 # 这个代码练习假定你对 Java 或 Scala 有一定的了解，当然，如果你之前使用的是其他开发语言，你也应该能够跟随本教程进行学习。
+在 IDE 中运行 # 在 IDE 中运行该项目可能会遇到 java.langNoClassDefFoundError 的异常。这很可能是因为运行所需要的 Flink 的依赖库没有默认被全部加载到类路径（classpath）里。
+IntelliJ IDE：前往 运行 &amp;gt; 编辑配置 &amp;gt; 修改选项 &amp;gt; 选中 将带有 &amp;ldquo;provided&amp;rdquo; 范围的依赖项添加到类路径。这样的话，运行配置将会包含所有在 IDE 中运行所必须的类。
+困难求助 # 如果遇到困难，可以参考 社区支持资源。 当然也可以在邮件列表提问，Flink 的 用户邮件列表 一直被评为所有Apache项目中最活跃的一个，这也是快速获得帮助的好方法。
+怎样跟着教程练习 # 首先，你需要在你的电脑上准备以下环境：</description>
+    </item>
+    
+    <item>
+      <title>基于 Table API 实现实时报表</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/try-flink/table_api/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/try-flink/table_api/</guid>
+      <description>基于 Table API 实现实时报表 # Apache Flink 提供了 Table API 作为批流统一的关系型 API。也就是说，在无界的实时流数据或者有界的批数据集上进行查询具有相同的语义，得到的结果一致。 Flink 的 Table API 可以简化数据分析、构建数据流水线以及 ETL 应用的定义。
+你接下来要搭建的是什么系统？ # 在本教程中，你将学习构建一个通过账户来追踪金融交易的实时看板。 数据流水线为：先从 Kafka 中读取数据，再将结果写入到 MySQL 中，最后通过 Grafana 展示。
+准备条件 # 我们默认你对 Java 或者 Scala 有一定了解，当然如果你使用的是其他编程语言，也可以继续学习。 同时也默认你了解基本的关系型概念，例如 SELECT 、GROUP BY 等语句。
+困难求助 # 如果遇到问题，可以参考 社区支持资源。 Flink 的 用户邮件列表 是 Apahe 项目中最活跃的一个，这也是快速寻求帮助的重要途径。
+在 Windows 环境下，如果用来生成数据的 docker 容器启动失败，请检查使用的脚本是否正确。 例如 docker-entrypoint.sh 是容器 table-walkthrough_data-generator_1 所需的 bash 脚本。 如果不可用，会报 standard_init_linux.go:211: exec user process caused &amp;ldquo;no such file or directory&amp;rdquo; 的错误。 一种解决办法是在 docker-entrypoint.</description>
+    </item>
+    
+    <item>
+      <title>Flink 操作场景</title>
+      <link>//localhost/flink/flink-docs-master/zh/docs/try-flink/flink-operations-playground/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost/flink/flink-docs-master/zh/docs/try-flink/flink-operations-playground/</guid>
+      <description>Flink 操作场景 # Apache Flink 可以以多种方式在不同的环境中部署，抛开这种多样性而言，Flink 集群的基本构建方式和操作原则仍然是相同的。
+在这篇文章里，你将会学习如何管理和运行 Flink 任务，了解如何部署和监控应用程序、Flink 如何从失败作业中进行恢复，同时你还会学习如何执行一些日常操作任务，如升级和扩容。
+注意：本文中使用的 Apache Flink Docker 镜像仅适用于 Apache Flink 发行版。 由于你目前正在浏览快照版的文档，因此下文中引用的分支可能已经不存在了，请先通过左侧菜单下方的版本选择器切换到发行版文档再查看。 场景说明 # 这篇文章中的所有操作都是基于如下两个集群进行的： Flink Session Cluster 以及一个 Kafka 集群， 我们会在下文带领大家一起搭建这两个集群。
+一个 Flink 集群总是包含一个 JobManager 以及一个或多个 Flink TaskManager。JobManager 负责处理 Job 提交、 Job 监控以及资源管理。Flink TaskManager 运行 worker 进程， 负责实际任务 Tasks 的执行，而这些任务共同组成了一个 Flink Job。 在这篇文章中， 我们会先运行一个 TaskManager，接下来会扩容到多个 TaskManager。 另外，这里我们会专门使用一个 client 容器来提交 Flink Job， 后续还会使用该容器执行一些操作任务。需要注意的是，Flink 集群的运行并不需要依赖 client 容器， 我们这里引入只是为了使用方便。
+这里的 Kafka 集群由一个 Zookeeper 服务端和一个 Kafka Broker 组成。</description>
+    </item>
+    
+  </channel>
+</rss>
