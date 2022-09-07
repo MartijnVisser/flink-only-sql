@@ -1,6 +1,9 @@
-# Only SQL: Empower data analysts end-to-end with Flink SQL
+# Conference usage
 
-This demo is used by Martijn Visser in his [Flink Forward talk 'Only SQL: Empower data analysts end-to-end with Flink SQL'](https://www.flink-forward.org/global-2021/conference-program#only-sql--empower-data-analysts-end-to-end-with-flink-sql)
+This demo is used by Martijn Visser in the following conference talks:
+
+* [Flink Forward talk 'Only SQL: Empower data analysts end-to-end with Flink SQL'](https://www.flink-forward.org/global-2021/conference-program#only-sql--empower-data-analysts-end-to-end-with-flink-sql) - [Recording](https://www.youtube.com/watch?v=KvaDe7QCwBQ) - [Demo version](https://github.com/MartijnVisser/flink-only-sql/releases/tag/v1.0) 
+* [Uptime talk 'Only SQL'](https://uptime.aiven.io/session/325604) - [Demo version](https://github.com/MartijnVisser/flink-only-sql/releases/tag/v2.0)
 
 [![Twitter Follow](https://img.shields.io/twitter/follow/MartijnVisser82?style=social&logo=twitter)](https://twitter.com/MartijnVisser82) [![GitHub Follow](https://img.shields.io/github/followers/MartijnVisser?style=social&logo=github)](https://github.com/MartijnVisser)
 
