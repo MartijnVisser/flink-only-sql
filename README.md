@@ -11,8 +11,8 @@ This demo is used by Martijn Visser in the following conference talks:
 
 We'll use Docker Compose to start all necessary services to run the demos. It will start the following services:
 
-* Apache Flink 1.15.1, accessible via http://localhost:8081
-* Apache Flink SQL Client 1.15.1
+* Apache Flink 1.15.2, accessible via http://localhost:8081
+* Apache Flink SQL Client 1.15.2
 * Apache Kafka (including Zookeeper) 7.2.1, accessible via broker:29092
 * Confluent Schema Registry 7.2.1, accessible via http://localhost:8091 (or http://schema-registry:8091 via Docker networking) 
 * Confluent REST Proxy 7.2.1, accessible via http://localhost:8082
