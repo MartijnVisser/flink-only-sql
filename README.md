@@ -222,7 +222,7 @@ a notification will be displayed to you.
 
 Another common use case in SQL is that you need join data from multiple sources. 
 In the next example, you will display a notification to the user of the website 
-who has visited the homepage more then 3 times in 10 seconds. If the `identifier` is `MartijnsMac`, the notification 
+who has visited the homepage more than 3 times in 10 seconds. If the `identifier` is `MartijnsMac`, the notification 
 will display a link to the author's Twitter handle. The Twitter handle is retrieved from the external source. 
 In case the identifier is different, no link will be included. 
 
